@@ -49,4 +49,9 @@ class SubstanceController extends Controller
 
         return new SubstanceResource($substance);
     }
+
+    public function destroy(Substance $substance)
+    {
+        $substance->delete();
+    }
 }
