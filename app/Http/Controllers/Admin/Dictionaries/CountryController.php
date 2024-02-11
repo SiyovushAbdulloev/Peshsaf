@@ -49,4 +49,9 @@ class CountryController extends Controller
 
         return new CountryResource($country);
     }
+
+    public function destroy(Country $country)
+    {
+        $country->delete();
+    }
 }
