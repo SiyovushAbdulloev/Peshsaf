@@ -12,7 +12,7 @@ class StoreRequest extends CoreFormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:measurement_units,name'],
+            'name' => ['required', 'string', 'max:255'],
         ];
     }
 

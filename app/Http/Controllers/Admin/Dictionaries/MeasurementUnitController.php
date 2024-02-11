@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dictionaries;
 
 use App\Actions\MeasurementUnit\IndexAction;
 use App\Actions\MeasurementUnit\StoreAction;
+use App\Actions\MeasurementUnit\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Models\MeasurementUnit;
 use App\Http\Requests\MeasurementUnit\StoreRequest;
@@ -38,5 +39,16 @@ class MeasurementUnitController extends Controller
     public function edit(MeasurementUnit $unit): View
     {
         return view('admin.dictionaries.measurement-units.edit', compact('unit'));
+    }
+
+    public function update(
+        StoreRequest $request,
+        UpdateAction $action,
+        MeasurementUnit $unit,
+    ): RedirectResponse
+    {
+        $action->execute($request->getParams(), $unit);
+
+        return redirect(route('dictionaries.measurement-units.index'))->with('success', 'Данные успешно изменены');
     }
 }
