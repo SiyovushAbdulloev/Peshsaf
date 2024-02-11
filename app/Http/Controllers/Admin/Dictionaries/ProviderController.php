@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Provider\StoreRequest;
 use App\Http\Resources\CountryResource;
 use App\Http\Resources\ProviderResource;
+use App\Models\Provider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -36,5 +37,15 @@ class ProviderController extends Controller
         $provider = $action->execute($request->getParams());
 
         return new ProviderResource($provider->load('country'));
+    }
+
+    public function edit(CountryIndexAction $action, Provider $provider): Application|View|Factory
+    {
+        $countries = $action->execute();
+
+        return view('admin.provider.edit', [
+            'provider' => new ProviderResource($provider->load('country')),
+            'countries' => CountryResource::collection($countries)
+        ]);
     }
 }
