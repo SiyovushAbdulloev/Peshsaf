@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\MeasurementUnit;
 use App\Http\Requests\MeasurementUnit\StoreRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
 class MeasurementUnitController extends Controller
@@ -32,5 +33,10 @@ class MeasurementUnitController extends Controller
         $action->execute($request->getParams());
 
         return redirect(route('dictionaries.measurement-units.index'))->with('success', 'Единица измерения добавлена');
+    }
+
+    public function edit(MeasurementUnit $unit): View
+    {
+        return view('admin.dictionaries.measurement-units.edit', compact('unit'));
     }
 }

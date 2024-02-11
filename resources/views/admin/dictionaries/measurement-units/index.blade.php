@@ -69,7 +69,7 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                         >
-                            <a href="#" class="mr-4">
+                            <a href="{{ route('dictionaries.measurement-units.edit', compact('unit')) }}" class="mr-4">
                                 <x-base.lucide icon="pencil" />
                             </a>
                             <a href="#" class="text-danger">
