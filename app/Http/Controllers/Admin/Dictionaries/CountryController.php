@@ -16,4 +16,9 @@ class CountryController extends Controller
 
         return view('admin.country.index', compact('countries'));
     }
+
+    public function create(): Application|View|Factory
+    {
+        return view('admin.country.create');
+    }
 }
