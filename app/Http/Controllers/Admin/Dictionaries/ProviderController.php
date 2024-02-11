@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Dictionaries;
 
 use App\Actions\Country\IndexAction as CountryIndexAction;
+use App\Actions\Provider\DestroyAction;
+use App\Actions\Provider\DestroyFileAction;
 use App\Actions\Provider\IndexAction;
 use App\Actions\Provider\StoreAction;
 use App\Actions\Provider\UpdateAction;
@@ -15,6 +17,7 @@ use App\Models\Provider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class ProviderController extends Controller
 {
@@ -60,5 +63,19 @@ class ProviderController extends Controller
         $provider = $action->execute($request->getParams(), $provider);
 
         return new ProviderResource($provider->load('country'));
+    }
+
+    public function destroy(DestroyAction $action, Provider $provider)
+    {
+        $action->execute($provider);
+    }
+
+    public function destroyFile(
+        Request $request,
+        DestroyFileAction $action,
+        Provider $provider,
+    )
+    {
+        $action->execute($provider, $request->get('file'));
     }
 }

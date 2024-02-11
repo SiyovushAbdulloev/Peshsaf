@@ -14,5 +14,6 @@ Route::name('admin.')->group(function () {
             ]);
             Route::resource('/countries', CountryController::class);
             Route::resource('/providers', ProviderController::class);
+            Route::delete('/providers/{provider}/file', [ProviderController::class, 'destroyFile']);
         });
 });
