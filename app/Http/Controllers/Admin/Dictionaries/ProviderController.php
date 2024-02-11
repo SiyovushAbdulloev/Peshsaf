@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin\Dictionaries;
 
 use App\Actions\Country\IndexAction as CountryIndexAction;
 use App\Actions\Provider\IndexAction;
+use App\Actions\Provider\StoreAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Provider\StoreRequest;
 use App\Http\Resources\CountryResource;
+use App\Http\Resources\ProviderResource;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -26,5 +29,12 @@ class ProviderController extends Controller
         return view('admin.provider.create', [
             'countries' => CountryResource::collection($countries)
         ]);
+    }
+
+    public function store(StoreRequest $request, StoreAction $action): ProviderResource
+    {
+        $provider = $action->execute($request->getParams());
+
+        return new ProviderResource($provider->load('country'));
     }
 }
