@@ -16,4 +16,9 @@ class SubstanceController extends Controller
 
         return view('admin.substance.index', compact('substances'));
     }
+
+    public function create(): Application|View|Factory
+    {
+        return view('admin.substance.create');
+    }
 }
