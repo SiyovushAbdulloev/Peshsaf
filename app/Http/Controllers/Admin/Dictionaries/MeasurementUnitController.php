@@ -6,12 +6,11 @@ use App\Actions\MeasurementUnit\IndexAction;
 use App\Actions\MeasurementUnit\StoreAction;
 use App\Actions\MeasurementUnit\UpdateAction;
 use App\Http\Controllers\Controller;
-use App\Models\MeasurementUnit;
 use App\Http\Requests\MeasurementUnit\StoreRequest;
+use App\Models\MeasurementUnit;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
+use Throwable;
 
 class MeasurementUnitController extends Controller
 {
@@ -50,5 +49,18 @@ class MeasurementUnitController extends Controller
         $action->execute($request->getParams(), $unit);
 
         return redirect(route('dictionaries.measurement-units.index'))->with('success', 'Данные успешно изменены');
+    }
+
+    public function destroy(MeasurementUnit $unit): RedirectResponse
+    {
+        try {
+            $unit->delete();
+
+            return redirect(route('dictionaries.measurement-units.index'))->with('success', 'Данные успешно удалены');
+        } catch (Throwable $e) {
+            logger($e->getMessage());
+        }
+
+        return back()->with('error', 'Невозможно удалить запись');
     }
 }
