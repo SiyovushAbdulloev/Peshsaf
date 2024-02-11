@@ -7,6 +7,7 @@ use App\Actions\Position\StoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Position\StoreRequest;
 use App\Http\Resources\PositionResource;
+use App\Models\Position;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -30,5 +31,10 @@ class PositionController extends Controller
         $position = $action->execute($request->getParams());
 
         return new PositionResource($position);
+    }
+
+    public function edit(Position $position): Application|View|Factory
+    {
+        return view('admin.position.edit', compact('position'));
     }
 }
