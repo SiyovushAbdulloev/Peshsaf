@@ -16,4 +16,9 @@ class PositionController extends Controller
 
         return view('admin.position.index', compact('positions'));
     }
+
+    public function create(): Application|View|Factory
+    {
+        return view('admin.position.create');
+    }
 }
