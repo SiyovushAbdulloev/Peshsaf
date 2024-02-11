@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dictionaries;
 
 use App\Actions\Position\IndexAction;
 use App\Actions\Position\StoreAction;
+use App\Actions\Position\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Position\StoreRequest;
 use App\Http\Resources\PositionResource;
@@ -36,5 +37,16 @@ class PositionController extends Controller
     public function edit(Position $position): Application|View|Factory
     {
         return view('admin.position.edit', compact('position'));
+    }
+
+    public function update(
+        StoreRequest $request,
+        UpdateAction $action,
+        Position $position
+    ): PositionResource
+    {
+        $position = $action->execute($request->getParams(), $position);
+
+        return new PositionResource($position);
     }
 }
