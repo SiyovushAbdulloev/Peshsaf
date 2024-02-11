@@ -49,4 +49,9 @@ class PositionController extends Controller
 
         return new PositionResource($position);
     }
+
+    public function destroy(Position $position)
+    {
+        $position->delete();
+    }
 }
