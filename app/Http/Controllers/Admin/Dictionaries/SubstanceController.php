@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dictionaries;
 
 use App\Actions\Substance\IndexAction;
 use App\Actions\Substance\StoreAction;
+use App\Actions\Substance\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Substance\StoreRequest;
 use App\Http\Resources\SubstanceResource;
@@ -36,5 +37,16 @@ class SubstanceController extends Controller
     public function edit(Substance $substance): Application|View|Factory
     {
         return view('admin.substance.edit', compact('substance'));
+    }
+
+    public function update(
+        StoreRequest $request,
+        UpdateAction $action,
+        Substance $substance
+    ): SubstanceResource
+    {
+        $substance = $action->execute($request->getParams(), $substance);
+
+        return new SubstanceResource($substance);
     }
 }
