@@ -7,6 +7,7 @@ use App\Actions\Country\StoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Country\StoreRequest;
 use App\Http\Resources\CountryResource;
+use App\Models\Country;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -30,5 +31,10 @@ class CountryController extends Controller
         $country = $action->execute($request->getParams());
 
         return new CountryResource($country);
+    }
+
+    public function edit(Country $country): Application|View|Factory
+    {
+        return view('admin.country.edit', compact('country'));
     }
 }
