@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin\Dictionaries;
 use App\Actions\Country\IndexAction as CountryIndexAction;
 use App\Actions\Provider\IndexAction;
 use App\Actions\Provider\StoreAction;
+use App\Actions\Provider\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Provider\StoreRequest;
+use App\Http\Requests\Provider\UpdateRequest;
 use App\Http\Resources\CountryResource;
 use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
@@ -47,5 +49,16 @@ class ProviderController extends Controller
             'provider' => new ProviderResource($provider->load('country')),
             'countries' => CountryResource::collection($countries)
         ]);
+    }
+
+    public function update(
+        UpdateRequest $request,
+        UpdateAction $action,
+        Provider $provider
+    ): ProviderResource
+    {
+        $provider = $action->execute($request->getParams(), $provider);
+
+        return new ProviderResource($provider->load('country'));
     }
 }
