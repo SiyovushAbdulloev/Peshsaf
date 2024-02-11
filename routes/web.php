@@ -1,8 +1,17 @@
 <?php
 
+use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\Dictionaries\MeasurementUnitController;
+use App\Http\Controllers\Admin\Dictionaries\PositionController;
+use App\Http\Controllers\Admin\MeasurementUnitController;
+use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
+
+>>>>>>> 73f312e (Added index method of PositionController (wip))
 
 /*
 |--------------------------------------------------------------------------
