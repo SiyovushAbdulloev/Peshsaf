@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dictionaries;
 
 use App\Actions\Country\IndexAction;
 use App\Actions\Country\StoreAction;
+use App\Actions\Country\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Country\StoreRequest;
 use App\Http\Resources\CountryResource;
@@ -36,5 +37,16 @@ class CountryController extends Controller
     public function edit(Country $country): Application|View|Factory
     {
         return view('admin.country.edit', compact('country'));
+    }
+
+    public function update(
+        StoreRequest $request,
+        UpdateAction $action,
+        Country $country
+    ): CountryResource
+    {
+        $country = $action->execute($request->getParams(), $country);
+
+        return new CountryResource($country);
     }
 }
