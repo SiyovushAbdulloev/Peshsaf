@@ -1,6 +1,6 @@
 DC := docker compose exec
 FPM := $(DC) php-fpm
-NODE := $(DC) node
+NODE := $(DC) node yarn
 ARTISAN := $(FPM) php artisan
 
 build:
@@ -46,4 +46,11 @@ seed:
 bash:
 	@$(FPM) bash
 
+node-install:
+	@$(NODE) install
 
+node-dev:
+	@$(NODE) run dev
+
+node-build:
+	@$(NODE) run build
