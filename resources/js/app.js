@@ -1,4 +1,6 @@
 import './bootstrap';
+// Load static files
+import.meta.glob(["../images/**"]);
 
 import Alpine from 'alpinejs';
 
