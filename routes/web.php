@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'login');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/', DashboardController::class)->name('dashboard');
+
+    Route::prefix('dictionaries')
+        ->namespace('Dictionaries')
+        ->name('dictionaries.')
+        ->group(function () {
+            Route::resource('measurments', MeasurmentController::class);
+        });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
