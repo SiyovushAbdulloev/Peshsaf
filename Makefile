@@ -1,7 +1,8 @@
 DC := docker compose exec
 FPM := $(DC) php-fpm
-NODE := $(DC) node yarn
 ARTISAN := $(FPM) php artisan
+NODE := $(DC) node
+YARN := $(NODE) yarn
 
 build:
 	@docker compose build --no-cache
@@ -14,7 +15,7 @@ stop:
 
 restart: stop start
 
-setup: start composer-install migrate seed
+setup: start composer-install migrate seed node-install
 
 composer-install:
 	@$(FPM) composer install
@@ -46,11 +47,14 @@ seed:
 bash:
 	@$(FPM) bash
 
+node-bash:
+	@$(NODE) bash
+
 node-install:
-	@$(NODE) install
+	@$(YARN) install
 
 node-dev:
-	@$(NODE) run dev
+	@$(YARN) run dev --host
 
 node-build:
-	@$(NODE) run build
+	@$(YARN) run build
