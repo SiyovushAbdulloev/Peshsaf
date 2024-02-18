@@ -18,6 +18,11 @@ return [
                     'title'      => 'Единицы измерений',
                 ],
             ],
+            'countries' => [
+                'icon'       => 'activity',
+                'route_name' => 'dictionaries.countries.index',
+                'title'      => 'Страны',
+            ],
         ],
     ],
     'warehouse' => [

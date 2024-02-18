@@ -7,51 +7,60 @@ use App\Actions\Country\StoreAction;
 use App\Actions\Country\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Country\StoreRequest;
-use App\Http\Resources\CountryResource;
 use App\Models\Country;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class CountryController extends Controller
 {
-    public function index(IndexAction $action): Application|View|Factory
+    public function index(IndexAction $action): View
     {
         $countries = $action->execute();
 
-        return view('admin.country.index', compact('countries'));
+        return view('admin.dictionaries.countries.index', compact('countries'));
     }
 
-    public function create(): Application|View|Factory
+    public function create(): View
     {
-        return view('admin.country.create');
+        $country = new Country();
+
+        return view('admin.dictionaries.countries.create', compact('country'));
     }
 
-    public function store(StoreRequest $request, StoreAction $action): CountryResource
+    public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
-        $country = $action->execute($request->getParams());
+        $action->execute($request->getParams());
 
-        return new CountryResource($country);
+        return redirect(route('dictionaries.countries.index'))->with('success', 'Страна добавлена');
     }
 
-    public function edit(Country $country): Application|View|Factory
+    public function edit(Country $country): View
     {
-        return view('admin.country.edit', compact('country'));
+        return view('admin.dictionaries.countries.edit', compact('country'));
     }
 
     public function update(
         StoreRequest $request,
         UpdateAction $action,
         Country $country
-    ): CountryResource
+    ): RedirectResponse
     {
-        $country = $action->execute($request->getParams(), $country);
+        $action->execute($request->getParams(), $country);
 
-        return new CountryResource($country);
+        return redirect(route('dictionaries.countries.index'))->with('success', 'Данные успешно изменены');
     }
 
-    public function destroy(Country $country)
+    public function destroy(Country $country): RedirectResponse
     {
-        $country->delete();
+        try {
+            $country->delete();
+
+            return redirect(route('dictionaries.countries.index'))->with('success', 'Данные успешно удалены');
+        } catch (Throwable $e) {
+            logger($e->getMessage());
+        }
+
+        return back()->with('error', 'Невозможно удалить запись');
     }
 }
