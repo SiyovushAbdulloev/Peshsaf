@@ -28,6 +28,11 @@ return [
                 'route_name' => 'dictionaries.positions.index',
                 'title'      => 'Позиции',
             ],
+            'substances' => [
+                'icon'       => 'activity',
+                'route_name' => 'dictionaries.substances.index',
+                'title'      => 'Действующие вещества',
+            ],
         ],
     ],
     'warehouse' => [
