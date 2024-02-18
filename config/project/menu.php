@@ -23,6 +23,11 @@ return [
                 'route_name' => 'dictionaries.countries.index',
                 'title'      => 'Страны',
             ],
+            'positions' => [
+                'icon'       => 'activity',
+                'route_name' => 'dictionaries.positions.index',
+                'title'      => 'Позиции',
+            ],
         ],
     ],
     'warehouse' => [

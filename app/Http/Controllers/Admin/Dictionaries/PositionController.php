@@ -7,51 +7,60 @@ use App\Actions\Position\StoreAction;
 use App\Actions\Position\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Position\StoreRequest;
-use App\Http\Resources\PositionResource;
 use App\Models\Position;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class PositionController extends Controller
 {
-    public function index(IndexAction $action): Application|View|Factory
+    public function index(IndexAction $action): View
     {
         $positions = $action->execute();
 
-        return view('admin.position.index', compact('positions'));
+        return view('admin.dictionaries.positions.index', compact('positions'));
     }
 
-    public function create(): Application|View|Factory
+    public function create(): View
     {
-        return view('admin.position.create');
+        $position = new Position();
+
+        return view('admin.dictionaries.positions.create', compact('position'));
     }
 
-    public function store(StoreRequest $request, StoreAction $action): PositionResource
+    public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
-        $position = $action->execute($request->getParams());
+        $action->execute($request->getParams());
 
-        return new PositionResource($position);
+        return redirect(route('dictionaries.position.index'))->with('success', 'Позиция добавлена');
     }
 
-    public function edit(Position $position): Application|View|Factory
+    public function edit(Position $position): View
     {
-        return view('admin.position.edit', compact('position'));
+        return view('admin.dictionaries.positions.edit', compact('position'));
     }
 
     public function update(
         StoreRequest $request,
         UpdateAction $action,
         Position $position
-    ): PositionResource
+    ): RedirectResponse
     {
-        $position = $action->execute($request->getParams(), $position);
+        $action->execute($request->getParams(), $position);
 
-        return new PositionResource($position);
+        return redirect(route('dictionaries.positions.index'))->with('success', 'Данные успешно изменены');
     }
 
-    public function destroy(Position $position)
+    public function destroy(Position $position): RedirectResponse
     {
-        $position->delete();
+        try {
+            $position->delete();
+
+            return redirect(route('dictionaries.positions.index'))->with('success', 'Данные успешно удалены');
+        } catch (Throwable $e) {
+            logger($e->getMessage());
+        }
+
+        return back()->with('error', 'Невозможно удалить запись');
     }
 }
