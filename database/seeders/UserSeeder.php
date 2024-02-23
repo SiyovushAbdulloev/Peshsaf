@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::firstOrCreate(
+        $admin   = User::firstOrCreate(
             [
                 'email' => 'admin@admin.com',
             ],
@@ -23,7 +23,29 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('password'),
             ]
         );
+        $warehouse = User::firstOrCreate(
+            [
+                'email' => 'warehouse@admin.com',
+            ],
+            [
+                'name'     => 'Завсклад',
+                'email'    => 'warehouse@admin.com',
+                'password' => bcrypt('password'),
+            ]
+        );
+        $vendor  = User::firstOrCreate(
+            [
+                'email' => 'vendor@admin.com',
+            ],
+            [
+                'name'     => 'Завсклад',
+                'email'    => 'vendor@admin.com',
+                'password' => bcrypt('password'),
+            ]
+        );
 
-        $user->assignRole(Role::ADMIN);
+        $admin->assignRole(Role::ADMIN);
+        $warehouse->assignRole(Role::WAREHOUSE);
+        $vendor->assignRole(Role::VENDOR);
     }
 }
