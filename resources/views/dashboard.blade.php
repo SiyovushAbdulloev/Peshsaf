@@ -4,7 +4,7 @@
     <title>Dashboard</title>
 @endsection
 
-@section('subcontent')
+@section('content')
     <div class="intro-y mt-8">
         <h2 class="mr-auto text-lg font-medium">This is a dashboard</h2>
     </div>

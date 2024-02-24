@@ -8,18 +8,20 @@ class MenuComposer
 {
     public function compose(View $view): void
     {
-        $menu = config('project.menu');
-        if (!is_null(request()->route())) {
-            $pageName = request()->route()->getName();
-            $activeMenu = $this->activeMenu($pageName, $menu);
+        if (auth()->check()) {
+            $menu = config('project.menu')[auth()->user()->role?->name]; // TODO get user role
+            if (!is_null(request()->route())) {
+                $pageName = request()->route()->getName();
+                $activeMenu = $this->activeMenu($pageName, $menu);
 
-            $view->with('mainMenu', $menu);
+                $view->with('mainMenu', $menu);
 
-            $view->with('firstLevelActiveIndex', $activeMenu['first_level_active_index']);
-            $view->with('secondLevelActiveIndex', $activeMenu['second_level_active_index']);
-            $view->with('thirdLevelActiveIndex', $activeMenu['third_level_active_index']);
+                $view->with('firstLevelActiveIndex', $activeMenu['first_level_active_index']);
+                $view->with('secondLevelActiveIndex', $activeMenu['second_level_active_index']);
+                $view->with('thirdLevelActiveIndex', $activeMenu['third_level_active_index']);
 
-            $view->with('pageName', $pageName);
+                $view->with('pageName', $pageName);
+            }
         }
     }
 

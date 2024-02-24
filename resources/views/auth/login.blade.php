@@ -1,4 +1,4 @@
-@extends('layouts/base')
+@extends('layouts/auth')
 
 @section('head')
     <title>Login</title>
