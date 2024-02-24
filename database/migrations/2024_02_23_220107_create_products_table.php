@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('measures', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('status');
+            $table->foreignId('dic_product_id')->constrained();
+            $table->morphs('model');
+            $table->string('barcode');
+            $table->boolean('history')->default(false);
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('measures');
+        Schema::dropIfExists('products');
     }
 };

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('dic_products', function (Blueprint $table) {
             $table->id();
             $table->string('status');
+            $table->string('name');
             $table->foreignId('category_id')->constrained();
             $table->foreignId('active_ingredient_id')->constrained();
             $table->foreignId('measure_id')->constrained();

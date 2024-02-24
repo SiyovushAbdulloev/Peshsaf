@@ -26,6 +26,11 @@ return [
             'route_name' => 'dashboard',
             'title'      => 'Dashboard',
         ],
+        'products'    => [
+            'icon'       => 'list',
+            'route_name' => 'warehouse.products.index',
+            'title'      => 'Товары',
+        ],
     ],
     'vendor' => [
         'dashboard'    => [
