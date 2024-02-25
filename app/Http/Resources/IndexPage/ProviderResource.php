@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\IndexPage;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,12 +18,8 @@ class ProviderResource extends JsonResource
             'id' => $this->resource->id,
             'organization_name' => $this->resource->organization_name,
             'organization_address' => $this->resource->organization_address,
-            'organization_info' => $this->resource->organization_info,
             'phone' => $this->resource->phone,
             'email' => $this->resource->email,
-            'full_name' => $this->resource->full_name,
-            'country' => new CountryResource($this->whenLoaded('country')),
-            'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }
 }

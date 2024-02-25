@@ -3,7 +3,7 @@
 namespace App\Actions\Provider;
 
 use App\Core\Actions\CoreAction;
-use App\Http\Resources\ProviderResource;
+use App\Http\Resources\IndexPage\ProviderResource;
 use App\Models\Provider;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 

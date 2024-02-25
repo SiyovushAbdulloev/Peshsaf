@@ -16,6 +16,7 @@ class DestroyAction extends CoreAction
             }
         }
 
+        $provider->files->delete();
         $provider->delete();
     }
 }

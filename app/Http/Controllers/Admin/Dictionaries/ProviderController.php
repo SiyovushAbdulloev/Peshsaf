@@ -14,50 +14,56 @@ use App\Http\Requests\Provider\UpdateRequest;
 use App\Http\Resources\CountryResource;
 use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 class ProviderController extends Controller
 {
-    public function index(IndexAction $action): Application|View|Factory
+    public function index(IndexAction $action): View
     {
         $providers = $action->execute();
 
-        return view('admin.provider.index', compact('providers'));
+        return view('admin.dictionaries.providers.index', compact('providers'));
     }
 
-    public function create(CountryIndexAction $action): Application|View|Factory
+    public function create(CountryIndexAction $action): View
     {
         $countries = $action->execute();
+        $provider = new Provider();
 
-        return view('admin.provider.create', [
-            'countries' => CountryResource::collection($countries)
+        return view('admin.dictionaries.providers.create', [
+            'countries' => CountryResource::collection($countries),
+            'provider' => $provider,
+            'page' => 'create'
         ]);
     }
 
-    public function store(StoreRequest $request, StoreAction $action): ProviderResource
+    public function store(StoreRequest $request, StoreAction $action): ?JsonResponse
     {
-        $provider = $action->execute($request->getParams());
+        $action->execute($request->getParams());
 
-        return new ProviderResource($provider->load('country'));
+        return response()->json([
+            'success' => true
+        ]);
     }
 
-    public function edit(CountryIndexAction $action, Provider $provider): Application|View|Factory
+    public function edit(CountryIndexAction $action, Provider $provider): View
     {
         $countries = $action->execute();
 
-        return view('admin.provider.edit', [
-            'provider' => new ProviderResource($provider->load('country')),
-            'countries' => CountryResource::collection($countries)
+        return view('admin.dictionaries.providers.edit', [
+            'provider' => new ProviderResource($provider->load('country', 'files')),
+            'countries' => CountryResource::collection($countries),
+            'page' => 'edit'
         ]);
     }
 
     public function update(
         UpdateRequest $request,
-        UpdateAction $action,
-        Provider $provider
+        UpdateAction  $action,
+        Provider      $provider
     ): ProviderResource
     {
         $provider = $action->execute($request->getParams(), $provider);
@@ -66,14 +72,22 @@ class ProviderController extends Controller
     }
 
     public function destroy(DestroyAction $action, Provider $provider)
-    {
-        $action->execute($provider);
+    {logger('Provider:' . $provider->id);
+        try {
+            $action->execute($provider);
+
+            return redirect(route('dictionaries.providers.index'))->with('success', 'Данные успешно удалены');
+        } catch (Throwable $e) {
+            logger($e->getMessage());
+        }
+
+        return back()->with('error', 'Невозможно удалить запись');
     }
 
     public function destroyFile(
-        Request $request,
+        Request           $request,
         DestroyFileAction $action,
-        Provider $provider,
+        Provider          $provider,
     )
     {
         $action->execute($provider, $request->get('file'));

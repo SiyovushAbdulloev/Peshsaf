@@ -33,6 +33,11 @@ return [
                 'route_name' => 'dictionaries.substances.index',
                 'title'      => 'Действующие вещества',
             ],
+            'providers' => [
+                'icon'       => 'activity',
+                'route_name' => 'dictionaries.providers.index',
+                'title'      => 'Поставщики',
+            ],
         ],
     ],
     'warehouse' => [

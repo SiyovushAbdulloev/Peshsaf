@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('providers', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('organization_name');
-            $table->string('full_name');
-            $table->foreignId('country_id');
-            $table->string('organization_address');
-            $table->string('phone');
-            $table->string('email');
-            $table->text('organization_info');
+            $table->string('filename');
+            $table->string('original_filename');
+            $table->string('mimetype');
+            $table->string('size');
+            $table->morphs('fileable');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('providers');
+        Schema::dropIfExists('files');
     }
 };
