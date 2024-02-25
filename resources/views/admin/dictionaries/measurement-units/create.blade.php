@@ -9,7 +9,7 @@
 
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
-            <form action="{{ route('dictionaries.measurement-units.store') }}" method="post">
+            <form action="{{ route('admin.dictionaries.measurement-units.store') }}" method="post">
                 @csrf
 
                 <div class="intro-y box p-5">
@@ -18,7 +18,7 @@
                     <div class="mt-5 text-right">
                         <x-base.button
                             as="a"
-                            :href="route('dictionaries.measurement-units.index')"
+                            :href="route('admin.dictionaries.measurement-units.index')"
                             class="mr-1 w-24"
                             type="button"
                             variant="outline-secondary"

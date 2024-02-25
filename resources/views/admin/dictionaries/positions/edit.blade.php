@@ -8,7 +8,7 @@
     <div class="intro-y mt-10 flex flex-row justify-content-between">
         <h2 class="intro-y text-lg font-medium">Изменение</h2>
 
-        <form class="ml-auto" action="{{ route('dictionaries.positions.destroy', compact('position')) }}"
+        <form class="ml-auto" action="{{ route('admin.dictionaries.positions.destroy', compact('position')) }}"
               method="post" onsubmit="return confirm('Вы действительно хотите удалить?');">
             @csrf
             @method('DELETE')
@@ -26,7 +26,7 @@
 
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
-            <form action="{{ route('dictionaries.positions.update', compact('position')) }}" method="post">
+            <form action="{{ route('admin.dictionaries.positions.update', compact('position')) }}" method="post">
                 @csrf
                 @method('PATCH')
 
@@ -36,7 +36,7 @@
                     <div class="mt-5 text-right">
                         <x-base.button
                             as="a"
-                            :href="route('dictionaries.positions.index')"
+                            :href="route('admin.dictionaries.positions.index')"
                             class="mr-1 w-24"
                             type="button"
                             variant="outline-secondary"

@@ -9,7 +9,7 @@
 
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
-            <form action="{{ route('dictionaries.countries.store') }}" method="post">
+            <form action="{{ route('admin.dictionaries.countries.store') }}" method="post">
                 @csrf
 
                 <div class="intro-y box p-5">
@@ -18,7 +18,7 @@
                     <div class="mt-5 text-right">
                         <x-base.button
                             as="a"
-                            :href="route('dictionaries.countries.index')"
+                            :href="route('admin.dictionaries.countries.index')"
                             class="mr-1 w-24"
                             type="button"
                             variant="outline-secondary"

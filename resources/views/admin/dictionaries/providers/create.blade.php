@@ -9,7 +9,7 @@
 
     <div class="mt-5 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
-            <form action="{{ route('dictionaries.providers.store') }}" method="post">
+            <form action="{{ route('admin.dictionaries.providers.store') }}" method="post">
                 @csrf
 
                 <div class="intro-y box p-5">
@@ -18,7 +18,7 @@
                     <div class="mt-5 text-right">
                         <x-base.button
                             as="a"
-                            :href="route('dictionaries.providers.index')"
+                            :href="route('admin.dictionaries.providers.index')"
                             class="mr-1 w-24"
                             type="button"
                             variant="outline-secondary"
@@ -51,7 +51,7 @@
                 body.append('files[]', file);
             });
 
-            let response = await fetch('http://localhost/dictionaries/providers', {
+            let response = await fetch('http://localhost/admin/dictionaries/providers', {
                 method: 'POST',
                 body
             })
@@ -60,7 +60,7 @@
                 if (response.ok) {
                     let data = await response.json();
                     if (data?.success) {
-                        location.href = 'http://localhost/dictionaries/providers';
+                        location.href = 'http://localhost/admin/dictionaries/providers';
                     }
                 } else if (response.status === 422) {
                     let {errors} = await response.json();

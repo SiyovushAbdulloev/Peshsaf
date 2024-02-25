@@ -8,7 +8,7 @@
     <h2 class="intro-y mt-10 text-lg font-medium">Позиции</h2>
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center ml-auto">
-            <a href="{{ route('dictionaries.positions.create') }}" class="transition duration-200 border
+            <a href="{{ route('admin.dictionaries.positions.create') }}" class="transition duration-200 border
             inline-flex items-center
             justify-center py-2
             px-3 rounded-md
@@ -69,7 +69,8 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                         >
-                            <a href="{{ route('dictionaries.positions.edit', compact('position')) }}" class="mr-4">
+                            <a href="{{ route('admin.dictionaries.positions.edit', compact('position')) }}"
+                               class="mr-4">
                                 <x-base.lucide icon="pencil"/>
                             </a>
                             <a href="#" class="text-danger">

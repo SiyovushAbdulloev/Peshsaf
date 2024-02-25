@@ -8,7 +8,7 @@
     <h2 class="intro-y mt-10 text-lg font-medium">Единицы измерений</h2>
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center ml-auto">
-            <a href="{{ route('dictionaries.measurement-units.create') }}" class="transition duration-200 border
+            <a href="{{ route('admin.dictionaries.measurement-units.create') }}" class="transition duration-200 border
             inline-flex items-center
             justify-center py-2
             px-3 rounded-md
@@ -69,11 +69,12 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                         >
-                            <a href="{{ route('dictionaries.measurement-units.edit', compact('unit')) }}" class="mr-4">
-                                <x-base.lucide icon="pencil" />
+                            <a href="{{ route('admin.dictionaries.measurement-units.edit', compact('unit')) }}"
+                               class="mr-4">
+                                <x-base.lucide icon="pencil"/>
                             </a>
                             <a href="#" class="text-danger">
-                                <x-base.lucide icon="trash" />
+                                <x-base.lucide icon="trash"/>
                             </a>
                         </td>
                     </tr>
@@ -81,8 +82,11 @@
                 </tbody>
             </table>
         @else
-            <div role="alert" class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center"><i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
-                Нет данных</div>
+            <div role="alert"
+                 class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
+                <i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                Нет данных
+            </div>
         @endif
     </div>
 @endsection
