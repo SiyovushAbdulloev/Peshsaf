@@ -1,10 +1,10 @@
 @extends('layouts/sidebar')
 
-@section('subhead')
+@section('head')
     <title>Поставщики</title>
 @endsection
 
-@section('subcontent')
+@section('content')
     <h2 class="intro-y mt-10 text-lg font-medium">Создание</h2>
 
     <div class="mt-5 gap-6">

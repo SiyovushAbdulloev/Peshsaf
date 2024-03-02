@@ -32,7 +32,7 @@ class MeasurementUnitController extends Controller
     {
         $action->execute($request->getParams());
 
-        return redirect(route('dictionaries.measurement-units.index'))->with('success', 'Единица измерения добавлена');
+        return redirect(route('admin.dictionaries.measurement-units.index'))->with('success', 'Единица измерения добавлена');
     }
 
     public function edit(MeasurementUnit $unit): View
@@ -48,7 +48,7 @@ class MeasurementUnitController extends Controller
     {
         $action->execute($request->getParams(), $unit);
 
-        return redirect(route('dictionaries.measurement-units.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.measurement-units.index'))->with('success', 'Данные успешно изменены');
     }
 
     public function destroy(MeasurementUnit $unit): RedirectResponse
@@ -56,7 +56,7 @@ class MeasurementUnitController extends Controller
         try {
             $unit->delete();
 
-            return redirect(route('dictionaries.measurement-units.index'))->with('success', 'Данные успешно удалены');
+            return redirect(route('admin.dictionaries.measurement-units.index'))->with('success', 'Данные успешно удалены');
         } catch (Throwable $e) {
             logger($e->getMessage());
         }

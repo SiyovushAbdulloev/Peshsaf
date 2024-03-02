@@ -32,7 +32,7 @@ class SubstanceController extends Controller
     {
         $action->execute($request->getParams());
 
-        return redirect(route('dictionaries.substances.index'))->with('success', 'Действующее вещество добавлено');
+        return redirect(route('admin.dictionaries.substances.index'))->with('success', 'Действующее вещество добавлено');
     }
 
     public function edit(Substance $substance): View
@@ -48,7 +48,7 @@ class SubstanceController extends Controller
     {
         $action->execute($request->getParams(), $substance);
 
-        return redirect(route('dictionaries.substances.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.substances.index'))->with('success', 'Данные успешно изменены');
     }
 
     public function destroy(Substance $substance): RedirectResponse
@@ -56,7 +56,7 @@ class SubstanceController extends Controller
         try {
             $substance->delete();
 
-            return redirect(route('dictionaries.substances.index'))->with('success', 'Данные успешно удалены');
+            return redirect(route('admin.dictionaries.substances.index'))->with('success', 'Данные успешно удалены');
         } catch (Throwable $e) {
             logger($e->getMessage());
         }

@@ -1,10 +1,10 @@
 @extends('layouts/sidebar')
 
-@section('subhead')
+@section('head')
     <title>Страны</title>
 @endsection
 
-@section('subcontent')
+@section('content')
     <h2 class="intro-y mt-10 text-lg font-medium">Страны</h2>
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center ml-auto">

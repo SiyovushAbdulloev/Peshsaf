@@ -1,10 +1,10 @@
 @extends('layouts/sidebar')
 
-@section('subhead')
+@section('head')
     <title>Действующие вещества</title>
 @endsection
 
-@section('subcontent')
+@section('content')
     <div class="intro-y mt-10 flex flex-row justify-content-between">
         <h2 class="intro-y text-lg font-medium">Изменение</h2>
 

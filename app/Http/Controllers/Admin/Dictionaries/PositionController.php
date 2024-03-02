@@ -32,7 +32,7 @@ class PositionController extends Controller
     {
         $action->execute($request->getParams());
 
-        return redirect(route('dictionaries.position.index'))->with('success', 'Позиция добавлена');
+        return redirect(route('admin.dictionaries.position.index'))->with('success', 'Позиция добавлена');
     }
 
     public function edit(Position $position): View
@@ -48,7 +48,7 @@ class PositionController extends Controller
     {
         $action->execute($request->getParams(), $position);
 
-        return redirect(route('dictionaries.positions.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.positions.index'))->with('success', 'Данные успешно изменены');
     }
 
     public function destroy(Position $position): RedirectResponse
@@ -56,7 +56,7 @@ class PositionController extends Controller
         try {
             $position->delete();
 
-            return redirect(route('dictionaries.positions.index'))->with('success', 'Данные успешно удалены');
+            return redirect(route('admin.dictionaries.positions.index'))->with('success', 'Данные успешно удалены');
         } catch (Throwable $e) {
             logger($e->getMessage());
         }

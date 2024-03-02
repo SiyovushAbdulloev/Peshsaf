@@ -76,7 +76,7 @@ class ProviderController extends Controller
         try {
             $action->execute($provider);
 
-            return redirect(route('dictionaries.providers.index'))->with('success', 'Данные успешно удалены');
+            return redirect(route('admin.dictionaries.providers.index'))->with('success', 'Данные успешно удалены');
         } catch (Throwable $e) {
             logger($e->getMessage());
         }

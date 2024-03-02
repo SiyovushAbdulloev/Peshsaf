@@ -32,7 +32,7 @@ class CountryController extends Controller
     {
         $action->execute($request->getParams());
 
-        return redirect(route('dictionaries.countries.index'))->with('success', 'Страна добавлена');
+        return redirect(route('admin.dictionaries.countries.index'))->with('success', 'Страна добавлена');
     }
 
     public function edit(Country $country): View
@@ -48,7 +48,7 @@ class CountryController extends Controller
     {
         $action->execute($request->getParams(), $country);
 
-        return redirect(route('dictionaries.countries.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.countries.index'))->with('success', 'Данные успешно изменены');
     }
 
     public function destroy(Country $country): RedirectResponse
@@ -56,7 +56,7 @@ class CountryController extends Controller
         try {
             $country->delete();
 
-            return redirect(route('dictionaries.countries.index'))->with('success', 'Данные успешно удалены');
+            return redirect(route('admin.dictionaries.countries.index'))->with('success', 'Данные успешно удалены');
         } catch (Throwable $e) {
             logger($e->getMessage());
         }
