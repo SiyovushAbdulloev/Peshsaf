@@ -31,6 +31,11 @@ return [
             'route_name' => 'warehouse.products.index',
             'title'      => 'Товары',
         ],
+        'receipts'    => [
+            'icon'       => 'list',
+            'route_name' => 'warehouse.receipts.index',
+            'title'      => 'Приход товаров',
+        ],
     ],
     'vendor' => [
         'dashboard'    => [

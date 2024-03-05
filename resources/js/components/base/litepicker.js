@@ -4,12 +4,13 @@
     // Litepicker
     $(".datepicker").each(function () {
         let options = {
-            autoApply: false,
+            autoApply: true,
+            lang: 'ru-RU',
             singleMode: false,
             numberOfColumns: 2,
             numberOfMonths: 2,
             showWeekNumbers: true,
-            format: "D MMM, YYYY",
+            format: "D-MM-YYYY",
             dropdowns: {
                 minYear: 1990,
                 maxYear: null,

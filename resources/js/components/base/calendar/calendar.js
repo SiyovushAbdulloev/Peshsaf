@@ -19,33 +19,6 @@
             navLinks: true,
             editable: true,
             dayMaxEvents: true,
-            events: [
-                {
-                    title: "Vue Vixens Day",
-                    start: "2045-01-05",
-                    end: "2045-01-08",
-                },
-                {
-                    title: "VueConfUS",
-                    start: "2045-01-11",
-                    end: "2045-01-15",
-                },
-                {
-                    title: "VueJS Amsterdam",
-                    start: "2045-01-17",
-                    end: "2045-01-21",
-                },
-                {
-                    title: "Vue Fes Japan 2045",
-                    start: "2045-01-21",
-                    end: "2045-01-24",
-                },
-                {
-                    title: "Laracon 2045",
-                    start: "2045-01-24",
-                    end: "2045-01-27",
-                },
-            ],
             drop: function (info) {
                 if (
                     $("#checkbox-events").length &&
