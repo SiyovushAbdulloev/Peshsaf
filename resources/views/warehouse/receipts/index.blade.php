@@ -5,13 +5,23 @@
 @endsection
 
 @section('content')
-    <h2 class="intro-y my-10 text-lg font-medium">Приход товаров</h2>
+    <div class="mt-5 grid grid-cols-12 gap-6">
+        <div class="intro-y mt-2 flex">
+            <h2 class="intro-y text-lg font-medium">Приход товаров</h2>
 
-    <div class="overflow-x-auto">
+            <a href="{{ route('warehouse.receipts.create') }}" class="transition duration-200 border
+                inline-flex items-center
+                justify-center py-2
+                px-3 rounded-md ml-auto
+                font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-2 shadow-md">
+                Добавить
+            </a>
+        </div>
+
         @if($receipts->count())
             <table
                 data-tw-merge
-                class="w-full text-left"
+                class="w-full text-left mt-5"
             >
                 <thead data-tw-merge class="">
                 <tr
