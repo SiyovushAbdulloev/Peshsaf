@@ -4,9 +4,6 @@ namespace App\Http\Requests\Provider;
 
 use App\Core\Http\Requests\CoreFormRequest;
 use App\Http\Requests\Params\Provider\StoreRequestParams;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
 
 class StoreRequest extends CoreFormRequest
 {
@@ -17,7 +14,7 @@ class StoreRequest extends CoreFormRequest
         return [
             'organization_name' => ['required', 'string', 'max:255'],
             'full_name' => ['required', 'string', 'max:255'],
-            'country_id' => ['required', 'integer', 'exists:countries,id'],
+            'country' => ['required', 'integer', 'exists:countries,id'],
             'organization_address' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email'],
@@ -27,19 +24,12 @@ class StoreRequest extends CoreFormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'errors' => $validator->errors()
-        ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
-    }
-
     public function toArray(): array
     {
         return [
             'organizationName' => $this->get('organization_name'),
             'providerFullName' => $this->get('full_name'),
-            'countryId' => $this->get('country_id'),
+            'countryId' => $this->get('country'),
             'organizationAddress' => $this->get('organization_address'),
             'phone' => $this->get('phone'),
             'email' => $this->get('email'),

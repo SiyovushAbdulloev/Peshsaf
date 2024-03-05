@@ -14,7 +14,7 @@ class UpdateRequest extends CoreFormRequest
         return [
             'organization_name' => ['required', 'string', 'max:255'],
             'provider_full_name' => ['required', 'string', 'max:255'],
-            'country_id' => ['required', 'integer', 'exists:countries,id'],
+            'country' => ['required', 'integer', 'exists:countries,id'],
             'organization_address' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email'],
@@ -29,7 +29,7 @@ class UpdateRequest extends CoreFormRequest
         return [
             'organizationName' => $this->get('organization_name'),
             'providerFullName' => $this->get('provider_full_name'),
-            'countryId' => $this->get('country_id'),
+            'countryId' => $this->get('country'),
             'organizationAddress' => $this->get('organization_address'),
             'phone' => $this->get('phone'),
             'email' => $this->get('email'),

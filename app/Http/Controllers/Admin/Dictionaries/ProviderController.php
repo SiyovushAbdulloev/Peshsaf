@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Dictionaries;
 
 use App\Actions\Country\IndexAction as CountryIndexAction;
 use App\Actions\Provider\DestroyAction;
-use App\Actions\Provider\DestroyFileAction;
 use App\Actions\Provider\IndexAction;
 use App\Actions\Provider\StoreAction;
 use App\Actions\Provider\UpdateAction;
@@ -12,11 +11,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Provider\StoreRequest;
 use App\Http\Requests\Provider\UpdateRequest;
 use App\Http\Resources\CountryResource;
-use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Throwable;
 
 class ProviderController extends Controller
@@ -40,39 +37,33 @@ class ProviderController extends Controller
         ]);
     }
 
-    public function store(StoreRequest $request, StoreAction $action): ?JsonResponse
+    public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
         $action->execute($request->getParams());
 
-        return response()->json([
-            'success' => true
-        ]);
+        return redirect(route('admin.dictionaries.providers.index'))->with('success', 'Поставщик добавлен');
     }
 
     public function edit(CountryIndexAction $action, Provider $provider): View
     {
         $countries = $action->execute();
 
-        return view('admin.dictionaries.providers.edit', [
-            'provider' => new ProviderResource($provider->load('country', 'files')),
-            'countries' => CountryResource::collection($countries),
-            'page' => 'edit'
-        ]);
+        return view('admin.dictionaries.providers.edit', compact('provider', 'countries'));
     }
 
     public function update(
         UpdateRequest $request,
         UpdateAction  $action,
         Provider      $provider
-    ): ProviderResource
+    ): RedirectResponse
     {
-        $provider = $action->execute($request->getParams(), $provider);
+        $action->execute($request->getParams(), $provider);
 
-        return new ProviderResource($provider->load('country'));
+        return redirect(route('admin.dictionaries.providers.index'))->with('success', 'Данные успешно изменены');
     }
 
-    public function destroy(DestroyAction $action, Provider $provider)
-    {logger('Provider:' . $provider->id);
+    public function destroy(DestroyAction $action, Provider $provider): RedirectResponse
+    {
         try {
             $action->execute($provider);
 
@@ -82,14 +73,5 @@ class ProviderController extends Controller
         }
 
         return back()->with('error', 'Невозможно удалить запись');
-    }
-
-    public function destroyFile(
-        Request           $request,
-        DestroyFileAction $action,
-        Provider          $provider,
-    )
-    {
-        $action->execute($provider, $request->get('file'));
     }
 }

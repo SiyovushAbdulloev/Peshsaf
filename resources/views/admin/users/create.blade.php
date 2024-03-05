@@ -1,7 +1,7 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Поставщики</title>
+    <title>Пользователи</title>
 @endsection
 
 @section('content')
@@ -9,17 +9,16 @@
 
     <div class="mt-5 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
-            <form action="{{ route('admin.dictionaries.providers.store') }}" method="post"
-                  enctype="multipart/form-data">
+            <form action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="intro-y box p-5">
-                    @include('admin.dictionaries.providers.partials.form')
+                    @include('admin.users.partials.form')
 
                     <div class="mt-5 text-right">
                         <x-base.button
                             as="a"
-                            :href="route('admin.dictionaries.providers.index')"
+                            :href="route('admin.users.index')"
                             class="mr-1 w-24"
                             type="button"
                             variant="outline-secondary"
@@ -27,8 +26,8 @@
                             Отмена
                         </x-base.button>
                         <x-base.button
+                            class="w-24"
                             type="submit"
-                            id="store-provider"
                             variant="primary"
                         >
                             Добавить

@@ -31,7 +31,7 @@ class Provider extends Model
     ];
 
     protected $casts = [
-      'files' => 'array'
+//      'files' => 'array'
     ];
 
     public function country(): BelongsTo
