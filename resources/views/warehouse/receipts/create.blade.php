@@ -39,3 +39,7 @@
         </div>
     </div>
 @endsection
+
+@pushOnce('scripts')
+    @vite('resources/js/pages/receipts.js')
+@endPushOnce

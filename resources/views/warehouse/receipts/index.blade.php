@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="mt-5 grid grid-cols-12 gap-6">
+    <div class="mt-5">
         <div class="intro-y mt-2 flex">
             <h2 class="intro-y text-lg font-medium">Приход товаров</h2>
 
