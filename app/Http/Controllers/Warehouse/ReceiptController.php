@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Warehouse;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Reciepts\StoreRequest;
+use App\Http\Requests\Reciepts\UpdateRequest;
 use App\Models\Dictionaries\Product;
 use App\Models\Receipt;
 use App\Models\Supplier;
@@ -37,12 +38,41 @@ class ReceiptController extends Controller
             ->receipts()
             ->create($request->validated());
 
-        foreach ($request->get('products') as $product) {
+        foreach ($request->get('products') as $productId) {
             $receipt->products()->create([
-                'product_id' => $product
+                'dic_product_id' => $productId
             ]);
         }
 
-        return redirect(route('warehouse.receipts.index'))->with('success', 'Приход успешно добавлен');
+        return redirect(route('warehouse.receipts.edit', compact('receipt')))->with('success', 'Приход успешно добавлен');
+    }
+
+    public function edit(Receipt $receipt): View
+    {
+        $suppliers = Supplier::get();
+
+        return view('warehouse.receipts.edit', compact('receipt', 'suppliers'));
+    }
+
+    public function update(Receipt $receipt, UpdateRequest $request)
+    {
+        $receipt->update($request->validated());
+
+        foreach ($request->get('products') as $key => $count) {
+            $product = $receipt->products->find($key);
+            $product->count = $count;
+            $product->save();
+        }
+
+        return redirect(route('warehouse.receipts.edit', compact('receipt')))->with('success', 'Данные успешно сохранены');
+    }
+
+    public function send(Receipt $receipt)
+    {
+        if ($receipt->status()->canBe('on_approval')) {
+            $receipt->status()->transitionTo('on_approval');
+        }
+
+        return redirect(route('warehouse.receipts.index'))->with('success', 'Приход успешно отправлен на одобрение');
     }
 }

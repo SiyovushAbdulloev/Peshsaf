@@ -38,6 +38,12 @@
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
+                        Статус
+                    </th>
+                    <th
+                        data-tw-merge
+                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                    >
                         Дата
                     </th>
                     <th
@@ -94,6 +100,12 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
+                            {{ $receipt->status }}
+                        </td>
+                        <td
+                            data-tw-merge
+                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                        >
                             {{ $receipt->date->format('d.m.Y') }}
                         </td>
                         <td
@@ -130,6 +142,11 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                         >
+                            @can('edit', $receipt)
+                            <a href="{{ route('warehouse.receipts.edit', compact('receipt')) }}" class="mr-4">
+                                <x-base.lucide icon="pencil" />
+                            </a>
+                            @endcan
                             <a href="#" class="mr-4">
                                 <x-base.lucide icon="info" />
                             </a>
