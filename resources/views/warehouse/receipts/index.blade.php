@@ -20,6 +20,7 @@
 
         @if($receipts->count())
             <table
+                id="receipts-table"
                 data-tw-merge
                 class="w-full text-left mt-5"
             >
@@ -78,7 +79,7 @@
                     </th>
                     <th
                         data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]"
                     >
                         &nbsp;
                     </th>
@@ -92,72 +93,102 @@
                     >
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $receipt->number }}
                         </td>
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $receipt->status }}
                         </td>
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $receipt->date->format('d.m.Y') }}
                         </td>
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $receipt->supplier?->name }}
                         </td>
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $receipt->supplier?->address }}
                         </td>
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $receipt->supplier?->country?->name }}
                         </td>
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $receipt->supplier?->phone }}
                         </td>
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $receipt->products_count }}
                         </td>
                         <td
                             data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
+                            class="px-5 py-2 border-b dark:border-darkmode-300 gap-2"
                         >
+                            <x-base.button
+                                as="a"
+                                size="sm"
+                                href="{{ route('warehouse.receipts.show', compact('receipt')) }}"
+                                type="button"
+                                variant="outline-primary"
+                                data-route="{{ route('warehouse.receipts.destroy', compact('receipt')) }}"
+                            >
+                                <x-base.lucide icon="info"/>
+                            </x-base.button>
                             @can('edit', $receipt)
-                            <a href="{{ route('warehouse.receipts.edit', compact('receipt')) }}" class="mr-4">
-                                <x-base.lucide icon="pencil" />
-                            </a>
+                                <x-base.button
+                                    as="a"
+                                    size="sm"
+                                    href="{{ route('warehouse.receipts.edit', compact('receipt')) }}"
+                                    type="button"
+                                    variant="outline-success"
+                                    data-route="{{ route('warehouse.receipts.destroy', compact('receipt')) }}"
+                                >
+                                    <x-base.lucide icon="pencil"/>
+                                </x-base.button>
+                                <x-base.button
+                                    size="sm"
+                                    class="delete-receipt"
+                                    type="button"
+                                    variant="outline-danger"
+                                    data-route="{{ route('warehouse.receipts.destroy', compact('receipt')) }}"
+                                >
+                                    <x-base.lucide icon="trash"/>
+                                </x-base.button>
                             @endcan
-                            <a href="#" class="mr-4">
-                                <x-base.lucide icon="info" />
-                            </a>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         @else
-            <div role="alert" class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center"><i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
-                Нет данных</div>
+            <div role="alert"
+                 class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
+                <i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                Нет данных
+            </div>
         @endif
     </div>
 @endsection
+
+@pushOnce('scripts')
+    @vite('resources/js/pages/receipts.js')
+@endPushOnce
