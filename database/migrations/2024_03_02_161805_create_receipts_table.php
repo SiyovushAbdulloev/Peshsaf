@@ -23,7 +23,9 @@ return new class extends Migration
 
         Schema::create('receipt_products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('dic_product_id')->constrained();
             $table->foreignId('receipt_id')->constrained();
+            $table->string('count')->nullable()->default(0);
 
             $table->timestamps();
         });

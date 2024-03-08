@@ -8,7 +8,7 @@
         >
             @foreach($suppliers as $supplier)
                 <option>Выберите поставщика</option>
-                <option value="{{ $supplier->id }}" @selected(old('name', $receipt->supplier_id) === $supplier->id)
+                <option value="{{ $supplier->id }}" @selected(old('supplier_id', $receipt->supplier_id) == $supplier->id)
                 >{{ $supplier->name }}</option>
             @endforeach
         </x-base.form-select>
@@ -21,17 +21,17 @@
     </div>
 
     <div>
-        <x-base.form-label for="name">Номер накладной</x-base.form-label>
+        <x-base.form-label for="number">Номер накладной</x-base.form-label>
         <x-base.form-input
             class="w-full"
-            id="name"
+            id="number"
             type="text"
-            name="name"
+            name="number"
             placeholder="Введите наименование"
-            value="{{ old('name', $receipt->name) }}"
+            value="{{ old('number', $receipt->number) }}"
         />
 
-        @error('name')
+        @error('number')
         <div class="mt-2 text-danger">
             {{ $message }}
         </div>

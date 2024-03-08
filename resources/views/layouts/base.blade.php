@@ -13,6 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1"
     >
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     @yield('head')
 
@@ -56,6 +57,10 @@
     <!-- BEGIN: Pages, layouts, components JS Assets-->
     @vite('resources/js/components/base/theme-color.js')
     @vite('resources/js/themes/rubick.js')
+    <script type="module" src="https://code.jquery.com/jquery-3.7.1.min.js"
+             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    @vite('resources/js/app.js')
     @stack('scripts')
     <!-- END: Pages, layouts, components JS Assets-->
 </body>

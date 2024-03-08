@@ -8,4 +8,5 @@ Route::name('warehouse.')->group(function () {
     Route::get('products', [ProductController::class, 'index'])->name('products.index');
 
     Route::resource('receipts', ReceiptController::class);
+    Route::post('receipts/{receipt}/send', [ReceiptController::class, 'send'])->name('receipts.send');
 });

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="mt-5 grid grid-cols-12 gap-6">
+    <div class="mt-5">
         <div class="intro-y mt-2 flex">
             <h2 class="intro-y text-lg font-medium">Приход товаров</h2>
 
@@ -33,6 +33,12 @@
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
                         #
+                    </th>
+                    <th
+                        data-tw-merge
+                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                    >
+                        Статус
                     </th>
                     <th
                         data-tw-merge
@@ -94,6 +100,12 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
+                            {{ $receipt->status }}
+                        </td>
+                        <td
+                            data-tw-merge
+                            class="px-5 py-3 border-b dark:border-darkmode-300"
+                        >
                             {{ $receipt->date->format('d.m.Y') }}
                         </td>
                         <td
@@ -130,6 +142,11 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                         >
+                            @can('edit', $receipt)
+                            <a href="{{ route('warehouse.receipts.edit', compact('receipt')) }}" class="mr-4">
+                                <x-base.lucide icon="pencil" />
+                            </a>
+                            @endcan
                             <a href="#" class="mr-4">
                                 <x-base.lucide icon="info" />
                             </a>
