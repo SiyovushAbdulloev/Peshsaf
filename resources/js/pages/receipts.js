@@ -15,7 +15,16 @@
         if(confirm('Вы действительно хотите удапмть товар?')) {
             // TODO call delete product route
             let id = $(this).attr('data-id');
-            $(this).closest('tr').remove();
+
+            $.ajax({
+                url: '/warehouse/test',
+                type: 'POST',
+                dataType: 'json',
+            }).done((result) => {
+                console.log(result);
+                // $(this).closest('tr').remove();
+
+            });
         }
     })
 })();
