@@ -8,7 +8,6 @@ use App\Http\Requests\Reciepts\UpdateRequest;
 use App\Models\Dictionaries\Product;
 use App\Models\Receipt;
 use App\Models\Supplier;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ReceiptController extends Controller
@@ -17,6 +16,7 @@ class ReceiptController extends Controller
     {
         $receipts = Receipt::query()
             ->withCount('products')
+            ->latest()
             ->paginate(15);
 
         return view('warehouse.receipts.index', compact('receipts'));
@@ -65,6 +65,11 @@ class ReceiptController extends Controller
         }
 
         return redirect(route('warehouse.receipts.edit', compact('receipt')))->with('success', 'Данные успешно сохранены');
+    }
+
+    public function destroy(Receipt $receipt): bool
+    {
+        return $receipt->delete();
     }
 
     public function send(Receipt $receipt)

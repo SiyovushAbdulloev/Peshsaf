@@ -29,6 +29,13 @@ class Receipt extends Model
         'status' => StatusReceipt::class
     ];
 
+    protected static function booted(): void
+    {
+        static::deleting(function (Receipt $receipt): void {
+            $receipt->products()->delete();
+        });
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(ReceiptProduct::class);

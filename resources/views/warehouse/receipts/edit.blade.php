@@ -16,7 +16,7 @@
 
                     @include('warehouse.receipts.partials.form')
 
-                    <x-base.table id="receipts" class="mt-5">
+                    <x-base.table id="products" class="mt-5">
                         <x-base.table.thead variant="light">
                             <x-base.table.tr>
                                 <x-base.table.th class="whitespace-nowrap">
@@ -36,7 +36,7 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @foreach($receipt->products as $product)
+                            @forelse($receipt->products as $product)
                                 <x-base.table.tr>
                                     <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
                                     <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
@@ -57,16 +57,22 @@
                                     <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
                                     <x-base.table.td>
                                         <x-base.button
-                                            id="delete-product"
+                                            class="delete-product"
                                             type="button"
                                             variant="outline-danger"
-                                            data-id="{{ $product->id }}"
+                                            data-route="{{ route('warehouse.receipts.products.destroy', compact('receipt',
+                                            'product'))
+                                             }}"
                                         >
                                             <x-base.lucide icon="trash"/>
                                         </x-base.button>
                                     </x-base.table.td>
                                 </x-base.table.tr>
-                            @endforeach
+                            @empty
+                                <x-base.table.tr>
+                                    <x-base.table.td colspan="5" class="text-center">No data</x-base.table.td>
+                                </x-base.table.tr>
+                            @endforelse
                         </x-base.table.tbody>
                     </x-base.table>
 
