@@ -12,17 +12,17 @@ return [
             'icon'     => 'library',
             'title'    => 'Справочники',
             'sub_menu' => [
-                'measurement-units' => [
+                'measurement-units'  => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.measurement-units.index',
                     'title'      => 'Единицы измерений',
                 ],
-                'countries'         => [
+                'countries'          => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.countries.index',
                     'title'      => 'Страны',
                 ],
-                'positions'         => [
+                'positions'          => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.positions.index',
                     'title'      => 'Позиции',
@@ -32,12 +32,12 @@ return [
                     'route_name' => 'admin.dictionaries.active-ingredients.index',
                     'title'      => 'Действующие вещества',
                 ],
-                'suppliers'         => [
+                'suppliers'          => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.suppliers.index',
                     'title'      => 'Поставщики',
                 ],
-                'products' => [
+                'products'           => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.categories.index',
                     'title'      => 'Список товаров',
@@ -45,7 +45,7 @@ return [
             ],
         ],
         'divider',
-        'users'    => [
+        'users'        => [
             'icon'       => 'activity',
             'route_name' => 'admin.users.index',
             'title'      => 'Пользователи',
