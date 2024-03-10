@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Dictionaries\SupplierController;
 use App\Http\Controllers\Admin\OutletController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WarehouseController;
+use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
