@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="intro-y mt-10 flex flex-row justify-content-between">
         <h2 class="intro-y text-lg font-medium">Изменение</h2>
 
@@ -56,7 +57,3 @@
     </div>
     </div>
 @endsection
-
-@pushOnce('scripts')
-    @vite('resources/js/pages/receipts.js')
-@endPushOnce
