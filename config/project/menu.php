@@ -50,6 +50,12 @@ return [
             'route_name' => 'admin.warehouses.index',
             'title'      => 'Склад',
         ],
+        'divider',
+        'outlets'      => [
+            'icon'       => 'home',
+            'route_name' => 'admin.outlets.index',
+            'title'      => 'Торговая точка',
+        ],
     ],
     'warehouse' => [
         'dashboard' => [

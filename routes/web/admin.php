@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Dictionaries\MeasurementUnitController;
 use App\Http\Controllers\Admin\Dictionaries\PositionController;
 use App\Http\Controllers\Admin\Dictionaries\SubstanceController;
 use App\Http\Controllers\Admin\Dictionaries\SupplierController;
+use App\Http\Controllers\Admin\OutletController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\FileController;
@@ -25,4 +26,5 @@ Route::name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
     Route::delete('/files/{file}', [FileController::class, 'delete']);
     Route::resource('warehouses', WarehouseController::class);
+    Route::resource('outlets', OutletController::class);
 });
