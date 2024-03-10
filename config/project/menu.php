@@ -45,7 +45,7 @@ return [
             ],
         ],
         'divider',
-        'users'        => [
+        'users'    => [
             'icon'       => 'activity',
             'route_name' => 'admin.users.index',
             'title'      => 'Пользователи',
