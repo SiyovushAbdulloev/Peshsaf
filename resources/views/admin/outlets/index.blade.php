@@ -25,30 +25,31 @@
                 class="w-full text-left mt-5"
             >
                 <thead data-tw-merge class="">
-                    <tr
-                        class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
-                    >
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            #
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Наименование
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Адресс
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Телефон
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]">
-                            &nbsp;
-                        </th>
-                    </tr>
+                <tr
+                    class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
+                >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        #
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Наименование
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Адресс
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Телефон
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]">
+                        &nbsp;
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
                 @foreach($outlets as $outlet)
                     <tr
-                        class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
+                        class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [
+                    &amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                     >
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->id }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->name }}</td>
