@@ -22,7 +22,7 @@
             <table
                 id="receipts-table"
                 data-tw-merge
-                class="w-full text-left mt-5"
+                class="w-full text-left col-span-12"
             >
                 <thead data-tw-merge class="">
                 <tr

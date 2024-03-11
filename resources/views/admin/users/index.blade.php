@@ -6,8 +6,9 @@
 
 @section('content')
     <h2 class="intro-y mt-10 text-lg font-medium">Пользователи</h2>
-    <div class="mt-5 grid grid-cols-12 gap-6">
-        <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center ml-auto">
+
+    <div class="overflow-x-auto">
+        <div class="intro-y col-span-12 mt-2 mb-2 flex flex-wrap items-center ml-auto w-fit">
             <a href="{{ route('admin.users.create') }}" class="transition duration-200 border
             inline-flex items-center
             justify-center py-2
@@ -20,7 +21,7 @@
         @if($users->count())
             <table
                 data-tw-merge
-                class="w-full text-left col-span-12"
+                class="w-full text-left"
             >
                 <thead data-tw-merge class="">
                 <tr
@@ -37,7 +38,7 @@
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
-                        ФИО
+                        Наименование
                     </th>
                     <th
                         data-tw-merge
@@ -105,7 +106,8 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                         >
-                            <a href="{{ route('admin.users.edit', compact('user')) }}" class="mr-4">
+                            <a href="{{ route('admin.users.edit', compact('user')) }}"
+                               class="mr-4">
                                 <x-base.lucide icon="pencil"/>
                             </a>
                             <a href="#" class="text-danger">

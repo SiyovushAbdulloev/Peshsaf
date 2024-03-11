@@ -20,7 +20,6 @@ return new class extends Migration
             $table->boolean('is_limited');
             $table->timestamp('expired')->nullable();
             $table->string('phone');
-            $table->foreignId('position_id');
             $table->string('address');
             $table->rememberToken();
             $table->timestamps();

@@ -6,8 +6,9 @@
 
 @section('content')
     <h2 class="intro-y mt-10 text-lg font-medium">Позиции</h2>
-    <div class="mt-5 grid grid-cols-12 gap-6">
-        <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center ml-auto">
+
+    <div class="overflow-x-auto">
+        <div class="intro-y col-span-12 mt-2 mb-2 flex flex-wrap items-center ml-auto w-fit">
             <a href="{{ route('admin.dictionaries.positions.create') }}" class="transition duration-200 border
             inline-flex items-center
             justify-center py-2
@@ -20,7 +21,7 @@
         @if($positions->count())
             <table
                 data-tw-merge
-                class="w-full text-left col-span-12"
+                class="w-full text-left"
             >
                 <thead data-tw-merge class="">
                 <tr

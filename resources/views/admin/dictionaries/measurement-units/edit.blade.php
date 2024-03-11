@@ -24,7 +24,7 @@
         </form>
     </div>
 
-    <div class="mt-5 grid grid-cols-12 gap-6">
+    <div class="mt-5">
         <div class="intro-y col-span-12 lg:col-span-6">
             <form action="{{ route('admin.dictionaries.measurement-units.update', compact('unit')) }}" method="post">
                 @csrf
