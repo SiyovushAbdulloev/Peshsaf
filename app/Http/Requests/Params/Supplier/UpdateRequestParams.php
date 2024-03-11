@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Requests\Params\Provider;
+namespace App\Http\Requests\Params\Supplier;
 
 use App\Core\Http\Requests\Params\RequestParams;
 
-class StoreRequestParams extends RequestParams
+class UpdateRequestParams extends RequestParams
 {
     public function __construct(
         public string $organizationName,
-        public string $providerFullName,
+        public string $fullName,
         public int $countryId,
         public string $organizationAddress,
         public string $phone,
         public string $email,
-        public string $organizationInfo,
-        public array $files,
+        public string $description,
+        public ?array $files,
     ) {
 
     }

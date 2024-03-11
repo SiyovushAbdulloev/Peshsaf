@@ -32,9 +32,9 @@ return [
                     'route_name' => 'admin.dictionaries.substances.index',
                     'title'      => 'Действующие вещества',
                 ],
-                'providers' => [
+                'suppliers' => [
                     'icon'       => 'activity',
-                    'route_name' => 'admin.dictionaries.providers.index',
+                    'route_name' => 'admin.dictionaries.suppliers.index',
                     'title'      => 'Поставщики',
                 ],
             ],

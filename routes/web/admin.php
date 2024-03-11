@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\Dictionaries\CountryController;
 use App\Http\Controllers\Admin\Dictionaries\MeasurementUnitController;
 use App\Http\Controllers\Admin\Dictionaries\PositionController;
-use App\Http\Controllers\Admin\Dictionaries\ProviderController;
+use App\Http\Controllers\Admin\Dictionaries\SupplierController;
 use App\Http\Controllers\Admin\Dictionaries\SubstanceController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FileController;
@@ -17,7 +17,7 @@ Route::name('admin.')->group(function () {
                 'measurement-units' => 'unit'
             ]);
             Route::resource('/countries', CountryController::class);
-            Route::resource('/providers', ProviderController::class);
+            Route::resource('/suppliers', SupplierController::class);
             Route::resource('/positions', PositionController::class);
             Route::resource('/substances', SubstanceController::class);
         });

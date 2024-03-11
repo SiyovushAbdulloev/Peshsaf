@@ -8,7 +8,7 @@
     <h2 class="intro-y mt-10 text-lg font-medium">Поставщики</h2>
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center ml-auto">
-            <a href="{{ route('admin.dictionaries.providers.create') }}" class="transition duration-200 border
+            <a href="{{ route('admin.dictionaries.suppliers.create') }}" class="transition duration-200 border
             inline-flex items-center
             justify-center py-2
             px-3 rounded-md
@@ -17,7 +17,7 @@
             </a>
         </div>
 
-        @if($providers->count())
+        @if($suppliers->count())
             <table
                 data-tw-merge
                 class="w-full text-left col-span-12"
@@ -66,7 +66,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($providers as $provider)
+                @foreach($suppliers as $supplier)
                     <tr
                         data-tw-merge
                         class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
@@ -75,37 +75,37 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $provider->id }}
+                            {{ $supplier->id }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $provider->organization_name }}
+                            {{ $supplier->organization_name }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $provider->organization_address }}
+                            {{ $supplier->organization_address }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $provider->phone }}
+                            {{ $supplier->phone }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $provider->email }}
+                            {{ $supplier->email }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                         >
-                            <a href="{{ route('admin.dictionaries.providers.edit', compact('provider')) }}"
+                            <a href="{{ route('admin.dictionaries.suppliers.edit', compact('supplier')) }}"
                                class="mr-4">
                                 <x-base.lucide icon="pencil"/>
                             </a>

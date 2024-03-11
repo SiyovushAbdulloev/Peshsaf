@@ -32,7 +32,7 @@ class PositionController extends Controller
     {
         $action->execute($request->getParams());
 
-        return redirect(route('admin.dictionaries.position.index'))->with('success', 'Позиция добавлена');
+        return redirect(route('admin.dictionaries.positions.index'))->with('success', 'Позиция добавлена');
     }
 
     public function edit(Position $position): View

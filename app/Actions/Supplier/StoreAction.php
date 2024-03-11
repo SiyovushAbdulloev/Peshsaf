@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Actions\Provider;
+namespace App\Actions\Supplier;
 
 use App\Core\Actions\CoreAction;
-use App\Http\Requests\Params\Provider\StoreRequestParams;
-use App\Models\Provider;
+use App\Http\Requests\Params\Supplier\StoreRequestParams;
+use App\Models\Supplier;
 use Storage;
 
 class StoreAction extends CoreAction
 {
-    public function handle(StoreRequestParams $params): Provider
+    public function handle(StoreRequestParams $params): Supplier
     {
-        $provider = Provider::create([
+        $provider = Supplier::create([
             'organization_name' => $params->organizationName,
-            'full_name' => $params->providerFullName,
+            'full_name' => $params->fullName,
             'country_id' => $params->countryId,
             'organization_address' => $params->organizationAddress,
             'phone' => $params->phone,
             'email' => $params->email,
-            'organization_info' => $params->organizationInfo,
+            'description' => $params->description,
         ]);
 
         foreach ($params->files as $file) {

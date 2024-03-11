@@ -1,31 +1,31 @@
 <?php
 
-namespace App\Actions\Provider;
+namespace App\Actions\Supplier;
 
 use App\Core\Actions\CoreAction;
-use App\Http\Requests\Params\Provider\UpdateRequestParams;
-use App\Models\Provider;
+use App\Http\Requests\Params\Supplier\UpdateRequestParams;
+use App\Models\Supplier;
 
 class UpdateAction extends CoreAction
 {
-    public function handle(UpdateRequestParams $params, Provider $provider): Provider
+    public function handle(UpdateRequestParams $params, Supplier $provider): Supplier
     {
         $files = $provider->files;
 
         if ($params->files) {
             foreach ($params->files as $file) {
-                $files[] = $file->store('providers');
+                $files[] = $file->store('suppliers');
             }
         }
 
         $provider->update([
             'organization_name' => $params->organizationName,
-            'provider_full_name' => $params->providerFullName,
+            'provider_full_name' => $params->fullName,
             'country_id' => $params->countryId,
             'organization_address' => $params->organizationAddress,
             'phone' => $params->phone,
             'email' => $params->email,
-            'organization_info' => $params->organizationInfo,
+            'description' => $params->description,
             'files' => $files
         ]);
 

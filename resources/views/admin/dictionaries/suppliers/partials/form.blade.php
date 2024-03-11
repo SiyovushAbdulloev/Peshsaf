@@ -7,7 +7,7 @@
             type="text"
             name="organization_name"
             placeholder="Введите наименование организации"
-            value="{{ old('organization_name', $provider->organization_name) }}"
+            value="{{ old('organization_name', $supplier->organization_name) }}"
         />
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
             @error('organization_name')
@@ -24,7 +24,7 @@
             type="text"
             name="full_name"
             placeholder="Введите ФИО поставщика"
-            value="{{ old('full_name', $provider->full_name) }}"
+            value="{{ old('full_name', $supplier->full_name) }}"
         />
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
             @error('full_name')
@@ -42,11 +42,12 @@
             aria-label=".form-select-sm example"
             name="country"
         >
+            <option value="">Выберите страну</option>
             @foreach($countries as $country)
                 <option value="{{$country->id}}"
                     {{
-                        $provider->exists ?
-                        ($provider->country?->id === $country->id ? 'selected' : '') :
+                        $supplier->exists ?
+                        ($supplier->country?->id === $country->id ? 'selected' : '') :
                         (old('country') == $country->id ? 'selected' : '')
                     }}
                 >{{$country->name}}</option>
@@ -62,7 +63,7 @@
             type="text"
             name="organization_address"
             placeholder="Введите адрес организации"
-            value="{{ old('organization_address', $provider->organization_address) }}"
+            value="{{ old('organization_address', $supplier->organization_address) }}"
         />
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
             @error('organization_address')
@@ -79,7 +80,7 @@
             type="text"
             name="phone"
             placeholder="Введите телефон"
-            value="{{ old('phone', $provider->phone) }}"
+            value="{{ old('phone', $supplier->phone) }}"
         />
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
             @error('phone')
@@ -96,7 +97,7 @@
             type="email"
             name="email"
             placeholder="Введите почту"
-            value="{{ old('email', $provider->email) }}"
+            value="{{ old('email', $supplier->email) }}"
         />
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
             @error('email')
@@ -106,18 +107,18 @@
     </div>
 
     <div class="w-full">
-        <x-base.form-label for="organization_info">Общая информация</x-base.form-label>
+        <x-base.form-label for="description">Общая информация</x-base.form-label>
         <x-base.form-textarea
             class="w-full"
-            id="organization_info"
+            id="description"
             type="text"
-            name="organization_info"
+            name="description"
             placeholder="Введите информацию об организации"
         >
-            {{ old('organization_info', $provider->organization_info) }}
+            {{ old('description', $supplier->description) }}
         </x-base.form-textarea>
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('organization_info')
+            @error('description')
             {{ $message }}
             @enderror
         </h5>
@@ -132,10 +133,10 @@
             accept=".doc,.pdf,.txt"
         />
 
-        @if($provider->exists())
+        @if($supplier->exists())
             <div>
                 <table>
-                    @foreach($provider->files as $file)
+                    @foreach($supplier->files as $file)
                         <tr id="{{$file->id}}">
                             <td>
                                 {{$file->original_filename}}
@@ -164,5 +165,5 @@
     </div>
 </div>
 @pushOnce('scripts')
-    @vite('resources/js/pages/providers.js')
+    @vite('resources/js/pages/suppliers.js')
 @endPushOnce

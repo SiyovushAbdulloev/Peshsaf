@@ -9,17 +9,17 @@
 
     <div class="mt-5 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
-            <form action="{{ route('admin.dictionaries.providers.store') }}" method="post"
+            <form action="{{ route('admin.dictionaries.suppliers.store') }}" method="post"
                   enctype="multipart/form-data">
                 @csrf
 
                 <div class="intro-y box p-5">
-                    @include('admin.dictionaries.providers.partials.form')
+                    @include('admin.dictionaries.suppliers.partials.form')
 
                     <div class="mt-5 text-right">
                         <x-base.button
                             as="a"
-                            :href="route('admin.dictionaries.providers.index')"
+                            :href="route('admin.dictionaries.suppliers.index')"
                             class="mr-1 w-24"
                             type="button"
                             variant="outline-secondary"
