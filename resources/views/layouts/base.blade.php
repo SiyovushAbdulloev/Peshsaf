@@ -24,6 +24,7 @@
     @vite('resources/css/vendors/tippy.css')
     @vite('resources/css/themes/rubick/side-nav.css')
     @vite('resources/css/app.css')
+    @livewireStyles
 </head>
 <!-- END: Head -->
 
@@ -62,6 +63,6 @@
 
 @vite('resources/js/app.js')
 @stack('scripts')
-<!-- END: Pages, layouts, components JS Assets-->
+@livewireScripts
 </body>
 </html>
