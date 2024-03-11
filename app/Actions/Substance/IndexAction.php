@@ -3,14 +3,13 @@
 namespace App\Actions\Substance;
 
 use App\Core\Actions\CoreAction;
-use App\Http\Resources\SubstanceResource;
 use App\Models\Substance;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Database\Eloquent\Collection;
 
 class IndexAction extends CoreAction
 {
-    public function handle(): AnonymousResourceCollection
+    public function handle(): Collection
     {
-        return SubstanceResource::collection(Substance::get());
+        return Substance::get();
     }
 }

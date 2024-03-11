@@ -3,14 +3,13 @@
 namespace App\Actions\Position;
 
 use App\Core\Actions\CoreAction;
-use App\Http\Resources\PositionResource;
 use App\Models\Position;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Database\Eloquent\Collection;
 
 class IndexAction extends CoreAction
 {
-    public function handle(): AnonymousResourceCollection
+    public function handle(): Collection
     {
-        return PositionResource::collection(Position::get());
+        return Position::get();
     }
 }

@@ -10,7 +10,6 @@ use App\Actions\Supplier\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Supplier\StoreRequest;
 use App\Http\Requests\Supplier\UpdateRequest;
-use App\Http\Resources\CountryResource;
 use App\Models\Supplier;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -31,7 +30,7 @@ class SupplierController extends Controller
         $supplier = new Supplier();
 
         return view('admin.dictionaries.suppliers.create', [
-            'countries' => CountryResource::collection($countries),
+            'countries' => $countries,
             'supplier' => $supplier,
             'page' => 'create'
         ]);
