@@ -17,8 +17,34 @@ return [
                     'route_name' => 'admin.dictionaries.measurement-units.index',
                     'title'      => 'Единицы измерений',
                 ],
+                'countries' => [
+                    'icon'       => 'activity',
+                    'route_name' => 'admin.dictionaries.countries.index',
+                    'title'      => 'Страны',
+                ],
+                'positions' => [
+                    'icon'       => 'activity',
+                    'route_name' => 'admin.dictionaries.positions.index',
+                    'title'      => 'Позиции',
+                ],
+                'substances' => [
+                    'icon'       => 'activity',
+                    'route_name' => 'admin.dictionaries.substances.index',
+                    'title'      => 'Действующие вещества',
+                ],
+                'suppliers' => [
+                    'icon'       => 'activity',
+                    'route_name' => 'admin.dictionaries.suppliers.index',
+                    'title'      => 'Поставщики',
+                ],
             ],
         ],
+        'divider',
+        'users'    => [
+            'icon'       => 'activity',
+            'route_name' => 'admin.users.index',
+            'title'      => 'Пользователи',
+        ]
     ],
     'warehouse' => [
         'dashboard'    => [
