@@ -44,6 +44,11 @@ return [
             'icon'       => 'activity',
             'route_name' => 'admin.users.index',
             'title'      => 'Пользователи',
+        ],
+        'warehouses' => [
+            'icon'       => 'home',
+            'route_name' => 'admin.warehouses.index',
+            'title'      => 'Склад',
         ]
     ],
     'warehouse' => [
