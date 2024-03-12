@@ -1,29 +1,39 @@
-<div class="grid grid-cols-2 gap-3">
+<div class="grid grid-cols-12 gap-3">
+    @if($client?->image)
+        <div class="col-span-12">
+            <div class="image-fit relative h-20 w-20 flex-none sm:h-24 sm:w-24 lg:h-32 lg:w-32">
+                <img class="rounded-full" src="{{ $client->image->url }}" alt="{{ $client->name }}">
+                <div class="absolute bottom-0 right-0 mb-1 mr-1 flex items-center justify-center rounded-full bg-primary p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="camera" class="lucide lucide-camera stroke-1.5 h-4 w-4 text-white"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+                </div>
+            </div>
+        </div>
+    @endif
     <x-base.form-input
         type="hidden"
         name="client_id"
-        value="{{ old('number', $client?->id) }}"
+        value="{{ old('client_id', $client?->id) }}"
     />
-    <div class="w-full">
-        <x-base.form-label for="number">ФИО покупателя</x-base.form-label>
+    <div class="w-full col-span-10">
+        <x-base.form-label for="client-name">ФИО покупателя</x-base.form-label>
         <x-base.form-input
-            id="number"
+            id="client-name"
             type="text"
             name="client_name"
             placeholder="Введите"
-            value="{{ old('number', $client?->name) }}"
+            value="{{ old('client_name', $client?->name) }}"
         />
 
-        @error('number')
+        @error('client_name')
         <div class="mt-2 text-danger">
             {{ $message }}
         </div>
         @enderror
     </div>
 
-    <div>
-        <x-base.form-label for="name">Дата покупки</x-base.form-label>
-        <div class="relative w-1/2">
+    <div class="col-span-2">
+        <x-base.form-label for="date">Дата покупки</x-base.form-label>
+        <div class="relative">
             <x-base.litepicker
                 name="date"
                 data-single-mode="true"
@@ -31,20 +41,57 @@
             />
         </div>
     </div>
-    <div class="w-full">
-        <x-base.form-label for="number">Телефон</x-base.form-label>
+    <div class="col-span-4">
+        <x-base.form-label for="phone">Телефон</x-base.form-label>
         <x-base.form-input
-            id="number"
+            id="phone"
             type="text"
-            name="number"
-            placeholder="Введите наименование"
-            value="{{ old('number', $client?->name) }}"
+            name="phone"
+            placeholder="Введите"
+            value="{{ old('phone', $client?->phone) }}"
         />
 
-        @error('number')
+        @error('phone')
         <div class="mt-2 text-danger">
             {{ $message }}
         </div>
         @enderror
     </div>
+
+    <div class="col-span-8">
+        <x-base.form-label for="address">Адрес</x-base.form-label>
+        <x-base.form-input
+            id="address"
+            type="text"
+            name="address"
+            placeholder="Введите"
+            value="{{ old('address', $client?->address) }}"
+        />
+
+        @error('address')
+        <div class="mt-2 text-danger">
+            {{ $message }}
+        </div>
+        @enderror
+    </div>
+
+    @if(!$client->image)
+        <div class="col-span-12">
+            <x-base.form-label for="photo">Фото</x-base.form-label>
+            <input
+                class="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none dark:border-white/70 dark:text-white  file:dark:text-white"
+                aria-describedby="file_input_help"
+                id="photo"
+                type="file"
+                name="photo"
+            >
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG (макс 1мб).</p>
+
+            @error('photo')
+            <div class="mt-2 text-danger">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+    @endif
 </div>

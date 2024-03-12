@@ -9,31 +9,38 @@
 
     <div class="mt-5">
         <div class="intro-y col-span-12">
-            <form action="{{ route('warehouse.sales.store') }}" method="post">
+            <form action="{{ route('warehouse.sales.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="intro-y box p-5">
                     @include('warehouse.sales.partials.form')
+                </div>
 
-                    <div class="mt-5 text-right">
-                        <x-base.button
-                            as="a"
-                            :href="route('warehouse.sales.index')"
-                            class="mr-1 w-24"
-                            type="button"
-                            variant="outline-secondary"
-                        >
-                            Отмена
-                        </x-base.button>
-                        <x-base.button
-                            class="w-24"
-                            type="button"
-                            variant="primary"
-                            type="submit"
-                        >
-                            Добавить
-                        </x-base.button>
+                <div class="intro-y box p-5 mt-3">
+                    <h5 class="text-lg font-medium">Товары</h5>
+
+                    <div>
+                        <livewire:warehouse.sale.products />
                     </div>
+                </div>
+
+                <div class="mt-5 text-right">
+                    <x-base.button
+                        as="a"
+                        :href="route('warehouse.sales.index')"
+                        class="mr-1 w-24"
+                        type="button"
+                        variant="outline-secondary"
+                    >
+                        Отмена
+                    </x-base.button>
+                    <x-base.button
+                        type="button"
+                        variant="primary"
+                        type="submit"
+                    >
+                        Оформить продажу
+                    </x-base.button>
                 </div>
             </form>
         </div>

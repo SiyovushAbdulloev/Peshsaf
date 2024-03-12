@@ -15,6 +15,8 @@ class SaleProduct extends Model
         'product_id',
     ];
 
+    public $timestamps = false;
+
     public function sale(): BelongsTo
     {
         return $this->belongsTo(Sale::class);

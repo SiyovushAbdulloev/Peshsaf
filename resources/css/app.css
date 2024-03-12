@@ -28,6 +28,13 @@
 @import "./components/base/_zoom-in.css";
 @import "./components/base/_intro.css";
 
+/* Fontawesome icons */
+@import '@fortawesome/fontawesome-free/css/fontawesome.css';
+@import '@fortawesome/fontawesome-free/css/regular.css';
+@import '@fortawesome/fontawesome-free/css/solid.css';
+@import '@fortawesome/fontawesome-free/css/brands.css';
+
+@import "@left4code/tw-starter/dist/css/_btn.css";
 /*
  |--------------------------------------------------------------------------
  | TailwindCSS Directives
