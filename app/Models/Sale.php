@@ -16,6 +16,9 @@ class Sale extends Model
     protected $fillable = [
         'date',
         'client_id',
+        'client_name',
+        'client_address',
+        'client_phone',
     ];
 
     protected $casts = [

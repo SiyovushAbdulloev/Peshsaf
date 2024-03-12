@@ -16,6 +16,9 @@ return new class extends Migration
             $table->morphs('model');
             $table->date('date');
             $table->foreignId('client_id')->constrained();
+            $table->string('client_name');
+            $table->string('client_address');
+            $table->string('client_phone');
             $table->timestamps();
         });
 
