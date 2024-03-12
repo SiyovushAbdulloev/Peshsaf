@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Warehouse;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -33,14 +34,17 @@ class UserSeeder extends Seeder
                 'email' => 'warehouse@admin.com',
             ],
             [
-                'name'     => 'Завсклад',
-                'email'    => 'warehouse@admin.com',
-                'password' => bcrypt('password'),
                 'is_limited' => true,
                 'expired' => now(),
                 'phone' => '100000001',
                 'position_id' => 2,
                 'address' => 'Tajikistan',
+                'name'         => 'Завсклад',
+                'email'        => 'warehouse@admin.com',
+                'password'     => bcrypt('password'),
+                'warehouse_id' => Warehouse::firstOrCreate([
+                    'name' => 'Склад 1',
+                ])->id,
             ]
         );
         $vendor  = User::firstOrCreate(

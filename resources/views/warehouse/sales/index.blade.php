@@ -1,15 +1,15 @@
 @extends('layouts/sidebar')
 
 @section('subhead')
-    <title>Приход товаров</title>
+    <title>Продажа</title>
 @endsection
 
 @section('content')
     <div class="mt-5">
         <div class="intro-y mt-2 flex">
-            <h2 class="intro-y text-lg font-medium">Приход товаров</h2>
+            <h2 class="intro-y text-lg font-medium">Продажа</h2>
 
-            <a href="{{ route('warehouse.receipts.create') }}" class="transition duration-200 border
+            <a href="{{ route('warehouse.sales.clients') }}" class="transition duration-200 border
                 inline-flex items-center
                 justify-center py-2
                 px-3 rounded-md ml-auto
@@ -18,11 +18,11 @@
             </a>
         </div>
 
-        @if($receipts->count())
+        @if($sales->count())
             <table
-                id="receipts-table"
+                id="sales-table"
                 data-tw-merge
-                class="w-full text-left col-span-12"
+                class="w-full text-left mt-5"
             >
                 <thead data-tw-merge class="">
                 <tr
@@ -39,31 +39,19 @@
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
-                        Статус
-                    </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
                         Дата
                     </th>
                     <th
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
-                        Поставщик
+                        Покупатель
                     </th>
                     <th
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
                         Адрес
-                    </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
-                        Страна
                     </th>
                     <th
                         data-tw-merge
@@ -86,7 +74,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($receipts as $receipt)
+                @foreach($sales as $sale)
                     <tr
                         data-tw-merge
                         class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
@@ -95,49 +83,37 @@
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $receipt->number }}
+                            {{ $sale->id }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $receipt->status }}
+                            {{ $sale->date->format('d.m.Y') }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $receipt->date->format('d.m.Y') }}
+                            {{ $sale->client->name }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $receipt->supplier?->name }}
+                            {{ $sale->client->address }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $receipt->supplier?->address }}
+                            {{ $sale->client->phone }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $receipt->supplier?->country?->name }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->supplier?->phone }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->products_count }}
+                            {{ $sale->products_count }}
                         </td>
                         <td
                             data-tw-merge
@@ -146,29 +122,29 @@
                             <x-base.button
                                 as="a"
                                 size="sm"
-                                href="{{ route('warehouse.receipts.show', compact('receipt')) }}"
+                                href="{{ route('warehouse.sales.show', compact('sale')) }}"
                                 type="button"
                                 variant="outline-primary"
                             >
                                 <x-base.lucide icon="info"/>
                             </x-base.button>
-                            @can('edit', $receipt)
+                            @can('edit', $sale)
                                 <x-base.button
                                     as="a"
                                     size="sm"
-                                    href="{{ route('warehouse.receipts.edit', compact('receipt')) }}"
+                                    href="{{ route('warehouse.sales.edit', compact('sale')) }}"
                                     type="button"
                                     variant="outline-success"
-                                    data-route="{{ route('warehouse.receipts.destroy', compact('receipt')) }}"
+                                    data-route="{{ route('warehouse.sales.destroy', compact('sale')) }}"
                                 >
                                     <x-base.lucide icon="pencil"/>
                                 </x-base.button>
                                 <x-base.button
                                     size="sm"
-                                    class="delete-receipt"
+                                    class="delete-sale"
                                     type="button"
                                     variant="outline-danger"
-                                    data-route="{{ route('warehouse.receipts.destroy', compact('receipt')) }}"
+                                    data-route="{{ route('warehouse.sales.destroy', compact('sale')) }}"
                                 >
                                     <x-base.lucide icon="trash"/>
                                 </x-base.button>
@@ -189,5 +165,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/receipts.js')
+    @vite('resources/js/pages/project/sales.js')
 @endPushOnce

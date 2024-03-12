@@ -67,6 +67,11 @@ return [
             'route_name' => 'warehouse.receipts.index',
             'title'      => 'Приход товаров',
         ],
+        'sales'    => [
+            'icon'       => 'list',
+            'route_name' => 'warehouse.sales.index',
+            'title'      => 'Продажа',
+        ],
     ],
     'vendor' => [
         'dashboard'    => [

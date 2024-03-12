@@ -88,5 +88,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/receipts.js')
+    @vite('resources/js/pages/project/receipts.js')
 @endPushOnce
