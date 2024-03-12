@@ -7,7 +7,7 @@ use App\Actions\MeasurementUnit\StoreAction;
 use App\Actions\MeasurementUnit\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MeasurementUnit\StoreRequest;
-use App\Models\MeasurementUnit;
+use App\Models\Dictionaries\Measure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Throwable;
@@ -23,7 +23,7 @@ class MeasurementUnitController extends Controller
 
     public function create(): View
     {
-        $unit = new MeasurementUnit;
+        $unit = new Measure;
 
         return view('admin.dictionaries.measurement-units.create', compact('unit'));
     }
@@ -35,7 +35,7 @@ class MeasurementUnitController extends Controller
         return redirect(route('admin.dictionaries.measurement-units.index'))->with('success', 'Единица измерения добавлена');
     }
 
-    public function edit(MeasurementUnit $unit): View
+    public function edit(Measure $unit): View
     {
         return view('admin.dictionaries.measurement-units.edit', compact('unit'));
     }
@@ -43,7 +43,7 @@ class MeasurementUnitController extends Controller
     public function update(
         StoreRequest $request,
         UpdateAction $action,
-        MeasurementUnit $unit,
+        Measure      $unit,
     ): RedirectResponse
     {
         $action->execute($request->getParams(), $unit);
@@ -51,7 +51,7 @@ class MeasurementUnitController extends Controller
         return redirect(route('admin.dictionaries.measurement-units.index'))->with('success', 'Данные успешно изменены');
     }
 
-    public function destroy(MeasurementUnit $unit): RedirectResponse
+    public function destroy(Measure $unit): RedirectResponse
     {
         try {
             $unit->delete();

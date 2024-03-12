@@ -37,6 +37,11 @@ return [
                     'route_name' => 'admin.dictionaries.suppliers.index',
                     'title'      => 'Поставщики',
                 ],
+                'products' => [
+                    'icon'       => 'activity',
+                    'route_name' => 'admin.dictionaries.categories.index',
+                    'title'      => 'Список товаров',
+                ],
             ],
         ],
         'divider',

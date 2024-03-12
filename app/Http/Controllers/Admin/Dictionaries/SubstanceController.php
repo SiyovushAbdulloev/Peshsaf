@@ -7,7 +7,7 @@ use App\Actions\Substance\StoreAction;
 use App\Actions\Substance\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Substance\StoreRequest;
-use App\Models\Substance;
+use App\Models\Dictionaries\ActiveIngredient;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Throwable;
@@ -23,7 +23,7 @@ class SubstanceController extends Controller
 
     public function create(): View
     {
-        $substance = new Substance();
+        $substance = new ActiveIngredient();
 
         return view('admin.dictionaries.substances.create', compact('substance'));
     }
@@ -35,7 +35,7 @@ class SubstanceController extends Controller
         return redirect(route('admin.dictionaries.substances.index'))->with('success', 'Действующее вещество добавлено');
     }
 
-    public function edit(Substance $substance): View
+    public function edit(ActiveIngredient $substance): View
     {
         return view('admin.dictionaries.substances.edit', compact('substance'));
     }
@@ -43,7 +43,7 @@ class SubstanceController extends Controller
     public function update(
         StoreRequest $request,
         UpdateAction $action,
-        Substance $substance
+        ActiveIngredient $substance
     ): RedirectResponse
     {
         $action->execute($request->getParams(), $substance);
@@ -51,7 +51,7 @@ class SubstanceController extends Controller
         return redirect(route('admin.dictionaries.substances.index'))->with('success', 'Данные успешно изменены');
     }
 
-    public function destroy(Substance $substance): RedirectResponse
+    public function destroy(ActiveIngredient $substance): RedirectResponse
     {
         try {
             $substance->delete();

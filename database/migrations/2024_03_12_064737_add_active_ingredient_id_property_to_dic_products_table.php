@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('active_ingredients', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('dic_products', function (Blueprint $table) {
+            $table->foreignId('active_ingredient_id')->constrained();
         });
     }
 
@@ -22,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('active_ingredients');
+        Schema::table('dic_products', function (Blueprint $table) {
+           $table->dropForeign('dic_products_active_ingredient_id_foreign');
+           $table->dropColumn('active_ingredient_id');
+        });
     }
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Dictionaries\CategoryController;
 use App\Http\Controllers\Admin\Dictionaries\CountryController;
 use App\Http\Controllers\Admin\Dictionaries\MeasurementUnitController;
 use App\Http\Controllers\Admin\Dictionaries\PositionController;
@@ -22,6 +23,11 @@ Route::name('admin.')->group(function () {
             Route::resource('/suppliers', SupplierController::class);
             Route::resource('/positions', PositionController::class);
             Route::resource('/substances', SubstanceController::class);
+            Route::prefix('/categories')
+                ->name('categories.')
+                ->group(function () {
+                    Route::get('/', [CategoryController::class, 'index'])->name('index');
+                });
         });
     Route::resource('/users', UserController::class);
     Route::delete('/files/{file}', [FileController::class, 'delete']);

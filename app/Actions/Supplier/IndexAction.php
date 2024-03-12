@@ -3,13 +3,15 @@
 namespace App\Actions\Supplier;
 
 use App\Core\Actions\CoreAction;
-use App\Models\Supplier;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Dictionaries\Category;
 
 class IndexAction extends CoreAction
 {
-    public function handle(): Collection
+    public function handle(Category $category): array
     {
-        return Supplier::with('country')->get();
+        return [
+            'categories' => Category::get(),
+            'category_products' => $category->load('products')
+        ];
     }
 }

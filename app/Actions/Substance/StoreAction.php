@@ -4,13 +4,13 @@ namespace App\Actions\Substance;
 
 use App\Core\Actions\CoreAction;
 use App\Http\Requests\Params\Substance\StoreRequestParams;
-use App\Models\Substance;
+use App\Models\Dictionaries\ActiveIngredient;
 
 class StoreAction extends CoreAction
 {
-    public function handle(StoreRequestParams $params): Substance
+    public function handle(StoreRequestParams $params): ActiveIngredient
     {
-        return Substance::create([
+        return ActiveIngredient::create([
             'name' => $params->name
         ]);
     }

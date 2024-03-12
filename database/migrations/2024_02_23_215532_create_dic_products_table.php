@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('status');
             $table->string('name');
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('active_ingredient_id')->constrained();
             $table->foreignId('measure_id')->constrained();
             $table->foreignId('country_id')->constrained();
             $table->string('barcode')->nullable()->unique();
