@@ -2,71 +2,89 @@
 
 namespace App\Http\Controllers\Admin\Dictionaries;
 
+use App\Actions\ActiveIngredient\IndexAction as ActiveIngredientIndexAction;
 use App\Actions\Country\IndexAction as CountryIndexAction;
-use App\Actions\Supplier\DestroyAction;
-use App\Actions\Supplier\IndexAction;
-use App\Actions\Supplier\StoreAction;
-use App\Actions\Supplier\UpdateAction;
+use App\Actions\Measure\IndexAction as MeasureIndexAction;
+use App\Actions\Product\DestroyAction;
+use App\Actions\Product\StoreAction;
+use App\Actions\Product\UpdateAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Supplier\StoreRequest;
-use App\Http\Requests\Supplier\UpdateRequest;
-use App\Models\Supplier;
+use App\Http\Requests\Products\StoreRequest;
+use App\Http\Requests\Products\UpdateRequest;
+use App\Models\Dictionaries\Category;
+use App\Models\Dictionaries\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Throwable;
 
 class ProductController extends Controller
 {
-    public function index(IndexAction $action): View
+    public function create(
+        CountryIndexAction $countryIndexAction,
+        ActiveIngredientIndexAction $activeIngredientIndexAction,
+        MeasureIndexAction $measureIndexAction,
+        Category $category
+    ): View
     {
-        $suppliers = $action->execute();
+        $product = new Product();
 
-        return view('admin.dictionaries.suppliers.index', compact('suppliers'));
-    }
-
-    public function create(CountryIndexAction $action): View
-    {
-        $countries = $action->execute();
-        $supplier = new Supplier();
-
-        return view('admin.dictionaries.suppliers.create', [
-            'countries' => $countries,
-            'supplier' => $supplier,
-            'page' => 'create'
+        return view('admin.dictionaries.categories.products.create', [
+            'countries' => $countryIndexAction->execute(),
+            'activeIngredients' => $activeIngredientIndexAction->execute(),
+            'measures' => $measureIndexAction->execute(),
+            'list' => config('project.list'),
+            'category' => $category,
+            'product' => $product
         ]);
     }
 
-    public function store(StoreRequest $request, StoreAction $action): RedirectResponse
+    public function store(
+        StoreRequest $request,
+        StoreAction $action,
+        Category $category
+    ): RedirectResponse
     {
-        $action->execute($request->getParams());
+        $action->execute($request->getParams(), $category);
 
-        return redirect(route('admin.dictionaries.suppliers.index'))->with('success', 'Поставщик добавлен');
+        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Продукт добавлен');
     }
 
-    public function edit(CountryIndexAction $action, Supplier $supplier): View
+    public function edit(
+        CountryIndexAction $countryIndexAction,
+        ActiveIngredientIndexAction $activeIngredientIndexAction,
+        MeasureIndexAction $measureIndexAction,
+        Category $category,
+        Product $product
+    ): View
     {
-        $countries = $action->execute();
-
-        return view('admin.dictionaries.suppliers.edit', compact('supplier', 'countries'));
+        return view('admin.dictionaries.categories.products.edit', [
+            'countries' => $countryIndexAction->execute(),
+            'activeIngredients' => $activeIngredientIndexAction->execute(),
+            'measures' => $measureIndexAction->execute(),
+            'list' => config('project.list'),
+            'category' => $category,
+            'product' => $product
+        ]);
     }
 
     public function update(
         UpdateRequest $request,
         UpdateAction  $action,
-        Supplier      $supplier
+        Category $category,
+        Product      $product
     ): RedirectResponse
     {
-        $action->execute($request->getParams(), $supplier);
+        $action->execute($request->getParams(), $product);
 
-        return redirect(route('admin.dictionaries.suppliers.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Данные успешно изменены');
     }
 
-    public function destroy(DestroyAction $action, Supplier $supplier): RedirectResponse
+    public function destroy(DestroyAction $action, Category $category, Product $product): RedirectResponse
     {
         try {
-            $action->execute($supplier);
+            $action->execute($product);
 
-            return redirect(route('admin.dictionaries.suppliers.index'))->with('success', 'Данные успешно удалены');
+            return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Данные успешно удалены');
         } catch (Throwable $e) {
             logger($e->getMessage());
         }

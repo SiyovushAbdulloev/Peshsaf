@@ -53,6 +53,11 @@
                 >{{$country->name}}</option>
             @endforeach
         </x-base.form-select>
+        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
+            @error('country')
+            {{ $message }}
+            @enderror
+        </h5>
     </div>
 
     <div class="w-full">

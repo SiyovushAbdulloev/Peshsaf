@@ -27,9 +27,9 @@ return [
                     'route_name' => 'admin.dictionaries.positions.index',
                     'title'      => 'Позиции',
                 ],
-                'substances'        => [
+                'active-ingredients' => [
                     'icon'       => 'activity',
-                    'route_name' => 'admin.dictionaries.substances.index',
+                    'route_name' => 'admin.dictionaries.active-ingredients.index',
                     'title'      => 'Действующие вещества',
                 ],
                 'suppliers'         => [

@@ -32,7 +32,6 @@ class SupplierController extends Controller
         return view('admin.dictionaries.suppliers.create', [
             'countries' => $countries,
             'supplier' => $supplier,
-            'page' => 'create'
         ]);
     }
 

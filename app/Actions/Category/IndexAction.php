@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Actions\Supplier;
+namespace App\Actions\Category;
 
 use App\Core\Actions\CoreAction;
-use App\Models\Supplier;
+use App\Models\Dictionaries\Category;
 use Illuminate\Database\Eloquent\Collection;
 
 class IndexAction extends CoreAction
 {
     public function handle(): Collection
     {
-        return Supplier::with('country')->get();
+        return Category::get();
     }
 }

@@ -2,76 +2,59 @@
 
 namespace App\Http\Controllers\Admin\Dictionaries;
 
-use App\Actions\Country\IndexAction as CountryIndexAction;
-use App\Actions\Supplier\DestroyAction;
-use App\Actions\Supplier\IndexAction;
-use App\Actions\Supplier\StoreAction;
-use App\Actions\Supplier\UpdateAction;
+use App\Actions\Category\DestroyAction;
+use App\Actions\Category\IndexAction;
+use App\Actions\Category\StoreAction;
+use App\Actions\Category\UpdateAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Supplier\StoreRequest;
-use App\Http\Requests\Supplier\UpdateRequest;
+use App\Http\Requests\Category\StoreRequest;
 use App\Models\Dictionaries\Category;
-use App\Models\Supplier;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Throwable;
 
 class CategoryController extends Controller
 {
     public function index(IndexAction $action, Category $category): View
     {
-        $data = $action->execute($category);
+        $categories = $action->execute($category);
 
-        return view('admin.dictionaries.categories.index', compact('data'));
+        return view('admin.dictionaries.categories.index', compact('categories'));
     }
 
-    public function create(CountryIndexAction $action): View
+    public function create(): View
     {
-        $countries = $action->execute();
-        $supplier = new Supplier();
+        $category = new Category();
 
-        return view('admin.dictionaries.suppliers.create', [
-            'countries' => $countries,
-            'supplier' => $supplier,
-            'page' => 'create'
-        ]);
+        return view('admin.dictionaries.categories.create', compact('category'));
     }
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
         $action->execute($request->getParams());
 
-        return redirect(route('admin.dictionaries.suppliers.index'))->with('success', 'Поставщик добавлен');
+        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Категория добавлена');
     }
 
-    public function edit(CountryIndexAction $action, Supplier $supplier): View
+    public function edit(Category $category): View
     {
-        $countries = $action->execute();
-
-        return view('admin.dictionaries.suppliers.edit', compact('supplier', 'countries'));
+        return view('admin.dictionaries.categories.edit', compact('category'));
     }
 
     public function update(
-        UpdateRequest $request,
+        StoreRequest $request,
         UpdateAction  $action,
-        Supplier      $supplier
+        Category      $category
     ): RedirectResponse
     {
-        $action->execute($request->getParams(), $supplier);
+        $action->execute($request->getParams(), $category);
 
-        return redirect(route('admin.dictionaries.suppliers.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Данные успешно изменены');
     }
 
-    public function destroy(DestroyAction $action, Supplier $supplier): RedirectResponse
+    public function destroy(Category $category): RedirectResponse
     {
-        try {
-            $action->execute($supplier);
-
-            return redirect(route('admin.dictionaries.suppliers.index'))->with('success', 'Данные успешно удалены');
-        } catch (Throwable $e) {
-            logger($e->getMessage());
-        }
-
-        return back()->with('error', 'Невозможно удалить запись');
+        $category->delete();
+        
+        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Данные успешно удалены');
     }
 }

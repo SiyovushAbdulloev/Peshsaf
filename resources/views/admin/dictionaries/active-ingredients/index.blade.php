@@ -1,15 +1,15 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Поставщики</title>
+    <title>Действующие вещества</title>
 @endsection
 
 @section('content')
-    <h2 class="intro-y mt-5 text-lg font-medium">Поставщики</h2>
+    <h2 class="intro-y mt-5 text-lg font-medium">Действующие вещества</h2>
 
     <div class="overflow-x-auto">
         <div class="intro-y col-span-12 mt-2 mb-2 flex flex-wrap items-center ml-auto w-fit">
-            <a href="{{ route('admin.dictionaries.suppliers.create') }}" class="transition duration-200 border
+            <a href="{{ route('admin.dictionaries.active-ingredients.create') }}" class="transition duration-200 border
             inline-flex items-center
             justify-center py-2
             px-3 rounded-md
@@ -18,7 +18,7 @@
             </a>
         </div>
 
-        @if($suppliers->count())
+        @if($activeIngredients->count())
             <table
                 data-tw-merge
                 class="w-full text-left"
@@ -44,30 +44,12 @@
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
-                        Адресс
-                    </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
-                        Телефон
-                    </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
-                        E-mail
-                    </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
                         &nbsp;
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($suppliers as $supplier)
+                @foreach($activeIngredients as $activeIngredient)
                     <tr
                         data-tw-merge
                         class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
@@ -76,37 +58,19 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $supplier->id }}
+                            {{ $activeIngredient->id }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $supplier->organization_name }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
-                        >
-                            {{ $supplier->organization_address }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
-                        >
-                            {{ $supplier->phone }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
-                        >
-                            {{ $supplier->email }}
+                            {{ $activeIngredient->name }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                         >
-                            <a href="{{ route('admin.dictionaries.suppliers.edit', compact('supplier')) }}"
+                            <a href="{{ route('admin.dictionaries.active-ingredients.edit', compact('activeIngredient')) }}"
                                class="mr-4">
                                 <x-base.lucide icon="pencil"/>
                             </a>
