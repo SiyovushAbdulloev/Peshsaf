@@ -38,7 +38,7 @@
         <x-base.form-select
             id="country"
             class="mt-2"
-            formSelectSize="sm"
+            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="country"
         >
@@ -60,7 +60,7 @@
         </h5>
     </div>
 
-    <div class="w-full">
+    <div class="w-full flex flex-col justify-between">
         <x-base.form-label for="organization_address">Адрес</x-base.form-label>
         <x-base.form-input
             class="w-full"

@@ -1,5 +1,5 @@
 <div class="flex" style="flex-wrap: wrap">
-    <div class="w-1/2 mr-2">
+    <div class="w-1/2 mr-2 flex flex-col justify-between">
         <x-base.form-label for="name">Наименование</x-base.form-label>
         <x-base.form-input
             class="w-full"
@@ -21,7 +21,7 @@
         <x-base.form-select
             id="active-ingredient"
             class="mt-2"
-            formSelectSize="sm"
+            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="active_ingredient"
         >
@@ -48,7 +48,7 @@
         <x-base.form-select
             id="status"
             class="mt-2"
-            formSelectSize="sm"
+            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="status"
         >
@@ -75,7 +75,7 @@
         <x-base.form-select
             id="measure"
             class="mt-2"
-            formSelectSize="sm"
+            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="measure"
         >
@@ -97,8 +97,10 @@
         </h5>
     </div>
 
-    <div style="width: 32%">
-        <x-base.preview>
+    <div style="width: 32%" class="flex flex-col justify-center">
+
+        <x-base.preview class="">
+            <x-base.form-label style="opacity: 0; margin: 0;">Единицы измерения</x-base.form-label>
             <div class="relative mx-auto w-56">
                 <div
                     class="absolute flex h-full w-10 items-center justify-center rounded-l border bg-slate-100 text-slate-500 dark:border-darkmode-800 dark:bg-darkmode-700 dark:text-slate-400">
@@ -116,9 +118,10 @@
                 />
             </div>
         </x-base.preview>
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
+        <h5
+            class="'text-lg font-medium leading-none text-danger'">
             @error('expiry_date')
-            {{ $message }}
+            <p class="mt-3">{{ $message }}</p>
             @enderror
         </h5>
     </div>
@@ -128,7 +131,7 @@
         <x-base.form-select
             id="country"
             class="mt-2"
-            formSelectSize="sm"
+            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="country"
         >
@@ -150,7 +153,7 @@
         </h5>
     </div>
 
-    <div style="width: 30%">
+    <div style="width: 30%" class="flex flex-col justify-between">
         <x-base.form-label for="barcode">Штрих-код</x-base.form-label>
         <x-base.form-input
             class="w-full"

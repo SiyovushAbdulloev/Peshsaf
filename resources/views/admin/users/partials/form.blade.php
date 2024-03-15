@@ -36,7 +36,7 @@
         <x-base.form-label for="position">Позиция</x-base.form-label>
         <x-base.form-select
             class="mt-2"
-            formSelectSize="sm"
+            formSelectSize="md"
             aria-label="form-select-sm example"
             name="position"
         >
@@ -54,6 +54,7 @@
     </div>
 
     <div class="mt-2 flex flex-col">
+        <x-base.form-label style="opacity: 0;">Статус</x-base.form-label>
         <div class="flex flex-row">
             <x-base.form-check class="mr-2">
                 <x-base.form-check.input
