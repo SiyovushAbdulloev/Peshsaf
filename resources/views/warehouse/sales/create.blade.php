@@ -30,7 +30,7 @@
                         :href="route('warehouse.sales.index')"
                         class="mr-1 w-24"
                         type="button"
-                        variant="outline-secondary"
+                        variant="outline-primary"
                     >
                         Отмена
                     </x-base.button>
