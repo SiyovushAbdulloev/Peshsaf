@@ -9,25 +9,25 @@
 
     <div class="mt-5">
         <div class="intro-y col-span-12">
-            <form action="{{ route('warehouse.sales.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('warehouse.movements.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="intro-y box p-5">
-                    @include('warehouse.sales.partials.form')
+                    @include('warehouse.movements.partials.form')
                 </div>
 
                 <div class="intro-y box p-5 mt-3">
                     <h5 class="text-lg font-medium">Товары</h5>
 
                     <div class="overflow-x-auto">
-                        <livewire:warehouse.sale.products />
+                        <livewire:warehouse.movement.products />
                     </div>
                 </div>
 
                 <div class="mt-5 text-right">
                     <x-base.button
                         as="a"
-                        :href="route('warehouse.sales.index')"
+                        :href="route('warehouse.movements.index')"
                         class="mr-1 w-24"
                         type="button"
                         variant="outline-primary"
@@ -39,7 +39,7 @@
                         variant="primary"
                         type="submit"
                     >
-                        Оформить продажу
+                        Создать
                     </x-base.button>
                 </div>
             </form>
@@ -48,5 +48,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/sales.js')
+    @vite('resources/js/pages/project/movements.js')
 @endPushOnce

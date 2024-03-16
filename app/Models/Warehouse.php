@@ -31,4 +31,9 @@ class Warehouse extends Model
     {
         return $this->morphMany(Sale::class, 'model');
     }
+
+    public function movements(): HasMany
+    {
+        return $this->hasMany(Movement::class);
+    }
 }

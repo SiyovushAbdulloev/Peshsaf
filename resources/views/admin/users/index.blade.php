@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h2 class="intro-y mt-10 text-lg font-medium">Пользователи</h2>
+    <h2 class="intro-y mt-5 text-lg font-medium">Пользователи</h2>
 
     <div class="overflow-x-auto">
         <div class="intro-y col-span-12 mt-2 mb-2 flex flex-wrap items-center ml-auto w-fit">

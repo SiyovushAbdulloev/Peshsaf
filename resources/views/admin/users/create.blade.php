@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h2 class="intro-y mt-10 text-lg font-medium">Создание</h2>
+    <h2 class="intro-y mt-5 text-lg font-medium">Создание</h2>
 
     <div class="mt-5 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
