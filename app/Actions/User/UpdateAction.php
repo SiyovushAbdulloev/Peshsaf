@@ -4,6 +4,7 @@ namespace App\Actions\User;
 
 use App\Core\Actions\CoreAction;
 use App\Http\Requests\Params\User\UpdateRequestParams;
+use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,18 @@ class UpdateAction extends CoreAction
             'is_limited' => $params->isLimited,
             'expired' => $params->isLimited ? Carbon::createFromFormat('d-m-Y', $params->expired) : null,
         ]);
+
+        $role = $user->role->name;
+
+        if ($role === Role::VENDOR) {
+            $user->update([
+                'outlet_id' => $params->outletId
+            ]);
+        } else if ($role === Role::WAREHOUSE) {
+            $user->update([
+                'warehouse_id' => $params->warehouseId
+            ]);
+        }
 
         if ($params->password) {
             $user->update([

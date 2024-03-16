@@ -10,7 +10,10 @@ use App\Actions\User\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Models\Outlet;
+use App\Models\Role;
 use App\Models\User;
+use App\Models\Warehouse;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Throwable;
@@ -27,9 +30,12 @@ class UserController extends Controller
     public function create(PositionIndexAction $action): View
     {
         $positions = $action->execute();
+        $roles = Role::get();
+        $warehouses = Warehouse::get();
+        $outlets = Outlet::get();
         $user = new User();
 
-        return view('admin.users.create', compact('user', 'positions'));
+        return view('admin.users.create', compact('user', 'positions', 'roles', 'warehouses', 'outlets'));
     }
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse
@@ -42,8 +48,11 @@ class UserController extends Controller
     public function edit(PositionIndexAction $action, User $user): View
     {
         $positions = $action->execute();
+        $roles = Role::get();
+        $warehouses = Warehouse::get();
+        $outlets = Outlet::get();
 
-        return view('admin.users.edit', compact('user', 'positions'));
+        return view('admin.users.edit', compact('user', 'positions', 'roles', 'warehouses', 'outlets'));
     }
 
     public function update(

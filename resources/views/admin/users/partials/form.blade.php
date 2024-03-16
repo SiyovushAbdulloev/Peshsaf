@@ -1,5 +1,5 @@
 <div class="grid grid-cols-2 gap-4">
-    <div class="w-full">
+    <div class="w-full col-span-1">
         <x-base.form-label for="name">ФИО пользователя</x-base.form-label>
         <x-base.form-input
             class="w-full"
@@ -15,7 +15,7 @@
             @enderror
         </h5>
     </div>
-    <div class="w-full">
+    <div class="w-full col-span-1">
         <x-base.form-label for="address">Адресс</x-base.form-label>
         <x-base.form-input
             class="w-full"
@@ -32,7 +32,7 @@
         </h5>
     </div>
 
-    <div class="w-full">
+    <div class="w-full col-span-1">
         <x-base.form-label for="position">Позиция</x-base.form-label>
         <x-base.form-select
             class="mt-2"
@@ -40,18 +40,24 @@
             aria-label="form-select-sm example"
             name="position"
         >
-            @foreach($positions as $position)
+            <option value="">Выберите позицию</option>
+            @foreach($positions as $p)
                 <option
-                    value="{{$position->id}}"
-                    @selected(old('position', $user->position?->id) == $position->id)
+                    value="{{$p->id}}"
+                    @selected(old('position', $user->position?->id) == $p->id)
                 >
-                    {{$position->name}}
+                    {{$p->name}}
                 </option>
             @endforeach
         </x-base.form-select>
+        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
+            @error('position')
+            {{ $message }}
+            @enderror
+        </h5>
     </div>
 
-    <div class="mt-2 flex flex-col">
+    <div class="mt-2 flex flex-col col-span-1">
         <x-base.form-label style="opacity: 0;">Статус</x-base.form-label>
         <div class="flex flex-row">
             <x-base.form-check class="mr-2">
@@ -60,7 +66,7 @@
                     type="radio"
                     value='0'
                     id="no-limit"
-                    checked="{{$user->exists ? (!$user->is_limited ? '1' : '0') : (old('is_limited') ? '0' : '1')}}"
+                    :checked="old('is_limited', $user->is_limited === 0 ? 1 : 0)"
                 />
                 <x-base.form-check.label for="no-limit">
                     Нет ограничения
@@ -72,7 +78,7 @@
                     type="radio"
                     value='1'
                     id="status-date"
-                    checked="{{$user->exists ? ($user->is_limited ? '1' : '0') : (old('is_limited') ? '1' : '0')}}"
+                    :checked="old('is_limited', $user->is_limited === 1 ? 1 : 0)"
                 />
                 <x-base.form-check.label for="status-date">
                     <x-base.preview>
@@ -106,7 +112,17 @@
         </h5>
     </div>
 
-    <div class="w-full">
+    <livewire:admin.users.form
+        :roles="$roles"
+        :warehouses="$warehouses"
+        :outlets="$outlets"
+        :user="$user"
+        :role="old('role', $user->role?->name)"
+        :outlet="old('outlet', $user->outlet?->id)"
+        :warehouse="old('warehouse', $user->warehouse?->id)"
+    />
+
+    <div class="w-full col-span-1">
         <x-base.form-label for="phone">Телефон</x-base.form-label>
         <x-base.form-input
             class="w-full"
@@ -123,7 +139,7 @@
         </h5>
     </div>
 
-    <div class="w-full">
+    <div class="w-full col-span-1">
         <x-base.form-label for="password">Пароль</x-base.form-label>
         <x-base.form-input
             class="w-full"
@@ -140,7 +156,7 @@
         </h5>
     </div>
 
-    <div class="w-full">
+    <div class="w-full col-span-1">
         <x-base.form-label for="email">E-mail</x-base.form-label>
         <x-base.form-input
             class="w-full"
@@ -157,10 +173,10 @@
         </h5>
     </div>
 
-    <div class="w-full flex flex-col gap-8">
+    <div class="w-full flex flex-col gap-8 col-span-2">
         <x-base.form-upload
             class="mt-7"
-            name="file"
+            name="files"
             :multiple="true"
             accept=".doc,.pdf"
             description="PDF,DOC (макс 1Мб)"
