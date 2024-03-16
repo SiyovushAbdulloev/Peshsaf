@@ -44,13 +44,12 @@
         >
             <option value="">Выберите страну</option>
             @foreach($countries as $country)
-                <option value="{{$country->id}}"
-                    {{
-                        $supplier->exists ?
-                        ($supplier->country?->id === $country->id ? 'selected' : '') :
-                        (old('country') == $country->id ? 'selected' : '')
-                    }}
-                >{{$country->name}}</option>
+                <option
+                    value="{{$country->id}}"
+                    @selected(old('country', $supplier->country?->id) == $country->id)
+                >
+                    {{$country->name}}
+                </option>
             @endforeach
         </x-base.form-select>
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
