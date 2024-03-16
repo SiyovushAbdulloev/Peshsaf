@@ -21,6 +21,8 @@ return new class extends Migration
             $table->timestamp('expired')->nullable();
             $table->string('phone');
             $table->string('address');
+            $table->foreignId('warehouse_id')->nullable()->constrained();
+            $table->foreignId('outlet_id')->nullable()->constrained();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

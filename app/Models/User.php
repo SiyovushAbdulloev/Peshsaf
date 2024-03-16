@@ -24,6 +24,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $password
  * @property string $is_limited
  * @property CarbonInterface $expired
+ * @property int $warehouse_id
+ * @property int $outlet_id
  */
 class User extends Authenticatable
 {
@@ -47,6 +49,8 @@ class User extends Authenticatable
         'password',
         'is_limited',
         'expired',
+        'warehouse_id',
+        'outlet_id',
     ];
 
     /**
@@ -82,6 +86,11 @@ class User extends Authenticatable
     public function warehouse(): BelongsTo
     {
         return $this->belongsTo(Warehouse::class);
+    }
+
+    public function outlet(): BelongsTo
+    {
+        return $this->belongsTo(Outlet::class);
     }
 
     public function files(): MorphMany
