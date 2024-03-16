@@ -89,7 +89,11 @@ export default defineConfig({
                 "resources/js/pages/slideover.js",
                 "resources/js/pages/tabulator.js",
                 "resources/js/pages/validation.js",
-                "resources/js/pages/receipts.js",
+
+                // Project JS
+                "resources/js/pages/project/movements.js",
+                "resources/js/pages/project/receipts.js",
+                "resources/js/pages/project/sales.js",
 
                 // JS Themes
                 "resources/js/themes/rubick.js",

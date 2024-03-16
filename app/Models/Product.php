@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Dictionaries\Product as DicProduct;
 use App\StateMachines\StatusSale;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +29,11 @@ class Product extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(DicProduct::class, 'dic_product_id');
+    }
+
+    public function scopeByStatus(Builder $query, string|array $statuses): void
+    {
+        $query->whereIn('status', !is_array($statuses) ? [$statuses] : $statuses);
     }
 
     public function duplicate(): Product

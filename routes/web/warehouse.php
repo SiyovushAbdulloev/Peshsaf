@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Warehouse\MovementController;
 use App\Http\Controllers\Warehouse\ProductController;
 use App\Http\Controllers\Warehouse\ReceiptController;
 use App\Http\Controllers\Warehouse\ReceiptProductController;
@@ -16,4 +17,7 @@ Route::name('warehouse.')->group(function () {
     Route::get('/sales/clients', [SaleController::class, 'clients'])->name('sales.clients');
     Route::get('/sales/create/{client?}', [SaleController::class, 'create'])->name('sales.create');
     Route::resource('sales', SaleController::class)->except('create');
+
+    // Перемещения товаров
+    Route::resource('movements', MovementController::class);
 });

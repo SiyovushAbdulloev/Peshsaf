@@ -1,34 +1,35 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Продажа</title>
+    <title>Перемещение товаров</title>
 @endsection
 
 @section('content')
-    <h2 class="intro-y mt-5 text-lg font-medium">Создание</h2>
+    <h2 class="intro-y mt-5 text-lg font-medium">Изменение</h2>
 
     <div class="mt-5">
         <div class="intro-y col-span-12">
-            <form action="{{ route('warehouse.sales.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('warehouse.movements.update', compact('movement')) }}" method="post">
                 @csrf
+                @method('PATCH')
 
                 <div class="intro-y box p-5">
-                    @include('warehouse.sales.partials.form')
+                    @include('warehouse.movements.partials.form')
                 </div>
 
                 <div class="intro-y box p-5 mt-3">
                     <h5 class="text-lg font-medium">Товары</h5>
 
                     <div class="overflow-x-auto">
-                        <livewire:warehouse.sale.products />
+                        <livewire:warehouse.movement.products :$movement />
                     </div>
                 </div>
 
-                <div class="mt-5 text-right">
+                <div class="mt-5 text-right gap-3">
                     <x-base.button
                         as="a"
-                        :href="route('warehouse.sales.index')"
-                        class="mr-1 w-24"
+                        :href="route('warehouse.movements.index')"
+                        class="w-24"
                         type="button"
                         variant="outline-primary"
                     >
@@ -39,8 +40,9 @@
                         variant="primary"
                         type="submit"
                     >
-                        Оформить продажу
+                        Изменить
                     </x-base.button>
+                    <livewire:warehouse.movement.send :$movement />
                 </div>
             </form>
         </div>
@@ -48,5 +50,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/sales.js')
+    @vite('resources/js/pages/project/movements.js')
 @endPushOnce

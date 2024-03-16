@@ -6,8 +6,8 @@
             name="supplier_id"
             aria-label=".form-select-lg example"
         >
+            <option>Выберите поставщика</option>
             @foreach($suppliers as $supplier)
-                <option>Выберите поставщика</option>
                 <option value="{{ $supplier->id }}" @selected(old('supplier_id', $receipt->supplier_id) == $supplier->id)
                 >{{ $supplier->name }}</option>
             @endforeach

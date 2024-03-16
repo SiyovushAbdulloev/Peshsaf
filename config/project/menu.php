@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'admin' => [
+    'admin'     => [
         'dashboard'    => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
@@ -17,22 +17,22 @@ return [
                     'route_name' => 'admin.dictionaries.measurement-units.index',
                     'title'      => 'Единицы измерений',
                 ],
-                'countries' => [
+                'countries'         => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.countries.index',
                     'title'      => 'Страны',
                 ],
-                'positions' => [
+                'positions'         => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.positions.index',
                     'title'      => 'Позиции',
                 ],
-                'substances' => [
+                'substances'        => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.substances.index',
                     'title'      => 'Действующие вещества',
                 ],
-                'suppliers' => [
+                'suppliers'         => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.suppliers.index',
                     'title'      => 'Поставщики',
@@ -40,48 +40,53 @@ return [
             ],
         ],
         'divider',
-        'users'    => [
+        'users'        => [
             'icon'       => 'activity',
             'route_name' => 'admin.users.index',
             'title'      => 'Пользователи',
         ],
-        'warehouses' => [
+        'warehouses'   => [
             'icon'       => 'home',
             'route_name' => 'admin.warehouses.index',
             'title'      => 'Склад',
-        ]
+        ],
     ],
     'warehouse' => [
-        'dashboard'    => [
+        'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
             'title'      => 'Dashboard',
         ],
-        'products'    => [
+        'products'  => [
             'icon'       => 'list',
             'route_name' => 'warehouse.products.index',
             'title'      => 'Товары',
         ],
-        'receipts'    => [
+        'receipts'  => [
             'icon'       => 'list',
             'route_name' => 'warehouse.receipts.index',
             'title'      => 'Приход товаров',
         ],
-        'sales'    => [
+        'sales'     => [
             'icon'       => 'list',
             'route_name' => 'warehouse.sales.index',
             'title'      => 'Продажа',
         ],
+        'movements' => [
+            'icon'       => 'list',
+            'route_name' => 'warehouse.movements.index',
+            'title'      => 'Перемещение товаров',
+        ],
     ],
-    'vendor' => [
-        'dashboard'    => [
+    'vendor'    => [
+        'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
             'title'      => 'Dashboard',
         ],
     ],
-    'customs' => [
-        'dashboard'    => [
+    'customs'   => [
+        'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
             'title'      => 'Dashboard',
