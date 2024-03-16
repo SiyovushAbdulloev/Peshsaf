@@ -38,6 +38,12 @@ class SaleController extends Controller
         return redirect(route('warehouse.sales.index'))->with('success', 'Продажа успешно оформлена');
     }
 
+    public function show(Sale $sale): View
+    {
+        $sale = $sale->load('products.dicProduct.measure', 'products.product');
+        return view('warehouse.sales.show', compact('sale'));
+    }
+
     public function clients(): View
     {
         return view('warehouse.sales.clients');

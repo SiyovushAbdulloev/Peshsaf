@@ -75,7 +75,7 @@
         @enderror
     </div>
 
-    @if(!$client->image)
+    @if(!$client?->image)
         <div class="col-span-12">
             <x-base.form-label for="photo">Фото</x-base.form-label>
             <input
