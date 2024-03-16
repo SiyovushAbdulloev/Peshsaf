@@ -43,12 +43,10 @@
             @foreach($positions as $position)
                 <option
                     value="{{$position->id}}"
-                    {{
-                        $user->exists ?
-                        ($user->position?->id === $position->id ? 'selected' : '') :
-                        (old('position') == $position->id ? 'selected' : '')
-                    }}
-                >{{$position->name}}</option>
+                    @selected(old('position', $user->position?->id) == $position->id)
+                >
+                    {{$position->name}}
+                </option>
             @endforeach
         </x-base.form-select>
     </div>
@@ -160,12 +158,12 @@
     </div>
 
     <div class="w-full flex flex-col gap-8">
-        <input
-            type="file"
-            name="files[]"
-            placeholder="Нажмите чтобы выбрать файл"
-            multiple="multiple"
-            accept=".doc,.pdf,.txt"
+        <x-base.form-upload
+            class="mt-7"
+            name="file"
+            :multiple="true"
+            accept=".doc,.pdf"
+            description="PDF,DOC (макс 1Мб)"
         />
 
         @if($user->exists())

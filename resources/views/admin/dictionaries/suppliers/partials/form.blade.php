@@ -129,12 +129,12 @@
     </div>
 
     <div class="w-full flex flex-col gap-8">
-        <input
-            type="file"
-            name="files[]"
-            placeholder="Нажмите чтобы выбрать файл"
-            multiple="multiple"
-            accept=".doc,.pdf,.txt"
+        <x-base.form-upload
+            class="mt-7"
+            name="files"
+            :multiple="true"
+            accept=".doc,.pdf"
+            description="PDF, DOC (макс 1Мб)"
         />
 
         @if($supplier->exists())

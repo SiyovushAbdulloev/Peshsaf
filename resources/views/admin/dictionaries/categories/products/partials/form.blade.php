@@ -27,13 +27,12 @@
         >
             <option value="">Выберите действующее вещество</option>
             @foreach($activeIngredients as $activeIngredient)
-                <option value="{{$activeIngredient->id}}"
-                    {{
-                        $product->exists ?
-                        ($product->activeIngredient?->id === $activeIngredient->id ? 'selected' : '') :
-                        (old('active_ingredient') == $activeIngredient->id ? 'selected' : '')
-                    }}
-                >{{$activeIngredient->name}}</option>
+                <option
+                    value="{{$activeIngredient->id}}"
+                    @selected(old('active_ingredient', $product->activeIngredient?->id) == $activeIngredient->id)
+                >
+                    {{$activeIngredient->name}}
+                </option>
             @endforeach
         </x-base.form-select>
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
@@ -54,13 +53,12 @@
         >
             <option value="">Выберите перечень</option>
             @foreach($list as $item)
-                <option value="{{$item['alias']}}"
-                    {{
-                        $product->status ?
-                        ($product->status === $item['alias'] ? 'selected' : '') :
-                        (old('status') === $item['alias'] ? 'selected' : '')
-                    }}
-                >{{$item['description']}}</option>
+                <option
+                    value="{{$item['alias']}}"
+                    @selected(old('status', $product->status) === $item['alias'])
+                >
+                    {{$item['description']}}
+                </option>
             @endforeach
         </x-base.form-select>
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
@@ -81,13 +79,12 @@
         >
             <option value="">Выберите единицу</option>
             @foreach($measures as $measure)
-                <option value="{{$measure->id}}"
-                    {{
-                        $product->exists ?
-                        ($product->measure?->id === $measure->id ? 'selected' : '') :
-                        (old('measure') == $measure->id ? 'selected' : '')
-                    }}
-                >{{$measure->name}}</option>
+                <option
+                    value="{{$measure->id}}"
+                    @selected(old('measure', $product->measure?->id) == $measure->id)
+                >
+                    {{$measure->name}}
+                </option>
             @endforeach
         </x-base.form-select>
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
@@ -137,13 +134,12 @@
         >
             <option value="">Выберите страну</option>
             @foreach($countries as $country)
-                <option value="{{$country->id}}"
-                    {{
-                        $product->exists ?
-                        ($product->country?->id === $country->id ? 'selected' : '') :
-                        (old('country') == $country->id ? 'selected' : '')
-                    }}
-                >{{$country->name}}</option>
+                <option
+                    value="{{$country->id}}"
+                    @selected(old('country', $product->country?->id) == $country->id)
+                >
+                    {{$country->name}}
+                </option>
             @endforeach
         </x-base.form-select>
         <h5 class="mt-3 text-lg font-medium leading-none text-danger">
@@ -189,12 +185,11 @@
     </div>
 
     <div class="w-full flex flex-col gap-8">
-        <input
-            type="file"
-            name="files[]"
-            placeholder="Нажмите чтобы выбрать файл"
-            multiple="multiple"
+        <x-base.form-upload
+            name="file"
+            :multiple="true"
             accept=".doc,.pdf"
+            description="PDF,DOC (макс 1Мб)"
         />
 
         @if($product->exists())
