@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property string $name
@@ -19,4 +20,9 @@ class Outlet extends Model
         'address',
         'phone',
     ];
+
+    public function sales(): MorphMany
+    {
+        return $this->morphMany(Sale::class, 'model');
+    }
 }

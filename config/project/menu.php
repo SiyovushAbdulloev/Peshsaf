@@ -95,6 +95,12 @@ return [
             'route_name' => 'dashboard',
             'title'      => 'Dashboard',
         ],
+        'divider',
+        'sales'     => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.sales.index',
+            'title'      => 'Продажа',
+        ],
     ],
     'customs'   => [
         'dashboard' => [

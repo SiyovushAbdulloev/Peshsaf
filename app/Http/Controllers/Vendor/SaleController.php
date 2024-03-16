@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Warehouse;
+namespace App\Http\Controllers\Vendor;
 
 use App\Actions\Warehouse\Sale\StoreAction;
 use App\Http\Controllers\Controller;
@@ -16,37 +16,37 @@ class SaleController extends Controller
     public function index(): View
     {
         $sales = auth()->user()
-            ->warehouse
+            ->outlet
             ->sales()
             ->with('client')
             ->withCount('products')
             ->paginate(15);
 
-        return view('warehouse.sales.index', compact('sales'));
+        return view('vendor.sales.index', compact('sales'));
     }
 
     public function create(Client $client = null): View
     {
         $sale = new Sale;
 
-        return view('warehouse.sales.create', compact('sale', 'client'));
+        return view('vendor.sales.create', compact('sale', 'client'));
     }
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
-        $action->execute($request->getParams(), Role::WAREHOUSE);
+        $action->execute($request->getParams(), Role::VENDOR);
 
-        return redirect(route('warehouse.sales.index'))->with('success', 'Продажа успешно оформлена');
+        return redirect(route('vendor.sales.index'))->with('success', 'Продажа успешно оформлена');
     }
 
     public function show(Sale $sale): View
     {
         $sale = $sale->load('products.dicProduct.measure', 'products.product');
-        return view('warehouse.sales.show', compact('sale'));
+        return view('vendor.sales.show', compact('sale'));
     }
 
     public function clients(): View
     {
-        return view('warehouse.sales.clients');
+        return view('vendor.sales.clients');
     }
 }
