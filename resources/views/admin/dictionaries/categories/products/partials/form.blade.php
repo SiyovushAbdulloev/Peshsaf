@@ -186,7 +186,7 @@
 
     <div class="w-full flex flex-col gap-8">
         <x-base.form-upload
-            name="file"
+            name="files"
             :multiple="true"
             accept=".doc,.pdf"
             description="PDF,DOC (макс 1Мб)"

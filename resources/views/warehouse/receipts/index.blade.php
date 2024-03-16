@@ -113,13 +113,13 @@
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $receipt->supplier?->name }}
+                            {{ $receipt->supplier?->full_name }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $receipt->supplier?->address }}
+                            {{ $receipt->supplier?->organization_address }}
                         </td>
                         <td
                             data-tw-merge

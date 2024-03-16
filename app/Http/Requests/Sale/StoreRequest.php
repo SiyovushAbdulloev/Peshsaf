@@ -32,7 +32,7 @@ class StoreRequest extends CoreFormRequest
             'address'     => ['required', 'string', 'max:255'],
             'photo'       => ['nullable', 'file', 'max:1024'],
             'products'    => ['required', 'array', 'min:1'],
-            'products.*'  => ['exists:products,id'],
+            'products.*'  => ['required', 'integer', 'exists:products,id'],
         ];
     }
 

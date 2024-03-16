@@ -23,7 +23,11 @@ Route::middleware('auth:sanctum')
 
         Route::middleware('role:warehouse|vendor')
             ->group(function () {
-                Route::get('/{role}/sales', [SaleController::class, 'index']);
+                Route::get('/sales', [SaleController::class, 'index']);
+                Route::get('/sales/{client}', [SaleController::class, 'clients']);
+                Route::get('/sales/create/products', [SaleController::class, 'products']);
+                Route::get('/sales/create/{client?}', [SaleController::class, 'create']);
+                Route::post('/sales', [SaleController::class, 'store']);
             });
     });
 

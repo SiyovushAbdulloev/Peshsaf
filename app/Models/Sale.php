@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Http\Request;
 
 class Sale extends Model
 {
@@ -40,8 +42,17 @@ class Sale extends Model
         return $this->hasMany(SaleProduct::class);
     }
 
-    public function scopeFilter()
+    public function scopeFilter(Builder $query, Request $request)
     {
-        //
+        $query
+            ->when($request->get('phone') ?? null, function ($query, string $phone) {
+                $query->where('client_phone', $phone);
+            })
+            ->when($request->get('from') ?? null, function ($query, string $from) {
+                $query->whereDate('date', '>=', Carbon::createFromDate($from));
+            })
+            ->when($request->get('to') ?? null, function ($query, string $to) {
+                $query->whereDate('date', '<=', Carbon::createFromDate($to));
+            });
     }
 }

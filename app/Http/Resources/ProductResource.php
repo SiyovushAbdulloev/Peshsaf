@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 /**
  * @property \App\Models\Client $resource
  */
-class ClientResource extends PaginateResourceCollection
+class ProductResource extends PaginateResourceCollection
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,12 @@ class ClientResource extends PaginateResourceCollection
      */
     public function toArray(Request $request): array
     {
+        $product = $this->whenLoaded('product');
         return [
             'id' => $this->resource->id,
-            'name' => $this->resource->name,
-            'address' => $this->resource->address,
-            'phone' => $this->resource->phone,
+            'qrcode' => $this->resource->barcode,
+            'barcode' => $product?->barcode,
+            'name' => $product?->name,
         ];
     }
 }
