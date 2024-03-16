@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\OutletController;
 use App\Http\Controllers\Api\SaleController;
+use App\Http\Controllers\Api\WarehouseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,9 @@ Route::middleware('auth:sanctum')
                 Route::get('/sales/create/products', [SaleController::class, 'products']);
                 Route::get('/sales/create/{client?}', [SaleController::class, 'create']);
                 Route::post('/sales', [SaleController::class, 'store']);
+
+                Route::get('/warehouses', WarehouseController::class);
+                Route::get('/outlets', OutletController::class);
             });
     });
 
