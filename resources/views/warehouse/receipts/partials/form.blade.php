@@ -8,7 +8,8 @@
         >
             <option>Выберите поставщика</option>
             @foreach($suppliers as $supplier)
-                <option value="{{ $supplier->id }}" @selected(old('supplier_id', $receipt->supplier_id) == $supplier->id)
+                <option
+                    value="{{ $supplier->id }}" @selected(old('supplier_id', $receipt->supplier_id) == $supplier->id)
                 >{{ $supplier->name }}</option>
             @endforeach
         </x-base.form-select>

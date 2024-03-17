@@ -12,6 +12,8 @@ class UpdateRequestParams extends RequestParams
         public string $phone,
         public string $email,
         public int $positionId,
+        public ?int $warehouseId,
+        public ?int $outletId,
         public bool $isLimited,
         public ?string $expired,
         public ?string $password,

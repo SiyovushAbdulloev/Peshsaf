@@ -90,10 +90,10 @@
                             class="px-5 py-2 border-b dark:border-darkmode-300 flex gap-2"
                         >
                             <a href="{{ route('admin.warehouses.edit', compact('warehouse')) }}" class="mr-4">
-                                <x-base.lucide icon="pencil"/>
+                                <x-base.icon icon="fa-pen-to-square fa-solid"/>
                             </a>
                             <a href="#" class="text-danger">
-                                <x-base.lucide icon="trash"/>
+                                <x-base.icon icon="fa-trash"></x-base.icon>
                             </a>
                         </td>
                     </tr>
@@ -109,7 +109,3 @@
         @endif
     </div>
 @endsection
-
-@pushOnce('scripts')
-    @vite('resources/js/pages/receipts.js')
-@endPushOnce

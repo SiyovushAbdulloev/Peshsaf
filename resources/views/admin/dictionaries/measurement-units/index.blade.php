@@ -72,10 +72,10 @@
                         >
                             <a href="{{ route('admin.dictionaries.measurement-units.edit', compact('unit')) }}"
                                class="mr-4">
-                                <x-base.lucide icon="pencil"/>
+                                <x-base.icon icon="fa-pen-to-square fa-solid"/>
                             </a>
                             <a href="#" class="text-danger">
-                                <x-base.lucide icon="trash"/>
+                                <x-base.icon icon="fa-trash"></x-base.icon>
                             </a>
                         </td>
                     </tr>

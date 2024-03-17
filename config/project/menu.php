@@ -12,30 +12,35 @@ return [
             'icon'     => 'library',
             'title'    => 'Справочники',
             'sub_menu' => [
-                'measurement-units' => [
+                'measurement-units'  => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.measurement-units.index',
                     'title'      => 'Единицы измерений',
                 ],
-                'countries'         => [
+                'countries'          => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.countries.index',
                     'title'      => 'Страны',
                 ],
-                'positions'         => [
+                'positions'          => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.positions.index',
                     'title'      => 'Позиции',
                 ],
-                'substances'        => [
+                'active-ingredients' => [
                     'icon'       => 'activity',
-                    'route_name' => 'admin.dictionaries.substances.index',
+                    'route_name' => 'admin.dictionaries.active-ingredients.index',
                     'title'      => 'Действующие вещества',
                 ],
-                'suppliers'         => [
+                'suppliers'          => [
                     'icon'       => 'activity',
                     'route_name' => 'admin.dictionaries.suppliers.index',
                     'title'      => 'Поставщики',
+                ],
+                'products'           => [
+                    'icon'       => 'activity',
+                    'route_name' => 'admin.dictionaries.categories.index',
+                    'title'      => 'Список товаров',
                 ],
             ],
         ],
@@ -49,6 +54,12 @@ return [
             'icon'       => 'home',
             'route_name' => 'admin.warehouses.index',
             'title'      => 'Склад',
+        ],
+        'divider',
+        'outlets'      => [
+            'icon'       => 'home',
+            'route_name' => 'admin.outlets.index',
+            'title'      => 'Торговая точка',
         ],
     ],
     'warehouse' => [
@@ -83,6 +94,12 @@ return [
             'icon'       => 'home',
             'route_name' => 'dashboard',
             'title'      => 'Dashboard',
+        ],
+        'divider',
+        'sales'     => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.sales.index',
+            'title'      => 'Продажа',
         ],
     ],
     'customs'   => [

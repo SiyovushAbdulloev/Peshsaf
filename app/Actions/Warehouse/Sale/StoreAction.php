@@ -6,6 +6,7 @@ use App\Core\Actions\CoreAction;
 use App\Http\Requests\Params\Sale\StoreRequestParams;
 use App\Models\Client;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\Sale;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,7 +33,12 @@ class StoreAction extends CoreAction
             ]);
         }
 
-        $sale = auth()->user()->warehouse->sales()->create([
+        $model = match (auth()->user()->role->name) {
+            Role::WAREHOUSE => auth()->user()->warehouse,
+            Role::VENDOR => auth()->user()->outlet,
+        };
+
+        $sale = $model->sales()->create([
             'date'           => $params->date,
             'client_id'      => $client->id,
             'client_name'    => $client->name,

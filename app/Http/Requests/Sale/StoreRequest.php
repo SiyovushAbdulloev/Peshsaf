@@ -25,27 +25,27 @@ class StoreRequest extends CoreFormRequest
     public function rules(): array
     {
         return [
-            'client_id'   => ['nullable', 'exists:clients,id'],
-            'client_name' => ['required', 'string', 'max:255'],
-            'date'        => ['required', 'string'],
-            'phone'       => ['required', 'string'],
-            'address'     => ['required', 'string', 'max:255'],
-            'photo'       => ['nullable', 'file', 'max:1024'],
-            'products'    => ['required', 'array', 'min:1'],
-            'products.*'  => ['exists:products,id'],
+            'client_id'      => ['nullable', 'exists:clients,id'],
+            'client_name'    => ['required', 'string', 'max:255'],
+            'client_address' => ['required', 'string', 'max:255'],
+            'client_phone'   => ['required', 'string'],
+            'client_photo'   => ['nullable', 'file', 'max:1024'],
+            'date'           => ['required', 'string'],
+            'products'       => ['required', 'array', 'min:1'],
+            'products.*'     => ['required', 'integer', 'exists:products,id'],
         ];
     }
 
     public function toArray(): array
     {
         return [
-            'clientId'   => $this->get('client_id'),
-            'clientName' => $this->get('client_name'),
-            'date'       => $this->get('date'),
-            'phone'      => $this->get('phone'),
-            'address'    => $this->get('address'),
-            'photo'      => $this->file('photo'),
-            'products'   => $this->get('products'),
+            'clientId'      => $this->get('client_id'),
+            'clientName'    => $this->get('client_name'),
+            'clientPhone'   => $this->get('client_phone'),
+            'clientAddress' => $this->get('client_address'),
+            'clientPhoto'   => $this->file('client_photo'),
+            'date'          => $this->get('date'),
+            'products'      => $this->get('products'),
         ];
     }
 }

@@ -82,13 +82,13 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $supplier->name }}
+                            {{ $supplier->organization_name }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $supplier->address }}
+                            {{ $supplier->organization_address }}
                         </td>
                         <td
                             data-tw-merge
@@ -108,10 +108,10 @@
                         >
                             <a href="{{ route('admin.dictionaries.suppliers.edit', compact('supplier')) }}"
                                class="mr-4">
-                                <x-base.lucide icon="pencil"/>
+                                <x-base.icon icon="fa-pen-to-square fa-solid"/>
                             </a>
                             <a href="#" class="text-danger">
-                                <x-base.lucide icon="trash"/>
+                                <x-base.icon icon="fa-trash"></x-base.icon>
                             </a>
                         </td>
                     </tr>

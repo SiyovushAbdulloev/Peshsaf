@@ -24,6 +24,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $password
  * @property string $is_limited
  * @property CarbonInterface $expired
+ * @property int $warehouse_id
+ * @property int $outlet_id
  */
 class User extends Authenticatable
 {
@@ -47,6 +49,8 @@ class User extends Authenticatable
         'password',
         'is_limited',
         'expired',
+        'warehouse_id',
+        'outlet_id',
     ];
 
     /**
@@ -84,6 +88,11 @@ class User extends Authenticatable
         return $this->belongsTo(Warehouse::class);
     }
 
+    public function outlet(): BelongsTo
+    {
+        return $this->belongsTo(Outlet::class);
+    }
+
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'fileable');
@@ -100,10 +109,10 @@ class User extends Authenticatable
               } else {
                   $until = Carbon::parse($this->expired);
                   if (!$until->isFuture()) {
-                      return 'Не активен';
+                      return '<span class="text-danger">Не активен</span>';
                   }
                   $until = $until->format('d.m.Y');
-                  return "Активен до $until";
+                  return '<span class="text-success">Активен до' . $until . '</span>';
               }
             }
         );

@@ -9,7 +9,7 @@
         <div class="intro-y mt-2 flex">
             <h2 class="intro-y text-lg font-medium">Продажа</h2>
 
-            <a href="{{ route('warehouse.sales.clients') }}" class="transition duration-200 border
+            <a href="{{ route('warehouse.sales.clients') }}" class="mb-2 transition duration-200 border
                 inline-flex items-center
                 justify-center py-2
                 px-3 rounded-md ml-auto

@@ -4,6 +4,7 @@ namespace App\Http\Requests\User;
 
 use App\Core\Http\Requests\CoreFormRequest;
 use App\Http\Requests\Params\User\UpdateRequestParams;
+use App\Models\Role;
 
 class UpdateRequest extends CoreFormRequest
 {
@@ -11,33 +12,40 @@ class UpdateRequest extends CoreFormRequest
 
     public function rules(): array
     {
-        //TODO: Add russian error messages here and provider
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'password' => ['nullable', 'string', 'min:8', 'max:255'],
-            'position' => ['required', 'integer', 'exists:positions,id'],
-            'email' => ['required', 'email'],
-            'phone' => ['required', 'regex:/^[0-9]{9}+$/'],
-            'is_limited' => ['required', 'boolean'],
-            'expired' => ['required', 'string'],
-            'files' => ['nullable', 'array'],
-            'files.*' => ['required_with:files', 'file', 'mimes:pdf,doc', 'max:5120'],
+        $rules = [
+            'name'       => ['required', 'string', 'max:255'],
+            'position'   => ['required', 'integer', 'exists:positions,id'],
+            'address'    => ['required', 'string', 'max:255'],
+            'is_limited' => ['required', 'in:0,1'],
+            'expired'    => ['required', 'date'],
+            'phone'      => ['required', 'regex:/^[0-9]{9}+$/'],
+            'email'      => ['required', 'email'],
+            'password'   => ['nullable', 'string', 'min:8', 'max:255'],
+            'files'      => ['nullable', 'array'],
+            'files.*'    => ['required_with:files', 'file', 'mimes:pdf,doc', 'max:5120'],
         ];
+
+        return match ($this->user->role->name) {
+            Role::VENDOR => array_merge($rules, ['outlet' => ['required', 'integer', 'exists:outlets,id']]),
+            Role::WAREHOUSE => array_merge($rules, ['warehouse' => ['required', 'integer', 'exists:warehouses,id']]),
+            default => $rules,
+        };
     }
 
     public function toArray(): array
     {
         return [
-            'name' => $this->get('name'),
-            'address' => $this->get('address'),
-            'positionId' => $this->get('position'),
-            'email' => $this->get('email'),
-            'phone' => $this->get('phone'),
-            'isLimited' => $this->boolean('is_limited'),
-            'expired' => $this->get('expired'),
-            'password' => $this->get('password'),
-            'files' => $this->file('files'),
+            'name'        => $this->get('name'),
+            'positionId'  => $this->get('position'),
+            'address'     => $this->get('address'),
+            'isLimited'   => $this->boolean('is_limited'),
+            'expired'     => $this->get('expired'),
+            'warehouseId' => $this->get('warehouse'),
+            'outletId'    => $this->get('outlet'),
+            'phone'       => $this->get('phone'),
+            'email'       => $this->get('email'),
+            'password'    => $this->get('password'),
+            'files'       => $this->file('files'),
         ];
     }
 }
