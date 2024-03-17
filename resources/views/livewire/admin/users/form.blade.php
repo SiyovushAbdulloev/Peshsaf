@@ -1,21 +1,10 @@
-<div
-    class="grid grid-cols-2 col-span-1"
->
-    <div
-        @class([
-           "w-full",
-           $role => "col-span-1",
-           !$role => "col-span-2"
-       ])
-    >
+<div class="grid grid-cols-subgrid col-span-12">
+    <div class="col-span-12 2xl:col-span-6">
         <x-base.form-label>Роль</x-base.form-label>
         <x-base.form-select
-            class="mt-2"
-            formSelectSize="md"
             aria-label="form-select-sm example"
             name="role"
-            wire:model="role"
-            wire:change="setRole"
+            wire:model.live="role"
         >
             <option value="">Выберите роль</option>
             @foreach($roles as $r)
@@ -27,19 +16,17 @@
                 </option>
             @endforeach
         </x-base.form-select>
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('role')
-            {{ $message }}
-            @enderror
-        </h5>
+        @error('role')
+            <div class="mt-2 text-danger">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
-    @if($roleSelect === \App\Models\Role::VENDOR)
-        <div class="w-full col-span-2">
-            <x-base.form-label>Торговые точки</x-base.form-label>
+    @if($role === \App\Models\Role::VENDOR)
+        <div class="col-span-12 2xl:col-span-6">
+            <x-base.form-label>Торговая точка</x-base.form-label>
             <x-base.form-select
-                class="mt-2"
-                formSelectSize="md"
                 aria-label="form-select-sm example"
                 name="outlet"
                 wire:model="outlet"
@@ -48,26 +35,24 @@
                 @foreach($outlets as $o)
                     <option
                         value="{{$o->id}}"
-                        @selected(old($outlet, $user->outlet?->id) == $o->id)
+                        @selected(old($outlet, $user->outlet_id) == $o->id)
                     >
                         {{$o->name}}
                     </option>
                 @endforeach
             </x-base.form-select>
-            <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-                @error('outlet')
+            @error('outlet')
+            <div class="mt-2 text-danger">
                 {{ $message }}
-                @enderror
-            </h5>
+            </div>
+            @enderror
         </div>
     @endif
 
-    @if($roleSelect === App\Models\Role::WAREHOUSE)
-        <div class="w-full col-span-2">
-            <x-base.form-label>Склады</x-base.form-label>
+    @if($role === App\Models\Role::WAREHOUSE)
+        <div class="col-span-12 2xl:col-span-6">
+            <x-base.form-label>Склад</x-base.form-label>
             <x-base.form-select
-                class="mt-2"
-                formSelectSize="md"
                 aria-label="form-select-sm example"
                 name="warehouse"
                 wire:model="warehouse"
@@ -76,17 +61,17 @@
                 @foreach($warehouses as $w)
                     <option
                         value="{{$w->id}}"
-                        @selected(old($warehouse, $user->warehouse?->id) == $w->id)
+                        @selected(old($warehouse, $user->warehouse_id) == $w->id)
                     >
                         {{$w->name}}
                     </option>
                 @endforeach
             </x-base.form-select>
-            <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-                @error('warehouse')
+            @error('warehouse')
+            <div class="mt-2 text-danger">
                 {{ $message }}
-                @enderror
-            </h5>
+            </div>
+            @enderror
         </div>
     @endif
 </div>

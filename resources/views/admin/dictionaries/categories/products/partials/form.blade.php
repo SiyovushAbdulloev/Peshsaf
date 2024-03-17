@@ -1,5 +1,5 @@
-<div class="flex" style="flex-wrap: wrap">
-    <div class="w-1/2 mr-2 flex flex-col justify-between">
+<div class="grid grid-cols-12 gap-5 gap-y-5">
+    <div class="col-span-12 2xl:col-span-6">
         <x-base.form-label for="name">Наименование</x-base.form-label>
         <x-base.form-input
             class="w-full"
@@ -9,19 +9,17 @@
             placeholder="Введите наименование"
             value="{{ old('name', $product->name) }}"
         />
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('name')
+        @error('name')
+        <div class="font-italic text-danger">
             {{ $message }}
-            @enderror
-        </h5>
+        </div>
+        @enderror
     </div>
 
-    <div style="width: 49%">
+    <div class="col-span-12 2xl:col-span-6">
         <x-base.form-label for="active-ingredient">Действующее вещество</x-base.form-label>
         <x-base.form-select
             id="active-ingredient"
-            class="mt-2"
-            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="active_ingredient"
         >
@@ -35,19 +33,17 @@
                 </option>
             @endforeach
         </x-base.form-select>
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('active_ingredient')
+        @error('active_ingredient')
+        <div class="font-italic text-danger">
             {{ $message }}
-            @enderror
-        </h5>
+        </div>
+        @enderror
     </div>
 
-    <div style="width: 33%" class="mr-2">
+    <div class="col-span-6 2xl:col-span-4">
         <x-base.form-label for="status">Перечень</x-base.form-label>
         <x-base.form-select
             id="status"
-            class="mt-2"
-            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="status"
         >
@@ -61,44 +57,39 @@
                 </option>
             @endforeach
         </x-base.form-select>
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('status')
+        @error('status')
+        <div class="font-italic text-danger">
             {{ $message }}
-            @enderror
-        </h5>
+        </div>
+        @enderror
     </div>
 
-    <div style="width: 33%" class="mr-2">
-        <x-base.form-label for="measure">Единицы измерения</x-base.form-label>
+    <div class="col-span-6 2xl:col-span-4">
+        <x-base.form-label for="measure">Единица измерения</x-base.form-label>
         <x-base.form-select
             id="measure"
-            class="mt-2"
-            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="measure"
         >
             <option value="">Выберите единицу</option>
             @foreach($measures as $measure)
-                <option
-                    value="{{$measure->id}}"
-                    @selected(old('measure', $product->measure?->id) == $measure->id)
-                >
+                <option value="{{$measure->id}}" @selected(old('measure', $product->measure_id) == $measure->id)>
                     {{$measure->name}}
                 </option>
             @endforeach
         </x-base.form-select>
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('measure')
+
+        @error('measure')
+        <div class="font-italic text-danger">
             {{ $message }}
-            @enderror
-        </h5>
+        </div>
+        @enderror
     </div>
 
-    <div style="width: 32%" class="flex flex-col justify-center">
-
-        <x-base.preview class="">
-            <x-base.form-label style="opacity: 0; margin: 0;">Единицы измерения</x-base.form-label>
-            <div class="relative mx-auto w-56">
+    <div class="col-span-6 2xl:col-span-2">
+        <x-base.preview>
+            <x-base.form-label>Срок действия</x-base.form-label>
+            <div class="relative">
                 <div
                     class="absolute flex h-full w-10 items-center justify-center rounded-l border bg-slate-100 text-slate-500 dark:border-darkmode-800 dark:bg-darkmode-700 dark:text-slate-400">
                     <x-base.lucide
@@ -115,20 +106,17 @@
                 />
             </div>
         </x-base.preview>
-        <h5
-            class="'text-lg font-medium leading-none text-danger'">
-            @error('expiry_date')
-            <p class="mt-3">{{ $message }}</p>
-            @enderror
-        </h5>
+        @error('expiry_date')
+        <div class="font-italic text-danger">
+            {{ $message }}
+        </div>
+        @enderror
     </div>
 
-    <div style="width: 69%" class="mr-2">
+    <div class="col-span-6 2xl:col-span-4">
         <x-base.form-label for="country">Страна</x-base.form-label>
         <x-base.form-select
             id="country"
-            class="mt-2"
-            formSelectSize="md"
             aria-label=".form-select-sm example"
             name="country"
         >
@@ -142,14 +130,14 @@
                 </option>
             @endforeach
         </x-base.form-select>
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('country')
+        @error('country')
+        <div class="font-italic text-danger">
             {{ $message }}
-            @enderror
-        </h5>
+        </div>
+        @enderror
     </div>
 
-    <div style="width: 30%" class="flex flex-col justify-between">
+    <div class="col-span-6 2xl:col-span-4">
         <x-base.form-label for="barcode">Штрих-код</x-base.form-label>
         <x-base.form-input
             class="w-full"
@@ -159,14 +147,14 @@
             placeholder="Введите штрих-код"
             value="{{ old('barcode', $product->barcode) }}"
         />
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('barcode')
+        @error('barcode')
+        <div class="font-italic text-danger">
             {{ $message }}
-            @enderror
-        </h5>
+        </div>
+        @enderror
     </div>
 
-    <div class="w-full">
+    <div class="col-span-12">
         <x-base.form-label for="description">Общая информация</x-base.form-label>
         <x-base.form-textarea
             class="w-full"
@@ -174,17 +162,19 @@
             type="text"
             name="description"
             placeholder="Введите информацию о товаре"
+            rows="6"
         >
             {{ old('description', $product->description) }}
         </x-base.form-textarea>
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
-            @error('description')
+        @error('description')
+        <div class="font-italic text-danger">
             {{ $message }}
-            @enderror
-        </h5>
+        </div>
+        @enderror
     </div>
 
-    <div class="w-full flex flex-col gap-8">
+    <div class="col-span-12">
+        <x-base.form-label>Загрузите документы</x-base.form-label>
         <x-base.form-upload
             name="files"
             :multiple="true"
@@ -216,7 +206,7 @@
                 </table>
             </div>
         @endif
-        <h5 class="mt-3 text-lg font-medium leading-none text-danger">
+        <h5 class="font-italic text-danger">
             @error('files')
             {{ $message }}
             @enderror
@@ -234,6 +224,7 @@
         </h5>
     </div>
 </div>
+
 @pushOnce('scripts')
     @vite('resources/js/pages/project/products.js')
 @endPushOnce

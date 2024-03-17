@@ -6,7 +6,6 @@ use App\Actions\Warehouse\Sale\StoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Models\Client;
-use App\Models\Role;
 use App\Models\Sale;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -34,7 +33,7 @@ class SaleController extends Controller
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
-        $action->execute($request->getParams(), Role::WAREHOUSE);
+        $action->execute($request->getParams());
 
         return redirect(route('warehouse.sales.index'))->with('success', 'Продажа успешно оформлена');
     }

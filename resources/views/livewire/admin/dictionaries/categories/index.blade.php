@@ -53,51 +53,31 @@
             >
                 <thead data-tw-merge class="">
                 <tr
-                    data-tw-merge
                     class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                 >
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
-                        #
-                    </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">#</th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Наименование
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
-                        &nbsp;
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Перечень
                     </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Ед. измерения
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($products as $product)
                     <tr
-                        data-tw-merge
-                        class="h-fit [&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
+                            class="h-fit [&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                     >
-                        <td
-                            data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
-                        >
-                            {{ $product->id }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300"
-                        >
-                            {{ $product->name }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row h-full"
-                        >
+                        <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->id }}</td>
+                        <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->name }}</td>
+                        <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->status }}</td>
+                        <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->measure->name }}</td>
+                        <td class="px-5 py-3 border-b dark:border-darkmode-300">
                             <a href="{{ route('admin.dictionaries.categories.products.edit', compact('category', 'product')) }}"
                                class="mr-4">
                                 <x-base.icon icon="fa-pen-to-square fa-solid"/>
@@ -113,7 +93,7 @@
         @else
             <div role="alert"
                  class="alert mx-auto mt-4 relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
-                <i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                <x-base.icon icon="fa-circle-exclamation" class="text-lg mr-3"></x-base.icon>
                 Нет данных
             </div>
         @endif

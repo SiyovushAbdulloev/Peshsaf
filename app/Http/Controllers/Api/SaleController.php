@@ -16,31 +16,18 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $sales = [];
-
-        switch (auth()->user()->role->name) {
-            case Role::VENDOR:
-                $sales = auth()->user()
-                    ->outlet
-                    ->sales()
-                    ->with('client')
-                    ->withCount('products')
-                    ->paginate(15);
-                break;
-            case Role::WAREHOUSE:
-                $sales = auth()->user()
-                    ->warehouse
-                    ->sales()
-                    ->filter($request)
-                    ->withCount('products')
-                    ->paginate(15);
-                break;
-        }
+        $model = match (auth()->user()->role->name) {
+            Role::VENDOR => auth()->user()->outlet,
+            Role::WAREHOUSE => auth()->user()->warehouse,
+        };
 
         return response()->json([
-            'sales' => SaleResource::collection($sales)
+            'sales' => SaleResource::collection($model->sales()
+                ->with('client')
+                ->withCount('products')
+                ->paginate(15)),
         ]);
     }
 
@@ -49,7 +36,7 @@ class SaleController extends Controller
         $clients = Client::filter(['q' => $request->get('q')])->get();
 
         return response()->json([
-            'clients' => ClientResource::collection($clients)
+            'clients' => ClientResource::collection($clients),
         ]);
     }
 
@@ -58,18 +45,7 @@ class SaleController extends Controller
         $product = Product::firstWhere('barcode', $request->get('barcode'));
 
         return response()->json([
-            'product' => ProductResource::make($product->load('product'))
-        ]);
-    }
-
-    public function create(Client $client = null): JsonResponse
-    {
-        if ($client) {
-            $client = ClientResource::make($client);
-        }
-
-        return response()->json([
-            'client' => $client
+            'product' => $product ? ProductResource::make($product->load('product')) : '',
         ]);
     }
 
@@ -78,7 +54,7 @@ class SaleController extends Controller
         $sale = $action->execute($request->getParams());
 
         return response()->json([
-            'sale' => SaleResource::make($sale)
+            'sale' => SaleResource::make($sale),
         ]);
     }
 }

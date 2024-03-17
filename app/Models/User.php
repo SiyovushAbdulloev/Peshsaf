@@ -78,7 +78,7 @@ class User extends Authenticatable
         return $this->belongsTo(Position::class);
     }
 
-    public function getRoleAttribute(): ?\Spatie\Permission\Models\Role
+    public function getRoleAttribute(): \Spatie\Permission\Models\Role
     {
         return $this->roles->first();
     }
@@ -109,10 +109,10 @@ class User extends Authenticatable
               } else {
                   $until = Carbon::parse($this->expired);
                   if (!$until->isFuture()) {
-                      return 'Не активен';
+                      return '<span class="text-danger">Не активен</span>';
                   }
                   $until = $until->format('d.m.Y');
-                  return "Активен до $until";
+                  return '<span class="text-success">Активен до' . $until . '</span>';
               }
             }
         );

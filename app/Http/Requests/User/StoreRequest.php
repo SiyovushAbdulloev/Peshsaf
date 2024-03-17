@@ -15,37 +15,37 @@ class StoreRequest extends CoreFormRequest
     {
         //TODO: Add russian error messages here and provider
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'max:255'],
-            'position' => ['required', 'integer', 'exists:positions,id'],
-            'outlet' => ['required_if:role,' . Role::VENDOR, 'integer', 'exists:outlets,id'],
-            'warehouse' => ['required_if:role,' . Role::WAREHOUSE, 'integer', 'exists:warehouses,id'],
-            'email' => ['required', 'email'],
-            'phone' => ['required', 'regex:/^[0-9]{9}+$/'],
+            'name'       => ['required', 'string', 'max:255'],
+            'position'   => ['required', 'integer', 'exists:positions,id'],
+            'address'    => ['required', 'string', 'max:255'],
             'is_limited' => ['required', 'bool'],
-            'role' => ['required', Rule::in(Role::ADMIN, Role::WAREHOUSE, Role::VENDOR)],
-            'expired' => ['required_if:is_limited,true', 'string'],
-            'files' => ['required', 'array'],
-            'files.*' => ['required', 'file', 'mimes:pdf,doc', 'max:5120'],
+            'expired'    => ['nullable', 'required_if:is_limited,true', 'date'],
+            'role'       => ['required', Rule::in(Role::ADMIN, Role::WAREHOUSE, Role::VENDOR)],
+            'outlet'     => ['required_if:role,' . Role::VENDOR, 'integer', 'exists:outlets,id'],
+            'warehouse'  => ['required_if:role,' . Role::WAREHOUSE, 'integer', 'exists:warehouses,id'],
+            'phone'      => ['required', 'regex:/^[0-9]{9}+$/'],
+            'email'      => ['required', 'email'],
+            'password'   => ['required', 'string', 'min:6', 'max:255', 'confirmed'],
+            'files'      => ['required', 'array'],
+            'files.*'    => ['required', 'file', 'mimes:pdf,doc', 'max:5120'],
         ];
     }
 
     public function toArray(): array
     {
         return [
-            'name' => $this->get('name'),
-            'address' => $this->get('address'),
-            'positionId' => $this->get('position'),
+            'name'        => $this->get('name'),
+            'positionId'  => $this->get('position'),
+            'address'     => $this->get('address'),
+            'isLimited'   => $this->boolean('is_limited'),
+            'expired'     => $this->string('expired'),
+            'role'        => $this->get('role'),
+            'outletId'    => $this->get('outlet'),
             'warehouseId' => $this->get('warehouse'),
-            'outletId' => $this->get('outlet'),
-            'email' => $this->get('email'),
-            'phone' => $this->get('phone'),
-            'isLimited' => $this->boolean('is_limited'),
-            'role' => $this->get('role'),
-            'expired' => $this->string('expired'),
-            'password' => $this->get('password'),
-            'files' => $this->file('files'),
+            'phone'       => $this->get('phone'),
+            'email'       => $this->get('email'),
+            'password'    => $this->get('password'),
+            'files'       => $this->file('files'),
         ];
     }
 }

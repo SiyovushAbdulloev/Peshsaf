@@ -1,13 +1,11 @@
 (function () {
-    "use strict";
+    'use strict';
 
-    $('#status-date-picker').on('focus', function (e) {
-        $('#status-date').prop('checked', true);
-    });
+    $('input:radio[name=is_limited]').on('click', (e) => $('#status-date-picker').prop('disabled', e.target.value == 1 ? false : true));
 
     $('[id=remove-file]').each(function () {
         $(this).on('click', function (e) {
-            const id = e.target.getAttribute('data-value')
+            const id = e.target.getAttribute('data-value');
 
             $.ajax({
                 url: `http://localhost/admin/files/${id}`,
@@ -15,12 +13,12 @@
                 dataType: 'json',
             }).done((result) => {
                 if (result === 1) {
-                    document.getElementById(id).remove()
+                    document.getElementById(id).remove();
                 }
             }).fail((one, two, error) => {
                 //TODO: Implement showing error messages
-                console.log({one, two, error})
+                console.log({ one, two, error });
             });
-        })
-    })
+        });
+    });
 })();

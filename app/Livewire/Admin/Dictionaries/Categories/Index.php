@@ -30,7 +30,7 @@ class Index extends Component
 
     public function fetchProducts($category)
     {
-        $this->products = Product::where('category_id', $category)->get();
+        $this->products = Product::with('measure')->where('category_id', $category)->get();
         $this->currentCategory = $category;
     }
 }

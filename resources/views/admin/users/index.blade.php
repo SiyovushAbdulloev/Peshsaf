@@ -100,7 +100,7 @@
                             data-tw-merge
                             class="px-5 py-3 border-b dark:border-darkmode-300"
                         >
-                            {{ $user->statusText }}
+                            {!! $user->statusText !!}
                         </td>
                         <td
                             data-tw-merge

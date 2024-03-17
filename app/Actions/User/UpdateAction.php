@@ -14,40 +14,38 @@ class UpdateAction extends CoreAction
     public function handle(UpdateRequestParams $params, User $user): User
     {
         $user->update([
-            'name' => $params->name,
-            'email' => $params->email,
-            'phone' => $params->phone,
+            'name'        => $params->name,
+            'email'       => $params->email,
+            'phone'       => $params->phone,
             'position_id' => $params->positionId,
-            'address' => $params->address,
-            'is_limited' => $params->isLimited,
-            'expired' => $params->isLimited ? Carbon::createFromFormat('d-m-Y', $params->expired) : null,
+            'address'     => $params->address,
+            'is_limited'  => $params->isLimited,
+            'expired'     => $params->isLimited ? Carbon::createFromFormat('d-m-Y', $params->expired) : null,
         ]);
 
-        $role = $user->role->name;
-
-        if ($role === Role::VENDOR) {
-            $user->update([
-                'outlet_id' => $params->outletId
-            ]);
-        } else if ($role === Role::WAREHOUSE) {
-            $user->update([
-                'warehouse_id' => $params->warehouseId
-            ]);
-        }
+        match ($user->role->name) {
+            Role::VENDOR => $user->update([
+                'outlet_id' => $params->outletId,
+            ]),
+            Role::WAREHOUSE => $user->update([
+                'warehouse_id' => $params->warehouseId,
+            ]),
+            default => true
+        };
 
         if ($params->password) {
             $user->update([
-                'password' => $params->password
+                'password' => $params->password,
             ]);
         }
 
         if ($params->files) {
             foreach ($params->files as $file) {
                 $user->files()->create([
-                    'filename' => Storage::put('', $file),
+                    'filename'          => Storage::put('users', $file),
                     'original_filename' => $file->getClientOriginalName(),
-                    'mimetype' => $file->getClientMimeType(),
-                    'size' => $file->getSize(),
+                    'mimetype'          => $file->getClientMimeType(),
+                    'size'              => $file->getSize(),
                 ]);
             }
         }

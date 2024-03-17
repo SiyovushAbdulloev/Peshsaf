@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class StoreAction extends CoreAction
 {
-    public function handle(StoreRequestParams $params, string $role): Sale
+    public function handle(StoreRequestParams $params): Sale
     {
         $client = Client::firstOrCreate([
             'id' => $params->clientId,
@@ -33,28 +33,18 @@ class StoreAction extends CoreAction
             ]);
         }
 
-        $sale = [];
+        $model = match (auth()->user()->role->name) {
+            Role::WAREHOUSE => auth()->user()->warehouse,
+            Role::VENDOR => auth()->user()->outlet,
+        };
 
-        switch ($role) {
-            case Role::WAREHOUSE:
-                $sale = auth()->user()->warehouse->sales()->create([
-                    'date'           => $params->date,
-                    'client_id'      => $client->id,
-                    'client_name'    => $client->name,
-                    'client_phone'   => $client->phone,
-                    'client_address' => $client->address,
-                ]);
-                break;
-            case Role::VENDOR:
-                $sale = auth()->user()->outlet->sales()->create([
-                    'date'           => $params->date,
-                    'client_id'      => $client->id,
-                    'client_name'    => $client->name,
-                    'client_phone'   => $client->phone,
-                    'client_address' => $client->address,
-                ]);
-                break;
-        }
+        $sale = $model->sales()->create([
+            'date'           => $params->date,
+            'client_id'      => $client->id,
+            'client_name'    => $client->name,
+            'client_phone'   => $client->phone,
+            'client_address' => $client->address,
+        ]);
 
         foreach ($params->products as $productId) {
             $sale->products()->create([

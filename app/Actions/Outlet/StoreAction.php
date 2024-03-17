@@ -11,9 +11,9 @@ class StoreAction extends CoreAction
     public function handle(StoreRequestParams $params): Outlet
     {
         return Outlet::create([
-            'name' => $params->name,
+            'name'    => $params->name,
             'address' => $params->address,
-            'phone' => $params->phone,
+            'phone'   => $params->phone,
         ]);
     }
 }
