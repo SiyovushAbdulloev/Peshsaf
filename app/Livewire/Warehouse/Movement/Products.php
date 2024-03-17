@@ -3,7 +3,6 @@
 namespace App\Livewire\Warehouse\Movement;
 
 use App\Models\Movement;
-use App\Models\Product;
 use App\Models\WarehouseRemainProduct;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;

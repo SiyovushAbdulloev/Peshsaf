@@ -14,7 +14,7 @@
         </x-base.form-select>
 
         @error('outlet_id')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -30,7 +30,7 @@
         />
 
         @error('number')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
