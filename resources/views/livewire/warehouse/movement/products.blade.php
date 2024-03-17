@@ -1,4 +1,13 @@
 <div>
+    <x-base.button
+        size="sm"
+        type="button"
+        variant="outline-primary"
+        class="text-right"
+        wire:click="addProduct"
+    >
+        Сканировать
+    </x-base.button>
     <x-base.table id="products" class="mt-5">
         <x-base.table.thead variant="light">
             <x-base.table.tr>
@@ -21,10 +30,10 @@
         <x-base.table.tbody>
             @forelse($selectedProducts ?? [] as $product)
                 <x-base.table.tr wire:key="{{ $product->id }}">
-                    <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->dicProduct->name }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->dicProduct->barcode }}</x-base.table.td>
                     <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
-                    <x-base.table.td>{{ $product->barcode }}</x-base.table.td>
-                    <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->dicProduct->measure->name }}</x-base.table.td>
                     <x-base.table.td>
                         <input type="hidden" name="products[]" value="{{ $product->id }}">
                         <x-base.button
