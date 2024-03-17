@@ -1,7 +1,7 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Продажа</title>
+    <title>Перемещение товаров</title>
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
 
     <div class="mt-5">
         <div class="intro-y col-span-12">
-            <form action="{{ route('warehouse.movements.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('warehouse.movements.store') }}" method="post">
                 @csrf
 
                 <div class="intro-y box p-5">
