@@ -10,7 +10,7 @@
             value="{{ old('name', $product->name) }}"
         />
         @error('name')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -34,7 +34,7 @@
             @endforeach
         </x-base.form-select>
         @error('active_ingredient')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -58,7 +58,7 @@
             @endforeach
         </x-base.form-select>
         @error('status')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -80,7 +80,7 @@
         </x-base.form-select>
 
         @error('measure')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -107,7 +107,7 @@
             </div>
         </x-base.preview>
         @error('expiry_date')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -131,7 +131,7 @@
             @endforeach
         </x-base.form-select>
         @error('country')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -148,7 +148,7 @@
             value="{{ old('barcode', $product->barcode) }}"
         />
         @error('barcode')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -167,7 +167,7 @@
             {{ old('description', $product->description) }}
         </x-base.form-textarea>
         @error('description')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -206,22 +206,24 @@
                 </table>
             </div>
         @endif
-        <h5 class="font-italic text-danger">
-            @error('files')
+        @error('files')
+        <div class="mt-2 text-danger italic">
             {{ $message }}
-            @enderror
-            @if ($errors->has('files.*'))
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->get('files.*') as $error)
-                            @foreach($error as $message)
-                                <p>{{ $message }}</p>
-                            @endforeach
+        </div>
+        @enderror
+        @if ($errors->has('files.*'))
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->get('files.*') as $error)
+                        @foreach($error as $message)
+                            <div class="mt-2 text-danger italic">
+                                {{ $message }}
+                            </div>
                         @endforeach
-                    </ul>
-                </div>
-            @endif
-        </h5>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 </div>
 

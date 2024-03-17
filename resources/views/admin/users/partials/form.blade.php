@@ -10,7 +10,7 @@
             value="{{ old('name', $user->name) }}"
         />
         @error('name')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -33,7 +33,7 @@
             @endforeach
         </x-base.form-select>
         @error('position')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -49,14 +49,14 @@
             value="{{ old('address', $user->address) }}"
         />
         @error('address')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
     </div>
 
     <div class="col-span-12 2xl:col-span-6">
-        <x-base.form-label >Статус</x-base.form-label>
+        <x-base.form-label>Статус</x-base.form-label>
         <div class="flex flex-row">
             <x-base.form-check class="mr-2">
                 <x-base.form-check.input
@@ -101,12 +101,12 @@
             </x-base.form-check>
         </div>
         @error('is_limited')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
         @error('expired')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -125,7 +125,7 @@
             value="{{ old('phone', $user->phone) }}"
         />
         @error('phone')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -142,7 +142,7 @@
             value="{{ old('email', $user->email) }}"
         />
         @error('email')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -158,7 +158,7 @@
             placeholder="Введите пароль"
         />
         @error('password')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -208,10 +208,23 @@
             </table>
         @endif
         @error('files')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
+        @if ($errors->has('files.*'))
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->get('files.*') as $error)
+                        @foreach($error as $message)
+                            <div class="mt-2 text-danger italic">
+                                {{ $message }}
+                            </div>
+                        @endforeach
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 </div>
 

@@ -78,7 +78,7 @@ class User extends Authenticatable
         return $this->belongsTo(Position::class);
     }
 
-    public function getRoleAttribute(): \Spatie\Permission\Models\Role
+    public function getRoleAttribute(): ?\Spatie\Permission\Models\Role
     {
         return $this->roles->first();
     }

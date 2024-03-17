@@ -32,7 +32,7 @@
         />
 
         @error('client_name')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -59,7 +59,7 @@
         />
 
         @error('phone')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -76,7 +76,7 @@
         />
 
         @error('address')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -93,10 +93,23 @@
             />
 
             @error('photo')
-            <div class="mt-2 text-danger">
+            <div class="mt-2 text-danger italic">
                 {{ $message }}
             </div>
             @enderror
+            @if ($errors->has('files.*'))
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->get('files.*') as $error)
+                            @foreach($error as $message)
+                                <div class="mt-2 text-danger italic">
+                                    {{ $message }}
+                                </div>
+                            @endforeach
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
     @endif
 </div>

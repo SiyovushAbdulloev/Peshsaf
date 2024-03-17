@@ -9,7 +9,7 @@
             value="{{ old('organization_name', $supplier->organization_name) }}"
         />
         @error('organization_name')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -25,7 +25,7 @@
             value="{{ old('full_name', $supplier->full_name) }}"
         />
         @error('full_name')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -49,7 +49,7 @@
             @endforeach
         </x-base.form-select>
         @error('country')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -65,7 +65,7 @@
             value="{{ old('organization_address', $supplier->organization_address) }}"
         />
         @error('organization_address')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -81,7 +81,7 @@
             value="{{ old('phone', $supplier->phone) }}"
         />
         @error('phone')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -97,7 +97,7 @@
             value="{{ old('email', $supplier->email) }}"
         />
         @error('email')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -115,7 +115,7 @@
             {{ old('description', $supplier->description) }}
         </x-base.form-textarea>
         @error('description')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -156,10 +156,23 @@
             </div>
         @endif
         @error('files')
-        <div class="font-italic text-danger">
+        <div class="font-italic text-danger italic">
             {{ $message }}
         </div>
         @enderror
+        @if ($errors->has('files.*'))
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->get('files.*') as $error)
+                        @foreach($error as $message)
+                            <div class="mt-2 text-danger italic">
+                                {{ $message }}
+                            </div>
+                        @endforeach
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 </div>
 @pushOnce('scripts')
