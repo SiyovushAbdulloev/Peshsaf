@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Product extends Model
@@ -27,6 +28,11 @@ class Product extends Model
         'status' => StatusProduct::class,
     ];
 
+    public function lastActive(): HasOne
+    {
+        return $this->hasOne(Product::class, 'barcode', 'barcode')->active()->latest();
+    }
+
     public function model(): MorphTo
     {
         return $this->morphTo();
@@ -42,11 +48,8 @@ class Product extends Model
         $query->whereIn('status', !is_array($statuses) ? [$statuses] : $statuses);
     }
 
-    public function duplicate(): Product
+    public function scopeActive(Builder $query): void
     {
-        $product = $this->replicate();
-        $product->save();
-
-        return $product;
+        $query->where('history', false);
     }
 }

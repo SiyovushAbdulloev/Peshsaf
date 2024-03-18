@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('status');
             $table->foreignId('dic_product_id')->constrained();
             $table->morphs('model');
-            $table->string('barcode');
+            $table->string('barcode')->unique();
             $table->boolean('history')->default(false);
             $table->timestamps();
         });

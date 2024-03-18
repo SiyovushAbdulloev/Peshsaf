@@ -18,12 +18,12 @@ class StoreAction extends CoreAction
             'id' => $params->clientId,
         ], [
             'name'    => $params->clientName,
-            'phone'   => $params->phone,
-            'address' => $params->address,
+            'phone'   => $params->clientPhone,
+            'address' => $params->clientAddress,
         ]);
 
-        if ($params->photo) {
-            $file = $params->photo;
+        if ($params->clientPhoto) {
+            $file = $params->clientPhoto;
             $client->image()->delete();
             $client->image()->create([
                 'filename'          => Storage::put('clients', $file),
@@ -53,7 +53,7 @@ class StoreAction extends CoreAction
 
             $product = Product::find($productId);
 
-            $newProduct             = $product->duplicate();
+            $newProduct             = $product->replicate();
             $newProduct->model_type = Client::class;
             $newProduct->model_id   = $client->id;
             $newProduct->save();

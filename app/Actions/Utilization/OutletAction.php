@@ -11,13 +11,12 @@ class OutletAction extends CoreAction
     public function handle(Utilization $utilization): void
     {
         foreach ($utilization->products as $utilizationProduct) {
-            if (!$utilizationProduct->product->status()->canBe('used')) {
+            $product = $utilizationProduct->product->lastActive;
+            if (!$product->status()->canBe('used')) {
                 continue;
             }
 
-            $product = $utilizationProduct->product;
-
-            $newProduct             = $product->duplicate();
+            $newProduct             = $product->replicate();
             $newProduct->model_type = Outlet::class;
             $newProduct->model_id   = auth()->user()->outlet_id;
             $newProduct->save();

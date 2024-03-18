@@ -21,8 +21,7 @@ class StatusUtilization extends StateMachine
     public function transitions(): array
     {
         return [
-            'draft'   => ['pending'],
-            'pending' => ['finished'],
+            'draft' => ['finished'],
         ];
     }
 
@@ -34,7 +33,7 @@ class StatusUtilization extends StateMachine
     public function beforeTransitionHooks(): array
     {
         return [
-            'pending' => [
+            'draft' => [
                 function ($from, $model) {
                     // TODO Warehouse actions
                     match (auth()->user()->role->name) {
