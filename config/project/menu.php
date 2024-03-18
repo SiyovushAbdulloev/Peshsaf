@@ -45,7 +45,7 @@ return [
             ],
         ],
         'divider',
-        'users'        => [
+        'users'    => [
             'icon'       => 'activity',
             'route_name' => 'admin.users.index',
             'title'      => 'Пользователи',
@@ -105,6 +105,11 @@ return [
             'icon'       => 'list',
             'route_name' => 'vendor.sales.index',
             'title'      => 'Продажа',
+        ],
+        'receipts'  => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.receipts.index',
+            'title'      => 'Приход товаров',
         ],
     ],
     'customs'   => [

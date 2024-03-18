@@ -4,6 +4,7 @@ namespace App\Http\Requests\Movement;
 
 use App\Core\Http\Requests\CoreFormRequest;
 use App\Http\Requests\Params\Movement\ProductStoreRequestParams;
+use Illuminate\Validation\Rule;
 
 class ProductStoreRequest extends CoreFormRequest
 {
@@ -25,7 +26,10 @@ class ProductStoreRequest extends CoreFormRequest
     public function rules(): array
     {
         return [
-            'product' => ['exists:products,id'],
+            'product' => ['exists:products,id', Rule::unique('movement_products', 'product_id')->where(fn ($query) => $query
+                ->where('movement_id', $this->movement->id)
+                ->where('product_id', $this->product)
+            )],
         ];
     }
 

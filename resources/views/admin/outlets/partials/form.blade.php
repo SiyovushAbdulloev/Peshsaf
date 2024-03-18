@@ -11,7 +11,7 @@
         />
 
         @error('name')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -29,7 +29,7 @@
         />
 
         @error('address')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
@@ -47,7 +47,7 @@
         />
 
         @error('phone')
-        <div class="mt-2 text-danger">
+        <div class="mt-2 text-danger italic">
             {{ $message }}
         </div>
         @enderror
