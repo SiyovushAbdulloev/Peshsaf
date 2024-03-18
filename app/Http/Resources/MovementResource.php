@@ -5,9 +5,9 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 
 /**
- * @property \App\Models\Sale $resource
+ * @property \App\Models\Client $resource
  */
-class SaleResource extends PaginateResourceCollection
+class MovementResource extends PaginateResourceCollection
 {
     /**
      * Transform the resource into an array.
@@ -18,11 +18,9 @@ class SaleResource extends PaginateResourceCollection
     {
         return [
             'id' => $this->resource->id,
-            'client_name' => $this->resource->client_name,
-            'client_address' => $this->resource->client_address,
-            'client_phone' => $this->resource->client_phone,
-            'products_count' => $this->resource->products_count,
             'date' => $this->resource->date->format('d.m.Y'),
+            'products_count' => $this->resource->products_count,
+            'outlet' => OutletResource::make($this->whenLoaded('outlet')),
         ];
     }
 }

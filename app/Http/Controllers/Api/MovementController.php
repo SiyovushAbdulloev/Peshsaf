@@ -7,9 +7,14 @@ use App\Actions\Warehouse\Movement\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Movement\StoreRequest;
 use App\Http\Requests\Movement\UpdateRequest;
+use App\Http\Resources\MovementResource;
+use App\Http\Resources\OutletResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Movement;
 use App\Models\Outlet;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -24,24 +29,33 @@ class MovementController extends Controller
             ->paginate(10);
 
         return response()->json([
-            ''
+            'movements' => MovementResource::collection($movements)
         ]);
     }
 
-    public function create(): View
+    public function create(): JsonResponse
     {
-        $movement = new Movement;
         $outlets  = Outlet::get();
 
-        return view('warehouse.movements.create', compact('movement', 'outlets'));
+        return response()->json([
+            'outlets' => OutletResource::collection($outlets)
+        ]);
     }
 
-    public function store(StoreRequest $request, StoreAction $action): RedirectResponse
+    public function products(Request $request): JsonResponse
     {
-        $movement = $action->execute($request->getParams());
+        $product = Product::firstWhere('barcode', $request->get('barcode'));
 
-        return redirect(route('warehouse.movements.edit', compact('movement')))->with('success',
-            'Перемещение успешно добавлено');
+        return response()->json([
+            'product' => $product ? ProductResource::make($product->load('product')) : '',
+        ]);
+    }
+
+    public function store(StoreRequest $request, StoreAction $action): bool
+    {
+        $action->execute($request->getParams());
+
+        return true;
     }
 
     public function edit(Movement $movement): View

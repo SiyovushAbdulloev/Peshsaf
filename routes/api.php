@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MovementController;
 use App\Http\Controllers\Api\OutletController;
 use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\WarehouseController;
@@ -33,6 +34,11 @@ Route::middleware('auth:sanctum')
 
                 Route::get('/warehouses', WarehouseController::class);
                 Route::get('/outlets', OutletController::class);
+
+                Route::get('/movements', [MovementController::class, 'index']);
+                Route::get('/movements/create', [MovementController::class, 'create']);
+                Route::get('/movements/create/products', [MovementController::class, 'products']);
+                Route::post('/movements', [MovementController::class, 'store']);
             });
     });
 
