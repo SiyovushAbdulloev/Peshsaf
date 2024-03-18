@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Warehouse;
 
 use App\Actions\Warehouse\Sale\StoreAction;
 use App\Http\Controllers\Controller;
@@ -10,7 +10,6 @@ use App\Http\Resources\ProductResource;
 use App\Http\Resources\SaleResource;
 use App\Models\Client;
 use App\Models\Product;
-use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -18,16 +17,15 @@ class SaleController extends Controller
 {
     public function index(): JsonResponse
     {
-        $model = match (auth()->user()->role->name) {
-            Role::VENDOR => auth()->user()->outlet,
-            Role::WAREHOUSE => auth()->user()->warehouse,
-        };
+        $sales =  auth()->user()
+            ->warehouse
+            ->sales()
+            ->with('client')
+            ->withCount('products')
+            ->paginate(15);
 
         return response()->json([
-            'sales' => SaleResource::collection($model->sales()
-                ->with('client')
-                ->withCount('products')
-                ->paginate(15)),
+            'sales' => SaleResource::collection($sales),
         ]);
     }
 
