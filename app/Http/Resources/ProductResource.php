@@ -16,12 +16,11 @@ class ProductResource extends PaginateResourceCollection
      */
     public function toArray(Request $request): array
     {
-        $product = $this->whenLoaded('product');
         return [
             'id' => $this->resource->id,
-            'qrcode' => $this->resource->barcode,
-            'barcode' => $product?->barcode,
-            'name' => $product?->name,
+            'qrcode' => $this->resource->product->barcode,
+            'barcode' => $this->resource->dicProduct?->barcode,
+            'name' => $this->resource->dicProduct?->name,
         ];
     }
 }
