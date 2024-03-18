@@ -22,7 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'supplier_id' => ['required', 'exists:suppliers,id'],
+            'warehouse_id' => ['required', 'exists:warehouses,id'],
             'number'      => ['required', 'string', 'max:255'],
             'date'        => ['required', 'string'],
             'products'    => ['required', 'array', 'min:1'],

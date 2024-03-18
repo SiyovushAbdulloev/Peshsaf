@@ -106,6 +106,11 @@ return [
             'route_name' => 'vendor.sales.index',
             'title'      => 'Продажа',
         ],
+        'receipts'  => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.receipts.index',
+            'title'      => 'Приход товаров',
+        ],
     ],
     'customs'   => [
         'dashboard' => [
