@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Movement;
+namespace App\Http\Requests\Utilization;
 
 use App\Core\Http\Requests\CoreFormRequest;
-use App\Http\Requests\Params\Movement\StoreRequestParams;
+use App\Http\Requests\Params\Utilization\UpdateRequestParams;
 
-class StoreRequest extends CoreFormRequest
+class UpdateRequest extends CoreFormRequest
 {
-    protected string $params = StoreRequestParams::class;
+    protected string $params = UpdateRequestParams::class;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,6 @@ class StoreRequest extends CoreFormRequest
             'outlet_id'  => ['required', 'exists:outlets,id'],
             'number'     => ['required', 'string', 'max:255'],
             'date'       => ['required', 'string'],
-            'products'   => ['required', 'array', 'min:1'],
-            'products.*' => ['exists:warehouse_remain_products,product_id'],
         ];
     }
 
@@ -39,7 +37,6 @@ class StoreRequest extends CoreFormRequest
             'outletId' => $this->get('outlet_id'),
             'number'   => $this->get('number'),
             'date'     => $this->get('date'),
-            'products' => $this->get('products'),
         ];
     }
 }

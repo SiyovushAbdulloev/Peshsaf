@@ -11,9 +11,9 @@ class StoreRequestParams extends RequestParams
         public string|int|null $clientId,
         public string $clientName,
         public string $date,
-        public string $phone,
-        public string $address,
-        public ?UploadedFile $photo,
+        public string $clientPhone,
+        public string $clientAddress,
+        public ?UploadedFile $clientPhoto,
         public array $products,
     ) {
     }

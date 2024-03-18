@@ -8,11 +8,14 @@
     >
         Сканировать
     </x-base.button>
-    <x-base.table id="sale-products" class="mt-5">
+    <x-base.table id="products" class="mt-5">
         <x-base.table.thead variant="light">
             <x-base.table.tr>
                 <x-base.table.th class="whitespace-nowrap">
                     Наименование
+                </x-base.table.th>
+                <x-base.table.th class="whitespace-nowrap">
+                    Отправитель
                 </x-base.table.th>
                 <x-base.table.th class="whitespace-nowrap">
                     Штрих-код
@@ -30,10 +33,11 @@
         <x-base.table.tbody>
             @forelse($selectedProducts ?? [] as $product)
                 <x-base.table.tr wire:key="{{ $product->id }}">
-                    <x-base.table.td>{{ $product->dicProduct->name }}</x-base.table.td>
-                    <x-base.table.td>{{ $product->dicProduct->barcode }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->model->name }}/{{ $product->model->user->name }}</x-base.table.td>
                     <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
-                    <x-base.table.td>{{ $product->dicProduct->measure->name }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->barcode }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
                     <x-base.table.td>
                         <input type="hidden" name="products[]" value="{{ $product->id }}">
                         <x-base.button
@@ -46,10 +50,11 @@
                         </x-base.button>
                         <x-base.button
                             size="sm"
-                            class="delete-sale ml-1"
+                            class="delete ml-1"
                             type="button"
                             variant="outline-danger"
                             wire:click="deleteProduct({{$product->id}})"
+                            wire:confirm="Вы действительно хотите удалить продукт?"
                         >
                             <x-base.icon icon="fa-trash"></x-base.icon>
                         </x-base.button>

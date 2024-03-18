@@ -19,6 +19,7 @@ class SaleController extends Controller
             ->sales()
             ->with('client')
             ->withCount('products')
+            ->latest('date')
             ->paginate(15);
 
         return view('warehouse.sales.index', compact('sales'));

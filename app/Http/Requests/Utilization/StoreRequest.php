@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Movement;
+namespace App\Http\Requests\Utilization;
 
 use App\Core\Http\Requests\CoreFormRequest;
-use App\Http\Requests\Params\Movement\StoreRequestParams;
+use App\Http\Requests\Params\Utilization\StoreRequestParams;
 
 class StoreRequest extends CoreFormRequest
 {
@@ -29,7 +29,7 @@ class StoreRequest extends CoreFormRequest
             'number'     => ['required', 'string', 'max:255'],
             'date'       => ['required', 'string'],
             'products'   => ['required', 'array', 'min:1'],
-            'products.*' => ['exists:warehouse_remain_products,product_id'],
+            'products.*' => ['exists:products,id'],
         ];
     }
 

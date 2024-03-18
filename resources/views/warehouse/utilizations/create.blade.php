@@ -1,7 +1,7 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Продажа</title>
+    <title>Утилизация товаров</title>
 @endsection
 
 @section('content')
@@ -9,34 +9,25 @@
 
     <div class="mt-5">
         <div class="intro-y col-span-12">
-            <form action="{{ route('warehouse.sales.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('warehouse.utilizations.store') }}" method="post">
                 @csrf
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="intro-y box p-5">
-                    @include('warehouse.sales.partials.form')
+                    @include('warehouse.utilizations.partials.form')
                 </div>
 
                 <div class="intro-y box p-5 mt-3">
                     <h5 class="text-lg font-medium">Товары</h5>
 
                     <div class="overflow-x-auto">
-                        <livewire:warehouse.sale.products />
+                        <livewire:warehouse.utilization.products />
                     </div>
                 </div>
 
                 <div class="mt-5 text-right">
                     <x-base.button
                         as="a"
-                        :href="route('warehouse.sales.index')"
+                        :href="route('warehouse.utilizations.index')"
                         class="mr-1 w-24"
                         type="button"
                         variant="outline-primary"
@@ -48,7 +39,7 @@
                         variant="primary"
                         type="submit"
                     >
-                        Оформить продажу
+                        Создать
                     </x-base.button>
                 </div>
             </form>
@@ -57,5 +48,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/sales.js')
+    @vite('resources/js/pages/project/utilizations.js')
 @endPushOnce

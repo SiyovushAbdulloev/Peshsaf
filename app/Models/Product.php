@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\Models\Dictionaries\Product as DicProduct;
-use App\StateMachines\StatusSale;
+use App\StateMachines\StatusProduct;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Product extends Model
 {
@@ -23,8 +25,18 @@ class Product extends Model
     ];
 
     public $stateMachines = [
-        'status' => StatusSale::class,
+        'status' => StatusProduct::class,
     ];
+
+    public function lastActive(): HasOne
+    {
+        return $this->hasOne(Product::class, 'barcode', 'barcode')->active()->latest();
+    }
+
+    public function model(): MorphTo
+    {
+        return $this->morphTo();
+    }
 
     public function product(): BelongsTo
     {
@@ -36,14 +48,8 @@ class Product extends Model
         $query->whereIn('status', !is_array($statuses) ? [$statuses] : $statuses);
     }
 
-    public function duplicate(): Product
+    public function scopeActive(Builder $query): void
     {
-        return Product::create([
-            'dic_product_id' => $this->dic_product_id,
-            'model_type'     => $this->model_type,
-            'model_id'       => $this->model_id,
-            'barcode'        => $this->barcode,
-            'history'        => $this->history,
-        ]);
+        $query->where('history', false);
     }
 }

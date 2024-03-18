@@ -53,7 +53,7 @@
         <x-base.form-input
             id="phone"
             type="text"
-            name="phone"
+            name="client_phone"
             placeholder="Введите"
             value="{{ old('phone', $client?->phone) }}"
         />
@@ -70,7 +70,7 @@
         <x-base.form-input
             id="address"
             type="text"
-            name="address"
+            name="client_address"
             placeholder="Введите"
             value="{{ old('address', $client?->address) }}"
         />
@@ -87,7 +87,7 @@
             <x-base.form-label for="photo">Фото</x-base.form-label>
             <x-base.form-upload
                 id="photo"
-                name="photo"
+                name="client_photo"
                 accept=".png,.jpg"
                 description="PNG, JPG (макс 1Мб)"
             />

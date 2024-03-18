@@ -29,7 +29,7 @@ class StoreAction extends CoreAction
 //            TODO перенести код в экш конфирма
 //            $product = Product::find($productId);
 //
-//            $newProduct             = $product->duplicate();
+//            $newProduct             = $product->replicate();
 //            $newProduct->model_type = Outlet::class;
 //            $newProduct->model_id   = $params->outletId;
 //            $newProduct->save();
