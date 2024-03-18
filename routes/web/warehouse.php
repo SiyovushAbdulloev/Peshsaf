@@ -5,6 +5,7 @@ use App\Http\Controllers\Warehouse\ProductController;
 use App\Http\Controllers\Warehouse\ReceiptController;
 use App\Http\Controllers\Warehouse\ReceiptProductController;
 use App\Http\Controllers\Warehouse\SaleController;
+use App\Http\Controllers\Warehouse\UtilizationController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('warehouse.')->group(function () {
@@ -20,4 +21,7 @@ Route::name('warehouse.')->group(function () {
 
     // Перемещения товаров
     Route::resource('movements', MovementController::class);
+
+    // Утилизация товаров
+    Route::resource('utilizations', UtilizationController::class);
 });

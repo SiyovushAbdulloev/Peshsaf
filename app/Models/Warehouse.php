@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
@@ -35,5 +36,15 @@ class Warehouse extends Model
     public function movements(): HasMany
     {
         return $this->hasMany(Movement::class);
+    }
+
+    public function utilizations(): MorphMany
+    {
+        return $this->morphMany(Utilization::class, 'model');
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'warehouse_id');
     }
 }

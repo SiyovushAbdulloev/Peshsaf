@@ -88,6 +88,11 @@ return [
             'route_name' => 'warehouse.movements.index',
             'title'      => 'Перемещение товаров',
         ],
+        'utilizations' => [
+            'icon'       => 'list',
+            'route_name' => 'warehouse.utilizations.index',
+            'title'      => 'Утилизация товаров',
+        ],
     ],
     'vendor'    => [
         'dashboard' => [
