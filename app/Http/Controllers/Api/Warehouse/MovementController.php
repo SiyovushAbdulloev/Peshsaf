@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Warehouse;
 
-use App\Actions\Warehouse\GetProductsAction;
+use App\Actions\Warehouse\GetProductAction;
 use App\Actions\Warehouse\Movement\AddProductAction;
 use App\Actions\Warehouse\Movement\StoreAction;
 use App\Actions\Warehouse\Movement\UpdateAction;
@@ -47,7 +47,7 @@ class MovementController extends Controller
         return response()->json(OutletResource::collection($outlets));
     }
 
-    public function products(Request $request, GetProductsAction $action): JsonResponse
+    public function products(Request $request, GetProductAction $action): JsonResponse
     {
         $product = $action->execute($request->get('barcode'));
 
@@ -55,7 +55,7 @@ class MovementController extends Controller
             return response()->json(['data' => null]);
         }
 
-        return response()->json(ProductResource::make($product->load('product')));
+        return response()->json(['data' => ProductResource::make($product->load('product', 'dicProduct'))]);
     }
 
     public function store(StoreRequest $request, StoreAction $action): JsonResponse

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Warehouse;
 
-use App\Actions\Warehouse\GetProductsAction;
+use App\Actions\Warehouse\GetProductAction;
 use App\Actions\Warehouse\Sale\GetClientsAction;
 use App\Actions\Warehouse\Sale\StoreAction;
 use App\Http\Controllers\Controller;
@@ -39,7 +39,7 @@ class SaleController extends Controller
         return response()->json(ClientResource::collection($clients));
     }
 
-    public function products(Request $request, GetProductsAction $action): JsonResponse
+    public function products(Request $request, GetProductAction $action): JsonResponse
     {
         $product = $action->execute($request->get('barcode'));
 
