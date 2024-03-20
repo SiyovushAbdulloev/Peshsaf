@@ -32,4 +32,11 @@ class ReceiptController extends Controller
 
         return view('vendor.receipts.approving', compact('receipt'));
     }
+
+    public function edit(Movement $receipt): View
+    {
+        $receipt->load('products.dicProduct.measure', 'products.product');
+
+        return view('vendor.receipts.edit', compact('receipt'));
+    }
 }
