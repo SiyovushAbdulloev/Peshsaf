@@ -19,4 +19,22 @@
             });
         })
     })
+
+    $('#show-product').on('click', function () {
+        const modal = tailwind.Modal.getOrCreateInstance($('#product-modal'));
+        modal.show();
+    })
+
+    document.addEventListener('livewire:init', () => {
+        Livewire.on('show-modal', (data) => {
+            Livewire.dispatch('can-show', data)
+        });
+        Livewire.on('show-product-again', () => {
+            console.log("WOWOWO")
+            $('#show-product').on('click', function () {
+                const modal = tailwind.Modal.getOrCreateInstance($('#product-modal'));
+                modal.show();
+            })
+        })
+    });
 })();
