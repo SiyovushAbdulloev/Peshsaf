@@ -118,5 +118,10 @@ return [
             'route_name' => 'dashboard',
             'title'      => 'Dashboard',
         ],
+        'receipts'  => [
+            'icon'       => 'list',
+            'route_name' => 'customs.receipts.index',
+            'title'      => 'Приход товаров',
+        ],
     ],
 ];

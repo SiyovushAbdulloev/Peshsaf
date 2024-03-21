@@ -5,6 +5,7 @@ namespace App\Actions\Supplier;
 use App\Core\Actions\CoreAction;
 use App\Http\Requests\Params\Supplier\UpdateRequestParams;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateAction extends CoreAction
 {
@@ -14,7 +15,12 @@ class UpdateAction extends CoreAction
 
         if ($params->files) {
             foreach ($params->files as $file) {
-                $files[] = $file->store('suppliers');
+                $provider->files()->create([
+                    'filename'          => Storage::put('suppliers', $file),
+                    'original_filename' => $file->getClientOriginalName(),
+                    'mimetype'          => $file->getClientMimeType(),
+                    'size'              => $file->getSize(),
+                ]);
             }
         }
 

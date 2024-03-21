@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Warehouse;
 
+use App\Actions\Warehouse\Receipt\StoreAction;
+use App\Actions\Warehouse\Receipt\UpdateAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Reciepts\StoreRequest;
-use App\Http\Requests\Reciepts\UpdateRequest;
+use App\Http\Requests\Receipts\StoreRequest;
+use App\Http\Requests\Receipts\UpdateRequest;
 use App\Models\Dictionaries\Product;
 use App\Models\Receipt;
 use App\Models\Supplier;
@@ -24,27 +26,19 @@ class ReceiptController extends Controller
 
     public function create(): View
     {
-        $receipt = new Receipt;
+        $receipt   = new Receipt;
         $suppliers = Supplier::get();
-        $products = Product::get();
+        $products  = Product::get();
 
         return view('warehouse.receipts.create', compact('receipt', 'suppliers', 'products'));
     }
 
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, StoreAction $action)
     {
-        $receipt = auth()->user()
-            ->warehouse
-            ->receipts()
-            ->create($request->validated());
+        $receipt = $action->execute($request->getParams());
 
-        foreach ($request->get('products') as $productId) {
-            $receipt->products()->create([
-                'dic_product_id' => $productId
-            ]);
-        }
-
-        return redirect(route('warehouse.receipts.edit', compact('receipt')))->with('success', 'Приход успешно добавлен');
+        return redirect(route('warehouse.receipts.edit', compact('receipt')))->with('success',
+            'Приход успешно добавлен');
     }
 
     public function edit(Receipt $receipt): View
@@ -54,17 +48,15 @@ class ReceiptController extends Controller
         return view('warehouse.receipts.edit', compact('receipt', 'suppliers'));
     }
 
-    public function update(Receipt $receipt, UpdateRequest $request)
-    {
-        $receipt->update($request->validated());
+    public function update(
+        Receipt $receipt,
+        UpdateRequest $request,
+        UpdateAction $action
+    ) {
+        $action->execute($request->getParams(), $receipt);
 
-        foreach ($request->get('products') as $key => $count) {
-            $product = $receipt->products->find($key);
-            $product->count = $count;
-            $product->save();
-        }
-
-        return redirect(route('warehouse.receipts.edit', compact('receipt')))->with('success', 'Данные успешно сохранены');
+        return redirect(route('warehouse.receipts.edit', compact('receipt')))->with('success',
+            'Данные успешно сохранены');
     }
 
     public function destroy(Receipt $receipt): bool
@@ -72,8 +64,12 @@ class ReceiptController extends Controller
         return $receipt->delete();
     }
 
-    public function send(Receipt $receipt)
-    {
+    public function send(
+        UpdateRequest $request,
+        Receipt $receipt,
+        UpdateAction $action
+    ) {
+        $action->execute($request->getParams(), $receipt);
         if ($receipt->status()->canBe('on_approval')) {
             $receipt->status()->transitionTo('on_approval');
         }

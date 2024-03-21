@@ -10,7 +10,8 @@
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12">
             <div class="intro-y box p-5">
-                <form action="{{ route('warehouse.receipts.update', compact('receipt')) }}" method="post">
+                <form id="receipt-form" action="{{ route('warehouse.receipts.update', compact('receipt')) }}"
+                      method="post">
                     @csrf
                     @method('PATCH')
 
@@ -36,7 +37,7 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @forelse($receipt->products as $product)
+                            @forelse($receipt->products as $key => $product)
                                 <x-base.table.tr>
                                     <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
                                     <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
@@ -45,7 +46,7 @@
                                             class="form-control"
                                             name="products[{{$product->id}}]"
                                             type="number"
-                                            :value='old("count.$product->id", $product->count)'
+                                            :value='old("products.$product->id", $product->count)'
                                             required
                                         />
                                         @error("products.$product->id")
@@ -102,10 +103,6 @@
                             </x-base.button>
                         </div>
                     </div>
-                </form>
-
-                <form id="send-form" action="{{ route('warehouse.receipts.send', compact('receipt')) }}" method="POST">
-                    @csrf
 
                     <div class="flex">
                         <div class="text-lg ml-5 flex flex-row items-center">
@@ -119,7 +116,7 @@
                                 for="make-qr"
                             >
                                 Сформировать QR код: <span class="font-bold text-xl underline">{{
-                    $receipt->products->count() }}</span>
+                $receipt->products->count() }}</span>
                             </label>
                         </div>
                         <div class="text-lg ml-10 flex items-center">
@@ -136,6 +133,8 @@
                             type="button"
                             variant="success"
                             id="send"
+                            data-route="{{ route('warehouse.receipts.send', compact('receipt')) }}"
+                            disabled
                         >
                             Отправить документ ТАМОЖНЕЙ
                         </x-base.button>

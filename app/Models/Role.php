@@ -11,4 +11,6 @@ class Role extends Model
     const WAREHOUSE = 'warehouse';
 
     const VENDOR = 'vendor';
+
+    const CUSTOMS = 'customs';
 }

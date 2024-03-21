@@ -6,19 +6,25 @@ use App\Models\Dictionaries\Product as DicProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class WarehouseRemain extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'warehouse_id',
+        'dic_product_id',
+    ];
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(DicProduct::class, 'dic_product_id');
     }
 
-    public function products(): HasManyThrough
+    public function products(): HasMany
     {
-        return $this->hasManyThrough(Product::class, WarehouseRemainProduct::class, 'product_id', 'id');
+        return $this->hasMany(WarehouseRemainProduct::class);
     }
 }

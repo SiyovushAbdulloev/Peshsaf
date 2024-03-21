@@ -6,6 +6,7 @@ use App\Actions\Warehouse\GetProductAction;
 use App\Actions\Warehouse\GetProductsAction;
 use App\Models\Movement;
 use App\Models\WarehouseRemainProduct;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -42,6 +43,7 @@ class Products extends Component
     public function addProduct()
     {
         $product = WarehouseRemainProduct::with('product', 'dicProduct.measure')
+            ->whereHas('product', fn (Builder $query) => $query->active())
             ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
             ->first();
 

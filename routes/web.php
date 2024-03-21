@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/admin')
         ->group(__DIR__ . '/web/admin.php');
+    Route::prefix('/customs')
+        ->group(__DIR__ . '/web/customs.php');
     Route::prefix('/warehouse')
         ->group(__DIR__ . '/web/warehouse.php');
     Route::prefix('/vendor')
