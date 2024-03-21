@@ -101,6 +101,11 @@ return [
             'title'      => 'Dashboard',
         ],
         'divider',
+        'products'  => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.products.index',
+            'title'      => 'Товары',
+        ],
         'sales'     => [
             'icon'       => 'list',
             'route_name' => 'vendor.sales.index',

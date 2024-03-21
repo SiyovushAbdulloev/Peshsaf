@@ -5,7 +5,9 @@ namespace App\Models;
 use App\Models\Dictionaries\Product as DicProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class OutletProduct extends Model
 {
@@ -17,6 +19,16 @@ class OutletProduct extends Model
         'origin_id',
         'origin_type',
     ];
+
+    public function origin(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 
     public function dicProduct(): HasOneThrough
     {
