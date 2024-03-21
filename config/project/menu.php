@@ -116,6 +116,11 @@ return [
             'route_name' => 'vendor.receipts.index',
             'title'      => 'Приход товаров',
         ],
+        'returns'  => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.returns.index',
+            'title'      => 'Возврат',
+        ],
     ],
     'customs'   => [
         'dashboard' => [
