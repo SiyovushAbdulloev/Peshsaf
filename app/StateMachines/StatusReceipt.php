@@ -6,6 +6,14 @@ use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusReceipt extends StateMachine
 {
+    const DRAFT = 'draft';
+
+    const ON_APPROVAL = 'on_approval';
+
+    const APPROVED = 'approved';
+
+    const FINISHED = 'finished';
+
     public function recordHistory(): bool
     {
         return false;
@@ -15,7 +23,8 @@ class StatusReceipt extends StateMachine
     {
         return [
             'draft'       => ['on_approval'],
-            'on_approval' => ['finished', 'draft'],
+            'on_approval' => ['approved', 'draft'],
+            'approved'    => ['finished'],
         ];
     }
 

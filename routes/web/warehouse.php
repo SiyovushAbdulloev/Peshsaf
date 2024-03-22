@@ -12,7 +12,7 @@ Route::name('warehouse.')->group(function () {
     Route::get('products', [ProductController::class, 'index'])->name('products.index');
 
     Route::resource('receipts', ReceiptController::class);
-    Route::post('receipts/{receipt}/send', [ReceiptController::class, 'send'])->name('receipts.send');
+    Route::patch('receipts/{receipt}/send', [ReceiptController::class, 'send'])->name('receipts.send');
     Route::delete('receipts/{receipt}/products/{product}', [ReceiptProductController::class, 'destroy'])->name('receipts.products.destroy');
 
     Route::get('/sales/clients', [SaleController::class, 'clients'])->name('sales.clients');

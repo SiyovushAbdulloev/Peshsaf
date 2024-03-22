@@ -20,7 +20,7 @@ class UpdateRequest extends CoreFormRequest
             'email'                => ['required', 'email'],
             'description'          => ['required', 'string', 'max:400'],
             'files'                => ['nullable', 'array'],
-            'files.*'              => ['required_with:files', 'file', 'mimes:pdf,doc', 'max:5120'],
+            'files.*'              => ['required_with:files', 'file', 'mimes:pdf,doc,docx', 'max:5120'],
         ];
     }
 

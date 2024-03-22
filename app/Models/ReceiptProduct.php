@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Models\Dictionaries\Product;
+use App\Models\Dictionaries\Product as DicProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class ReceiptProduct extends Model
 {

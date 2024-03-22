@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Vendor;
 
 use App\Actions\Vendor\Receipt\StoreAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Reciepts\StoreRequest;
-use App\Http\Requests\Reciepts\UpdateRequest;
+use App\Http\Requests\Receipts\StoreRequest;
+use App\Http\Requests\Receipts\UpdateRequest;
 use App\Models\Dictionaries\Product;
 use App\Models\Receipt;
 use App\Models\Warehouse;

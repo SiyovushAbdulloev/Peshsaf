@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Warehouse\Movement;
 
+use App\Actions\Warehouse\GetProductAction;
+use App\Actions\Warehouse\GetProductsAction;
 use App\Models\Movement;
 use App\Models\WarehouseRemainProduct;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,17 +21,13 @@ class Products extends Component
     {
         $this->movement = $movement;
 
-        $this->selectedProducts = WarehouseRemainProduct::with('product', 'dicProduct.measure')
-            ->whereIn('product_id', old('products', $movement->products->pluck('product_id')))
-            ->get();
+        $this->selectedProducts = app(GetProductsAction::class)->execute($movement->products->pluck('product_id')->toArray());
     }
 
     #[On('search')]
     public function search(string $barcode)
     {
-        $product = WarehouseRemainProduct::query()->whereHas('product', function (Builder $query) use ($barcode) {
-            $query->where('barcode', $barcode);
-        })->first();
+        $product = app(GetProductAction::class)->execute($barcode);
 
         if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
             $this->selectedProducts->push($product);
@@ -44,8 +42,11 @@ class Products extends Component
 
     public function addProduct()
     {
-        $product = WarehouseRemainProduct::with('product', 'dicProduct.measure')->whereNotIn('product_id',
-            $this->selectedProducts->pluck('product_id'))->first();
+        $product = WarehouseRemainProduct::with('product', 'dicProduct.measure')
+            ->whereHas('product', fn (Builder $query) => $query->active())
+            ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
+            ->first();
+
         if ($product) {
             $this->selectedProducts->push($product);
             if ($this->movement->exists) {

@@ -12,4 +12,7 @@ return [
     Role::VENDOR => [
         'description' => 'Продавец',
     ],
+    Role::CUSTOMS => [
+        'description' => 'Таможня',
+    ],
 ];

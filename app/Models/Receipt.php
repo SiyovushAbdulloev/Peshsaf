@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\StateMachines\StatusReceipt;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,15 +19,15 @@ class Receipt extends Model
         'number',
         'date',
         'supplier_id',
-        'warehouse_id'
+        'warehouse_id',
     ];
 
     protected $casts = [
-        'date' => 'datetime'
+        'date' => 'datetime',
     ];
 
     public $stateMachines = [
-        'status' => StatusReceipt::class
+        'status' => StatusReceipt::class,
     ];
 
     protected static function booted(): void
@@ -44,5 +45,18 @@ class Receipt extends Model
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function warehouse(): BelongsTo
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
+
+    public function scopeByStatus(Builder $query, array|string $statuses): void
+    {
+        if (!is_array($statuses)) {
+            $statuses = [$statuses];
+        }
+        $query->whereIn('status', $statuses);
     }
 }

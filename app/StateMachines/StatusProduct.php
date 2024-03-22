@@ -15,15 +15,16 @@ class StatusProduct extends StateMachine
     public function transitions(): array
     {
         return [
-            'new'  => ['sold'],
-            'sold' => ['used', 'utilized'],
-            'used' => ['utilized'],
+            'approved' => ['new'],
+            'new'      => ['sold'],
+            'sold'     => ['used', 'utilized'],
+            'used'     => ['utilized'],
         ];
     }
 
     public function defaultState(): ?string
     {
-        return 'new';
+        return 'approved';
     }
 
     public function beforeTransitionHooks(): array

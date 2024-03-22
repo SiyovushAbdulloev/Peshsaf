@@ -153,4 +153,9 @@ export default defineConfig({
             "tailwind-config": path.resolve(__dirname, "./tailwind.config.js"),
         },
     },
+    server: {
+        hmr: {
+            host: 'localhost',
+        },
+    }
 });

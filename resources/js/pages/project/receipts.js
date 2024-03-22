@@ -1,13 +1,14 @@
 (function () {
     'use strict';
 
+    $('#selected').text($('.products:checked').length)
     $('.products').on('click', function (e) {
         $('#selected').text($('.products:checked').length);
     });
 
     $('#send').on('click', function () {
         if (confirm('Вы действительно хотите отправить на одобрение?')) {
-            $('#send-form')[0].submit();
+            $('#receipt-form').attr('action', $('#send').data('route')).submit();
         }
     });
 
@@ -32,6 +33,8 @@
             });
         }
     });
+
+    $('#make-qr').click((e) => $('#send').prop('disabled', !$(e.target).is(':checked')));
 
     let receiptsTable = $('#receipts-table');
     $('.delete-receipt', receiptsTable).on('click', function (e) {

@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Reciepts;
+namespace App\Http\Requests\Receipts;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Core\Http\Requests\CoreFormRequest;
+use App\Http\Requests\Params\Warehouse\Receipt\StoreRequestParams;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends CoreFormRequest
 {
+    protected string $params = StoreRequestParams::class;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -26,6 +29,17 @@ class UpdateRequest extends FormRequest
             'number'      => ['required', 'string', 'max:255'],
             'date'        => ['required', 'string'],
             'products'    => ['required', 'array', 'min:1'],
+            'products.*'  => ['exists:dic_products,id'],
+        ];
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'supplierId' => $this->get('supplier_id'),
+            'number'     => $this->get('number'),
+            'date'       => $this->get('date'),
+            'products'   => $this->get('products'),
         ];
     }
 }
