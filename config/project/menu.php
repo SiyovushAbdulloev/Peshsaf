@@ -116,10 +116,21 @@ return [
             'route_name' => 'vendor.receipts.index',
             'title'      => 'Приход товаров',
         ],
-        'returns'  => [
-            'icon'       => 'list',
-            'route_name' => 'vendor.returns.index',
-            'title'      => 'Возврат',
+        'returns' => [
+            'icon'     => 'list',
+            'title'    => 'Возврат',
+            'sub_menu' => [
+                'returns-warehouse'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.returns-warehouse.index',
+                    'title'      => 'Возврат товара на склад',
+                ],
+                'returns-vendor'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.returns-vendor.index',
+                    'title'      => 'Возврат товара от покупателя',
+                ],
+            ],
         ],
     ],
     'customs'   => [

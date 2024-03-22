@@ -9,7 +9,7 @@
         <div class="intro-y mt-2 flex">
             <h2 class="intro-y text-lg font-medium">Возврат товаров</h2>
 
-            <a href="{{ route('vendor.returns.create') }}" class="mb-2 transition duration-200 border
+            <a href="{{ route('vendor.returns-vendor.create') }}" class="mb-2 transition duration-200 border
                 inline-flex items-center
                 justify-center py-2
                 px-3 rounded-md ml-auto
@@ -95,25 +95,26 @@
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $return->outlet->name }}
+                            {{ $return->refund->warehouse?->name ?? $return->refund->origin?->name }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $return->outlet->address }}
+                            {{ $return->refund->warehouse?->address ?? $return->refund->origin?->address }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $return->outlet->phone }}
+                            {{ $return->refund->warehouse?->phone ?? $return->refund->origin?->phone }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $return->products_count }}
+                            0
+                            {{--                            {{ $return->r_count }}--}}
                         </td>
                         <td
                             data-tw-merge
@@ -122,20 +123,20 @@
                             <x-base.button
                                 as="a"
                                 size="sm"
-                                href="{{ route('warehouse.movements.show', compact('movement')) }}"
+                                href="{{ route('vendor.returns-vendor.show', compact('return')) }}"
                                 type="button"
                                 variant="outline-primary"
                             >
                                 <x-base.lucide icon="info"/>
                             </x-base.button>
-                            @can('edit', $movement)
+                            @can('edit', $return)
                                 <x-base.button
                                     as="a"
                                     size="sm"
-                                    href="{{ route('warehouse.movements.edit', compact('movement')) }}"
+                                    href="{{ route('vendor.returns-vendor.edit', compact('return')) }}"
                                     type="button"
                                     variant="outline-success"
-                                    data-route="{{ route('warehouse.movements.destroy', compact('movement')) }}"
+                                    data-route="{{ route('vendor.returns-vendor.destroy', compact('return')) }}"
                                 >
                                     <x-base.lucide icon="pencil"/>
                                 </x-base.button>
@@ -144,7 +145,7 @@
                                     class="delete-movement"
                                     type="button"
                                     variant="outline-danger"
-                                    data-route="{{ route('warehouse.movements.destroy', compact('movement')) }}"
+                                    data-route="{{ route('vendor.returns-vendor.destroy', compact('movement')) }}"
                                 >
                                     <x-base.lucide icon="trash"/>
                                 </x-base.button>
@@ -162,11 +163,6 @@
             </div>
         @endif
     </div>
-
-    <form id="delete-form" method="post">
-        @csrf
-        @method('DELETE')
-    </form>
 @endsection
 
 @pushOnce('scripts')

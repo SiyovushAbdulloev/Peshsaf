@@ -7,19 +7,19 @@ use App\Models\Movement;
 use App\Models\Warehouse;
 use Illuminate\View\View;
 
-class ReturnController extends Controller
+class ReturnVendorController extends Controller
 {
     public function index(): View
     {
         $returns = auth()->user()
             ->outlet
             ->refunds()
-            ->with('refund')
-            ->withCount('products')
+//            ->count()
+//            ->with('warehouse', 'origin')
             ->latest()
             ->paginate(15);
 
-        return view('vendor.returns.index', compact('returns'));
+        return view('vendor.returns-vendor.index', compact('returns'));
     }
 
     public function show(Movement $receipt): View

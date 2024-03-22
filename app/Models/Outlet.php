@@ -43,8 +43,8 @@ class Outlet extends Model
         return $this->hasMany(OutletProduct::class);
     }
 
-    public function refunds(): HasMany
+    public function refunds(): MorphMany
     {
-        return $this->hasMany(RefundProduct::class);
+        return $this->morphMany(Refund::class, 'origin');
     }
 }

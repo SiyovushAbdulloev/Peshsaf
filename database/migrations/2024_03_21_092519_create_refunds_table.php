@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('type');
             $table->timestamp('date');
             $table->morphs('origin');
-            $table->foreignId('outlet_id')->constrained();
+            $table->foreignId('warehouse_id')->nullable()->constrained();
+            $table->foreignId('client_id')->nullable()->constrained();
             $table->integer('number');
             $table->timestamps();
         });

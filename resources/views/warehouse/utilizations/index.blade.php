@@ -162,11 +162,6 @@
             </div>
         @endif
     </div>
-
-    <form id="delete-form" method="post">
-        @csrf
-        @method('DELETE')
-    </form>
 @endsection
 
 @pushOnce('scripts')

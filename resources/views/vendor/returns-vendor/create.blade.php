@@ -1,7 +1,7 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Перемещение товаров</title>
+    <title>Возврат товаров</title>
 @endsection
 
 @section('content')
@@ -9,25 +9,25 @@
 
     <div class="mt-5">
         <div class="intro-y col-span-12">
-            <form action="{{ route('warehouse.movements.store') }}" method="post">
+            <form action="{{ route('vendor.returns-vendor.store') }}" method="post">
                 @csrf
 
                 <div class="intro-y box p-5">
-                    @include('warehouse.movements.partials.form')
+                    @include('vendor.returns-vendor.partials.form')
                 </div>
 
                 <div class="intro-y box p-5 mt-3">
                     <h5 class="text-lg font-medium">Товары</h5>
 
                     <div class="overflow-x-auto">
-                        <livewire:warehouse.movement.products />
+                        <livewire:warehouse.movement.products/>
                     </div>
                 </div>
 
                 <div class="mt-5 text-right">
                     <x-base.button
                         as="a"
-                        :href="route('warehouse.movements.index')"
+                        :href="route('vendor.returns-vendor.index')"
                         class="mr-1 w-24"
                         type="button"
                         variant="outline-primary"

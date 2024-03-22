@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Vendor\ProductController;
 use App\Http\Controllers\Vendor\ReceiptController;
-use App\Http\Controllers\Vendor\ReturnController;
+use App\Http\Controllers\Vendor\ReturnVendorController;
 use App\Http\Controllers\Vendor\SaleController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +20,10 @@ Route::middleware('role:vendor')
         Route::get('/sales/create/{client?}', [SaleController::class, 'create'])->name('sales.create');
         Route::resource('sales', SaleController::class)->except('create');
 
-        Route::resource('/returns', ReturnController::class);
+        Route::resource('/returns-vendor', ReturnVendorController::class)->parameters([
+            'returns-vendor-vendor' => 'return'
+        ]);
+        Route::resource('/returns-warehouse', ReturnVendorController::class)->parameters([
+            'returns-vendor-warehouse' => 'return'
+        ]);
 });
