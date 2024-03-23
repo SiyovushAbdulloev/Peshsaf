@@ -5,10 +5,11 @@ namespace App\Http\Resources\Warehouse;
 use App\Http\Resources\ClientResource;
 use App\Http\Resources\OutletResource;
 use App\Http\Resources\PaginateResourceCollection;
+use App\Http\Resources\SimpleProductResource;
 use Illuminate\Http\Request;
 
 /**
- * @property \App\Models\Client $resource
+ * @property \App\Models\Utilization $resource
  */
 class UtilizationResource extends PaginateResourceCollection
 {
@@ -20,13 +21,15 @@ class UtilizationResource extends PaginateResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->resource->id,
-            'name' => $this->resource->name,
-            'address' => $this->resource->address,
-            'phone' => $this->resource->phone,
+            'id'             => $this->resource->id,
+            'type'           => $this->resource->type,
+            'status'         => $this->resource->status,
+            'date'           => $this->resource->date->format('d.m.Y'),
+            'number'         => $this->resource->number,
             'products_count' => $this->resource->products_count,
-            'client' => ClientResource::make($this->whenLoaded('client')),
-            'outlet' => OutletResource::make($this->whenLoaded('outlet')),
+            'client'         => ClientResource::make($this->whenLoaded('client')),
+            'outlet'         => OutletResource::make($this->whenLoaded('outlet')),
+            'products'       => SimpleProductResource::collection($this->whenLoaded('products')),
         ];
     }
 }

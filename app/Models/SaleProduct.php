@@ -31,6 +31,6 @@ class SaleProduct extends Model
 
     public function dicProduct(): HasOneThrough
     {
-        return $this->hasOneThrough(DicProduct::class, Product::class, 'id', 'id', 'product_id');
+        return $this->hasOneThrough(DicProduct::class, Product::class, 'id', 'id', 'product_id', 'dic_product_id');
     }
 }

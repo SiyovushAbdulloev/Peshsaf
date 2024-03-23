@@ -2,6 +2,7 @@
 
 namespace App\StateMachines;
 
+use App\Actions\Warehouse\Receipt\GeneratePdfAction;
 use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusReceipt extends StateMachine
@@ -31,5 +32,16 @@ class StatusReceipt extends StateMachine
     public function defaultState(): ?string
     {
         return 'draft';
+    }
+
+    public function afterTransitionHooks(): array
+    {
+        return [
+            'finished' => [
+                function ($from, $model) {
+                    app(GeneratePdfAction::class)->execute($model);
+                },
+            ],
+        ];
     }
 }

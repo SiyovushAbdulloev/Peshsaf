@@ -2,12 +2,14 @@
 
 namespace App\Actions\Warehouse\Sale;
 
+use App\Actions\Warehouse\RemoveWarehouseProductAction;
 use App\Core\Actions\CoreAction;
 use App\Http\Requests\Params\Sale\StoreRequestParams;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\Sale;
+use App\Models\WarehouseRemainProduct;
 use Illuminate\Support\Facades\Storage;
 
 class StoreAction extends CoreAction
@@ -62,6 +64,9 @@ class StoreAction extends CoreAction
 
             $product->history = true;
             $product->save();
+
+            // Удаляем продукт из остатка склада
+            app(RemoveWarehouseProductAction::class)->execute($product);
         }
 
         return $sale;

@@ -2,6 +2,7 @@
 
 namespace App\StateMachines;
 
+use App\Actions\Warehouse\RemoveWarehouseProductAction;
 use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusMovement extends StateMachine
@@ -22,5 +23,19 @@ class StatusMovement extends StateMachine
     public function defaultState(): ?string
     {
         return 'draft';
+    }
+
+    public function afterTransitionHooks(): array
+    {
+        return [
+            'approved' => [
+                function ($from, $model) {
+                    foreach ($model->products as $movementProduct) {
+                        // Удаляем товар из остатков склада
+                        app(RemoveWarehouseProductAction::class)->execute($movementProduct->product);
+                    }
+                },
+            ],
+        ];
     }
 }

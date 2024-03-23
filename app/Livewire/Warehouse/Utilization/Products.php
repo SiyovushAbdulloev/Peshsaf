@@ -4,7 +4,6 @@ namespace App\Livewire\Warehouse\Utilization;
 
 use App\Models\Product;
 use App\Models\Utilization;
-use App\Models\WarehouseRemainProduct;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Attributes\On;

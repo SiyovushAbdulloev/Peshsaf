@@ -19,68 +19,35 @@
         </div>
 
         @if($receipts->count())
-            <table
-                id="receipts-table"
-                data-tw-merge
-                class="w-full text-left col-span-12"
-            >
-                <thead data-tw-merge class="">
-                <tr
-                    data-tw-merge
-                    class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
+            <table id="receipts-table" class="w-full text-left col-span-12">
+                <thead>
+                <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                 >
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         #
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Статус
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Дата
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Поставщик
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Адрес
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Страна
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Телефон
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Количество
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]">
                         &nbsp;
                     </th>
                 </tr>
@@ -88,61 +55,17 @@
                 <tbody>
                 @foreach($receipts as $receipt)
                     <tr
-                        data-tw-merge
                         class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                     >
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->number }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->status }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->date->format('d.m.Y') }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->supplier?->full_name }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->supplier?->organization_address }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->supplier?->country?->name }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->supplier?->phone }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $receipt->products_count }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300 gap-2"
-                        >
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->number }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->status }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->date->format('d.m.Y') }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->supplier?->full_name }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->supplier?->organization_address }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->supplier?->country?->name }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->supplier?->phone }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->products_count }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 flex">
                             <x-base.button
                                 as="a"
                                 size="sm"
@@ -150,8 +73,11 @@
                                 type="button"
                                 variant="outline-primary"
                             >
-                                <x-base.lucide icon="info"/>
+                                <x-base.icon icon="fa-info"/>
                             </x-base.button>
+                            @can('generate', $receipt)
+                                <livewire:warehouse.receipt.generate-pdf :receipt="$receipt"/>
+                            @endcan
                             @can('edit', $receipt)
                                 <x-base.button
                                     as="a"
@@ -159,9 +85,8 @@
                                     href="{{ route('warehouse.receipts.edit', compact('receipt')) }}"
                                     type="button"
                                     variant="outline-success"
-                                    data-route="{{ route('warehouse.receipts.destroy', compact('receipt')) }}"
                                 >
-                                    <x-base.lucide icon="pencil"/>
+                                    <x-base.icon icon="fa-pencil"/>
                                 </x-base.button>
                                 <x-base.button
                                     size="sm"
@@ -170,7 +95,7 @@
                                     variant="outline-danger"
                                     data-route="{{ route('warehouse.receipts.destroy', compact('receipt')) }}"
                                 >
-                                    <x-base.lucide icon="trash"/>
+                                    <x-base.icon icon="fa-trash"/>
                                 </x-base.button>
                             @endcan
                         </td>

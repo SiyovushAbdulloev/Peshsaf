@@ -31,10 +31,11 @@ class Products extends Component
 
     public function addProduct()
     {
-        $product = WarehouseRemainProduct::with('product', 'dicProduct.measure')
+        $product = WarehouseRemainProduct::with('product.product', 'dicProduct.measure')
             ->whereHas('product', fn (Builder $query) => $query->active())
             ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
             ->first();
+
         if ($product) {
             $this->selectedProducts->push($product);
         }

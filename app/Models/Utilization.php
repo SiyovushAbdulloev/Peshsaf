@@ -14,20 +14,25 @@ class Utilization extends Model
 {
     use HasFactory, HasStateMachines;
 
+    const CLIENT = 'client';
+
+    const OUTLET = 'outlet';
+
     protected $fillable = [
         'status',
         'date',
         'number',
         'client_id',
         'outlet_id',
+        'type',
     ];
 
     protected $casts = [
-        'date' => 'datetime'
+        'date' => 'datetime',
     ];
 
     public $stateMachines = [
-        'status' => StatusUtilization::class
+        'status' => StatusUtilization::class,
     ];
 
     protected static function booted(): void

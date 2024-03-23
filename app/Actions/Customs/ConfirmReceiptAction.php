@@ -5,7 +5,6 @@ namespace App\Actions\Customs;
 use App\Core\Actions\CoreAction;
 use App\Models\Product;
 use App\Models\Receipt;
-use App\Models\Warehouse;
 use App\Models\WarehouseRemain;
 
 class ConfirmReceiptAction extends CoreAction
@@ -20,11 +19,13 @@ class ConfirmReceiptAction extends CoreAction
             ]);
 
             for ($i = 0; $i < (int)$receiptProduct->count; $i++) {
+                $lastProduct = Product::getLastProduct();
                 // Создаем товар
                 $product = Product::query()->create([
                     'dic_product_id' => $receiptProduct->dic_product_id,
                     'model_type'     => Receipt::class,
                     'model_id'       => $receipt->id,
+                    'barcode'        => $lastProduct ? $lastProduct->barcode + 1 : 1,
                 ]);
 
                 // Добавляем товар в остатки
@@ -33,6 +34,10 @@ class ConfirmReceiptAction extends CoreAction
                     'product_id'   => $product->id,
                 ]);
             }
+        }
+
+        if ($receipt->status()->canBe('approved')) {
+            $receipt->status()->transitionTo('approved');
         }
     }
 }

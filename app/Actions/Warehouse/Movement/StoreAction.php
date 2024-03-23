@@ -25,17 +25,6 @@ class StoreAction extends CoreAction
             $movement->products()->create([
                 'product_id' => $productId,
             ]);
-
-//            TODO перенести код в экш конфирма
-//            $product = Product::find($productId);
-//
-//            $newProduct             = $product->replicate();
-//            $newProduct->model_type = Outlet::class;
-//            $newProduct->model_id   = $params->outletId;
-//            $newProduct->save();
-//
-//            $product->history = true;
-//            $product->save();
         }
 
         return $movement;

@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('utilizations', function (Blueprint $table) {
             $table->id();
+            $table->string('type')->default('outlet');
             $table->string('status');
             $table->morphs('model');
             $table->string('number');

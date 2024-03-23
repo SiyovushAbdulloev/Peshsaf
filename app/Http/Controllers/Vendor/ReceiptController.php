@@ -3,12 +3,7 @@
 namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Receipts\StoreRequest;
-use App\Http\Requests\Receipts\UpdateRequest;
-use App\Models\Dictionaries\Product;
-use App\Models\Receipt;
 use App\Models\Movement;
-use App\Models\Warehouse;
 use Illuminate\View\View;
 
 class ReceiptController extends Controller
@@ -31,27 +26,10 @@ class ReceiptController extends Controller
         return view('vendor.receipts.show', compact('receipt'));
     }
 
-    public function edit(Movement $receipt): View
+    public function approving(Movement $receipt): View
     {
-        $receipt->load('products.dicProduct.measure', 'products.product');
+        $this->authorize('approve', $receipt);
 
-        return view('vendor.receipts.edit', compact('receipt'));
-    }
-
-    public function send(Movement $receipt)
-    {
-        if ($receipt->status()->canBe('approving')) {
-            $receipt->status()->transitionTo('approving');
-        }
-
-        foreach ($receipt->products as $product) {
-            auth()->user()->outlet->products()->create([
-                'product_id' => $product->product_id,
-                'origin_id' => $receipt->warehouse_id,
-                'origin_type' => Warehouse::class,
-            ]);
-        }
-
-        return redirect(route('vendor.receipts.index'))->with('success', 'Приход успешно отправлен на одобрение');
+        return view('vendor.receipts.approving', compact('receipt'));
     }
 }

@@ -25,15 +25,19 @@ class UpdateRequest extends CoreFormRequest
     public function rules(): array
     {
         return [
-            'outlet_id'  => ['required', 'exists:outlets,id'],
-            'number'     => ['required', 'string', 'max:255'],
-            'date'       => ['required', 'string'],
+            'type'      => ['required', 'in:client,outlet'],
+            'client_id' => ['nullable', 'required_if:type,client', 'exists:clients,id'],
+            'outlet_id' => ['nullable', 'required_if:type,outlet', 'exists:outlets,id'],
+            'number'    => ['required', 'string', 'max:255'],
+            'date'      => ['required', 'string'],
         ];
     }
 
     public function toArray(): array
     {
         return [
+            'type'     => $this->get('type'),
+            'clientId' => $this->get('client_id'),
             'outletId' => $this->get('outlet_id'),
             'number'   => $this->get('number'),
             'date'     => $this->get('date'),

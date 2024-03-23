@@ -34,7 +34,14 @@
             @forelse($selectedProducts ?? [] as $product)
                 <x-base.table.tr wire:key="{{ $product->id }}">
                     <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
-                    <x-base.table.td>{{ $product->model->name }}/{{ $product->model->user->name }}</x-base.table.td>
+                    <x-base.table.td>
+                        @if($product->model instanceof \App\Models\Client)
+                            Клиент
+                        @else
+                            Торговая точка
+                        @endif
+                        / {{ $product->model->name }}
+                    </x-base.table.td>
                     <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
                     <x-base.table.td>{{ $product->barcode }}</x-base.table.td>
                     <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
@@ -62,7 +69,7 @@
                 </x-base.table.tr>
             @empty
                 <x-base.table.tr>
-                    <x-base.table.td colspan="5" class="text-center">No data</x-base.table.td>
+                    <x-base.table.td colspan="6" class="text-center">No data</x-base.table.td>
                 </x-base.table.tr>
             @endforelse
         </x-base.table.tbody>

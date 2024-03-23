@@ -19,15 +19,12 @@ class UtilizationController extends Controller
         $utilizations = auth()->user()
             ->warehouse
             ->utilizations()
-            ->with('client')
-            ->with('outlet')
+            ->with('client', 'outlet')
             ->withCount('products')
             ->latest()
             ->paginate(10);
 
-        return response()->json([
-            'utilizations' => UtilizationResource::collection($utilizations)
-        ]);
+        return response()->json(UtilizationResource::collection($utilizations));
     }
 
     public function store(StoreRequest $request, StoreAction $action): JsonResponse
@@ -35,14 +32,14 @@ class UtilizationController extends Controller
         $utilization = $action->execute($request->getParams());
 
         return response()->json([
-            'utilization' => UtilizationResource::make($utilization->load('client', 'outlet'))
+            'data' => UtilizationResource::make($utilization->load('client', 'outlet')->loadCount('products'))
         ]);
     }
 
     public function show(Utilization $utilization): JsonResponse
     {
         return response()->json([
-            'utilization' => UtilizationResource::make($utilization->load('client', 'outlet'))
+            'data' => UtilizationResource::make($utilization->load('client', 'outlet', 'products'))
         ]);
     }
 
@@ -54,7 +51,7 @@ class UtilizationController extends Controller
         $action->execute($request->getParams(), $utilization);
 
         return response()->json([
-            'utilization' => UtilizationResource::make($utilization->load('client', 'outlet'))
+            'data' => UtilizationResource::make($utilization->load('client', 'outlet'))
         ]);
     }
 
@@ -72,7 +69,7 @@ class UtilizationController extends Controller
         $action->execute($utilization);
 
         return response()->json([
-            'success' => 'Утилизация успешно проведена'
+            'data' => UtilizationResource::make($utilization->load('client', 'outlet'))
         ]);
     }
 }

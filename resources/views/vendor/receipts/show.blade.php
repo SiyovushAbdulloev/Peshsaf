@@ -91,7 +91,7 @@
             <div class="mt-5 text-left">
                 <x-base.button
                     as="a"
-                    :href="route('warehouse.sales.index')"
+                    :href="route('vendor.receipts.index')"
                     class="mr-1 w-24"
                     type="button"
                     variant="outline-primary"

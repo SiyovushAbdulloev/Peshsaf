@@ -7,6 +7,16 @@ use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusProduct extends StateMachine
 {
+    const APPROVED = 'approved';
+
+    const NEW = 'new';
+
+    const SOLD = 'sold';
+
+    const USED = 'used';
+
+    const UTILIZED = 'utilized';
+
     public function recordHistory(): bool
     {
         return false;
