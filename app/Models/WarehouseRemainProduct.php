@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class WarehouseRemainProduct extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'warehouse_remain_id',
@@ -24,6 +25,6 @@ class WarehouseRemainProduct extends Model
 
     public function dicProduct(): HasOneThrough
     {
-        return $this->hasOneThrough(DicProduct::class, Product::class, 'id', 'id', 'product_id');
+        return $this->hasOneThrough(DicProduct::class, Product::class, 'id', 'id', 'product_id', 'dic_product_id');
     }
 }

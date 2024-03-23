@@ -1,26 +1,5 @@
 <div class="grid grid-cols-12 gap-3 gap-y-5">
-    <div class="col-span-12 2xl:col-span-6">
-        <x-base.form-label for="outlet_id">Торговая точка</x-base.form-label>
-        <x-base.form-select
-            id="outlet_id"
-            name="outlet_id"
-            aria-label=".form-select-lg example"
-        >
-            <option value="">Выберите торговую точку</option>
-            @foreach($outlets as $outlet)
-                <option
-                    value="{{ $outlet->id }}"
-                    @selected(old('outlet_id', $utilization->outlet_id) == $outlet->id)
-                >{{ $outlet->name }}</option>
-            @endforeach
-        </x-base.form-select>
-
-        @error('outlet_id')
-        <div class="mt-2 text-danger italic">
-            {{ $message }}
-        </div>
-        @enderror
-    </div>
+    <livewire:warehouse.utilization.create />
 
     <div class="col-span-12 2xl:col-span-3">
         <x-base.form-label for="number">Номер</x-base.form-label>

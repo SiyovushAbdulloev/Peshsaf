@@ -18,4 +18,9 @@ class ReceiptPolicy
     {
         return $receipt->status()->is(StatusReceipt::ON_APPROVAL) && auth()->user()->role->name === Role::CUSTOMS;
     }
+
+    public function generate(User $user, Receipt $receipt): bool
+    {
+        return $receipt->status()->is(StatusReceipt::APPROVED);
+    }
 }

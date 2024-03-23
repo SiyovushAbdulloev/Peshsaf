@@ -14,9 +14,11 @@ class StoreAction extends CoreAction
             ->warehouse
             ->utilizations()
             ->create([
+                'type'      => $params->type,
                 'number'    => $params->number,
                 'date'      => $params->date,
                 'outlet_id' => $params->outletId,
+                'client_id' => $params->clientId,
             ]);
 
         foreach ($params->products as $productId) {

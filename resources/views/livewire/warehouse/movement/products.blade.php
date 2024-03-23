@@ -35,7 +35,7 @@
                     <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
                     <x-base.table.td>{{ $product->dicProduct->measure->name }}</x-base.table.td>
                     <x-base.table.td>
-                        <input type="hidden" name="products[]" value="{{ $product->id }}">
+                        <input type="hidden" name="products[]" value="{{ $product->product_id }}">
                         <x-base.button
                             size="sm"
                             href="#"

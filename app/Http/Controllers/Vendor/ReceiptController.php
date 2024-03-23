@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers\Vendor;
 
-use App\Actions\Vendor\Receipt\StoreAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Receipts\StoreRequest;
-use App\Http\Requests\Receipts\UpdateRequest;
-use App\Models\Dictionaries\Product;
-use App\Models\Receipt;
-use App\Models\Warehouse;
+use App\Models\Movement;
 use Illuminate\View\View;
 
 class ReceiptController extends Controller
@@ -26,53 +21,15 @@ class ReceiptController extends Controller
         return view('vendor.receipts.index', compact('receipts'));
     }
 
-    public function create(): View
+    public function show(Movement $receipt): View
     {
-        $receipt = new Receipt;
-        $warehouses = Warehouse::get();
-        $products = Product::get();
-
-        return view('vendor.receipts.create', compact('receipt', 'warehouses', 'products'));
+        return view('vendor.receipts.show', compact('receipt'));
     }
 
-    public function store(StoreRequest $request, StoreAction $action)
+    public function approving(Movement $receipt): View
     {
-        $receipt = $action->execute($request);
+        $this->authorize('approve', $receipt);
 
-        return redirect(route('vendor.receipts.edit', compact('receipt')))->with('success', 'Приход успешно добавлен');
-    }
-
-    public function edit(Receipt $receipt): View
-    {
-        $warehouses = Warehouse::get();
-
-        return view('vendor.receipts.edit', compact('receipt', 'warehouses'));
-    }
-
-    public function update(Receipt $receipt, UpdateRequest $request)
-    {
-        $receipt->update($request->validated());
-
-        foreach ($request->get('products') as $key => $count) {
-            $product = $receipt->products->find($key);
-            $product->count = $count;
-            $product->save();
-        }
-
-        return redirect(route('vendor.receipts.edit', compact('receipt')))->with('success', 'Данные успешно сохранены');
-    }
-
-    public function destroy(Receipt $receipt): bool
-    {
-        return $receipt->delete();
-    }
-
-    public function send(Receipt $receipt)
-    {
-        if ($receipt->status()->canBe('on_approval')) {
-            $receipt->status()->transitionTo('on_approval');
-        }
-
-        return redirect(route('vendor.receipts.index'))->with('success', 'Приход успешно отправлен на одобрение');
+        return view('vendor.receipts.approving', compact('receipt'));
     }
 }

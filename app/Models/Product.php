@@ -28,14 +28,6 @@ class Product extends Model
         'status' => StatusProduct::class,
     ];
 
-    protected static function booted(): void
-    {
-        static::creating(function ($model) {
-            $lastProduct = Product::query()->firstWhere('barcode', Product::max('barcode'));
-            $model->barcode = $lastProduct ? $lastProduct->barcode + 1 : 1;
-        });
-    }
-
     public function lastActive(): HasOne
     {
         return $this->hasOne(Product::class, 'barcode', 'barcode')->active()->latest();
@@ -58,6 +50,13 @@ class Product extends Model
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('history', false);
+        $query
+            ->where('status', '!=', 'approved')
+            ->where('history', false);
+    }
+
+    public static function getLastProduct(): ?Product
+    {
+        return Product::firstWhere('barcode', Product::max('barcode'));
     }
 }

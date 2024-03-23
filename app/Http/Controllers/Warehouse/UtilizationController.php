@@ -8,6 +8,7 @@ use App\Actions\Warehouse\Utilization\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Utilization\StoreRequest;
 use App\Http\Requests\Utilization\UpdateRequest;
+use App\Models\Client;
 use App\Models\Outlet;
 use App\Models\Utilization;
 use Illuminate\View\View;
@@ -36,9 +37,8 @@ class UtilizationController extends Controller
     public function create(): View
     {
         $utilization = new Utilization;
-        $outlets     = Outlet::get();
 
-        return view('warehouse.utilizations.create', compact('utilization', 'outlets'));
+        return view('warehouse.utilizations.create', compact('utilization'));
     }
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse
@@ -52,8 +52,9 @@ class UtilizationController extends Controller
     public function edit(Utilization $utilization): View
     {
         $outlets = Outlet::get();
+        $clients = Client::get();
 
-        return view('warehouse.utilizations.edit', compact('utilization', 'outlets'));
+        return view('warehouse.utilizations.edit', compact('utilization', 'outlets', 'clients'));
     }
 
     public function update(

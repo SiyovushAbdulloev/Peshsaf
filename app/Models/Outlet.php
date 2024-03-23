@@ -37,4 +37,9 @@ class Outlet extends Model
     {
         return $this->hasMany(Movement::class);
     }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(OutletProduct::class);
+    }
 }
