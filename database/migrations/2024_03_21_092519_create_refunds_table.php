@@ -19,7 +19,7 @@ return new class extends Migration
             $table->morphs('origin');
             $table->foreignId('warehouse_id')->nullable()->constrained();
             $table->foreignId('client_id')->nullable()->constrained();
-            $table->integer('number');
+            $table->string('number');
             $table->timestamps();
         });
     }

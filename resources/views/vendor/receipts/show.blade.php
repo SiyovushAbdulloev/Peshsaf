@@ -105,6 +105,5 @@
 @endsection
 
 @pushOnce('scripts')
-    {{--    @vite('resources/js/vendors/modal.js')--}}
     @vite('resources/js/pages/project/products.js')
 @endPushOnce
