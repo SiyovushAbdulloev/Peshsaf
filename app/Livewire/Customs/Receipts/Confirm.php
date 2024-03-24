@@ -24,10 +24,6 @@ class Confirm extends Component
     {
         app(ConfirmReceiptAction::class)->execute($this->receipt);
 
-        if ($this->receipt->status()->canBe('finished')) {
-            $this->receipt->status()->transitionTo('finished');
-        }
-
         session()->flash('success', 'Приход успешно одобрен');
 
         return $this->redirect(route('customs.receipts.index'));
