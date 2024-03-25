@@ -49,8 +49,8 @@ class Products extends Component
             ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
             ->first();
 
-        if ($outletProduct && !$this->selectedProducts->contains('barcode', $outletProduct->product->barcode)) {
-            $this->selectedProducts->push($outletProduct->product);
+        if ($outletProduct && !$this->selectedProducts->contains('product.barcode', $outletProduct->product->barcode)) {
+            $this->selectedProducts->push($outletProduct);
             if ($this->return?->exists) {
                 $this->return->products()->firstOrCreate([
                     'product_id' => $outletProduct->product_id,
