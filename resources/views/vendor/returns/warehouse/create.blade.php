@@ -9,27 +9,25 @@
 
     <div class="mt-5">
         <div class="intro-y col-span-12">
-            <form action="{{ route('vendor.returns-vendor.store') }}" method="post">
+            <form action="{{ route('vendor.returns.warehouse.store') }}" method="post">
                 @csrf
 
-                <livewire:vendor.return.clients/>
-
-                <div class="intro-y box p-5 mt-2">
-                    @include('vendor.returns-vendor.partials.form')
+                <div class="intro-y box p-5">
+                    @include('vendor.returns.warehouse.partials.form')
                 </div>
 
                 <div class="intro-y box p-5 mt-3">
                     <h5 class="text-lg font-medium">Товары</h5>
 
                     <div class="overflow-x-auto">
-                        <livewire:vendor.return.products/>
+                        <livewire:vendor.return.warehouse.products/>
                     </div>
                 </div>
 
                 <div class="mt-5 text-right">
                     <x-base.button
                         as="a"
-                        :href="route('vendor.returns-vendor.index')"
+                        :href="route('vendor.returns.warehouse.index')"
                         class="mr-1 w-24"
                         type="button"
                         variant="outline-primary"
@@ -41,7 +39,7 @@
                         variant="primary"
                         type="submit"
                     >
-                        Сохранить
+                        Создать
                     </x-base.button>
                 </div>
             </form>
@@ -50,5 +48,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/vendor.js')
+    @vite('resources/js/pages/project/returns.js')
 @endPushOnce

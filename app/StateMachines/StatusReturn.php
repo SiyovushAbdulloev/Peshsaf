@@ -14,7 +14,7 @@ class StatusReturn extends StateMachine
     public function transitions(): array
     {
         return [
-            'draft'     => ['pending'],
+            'draft'   => ['pending', 'finished'],
             'pending' => ['finished'],
         ];
     }

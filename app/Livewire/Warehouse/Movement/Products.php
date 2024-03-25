@@ -49,7 +49,7 @@ class Products extends Component
 
         if ($product) {
             $this->selectedProducts->push($product);
-            if ($this->movement->exists) {
+            if ($this->movement?->exists) {
                 $this->movement->products()->firstOrCreate([
                     'product_id' => $product->id,
                 ]);

@@ -29,18 +29,27 @@ class Products extends Component
     #[On('confirm')]
     public function search(string $barcode)
     {
-        $saledProduct = SaleProduct::with('sale.client')->whereHas('product', function (Builder $query) use ($barcode) {
-            $query->where('barcode', $barcode);
-        })->first();
+        $saledProduct = SaleProduct::with('sale.client')
+            ->whereHas('product', function (Builder $query) use ($barcode) {
+                $query->where('barcode', $barcode);
+            })
+            ->first();
 
-        $this->dispatch('show-client', $saledProduct->sale->client);
+        if ($saledProduct && !$this->selectedProducts->contains('barcode', $saledProduct->product->barcode)) {
+            $this->selectedProducts->push($saledProduct);
+        }
+    }
 
-        $product = OutletProduct::with('dicProduct.measure', 'product')->whereHas('product', function (Builder $query) use ($barcode) {
-            $query->where('barcode', $barcode);
-        })->first();
+    public function addProduct()
+    {
+        $saledProduct = SaleProduct::with('sale.client')
+            ->whereHas('product', function (Builder $query) {
+                $query->where('barcode', 16);
+            })
+            ->first();
 
-        if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
-            $this->selectedProducts->push($product);
+        if ($saledProduct && !$this->selectedProducts->contains('barcode', $saledProduct->product->barcode)) {
+            $this->selectedProducts->push($saledProduct);
         }
     }
 

@@ -22,6 +22,13 @@ return new class extends Migration
             $table->string('number');
             $table->timestamps();
         });
+
+        Schema::create('refund_products', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('refund_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -29,6 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('refund_products');
         Schema::dropIfExists('refunds');
     }
 };

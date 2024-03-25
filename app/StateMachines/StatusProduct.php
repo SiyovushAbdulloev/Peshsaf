@@ -27,7 +27,7 @@ class StatusProduct extends StateMachine
         return [
             'approved' => ['new'],
             'new'      => ['sold'],
-            'sold'     => ['used', 'utilized'],
+            'sold'     => ['used', 'utilized', 'new'],
             'used'     => ['utilized'],
         ];
     }

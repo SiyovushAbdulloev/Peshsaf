@@ -12,25 +12,24 @@ class ApproveAction extends CoreAction
     public function handle(Movement $receipt): Movement
     {
         foreach ($receipt->products as $receipProduct) {
+            $product = Product::find($receipProduct->product_id);
+
+            $newProduct             = $product->replicate();
+            $newProduct->model_type = Outlet::class;
+            $newProduct->model_id   = auth()->user()->outlet_id;
+            $newProduct->save();
+
             auth()->user()
                 ->outlet
                 ->products()
                 ->create([
-                    'product_id' => $receipProduct->product_id,
-                    'origin_type' => Movement::class,
-                    'origin_id' => $receipt->id,
+                    'product_id'   => $newProduct->id,
+                    'warehouse_id' => $receipt->warehouse_id,
                 ]);
+
+            $product->history = true;
+            $product->save();
         }
-
-        $product = Product::find($receipProduct->product_id);
-
-        $newProduct             = $product->replicate();
-        $newProduct->model_type = Outlet::class;
-        $newProduct->model_id   = auth()->user()->outlet_id;
-        $newProduct->save();
-
-        $product->history = true;
-        $product->save();
 
         return $receipt;
     }

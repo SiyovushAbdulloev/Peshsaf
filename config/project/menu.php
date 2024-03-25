@@ -118,17 +118,17 @@ return [
         ],
         'returns' => [
             'icon'     => 'list',
-            'title'    => 'Возврат',
+            'title'    => 'Возвраты',
             'sub_menu' => [
-                'returns-warehouse'  => [
+                'warehouse'  => [
                     'icon'       => 'list',
-                    'route_name' => 'vendor.returns-warehouse.index',
-                    'title'      => 'Возврат товара на склад',
+                    'route_name' => 'vendor.returns.warehouse.index',
+                    'title'      => 'На склад',
                 ],
-                'returns-vendor'  => [
+                'clients'  => [
                     'icon'       => 'list',
-                    'route_name' => 'vendor.returns-vendor.index',
-                    'title'      => 'Возврат товара от покупателя',
+                    'route_name' => 'vendor.returns.clients.index',
+                    'title'      => 'От покупателей',
                 ],
             ],
         ],

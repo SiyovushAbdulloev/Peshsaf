@@ -1,7 +1,7 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Просмотр возврата</title>
+    <title>Просмотр продажи</title>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
             <div class="box rounded-md p-5">
                 <div class="mb-5 flex items-center border-b border-slate-200/60 pb-5 dark:border-darkmode-400">
                     <div class="truncate text-base font-medium">
-                        Детали возврата
+                        Детали продажи
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -22,21 +22,21 @@
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-user"
                     />
-                    Клиент: <span class="ml-2">{{ $return->warehouse?->name ?? $return->origin?->name }}</span>
+                    Клиент: <span class="ml-2">{{ $sale->client_name }}</span>
                 </div>
                 <div class="mt-3 flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-phone"
                     />
-                    Телефон: <span class="ml-2">{{ $return->warehouse?->phone ?? $return->origin?->phone }}</span>
+                    Телефон: <span class="ml-2">{{ $sale->client_phone }}</span>
                 </div>
                 <div class="mt-3 flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-location-dot"
                     />
-                    Адрес: <span class="ml-2">{{ $return->warehouse?->address ?? $return->origin?->address }}</span>
+                    Адрес: <span class="ml-2">{{ $sale->client_address }}</span>
                 </div>
             </div>
         </div>
@@ -64,19 +64,19 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @foreach ($return->products as $product)
+                            @foreach ($sale->products as $product)
                                 <x-base.table.tr>
                                     <x-base.table.td class="!py-4">
-                                        {{ $product->product->dicProduct->name }}
+                                        {{ $product->dicProduct->name }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->dicProduct->barcode }}
+                                        {{ $product->dicProduct->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
                                         {{ $product->product->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->dicProduct->measure->name }}
+                                        {{ $product->dicProduct->measure->name }}
                                     </x-base.table.td>
                                     <x-base.table.td class="text-right">
                                         <x-base.button
@@ -97,7 +97,7 @@
             <div class="mt-5 text-left">
                 <x-base.button
                     as="a"
-                    :href="route('vendor.returns-vendor.index')"
+                    :href="route('warehouse.sales.index')"
                     class="mr-1 w-24"
                     type="button"
                     variant="outline-primary"
