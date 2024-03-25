@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        $products = OutletProduct::with('product', 'dicProduct')
+        $products = OutletProduct::with('product', 'dicProduct', 'warehouse')
             ->withCount('product')
             ->paginate(15);
 
