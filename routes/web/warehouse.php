@@ -4,6 +4,7 @@ use App\Http\Controllers\Warehouse\MovementController;
 use App\Http\Controllers\Warehouse\ProductController;
 use App\Http\Controllers\Warehouse\ReceiptController;
 use App\Http\Controllers\Warehouse\ReceiptProductController;
+use App\Http\Controllers\Warehouse\ReturnController;
 use App\Http\Controllers\Warehouse\SaleController;
 use App\Http\Controllers\Warehouse\UtilizationController;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,7 @@ Route::name('warehouse.')->group(function () {
 
     // Утилизация товаров
     Route::resource('utilizations', UtilizationController::class);
+
+    Route::get('/returns', [ReturnController::class, 'index'])->name('returns.index');
+    Route::get('/returns/{return}', [ReturnController::class, 'show'])->name('returns.show');
 });

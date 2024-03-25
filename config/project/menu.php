@@ -93,6 +93,11 @@ return [
             'route_name' => 'warehouse.utilizations.index',
             'title'      => 'Утилизация товаров',
         ],
+        'returns'  => [
+            'icon'       => 'list',
+            'route_name' => 'warehouse.returns.index',
+            'title'      => 'Возврат товаров',
+        ],
     ],
     'vendor'    => [
         'dashboard' => [

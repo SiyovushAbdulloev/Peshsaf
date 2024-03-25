@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    // Show slide over
+    // Send slide over
     $("#programmatically-show-slideover").on("click", function () {
         const el = document.querySelector("#programmatically-slideover");
         const slideOver = tailwind.Modal.getOrCreateInstance(el);

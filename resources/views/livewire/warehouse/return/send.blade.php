@@ -1,0 +1,10 @@
+<div>
+    <x-base.button
+        size="md"
+        type="button"
+        variant="primary"
+        wire:click="approve"
+    >
+        Подтвердить
+    </x-base.button>
+</div>
