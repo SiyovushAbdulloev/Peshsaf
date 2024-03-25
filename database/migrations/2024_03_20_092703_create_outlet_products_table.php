@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('outlet_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->morphs('origin');
+            $table->foreignId('warehouse_id')->constrained();
             $table->timestamps();
+
+            $table->unique('product_id');
         });
     }
 

@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')
             });
 
         require_once __DIR__ . '/api/warehouse.php';
+        require_once __DIR__ . '/api/vendor.php';
     });
 
 require_once __DIR__ . '/api/auth.php';

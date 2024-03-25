@@ -39,7 +39,7 @@
                 </x-base.button>
             </div>
         @empty
-            <div>No data</div>
+            <div>Нет данных</div>
         @endforelse
     </div>
 </div>

@@ -101,6 +101,11 @@ return [
             'title'      => 'Dashboard',
         ],
         'divider',
+        'products'  => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.products.index',
+            'title'      => 'Товары',
+        ],
         'sales'     => [
             'icon'       => 'list',
             'route_name' => 'vendor.sales.index',
@@ -110,6 +115,22 @@ return [
             'icon'       => 'list',
             'route_name' => 'vendor.receipts.index',
             'title'      => 'Приход товаров',
+        ],
+        'returns' => [
+            'icon'     => 'list',
+            'title'    => 'Возвраты',
+            'sub_menu' => [
+                'warehouse'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.returns.warehouse.index',
+                    'title'      => 'На склад',
+                ],
+                'clients'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.returns.clients.index',
+                    'title'      => 'От покупателей',
+                ],
+            ],
         ],
     ],
     'customs'   => [

@@ -1,7 +1,7 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Просмотр прихода</title>
+    <title>Просмотр продажи</title>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
             <div class="box rounded-md p-5">
                 <div class="mb-5 flex items-center border-b border-slate-200/60 pb-5 dark:border-darkmode-400">
                     <div class="truncate text-base font-medium">
-                        Детали прихода
+                        Детали продажи
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -22,21 +22,21 @@
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-user"
                     />
-                    Отправитель: <span class="ml-2">{{ $receipt->warehouse->name }}</span>
+                    Клиент: <span class="ml-2">{{ $sale->client_name }}</span>
                 </div>
                 <div class="mt-3 flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-phone"
                     />
-                    Дата: <span class="ml-2">{{ $receipt->date }}</span>
+                    Телефон: <span class="ml-2">{{ $sale->client_phone }}</span>
                 </div>
                 <div class="mt-3 flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-location-dot"
                     />
-                    Номер накладной: <span class="ml-2">{{ $receipt->number }}</span>
+                    Адрес: <span class="ml-2">{{ $sale->client_address }}</span>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @foreach ($receipt->products as $product)
+                            @foreach ($sale->products as $product)
                                 <x-base.table.tr>
                                     <x-base.table.td class="!py-4">
                                         {{ $product->dicProduct->name }}
@@ -79,7 +79,13 @@
                                         {{ $product->dicProduct->measure->name }}
                                     </x-base.table.td>
                                     <x-base.table.td class="text-right">
-                                        <livewire:product-button :product="$product->product_id"/>
+                                        <x-base.button
+                                            size="sm"
+                                            type="button"
+                                            variant="outline-primary"
+                                        >
+                                            <x-base.lucide icon="info"/>
+                                        </x-base.button>
                                     </x-base.table.td>
                                 </x-base.table.tr>
                             @endforeach
@@ -91,7 +97,7 @@
             <div class="mt-5 text-left">
                 <x-base.button
                     as="a"
-                    :href="route('vendor.receipts.index')"
+                    :href="route('warehouse.sales.index')"
                     class="mr-1 w-24"
                     type="button"
                     variant="outline-primary"
@@ -101,9 +107,4 @@
             </div>
         </div>
     </div>
-    <livewire:product-modal/>
 @endsection
-
-@pushOnce('scripts')
-    @vite('resources/js/pages/project/products.js')
-@endPushOnce

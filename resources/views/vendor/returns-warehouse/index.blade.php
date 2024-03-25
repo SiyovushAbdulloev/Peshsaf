@@ -1,15 +1,15 @@
 @extends('layouts/sidebar')
 
 @section('subhead')
-    <title>Утилизация товаров</title>
+    <title>Возврат товаров</title>
 @endsection
 
 @section('content')
     <div class="mt-5">
         <div class="intro-y mt-2 flex">
-            <h2 class="intro-y text-lg font-medium">Утилизация товаров</h2>
+            <h2 class="intro-y text-lg font-medium">Возврат товаров</h2>
 
-            <a href="{{ route('warehouse.utilizations.create') }}" class="mb-2 transition duration-200 border
+            <a href="{{ route('vendor.returns-vendor.create') }}" class="mb-2 transition duration-200 border
                 inline-flex items-center
                 justify-center py-2
                 px-3 rounded-md ml-auto
@@ -18,9 +18,9 @@
             </a>
         </div>
 
-        @if($utilizations->count())
+        @if($returns->count())
             <table
-                id="utilizations-table"
+                id="movements-table"
                 data-tw-merge
                 class="w-full text-left mt-5"
             >
@@ -33,7 +33,7 @@
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
-                        #
+                        № н-й
                     </th>
                     <th
                         data-tw-merge
@@ -45,7 +45,7 @@
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
-                        Торговая точка
+                        Получатель
                     </th>
                     <th
                         data-tw-merge
@@ -74,7 +74,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($utilizations as $utilization)
+                @foreach($returns as $return)
                     <tr
                         data-tw-merge
                         class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
@@ -83,37 +83,37 @@
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $utilization->number }}
+                            {{ $return->number }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $utilization->date->format('d.m.Y') }}
+                            {{ $return->date->format('d.m.Y') }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $utilization->outlet->name }}
+                            {{ $return->warehouse?->name ?? $return->origin?->name }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $utilization->outlet->address }}
+                            {{ $return->warehouse?->address ?? $return->origin?->address }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $utilization->outlet->phone }}
+                            {{ $return->warehouse?->phone ?? $return->origin?->phone }}
                         </td>
                         <td
                             data-tw-merge
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
-                            {{ $utilization->products_count }}
+                            {{ $return->products_count }}
                         </td>
                         <td
                             data-tw-merge
@@ -122,29 +122,29 @@
                             <x-base.button
                                 as="a"
                                 size="sm"
-                                href="{{ route('warehouse.utilizations.show', compact('utilization')) }}"
+                                href="{{ route('vendor.returns-vendor.show', compact('return')) }}"
                                 type="button"
                                 variant="outline-primary"
                             >
                                 <x-base.lucide icon="info"/>
                             </x-base.button>
-                            @can('edit', $utilization)
+                            @can('edit', $return)
                                 <x-base.button
                                     as="a"
                                     size="sm"
-                                    href="{{ route('warehouse.utilizations.edit', compact('utilization')) }}"
+                                    href="{{ route('vendor.returns-vendor.edit', compact('return')) }}"
                                     type="button"
                                     variant="outline-success"
-                                    data-route="{{ route('warehouse.utilizations.destroy', compact('utilization')) }}"
+                                    data-route="{{ route('vendor.returns-vendor.destroy', compact('return')) }}"
                                 >
                                     <x-base.lucide icon="pencil"/>
                                 </x-base.button>
                                 <x-base.button
                                     size="sm"
-                                    class="delete-utilization"
+                                    class="delete-movement"
                                     type="button"
                                     variant="outline-danger"
-                                    data-route="{{ route('warehouse.utilizations.destroy', compact('utilization')) }}"
+                                    data-route="{{ route('vendor.returns-vendor.destroy', compact('return')) }}"
                                 >
                                     <x-base.lucide icon="trash"/>
                                 </x-base.button>
@@ -165,5 +165,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/utilizations.js')
+    @vite('resources/js/pages/project/movements.js')
 @endPushOnce
