@@ -42,7 +42,7 @@
                     name="warehouse_id"
                     aria-label=".form-select-lg example"
                 >
-                    <option value="">Выберите торговую точку</option>
+                    <option value="">Выберите склад</option>
                     @foreach($warehouses as $warehouse)
                         <option
                             value="{{ $warehouse->id }}" @selected(old('warehouse_id', $return->warehouse_id) == $warehouse->id)

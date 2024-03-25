@@ -21,4 +21,22 @@
             $('#return-form').attr('action', $('#send').data('route')).submit();
         }
     });
+
+    document.addEventListener('livewire:init', () => {
+        let barcode = '';
+        let interval;
+        document.addEventListener('keydown', function (evt) {
+            if (interval)
+                clearInterval(interval);
+            if (evt.code == 'Enter') {
+                if (barcode)
+                    Livewire.dispatch('confirm', { barcode: barcode });
+                barcode = '';
+                return;
+            }
+            if (evt.key != 'Shift')
+                barcode += evt.key;
+            interval = setInterval(() => barcode = '', 20);
+        });
+    });
 })();
