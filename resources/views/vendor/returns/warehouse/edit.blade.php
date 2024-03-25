@@ -22,7 +22,7 @@
                     <h5 class="text-lg font-medium">Товары</h5>
 
                     <div class="overflow-x-auto">
-                        <livewire:vendor.return.warehouse.products :$return/>
+                        <livewire:vendor.return.products :$return/>
                     </div>
                 </div>
 
