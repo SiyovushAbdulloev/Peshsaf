@@ -4,6 +4,9 @@ use App\Http\Controllers\Warehouse\MovementController;
 use App\Http\Controllers\Warehouse\ProductController;
 use App\Http\Controllers\Warehouse\ReceiptController;
 use App\Http\Controllers\Warehouse\ReceiptProductController;
+use App\Http\Controllers\Warehouse\Reports\OutletController;
+use App\Http\Controllers\Warehouse\Reports\RemainController;
+use App\Http\Controllers\Warehouse\Reports\UtilizationController as UtilizationReportController;
 use App\Http\Controllers\Warehouse\ReturnController;
 use App\Http\Controllers\Warehouse\SaleController;
 use App\Http\Controllers\Warehouse\UtilizationController;
@@ -28,4 +31,12 @@ Route::name('warehouse.')->group(function () {
 
     Route::get('/returns', [ReturnController::class, 'index'])->name('returns.index');
     Route::get('/returns/{return}', [ReturnController::class, 'show'])->name('returns.show');
+
+    Route::prefix('reports')
+        ->name('reports.')
+        ->group(function () {
+            Route::get('/remains', [RemainController::class, 'index'])->name('remains.index');
+            Route::get('/utilizations', [UtilizationReportController::class, 'index'])->name('utilizations.index');
+            Route::get('/outlets', [OutletController::class, 'index'])->name('outlets.index');
+        });
 });

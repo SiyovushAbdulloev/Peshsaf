@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\StateMachines\StatusUtilization;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -60,5 +61,17 @@ class Utilization extends Model
     public function outlet(): BelongsTo
     {
         return $this->belongsTo(Outlet::class);
+    }
+
+    public function returner(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+               return match ($this->type) {
+                   self::OUTLET => $this->outlet->name,
+                   self::CLIENT => $this->client->name,
+               };
+            }
+        );
     }
 }

@@ -98,6 +98,27 @@ return [
             'route_name' => 'warehouse.returns.index',
             'title'      => 'Возврат товаров',
         ],
+        'reports' => [
+            'icon'     => 'list',
+            'title'    => 'Отчеты',
+            'sub_menu' => [
+                'remains'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'warehouse.reports.remains.index',
+                    'title'      => 'По остаткам',
+                ],
+                'utilizations'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'warehouse.reports.utilizations.index',
+                    'title'      => 'По утилизации',
+                ],
+                'outlets'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'warehouse.reports.outlets.index',
+                    'title'      => 'По торговым точкам',
+                ],
+            ],
+        ],
     ],
     'vendor'    => [
         'dashboard' => [
