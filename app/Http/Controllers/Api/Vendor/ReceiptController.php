@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Vendor;
 
+use App\Actions\Vendor\Receipt\ApproveAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Vendor\ReceiptResource;
 use App\Models\Movement;
 use Illuminate\Http\JsonResponse;
-use Illuminate\View\View;
 
 class ReceiptController extends Controller
 {
@@ -20,9 +20,7 @@ class ReceiptController extends Controller
             ->latest()
             ->paginate(15);
 
-        return response()->json([
-            'receipts' => ReceiptResource::collection($receipts)
-        ]);
+        return response()->json(ReceiptResource::collection($receipts));
     }
 
     public function show(Movement $receipt): JsonResponse
@@ -30,23 +28,24 @@ class ReceiptController extends Controller
         $receipt->load('warehouse');
 
         return response()->json([
-            'receipt' => ReceiptResource::make($receipt)
+            'data' => ReceiptResource::make($receipt->load('products')->loadCount('products')),
         ]);
     }
 
-    public function approving(Movement $receipt): JsonResponse
+    public function approve(Movement $receipt, ApproveAction $action): JsonResponse
     {
         $this->authorize('approve', $receipt);
 
-        $receipt->load('products.product.product.measure', 'warehouse');
+        if ($receipt->status()->canBe('approved')) {
+            $receipt->status()->transitionTo('approved');
+        }
 
         return response()->json([
-            'receipt' => ReceiptResource::make($receipt)
+            'data' => ReceiptResource::make(
+                $action->execute($receipt)
+                    ->load('products')
+                    ->loadCount('products')
+            ),
         ]);
-    }
-
-    public function approve(Movement $receipt): View
-    {
-        //TODO: implement approve
     }
 }

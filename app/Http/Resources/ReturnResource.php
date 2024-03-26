@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\Vendor\ProductResource;
+use App\Http\Resources\Warehouse\Movement\ProductResource;
 use Illuminate\Http\Request;
 
 /**
@@ -25,7 +25,7 @@ class ReturnResource extends PaginateResourceCollection
             'number'         => $this->resource->number,
             'products_count' => $this->resource->products_count,
             'outlet'         => OutletResource::make($this->whenLoaded('origin')),
-            'products'       => ProductResource::collection($this->whenLoaded('products.product.product.measure')),
+            'products'       => ProductResource::collection($this->whenLoaded('products')),
         ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Resources\Warehouse;
 use App\Http\Resources\ClientResource;
 use App\Http\Resources\OutletResource;
 use App\Http\Resources\PaginateResourceCollection;
-use App\Http\Resources\SimpleProductResource;
+use App\Http\Resources\Warehouse\Movement\ProductResource;
 use Illuminate\Http\Request;
 
 /**
@@ -29,7 +29,7 @@ class UtilizationResource extends PaginateResourceCollection
             'products_count' => $this->resource->products_count,
             'client'         => ClientResource::make($this->whenLoaded('client')),
             'outlet'         => OutletResource::make($this->whenLoaded('outlet')),
-            'products'       => SimpleProductResource::collection($this->whenLoaded('products')),
+            'products'       => ProductResource::collection($this->whenLoaded('products')),
         ];
     }
 }

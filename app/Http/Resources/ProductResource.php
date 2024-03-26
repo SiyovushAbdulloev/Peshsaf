@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 
 /**
- * @property \App\Models\Client $resource
+ * @property \App\Models\Product $resource
  */
 class ProductResource extends PaginateResourceCollection
 {
@@ -17,10 +17,10 @@ class ProductResource extends PaginateResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->resource->id,
-            'qrcode' => $this->resource->product->barcode,
+            'id'      => $this->resource->id,
+            'qrcode'  => $this->resource->product->barcode,
             'barcode' => $this->resource->dicProduct?->barcode,
-            'name' => $this->resource->dicProduct?->name,
+            'name'    => $this->resource->dicProduct?->name,
         ];
     }
 }

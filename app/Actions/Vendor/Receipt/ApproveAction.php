@@ -2,6 +2,7 @@
 
 namespace App\Actions\Vendor\Receipt;
 
+use App\Actions\Warehouse\RemoveWarehouseProductAction;
 use App\Core\Actions\CoreAction;
 use App\Models\Movement;
 use App\Models\Outlet;
@@ -19,13 +20,17 @@ class ApproveAction extends CoreAction
             $newProduct->model_id   = auth()->user()->outlet_id;
             $newProduct->save();
 
-            auth()->user()
-                ->outlet
-                ->products()
-                ->create([
-                    'product_id'   => $newProduct->id,
-                    'warehouse_id' => $receipt->warehouse_id,
-                ]);
+            // Удаление товара из остатов склада
+            app(RemoveWarehouseProductAction::class)->execute($product);
+
+            // Оприходование товара в остатки торговой точки
+            $outlet = auth()->user()->outlet;
+            logger("Добавление товара $product->id в остатки торговой точки $outlet->id");
+
+            $outlet->products()->create([
+                'product_id'   => $newProduct->id,
+                'warehouse_id' => $receipt->warehouse_id,
+            ]);
 
             $product->history = true;
             $product->save();
