@@ -7,8 +7,13 @@ use App\Models\User;
 
 class RefundPolicy
 {
-    public function edit(User $user, Refund $refund): bool
+    public function edit(User $user, Refund $return): bool
     {
-        return $refund->status()->is('draft');
+        return $return->status()->is('draft');
+    }
+
+    public function approve(User $user, Refund $return): bool
+    {
+        return $user->warehouse_id === $return->warehouse_id && $return->status()->is('pending');
     }
 }

@@ -10,116 +10,61 @@
 
         @if($returns->count())
             <table
-                id="movements-table"
-                data-tw-merge
+                id="return-table"
                 class="w-full text-left mt-5"
             >
-                <thead data-tw-merge class="">
-                <tr
-                    data-tw-merge
-                    class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
-                >
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                <thead>
+                <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300
+                [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         № н-й
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Статус
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Дата
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Торговая точка
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Адрес
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Телефон
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Количество
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]">
                         &nbsp;
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($returns as $return)
-                    <tr
-                        data-tw-merge
-                        class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
+                    <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                     >
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $return->number }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $return->date->format('d.m.Y') }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $return->origin->name }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $return->origin?->address }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $return->origin?->phone }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
-                            {{ $return->products_count }}
-                        </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 text-right"
-                        >
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->number }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ __($return->status) }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->date->format('d.m.Y') }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->origin->name }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->origin->address }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->origin->phone }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->products_count }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 text-right">
                             <x-base.button
                                 as="a"
                                 size="sm"
                                 href="{{ route('warehouse.returns.show', compact('return')) }}"
                                 type="button"
-                                variant="outline-primary"
+                                :variant="$return->status()->is(\App\StateMachines\StatusReturn::PENDING) ? 'outline-warning' : 'outline-primary'"
                             >
-                                @if($return->status === \App\StateMachines\StatusReturn::PENDING)
+                                @if($return->status()->is(\App\StateMachines\StatusReturn::PENDING))
                                     <x-base.icon icon="fa-check"/>
                                 @else
-                                    <x-base.lucide icon="info"/>
+                                    <x-base.icon icon="fa-info"/>
                                 @endif
                             </x-base.button>
                         </td>
@@ -136,7 +81,3 @@
         @endif
     </div>
 @endsection
-
-@pushOnce('scripts')
-    @vite('resources/js/pages/project/movements.js')
-@endPushOnce

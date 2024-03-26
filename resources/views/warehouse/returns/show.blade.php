@@ -64,19 +64,19 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @foreach ($return->products as $product)
+                            @foreach ($return->products as $returnProduct)
                                 <x-base.table.tr>
                                     <x-base.table.td class="!py-4">
-                                        {{ $product->product->product->name }}
+                                        {{ $returnProduct->dicProduct->name }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->product->barcode }}
+                                        {{ $returnProduct->dicProduct->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->barcode }}
+                                        {{ $returnProduct->product->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->product->measure->name }}
+                                        {{ $returnProduct->dicProduct->measure->name }}
                                     </x-base.table.td>
                                     <x-base.table.td class="text-right">
                                         <x-base.button
@@ -84,7 +84,7 @@
                                             type="button"
                                             variant="outline-primary"
                                         >
-                                            <x-base.lucide icon="info"/>
+                                            <x-base.icon icon="fa-info" class="w-3 h-3"/>
                                         </x-base.button>
                                     </x-base.table.td>
                                 </x-base.table.tr>
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="mt-5 text-left flex gap-4">
+            <div class="mt-5 flex justify-end gap-4">
                 <x-base.button
                     as="a"
                     :href="route('warehouse.returns.index')"
@@ -102,11 +102,11 @@
                     type="button"
                     variant="outline-primary"
                 >
-                    Отмена
+                    Назад
                 </x-base.button>
-                @if($return->status === \App\StateMachines\StatusReturn::PENDING)
-                    <livewire:warehouse.return.send :record="$return"/>
-                @endif
+                @can('approve', $return)
+                    <livewire:warehouse.return.approve :$return/>
+                @endcan
             </div>
         </div>
     </div>
