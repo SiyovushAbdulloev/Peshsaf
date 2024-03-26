@@ -47,4 +47,9 @@ class Warehouse extends Model
     {
         return $this->hasOne(User::class, 'warehouse_id');
     }
+
+    public function returns(): HasMany
+    {
+        return $this->hasMany(Refund::class);
+    }
 }

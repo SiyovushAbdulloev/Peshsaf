@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    // Show code or preview
+    // Send code or preview
     $(".preview-component").each(function () {
         const previewComponent = this;
         $(this)

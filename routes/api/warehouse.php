@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Warehouse\MovementController;
+use App\Http\Controllers\Api\Warehouse\ReturnController;
 use App\Http\Controllers\Api\Warehouse\SaleController;
 use App\Http\Controllers\Api\Warehouse\UtilizationController;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,8 @@ Route::middleware('role:warehouse')
         Route::patch('/utilizations/{utilization}', [UtilizationController::class, 'update']);
         Route::delete('/utilizations/{utilization}', [UtilizationController::class, 'destroy']);
         Route::patch('/utilizations/{utilization}/finish', [UtilizationController::class, 'finish']);
+
+        Route::get('/returns', [ReturnController::class, 'index'])->name('returns.index');
+        Route::get('/returns/{return}', [ReturnController::class, 'show'])->name('returns.show');
+        Route::patch('/returns/{return}/approve', [ReturnController::class, 'approve'])->name('returns.approve');
     });

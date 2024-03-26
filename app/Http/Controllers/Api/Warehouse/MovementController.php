@@ -16,7 +16,6 @@ use App\Http\Resources\ProductResource;
 use App\Models\Movement;
 use App\Models\MovementProduct;
 use App\Models\Outlet;
-use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -76,7 +75,7 @@ class MovementController extends Controller
         UpdateRequest $request,
         UpdateAction $action
     ) {
-        $action->execute($request->getParams());
+        $action->execute($request->getParams(), $movement);
 
         return response()->json([
             'data' => MovementResource::make(

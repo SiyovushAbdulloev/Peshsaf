@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Resources\Warehouse;
+namespace App\Http\Resources\Vendor;
 
-use App\Http\Resources\ClientResource;
-use App\Http\Resources\OutletResource;
 use App\Http\Resources\PaginateResourceCollection;
 use App\Http\Resources\Warehouse\Movement\ProductResource;
+use App\Http\Resources\WarehouseResource;
 use Illuminate\Http\Request;
 
 /**
- * @property \App\Models\Utilization $resource
+ * @property \App\Models\Movement $resource
  */
-class UtilizationResource extends PaginateResourceCollection
+class ReceiptResource extends PaginateResourceCollection
 {
     /**
      * Transform the resource into an array.
@@ -22,13 +21,11 @@ class UtilizationResource extends PaginateResourceCollection
     {
         return [
             'id'             => $this->resource->id,
-            'type'           => $this->resource->type,
             'status'         => $this->resource->status,
-            'date'           => $this->resource->date->format('d.m.Y'),
             'number'         => $this->resource->number,
-            'products_count' => $this->resource->products_count,
-            'client'         => ClientResource::make($this->whenLoaded('client')),
-            'outlet'         => OutletResource::make($this->whenLoaded('outlet')),
+            'date'           => $this->resource->date->format('d.m.Y'),
+            'products_count' => $this->whenCounted('products'),
+            'warehouse'      => WarehouseResource::make($this->whenLoaded('warehouse')),
             'products'       => ProductResource::collection($this->whenLoaded('products')),
         ];
     }

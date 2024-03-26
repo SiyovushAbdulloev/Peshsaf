@@ -60,4 +60,9 @@ class Refund extends Model
     {
         $query->where('type', $type);
     }
+
+    public function scopeByStatus(Builder $query, string|array $statuses): void
+    {
+        $query->whereIn('status', !is_array($statuses) ? [$statuses] : $statuses);
+    }
 }

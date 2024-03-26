@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Vendor\Receipts;
 
-use App\Actions\Customs\ConfirmReceiptAction;
 use App\Actions\Vendor\Receipt\ApproveAction;
 use App\Models\Movement;
 use Livewire\Component;

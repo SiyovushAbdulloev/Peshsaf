@@ -1,6 +1,8 @@
-@props(['icon' => null, 'width' => 24, 'height' => 24])
+@props(['icon' => null])
 
 <i
-    {{ $attributes->class(merge(["stroke-1.6 fa " . uncamelize($icon, '-'), $attributes->whereStartsWith('class')
+    {{ $attributes->class(merge(["w-4 h-4 leading-4 text-base fa " . uncamelize($icon, '-'),
+    $attributes->whereStartsWith
+    ('class')
     ->first()]))->merge($attributes->whereDoesntStartWith('class')->getAttributes()) }}
 ></i>

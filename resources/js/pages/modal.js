@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    // Show modal
+    // Send modal
     $("#programmatically-show-modal").on("click", function () {
         const el = document.querySelector("#programmatically-modal");
         const modal = tailwind.Modal.getOrCreateInstance(el);
