@@ -21,6 +21,6 @@ class ReceiptPolicy
 
     public function generate(User $user, Receipt $receipt): bool
     {
-        return $receipt->status()->is(StatusReceipt::APPROVED);
+        return $receipt->status()->is(StatusReceipt::APPROVED) || $receipt->filepath;
     }
 }

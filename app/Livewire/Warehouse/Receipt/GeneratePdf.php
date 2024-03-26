@@ -21,8 +21,6 @@ class GeneratePdf extends Component
         }
 
         session()->flash('success', 'Файл сгенерирован');
-
-        $this->redirect(route('warehouse.receipts.index'));
     }
 
     public function render()

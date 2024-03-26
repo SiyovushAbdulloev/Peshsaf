@@ -1,13 +1,26 @@
 <div>
-    <x-base.button
-        size="sm"
-        type="button"
-        variant="outline-warning"
-        wire:click="generate"
-        wire:loading.remove
-    >
-        <x-base.icon icon="fa-check"/>
-    </x-base.button>
+    @if(!$receipt->filepath)
+        <x-base.button
+            size="sm"
+            type="button"
+            variant="outline-warning"
+            wire:click="generate"
+            wire:loading.remove
+        >
+            <x-base.icon icon="fa-check"/>
+        </x-base.button>
+    @else
+        <x-base.button
+            as="a"
+            target="_blank"
+            :href="'/storage/' . $receipt->filepath"
+            size="sm"
+            type="button"
+            variant="outline-danger"
+        >
+            <x-base.icon icon="fa-file-pdf"/>
+        </x-base.button>
+    @endif
 
     <x-base.button
         type="button"
@@ -21,28 +34,36 @@
                 <g fill="none" fill-rule="evenodd">
                     <g transform="translate(2 1)" stroke="#ffffff" stroke-width="1.5">
                         <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#ffffff">
-                            <animate values="1;0;0;0;0;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s" calcMode="linear" repeatCount="indefinite"></animate>
+                            <animate values="1;0;0;0;0;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                     calcMode="linear" repeatCount="indefinite"></animate>
                         </circle>
                         <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#ffffff">
-                            <animate values="0;1;0;0;0;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s" calcMode="linear" repeatCount="indefinite"></animate>
+                            <animate values="0;1;0;0;0;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                     calcMode="linear" repeatCount="indefinite"></animate>
                         </circle>
                         <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#ffffff">
-                            <animate values="0;0;1;0;0;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s" calcMode="linear" repeatCount="indefinite"></animate>
+                            <animate values="0;0;1;0;0;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                     calcMode="linear" repeatCount="indefinite"></animate>
                         </circle>
                         <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#ffffff">
-                            <animate values="0;0;0;1;0;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s" calcMode="linear" repeatCount="indefinite"></animate>
+                            <animate values="0;0;0;1;0;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                     calcMode="linear" repeatCount="indefinite"></animate>
                         </circle>
                         <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#ffffff">
-                            <animate values="0;0;0;0;1;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s" calcMode="linear" repeatCount="indefinite"></animate>
+                            <animate values="0;0;0;0;1;0;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                     calcMode="linear" repeatCount="indefinite"></animate>
                         </circle>
                         <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#ffffff">
-                            <animate values="0;0;0;0;0;1;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s" calcMode="linear" repeatCount="indefinite"></animate>
+                            <animate values="0;0;0;0;0;1;0;0" attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                     calcMode="linear" repeatCount="indefinite"></animate>
                         </circle>
                         <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#ffffff">
-                            <animate values="0;0;0;0;0;0;1;0" attributeName="fill-opacity" begin="0s" dur="1.3s" calcMode="linear" repeatCount="indefinite"></animate>
+                            <animate values="0;0;0;0;0;0;1;0" attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                     calcMode="linear" repeatCount="indefinite"></animate>
                         </circle>
                         <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#ffffff">
-                            <animate values="0;0;0;0;0;0;0;1" attributeName="fill-opacity" begin="0s" dur="1.3s" calcMode="linear" repeatCount="indefinite"></animate>
+                            <animate values="0;0;0;0;0;0;0;1" attributeName="fill-opacity" begin="0s" dur="1.3s"
+                                     calcMode="linear" repeatCount="indefinite"></animate>
                         </circle>
                     </g>
                 </g>
