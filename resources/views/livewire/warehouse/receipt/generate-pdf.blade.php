@@ -13,7 +13,7 @@
         <x-base.button
             as="a"
             target="_blank"
-            :href="'/storage/' . $receipt->filepath"
+            :href="$receipt->url"
             size="sm"
             type="button"
             variant="outline-danger"

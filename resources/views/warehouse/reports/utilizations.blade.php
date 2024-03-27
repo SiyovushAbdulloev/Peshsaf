@@ -9,82 +9,42 @@
         <h2 class="intro-y text-lg font-medium">Отчет по утилизациям</h2>
 
         @if($utilizationProducts->count())
-            <table
-                id="sales-table"
-                data-tw-merge
-                class="w-full text-left mt-5"
-            >
-                <thead data-tw-merge class="">
-                <tr
-                    data-tw-merge
-                    class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
-                >
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+            <table class="w-full text-left mt-5">
+                <thead>
+                <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Наименование
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Штрих-код
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         QR-код
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Отправитель
                     </th>
-                    <th
-                        data-tw-merge
-                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                    >
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                         Дата
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($utilizationProducts as $utilizationProduct)
-                    <tr
-                        data-tw-merge
-                        class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
-                    >
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
+                    <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
                             {{ $utilizationProduct->dicProduct->name }}
                         </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
                             {{ $utilizationProduct->dicProduct->barcode }}
                         </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
                             {{ $utilizationProduct->product->barcode }}
                         </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
                             {{ $utilizationProduct->utilization->returner }}
                         </td>
-                        <td
-                            data-tw-merge
-                            class="px-5 py-2 border-b dark:border-darkmode-300"
-                        >
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
                             {{ $utilizationProduct->utilization->created_at->format('d.m.Y') }}
                         </td>
                     </tr>

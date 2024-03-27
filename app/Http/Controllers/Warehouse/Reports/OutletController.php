@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Warehouse\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\OutletProduct;
-use App\Models\Receipt;
-use App\Models\Supplier;
 use Illuminate\View\View;
 
 class OutletController extends Controller
@@ -19,10 +17,8 @@ class OutletController extends Controller
         return view('warehouse.reports.outlets', compact('outletProducts'));
     }
 
-    public function export(Receipt $receipt): View
+    public function export()
     {
-        $suppliers = Supplier::get();
-
-        return view('warehouse.receipts.edit', compact('receipt', 'suppliers'));
+        //
     }
 }

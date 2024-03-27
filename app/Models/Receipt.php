@@ -5,10 +5,12 @@ namespace App\Models;
 use App\StateMachines\StatusReceipt;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Receipt extends Model
 {
@@ -20,7 +22,7 @@ class Receipt extends Model
         'date',
         'supplier_id',
         'warehouse_id',
-        'filepath'
+        'filepath',
     ];
 
     protected $casts = [
@@ -51,6 +53,13 @@ class Receipt extends Model
     public function warehouse(): BelongsTo
     {
         return $this->belongsTo(Warehouse::class);
+    }
+
+    public function url(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => Storage::url($this->filepath)
+        );
     }
 
     public function scopeByStatus(Builder $query, array|string $statuses): void

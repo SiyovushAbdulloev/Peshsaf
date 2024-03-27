@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Warehouse\Reports;
 
 use App\Http\Controllers\Controller;
-use App\Models\Receipt;
-use App\Models\Supplier;
 use Illuminate\View\View;
 
 class RemainController extends Controller
@@ -21,10 +19,8 @@ class RemainController extends Controller
         return view('warehouse.reports.remains', compact('remains'));
     }
 
-    public function export(Receipt $receipt): View
+    public function export()
     {
-        $suppliers = Supplier::get();
-
-        return view('warehouse.receipts.edit', compact('receipt', 'suppliers'));
+        //
     }
 }
