@@ -92,8 +92,13 @@ export default defineConfig({
 
                 // Project JS
                 "resources/js/pages/project/movements.js",
+                "resources/js/pages/project/products.js",
                 "resources/js/pages/project/receipts.js",
+                "resources/js/pages/project/returns.js",
                 "resources/js/pages/project/sales.js",
+                "resources/js/pages/project/users.js",
+                "resources/js/pages/project/utilizations.js",
+                "resources/js/pages/project/vendor.js",
 
                 // JS Themes
                 "resources/js/themes/rubick.js",

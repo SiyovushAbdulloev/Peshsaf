@@ -24,7 +24,7 @@ class SaleController extends Controller
             ->with('client')
             ->withCount('products')
             ->latest()
-            ->paginate(10);
+            ->paginate(5);
 
         return response()->json(SaleResource::collection($sales));
     }
