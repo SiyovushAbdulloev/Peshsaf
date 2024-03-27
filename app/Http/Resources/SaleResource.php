@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Warehouse\Movement\ProductResource;
 use Illuminate\Http\Request;
 
 /**
@@ -23,6 +24,7 @@ class SaleResource extends PaginateResourceCollection
             'client_phone' => $this->resource->client_phone,
             'products_count' => $this->resource->products_count,
             'date' => $this->resource->date->format('d.m.Y'),
+            'products' => ProductResource::collection($this->whenLoaded('products'))
         ];
     }
 }
