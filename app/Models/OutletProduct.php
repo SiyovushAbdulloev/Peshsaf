@@ -19,6 +19,11 @@ class OutletProduct extends Model
         'warehouse_id',
     ];
 
+    public function outlet(): BelongsTo
+    {
+        return $this->belongsTo(Outlet::class);
+    }
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

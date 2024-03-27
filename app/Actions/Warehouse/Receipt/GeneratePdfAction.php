@@ -7,11 +7,15 @@ use App\Models\Product;
 use App\Models\Receipt;
 use App\Models\Warehouse;
 use App\Models\WarehouseRemain;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class GeneratePdfAction extends CoreAction
 {
     public function handle(Receipt $receipt): Receipt
     {
+        $codes = [];
         // Сгенерировать QR для каждого товара
         // и поменять статус товаров в остатках склада на new
         $products = Product::query()
@@ -34,6 +38,8 @@ class GeneratePdfAction extends CoreAction
 
             $newProduct->status()->transitionTo('new');
 
+            $codes[] = QrCode::size(140)->generate($newProduct->barcode);
+
             // Добавляем товар в остатки
             $remain->products()->create([
                 'warehouse_id' => $remain->warehouse_id,
@@ -43,6 +49,15 @@ class GeneratePdfAction extends CoreAction
             $product->history = true;
             $product->save();
         }
+
+        $path = "receipts/$receipt->id.pdf";
+        Storage::put($path, Pdf::loadView('qrcode', ['codes' => $codes])
+            ->setPaper('A4')
+            ->stream());
+
+        $receipt->update([
+            'filepath' => $path
+        ]);
 
         return $receipt;
     }

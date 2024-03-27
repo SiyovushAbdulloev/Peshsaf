@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->foreignId('supplier_id')->constrained();
             $table->foreignId('warehouse_id')->constrained();
+            $table->string('filepath')->nullable();
             $table->timestamps();
         });
 
