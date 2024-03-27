@@ -23,7 +23,7 @@ class ReturnResource extends PaginateResourceCollection
             'status'         => $this->resource->status,
             'date'           => $this->resource->date->format('d.m.Y'),
             'number'         => $this->resource->number,
-            'products_count' => $this->resource->products_count,
+            'products_count' => $this->whenCounted('products'),
             'outlet'         => OutletResource::make($this->whenLoaded('origin')),
             'products'       => ProductResource::collection($this->whenLoaded('products')),
         ];

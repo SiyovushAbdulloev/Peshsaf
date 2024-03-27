@@ -67,6 +67,12 @@
                     </th>
                     <th
                         data-tw-merge
+                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                    >
+                        Статус
+                    </th>
+                    <th
+                        data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]"
                     >
                         &nbsp;
@@ -114,6 +120,12 @@
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $movement->products_count }}
+                        </td>
+                        <td
+                            data-tw-merge
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
+                        >
+                            {{ $movement->status }}
                         </td>
                         <td
                             data-tw-merge

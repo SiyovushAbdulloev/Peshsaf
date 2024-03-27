@@ -22,7 +22,7 @@ class SaleResource extends PaginateResourceCollection
             'client_name' => $this->resource->client_name,
             'client_address' => $this->resource->client_address,
             'client_phone' => $this->resource->client_phone,
-            'products_count' => $this->resource->products_count,
+            'products_count' => $this->whenCounted('products'),
             'date' => $this->resource->date->format('d.m.Y'),
             'products' => ProductResource::collection($this->whenLoaded('products'))
         ];
