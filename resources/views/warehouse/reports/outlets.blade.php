@@ -6,7 +6,19 @@
 
 @section('content')
     <div class="mt-5">
-        <h2 class="intro-y text-lg font-medium">Отчет по торговым точкам</h2>
+        <div class="intro-y mt-2 flex">
+            <h2 class="intro-y text-lg font-medium">Отчет по торговым точкам</h2>
+
+            <x-base.button
+                as="a"
+                :href="route('warehouse.reports.outlets.export')"
+                class="mr-1 w-24"
+                type="button"
+                variant="outline-secondary"
+            >
+                Экспорт в Excel
+            </x-base.button>
+        </div>
 
         @if($outletProducts->count())
             <table class="w-full text-left mt-5">
