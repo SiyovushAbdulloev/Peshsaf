@@ -11,7 +11,7 @@
 
             <x-base.button
                 as="a"
-                :href="route('warehouse.reports.remains.export')"
+                :href="route('warehouse.reports.remains.export', $filters)"
                 class="mr-1 w-24"
                 type="button"
                 variant="outline-secondary"
@@ -19,6 +19,8 @@
                 Экспорт в Excel
             </x-base.button>
         </div>
+
+        <livewire:warehouse.reports.remain-filter :options="$dateOptions"/>
 
         @if($remains->count())
             <table class="w-full text-left mt-5">
@@ -66,10 +68,14 @@
             </table>
         @else
             <div role="alert"
-                 class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
+                 class="mt-8 alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
                 <i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
                 Нет данных
             </div>
         @endif
     </div>
 @endsection
+
+@pushOnce('scripts')
+    @vite('resources/js/pages/project/remains.js')
+@endPushOnce

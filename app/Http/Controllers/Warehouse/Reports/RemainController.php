@@ -10,8 +10,11 @@ class RemainController extends Controller
 {
     public function index(GetRemainsAction $action): View
     {
-        $remains = $action->execute(15);
+        $filters = request()->only(['from', 'to']);
 
-        return view('warehouse.reports.remains', compact('remains'));
+        $remains = $action->execute(15, $filters);
+        $dateOptions = config('project.filter-dates.options');
+
+        return view('warehouse.reports.remains', compact('remains', 'dateOptions', 'filters'));
     }
 }
