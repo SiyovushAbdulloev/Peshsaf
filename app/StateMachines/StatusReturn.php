@@ -2,6 +2,7 @@
 
 namespace App\StateMachines;
 
+use App\Actions\Vendor\Return\Client\FinishAction;
 use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusReturn extends StateMachine
@@ -28,5 +29,18 @@ class StatusReturn extends StateMachine
     public function defaultState(): ?string
     {
         return 'draft';
+    }
+
+    public function afterTransitionHooks(): array
+    {
+        return [
+            'finished' => [
+                function ($from, $model) {
+                    if ($from === self::DRAFT) {
+                        app(FinishAction::class)->execute($model);
+                    }
+                },
+            ],
+        ];
     }
 }

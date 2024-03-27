@@ -38,5 +38,9 @@
                 barcode += evt.key;
             interval = setInterval(() => barcode = '', 20);
         });
+
+        Livewire.on('clientSelected', function () {
+            $('#query').val('');
+        });
     });
 })();

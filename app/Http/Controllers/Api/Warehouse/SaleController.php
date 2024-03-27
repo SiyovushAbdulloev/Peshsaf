@@ -8,7 +8,7 @@ use App\Actions\Warehouse\Sale\StoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Resources\ClientResource;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\Warehouse\Movement\ProductResource;
 use App\Http\Resources\SaleResource;
 use App\Models\Sale;
 use Illuminate\Http\JsonResponse;
