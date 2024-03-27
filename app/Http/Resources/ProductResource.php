@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 
 /**
- * @property \App\Models\Product $resource
+ * @property \App\Models\WarehouseRemainProduct $resource
  */
 class ProductResource extends PaginateResourceCollection
 {
