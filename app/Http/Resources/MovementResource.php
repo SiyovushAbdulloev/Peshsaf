@@ -6,7 +6,7 @@ use App\Http\Resources\Warehouse\Movement\ProductResource;
 use Illuminate\Http\Request;
 
 /**
- * @property \App\Models\Client $resource
+ * @property \App\Models\Movement $resource
  */
 class MovementResource extends PaginateResourceCollection
 {
