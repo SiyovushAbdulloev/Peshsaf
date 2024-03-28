@@ -26,7 +26,7 @@ class UtilizationResource extends PaginateResourceCollection
             'status'         => $this->resource->status,
             'date'           => $this->resource->date->format('d.m.Y'),
             'number'         => $this->resource->number,
-            'products_count' => $this->resource->products_count,
+            'products_count' => $this->whenCounted('products'),
             'client'         => ClientResource::make($this->whenLoaded('client')),
             'outlet'         => OutletResource::make($this->whenLoaded('outlet')),
             'products'       => ProductResource::collection($this->whenLoaded('products')),

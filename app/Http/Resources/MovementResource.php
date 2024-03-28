@@ -20,8 +20,9 @@ class MovementResource extends PaginateResourceCollection
         return [
             'id' => $this->resource->id,
             'number' => $this->resource->number,
+            'status' => $this->resource->status,
             'date' => $this->resource->date->format('d.m.Y'),
-            'products_count' => $this->resource->products_count,
+            'products_count' => $this->whenCounted('products'),
             'outlet' => OutletResource::make($this->whenLoaded('outlet')),
             'products' => ProductResource::collection($this->whenLoaded('products'))
         ];
