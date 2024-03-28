@@ -16,9 +16,9 @@ class ReceiptController extends Controller
         return view('customs.receipts.index', compact('receipts'));
     }
 
-    public function confirmation(Receipt $receipt): View
+    public function show(Receipt $receipt): View
     {
         $receipt = $receipt->load('products.product.measure');
-        return view('customs.receipts.confirmation', compact('receipt'));
+        return view('customs.receipts.show', compact('receipt'));
     }
 }

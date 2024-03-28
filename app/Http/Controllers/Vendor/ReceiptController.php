@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Movement;
+use App\StateMachines\StatusMovement;
+use App\StateMachines\StatusReceipt;
 use Illuminate\View\View;
 
 class ReceiptController extends Controller
@@ -13,6 +15,7 @@ class ReceiptController extends Controller
         $receipts = auth()->user()
             ->outlet
             ->movements()
+            ->byStatus([StatusMovement::APPROVING, StatusMovement::APPROVED])
             ->with('warehouse')
             ->withCount('products')
             ->latest()

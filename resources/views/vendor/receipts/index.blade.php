@@ -49,7 +49,9 @@
                 @foreach($receipts as $receipt)
                     <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->number }}</td>
-                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->status }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
+                            <x-status :status="$receipt->status"/>
+                        </td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->date->format('d.m.Y') }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->warehouse?->name }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->warehouse?->address ?? '-' }}</td>

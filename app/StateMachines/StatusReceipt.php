@@ -15,6 +15,8 @@ class StatusReceipt extends StateMachine
 
     const FINISHED = 'finished';
 
+    const REJECTED = 'rejected';
+
     public function recordHistory(): bool
     {
         return false;
@@ -24,8 +26,9 @@ class StatusReceipt extends StateMachine
     {
         return [
             'draft'       => ['on_approval'],
-            'on_approval' => ['approved', 'draft'],
+            'on_approval' => ['approved', 'rejected'],
             'approved'    => ['finished'],
+            'rejected'    => ['on_approval'],
         ];
     }
 

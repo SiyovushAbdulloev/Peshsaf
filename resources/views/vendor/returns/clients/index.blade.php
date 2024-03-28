@@ -57,7 +57,9 @@
                     <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)
                     _td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->number }}</td>
-                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ __($return->status) }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
+                            <x-status :status="$return->status"/>
+                        </td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->date->format('d.m.Y') }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->client->name }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $return->client?->address }}</td>
