@@ -37,9 +37,7 @@ Route::name('warehouse.')->group(function () {
         ->name('reports.')
         ->group(function () {
             Route::get('/remains', [RemainController::class, 'index'])->name('remains.index');
-            Route::get('/remains/export', [RemainController::class, 'export'])->name('remains.export');
             Route::get('/utilizations', [UtilizationReportController::class, 'index'])->name('utilizations.index');
             Route::get('/outlets', [OutletController::class, 'index'])->name('outlets.index');
-            Route::get('/outlets/export', [OutletController::class, 'export'])->name('outlets.export');
         });
 });

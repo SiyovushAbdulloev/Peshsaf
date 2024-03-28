@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Warehouse\Reports;
 
+use App\Actions\Warehouse\Reports\ExportUtilizationsAction;
 use App\Actions\Warehouse\Reports\GetUtilizationsAction;
 use App\Http\Controllers\Controller;
 use App\Models\Outlet;
@@ -12,11 +13,11 @@ class UtilizationController extends Controller
 {
     public function index(GetUtilizationsAction $action, ExportUtilizationsAction $exportAction): View|StreamedResponse
     {
-        $filters = request()->only(['from', 'to', 'outlet']);
+        $filters = request()->only(['from', 'to', 'outlet', 'option']);
         $query = $action->execute(filters: $filters);
 
         if (request()->get('export')) {
-            $callback = function () use ($action, $exportAction, $query) {
+            $callback = function () use ($exportAction, $query) {
                 $writer = $exportAction->execute($query->get());
                 $writer->save('php://output');
             };

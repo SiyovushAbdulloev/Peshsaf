@@ -46,7 +46,7 @@ class ExportOutletsAction extends CoreAction
             ->setCellValue('B2', __('Штрих-код'))
             ->setCellValue('C2', __('QR-код'))
             ->setCellValue('D2', __('Отправитель'))
-            ->setCellValue('E2', __('Дата оп-я товара'));
+            ->setCellValue('E2', __('Дата'));
 
         $rowIndex = 3;
 

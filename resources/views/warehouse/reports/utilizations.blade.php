@@ -17,6 +17,7 @@
                     class="w-1/4"
                     aria-label="form-select-sm example"
                     name="outlet"
+                    id="outlet"
                 >
                     <option value="">Выберите торговую точку</option>
                     @foreach($outlets as $outlet)
@@ -29,10 +30,12 @@
                     class="w-1/4"
                     aria-label="form-select-sm example"
                     id="option"
+                    name="option"
                 >
                     <option value="">Выберите дату</option>
                     @foreach($options as $option)
                         <option value="{{$option['value']}}" data-from="{{$option['from']}}"
+                                @selected(($filters['option'] ?? '') == $option['value'])
                                 data-to="{{$option['to']}}">
                             {{$option['label']}}
                         </option>
@@ -53,31 +56,36 @@
                     name="to"
                     value="{{$filters['to'] ?? ''}}"
                 />
-                <x-base.button
-                    class="w-24"
-                    variant="primary"
-                >
-                    Очистить
-                </x-base.button>
-                <x-base.button
-                    class="w-24"
-                    variant="primary"
-                >
-                    Поиск
-                </x-base.button>
+                <div class="flex gap-4">
+                    <x-base.button
+                        class="w-24"
+                        variant="primary"
+                        id="search"
+                    >
+                        Поиск
+                    </x-base.button>
+                    <x-base.button
+                        class="w-24"
+                        variant="outline-primary"
+                        id="clear"
+                    >
+                        Очистить
+                    </x-base.button>
+                </div>
             </div>
         </form>
 
-        @if($utilizationProducts->count())
-            <div class="box p-4 mt-6">
-                <x-base.button
-                    class="w-24 block ml-auto"
-                    variant="primary"
-                    id="export-btn"
-                    type="button"
-                >
-                    Экспорт
-                </x-base.button>
+        <div class="box p-4 mt-6">
+            <x-base.button
+                class="flex gap-2 ml-auto"
+                variant="outline-success"
+                id="export-btn"
+                type="button"
+            >
+                <x-base.icon icon="fa-file-excel"/>
+                <span>Экспорт</span>
+            </x-base.button>
+            @if($utilizationProducts->count())
                 <table
                     id="sales-table"
                     class="w-full text-left mt-5"
@@ -127,14 +135,17 @@
                     @endforeach
                     </tbody>
                 </table>
-            </div>
-        @else
-            <div role="alert"
-                 class="mt-8 alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
-                <i data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
-                Нет данных
-            </div>
-        @endif
+                <div class="mt-4">
+                    {{$utilizationProducts->links()}}
+                </div>
+            @else
+                <div role="alert"
+                     class="mt-8 alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
+                    <i data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                    Нет данных
+                </div>
+            @endif
+        </div>
     </div>
 @endsection
 

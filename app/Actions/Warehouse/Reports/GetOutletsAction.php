@@ -4,22 +4,14 @@ namespace App\Actions\Warehouse\Reports;
 
 use App\Core\Actions\CoreAction;
 use App\Models\OutletProduct;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 
 class GetOutletsAction extends CoreAction
 {
-    public function handle(int|null $pagination = null): LengthAwarePaginator|Collection
+    public function handle(array $filters): Builder
     {
-        $outletProducts = OutletProduct::where('warehouse_id', auth()->user()->warehouse_id)
+        return OutletProduct::where('warehouse_id', auth()->user()->warehouse_id)
+            ->filter($filters)
             ->with('product', 'dicProduct', 'outlet');
-
-        if (!is_null($pagination)) {
-            $outletProducts = $outletProducts->paginate($pagination);
-        } else {
-            $outletProducts = $outletProducts->get();
-        }
-
-        return $outletProducts;
     }
 }
