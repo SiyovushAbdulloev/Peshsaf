@@ -39,6 +39,12 @@
                         data-tw-merge
                         class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                     >
+                        Статус
+                    </th>
+                    <th
+                        data-tw-merge
+                        class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                    >
                         Дата
                     </th>
                     <th
@@ -84,6 +90,12 @@
                             class="px-5 py-2 border-b dark:border-darkmode-300"
                         >
                             {{ $utilization->number }}
+                        </td>
+                        <td
+                            data-tw-merge
+                            class="px-5 py-2 border-b dark:border-darkmode-300"
+                        >
+                            {{ $utilization->status }}
                         </td>
                         <td
                             data-tw-merge
