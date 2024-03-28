@@ -35,7 +35,8 @@ class MovementController extends Controller
     public function show(Movement $movement): JsonResponse
     {
         return response()->json([
-            'data' => MovementResource::make($movement->load('products.product', 'products.dicProduct')->loadCount('products')),
+            'data' => MovementResource::make($movement->load('products.product', 'products.dicProduct',
+                'outlet')->loadCount('products')),
         ]);
     }
 
@@ -83,6 +84,15 @@ class MovementController extends Controller
                     ->load('outlet', 'products.product', 'products.dicProduct')
                     ->loadCount('products')
             ),
+        ]);
+    }
+
+    public function destroy(Movement $movement): JsonResponse
+    {
+        $movement->delete();
+
+        return response()->json([
+            'success' => 'Перемещение успешно удалено',
         ]);
     }
 

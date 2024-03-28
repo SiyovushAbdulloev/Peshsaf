@@ -22,6 +22,7 @@ Route::middleware('role:warehouse')
         Route::post('/movements/create', [MovementController::class, 'store']);
         Route::patch('/movements/{movement}/edit', [MovementController::class, 'update']);
         Route::patch('/movements/{movement}/edit', [MovementController::class, 'update']);
+        Route::delete('/movements/{movement}', [MovementController::class, 'destroy']);
         Route::post('/movements/{movement}/send', [MovementController::class, 'send']);
         Route::post('/movements/{movement}/products/add', [MovementController::class, 'addProduct']);
         Route::delete('/movements/{movement}/products/{movementProduct}', [MovementController::class, 'removeProduct']);
