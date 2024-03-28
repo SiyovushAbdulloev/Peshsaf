@@ -12,7 +12,7 @@ use App\Http\Requests\Movement\StoreRequest;
 use App\Http\Requests\Movement\UpdateRequest;
 use App\Http\Resources\MovementResource;
 use App\Http\Resources\OutletResource;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\Warehouse\Movement\ProductResource;
 use App\Models\Movement;
 use App\Models\MovementProduct;
 use App\Models\Outlet;
@@ -35,7 +35,7 @@ class MovementController extends Controller
     public function show(Movement $movement): JsonResponse
     {
         return response()->json([
-            'data' => MovementResource::make($movement->load('products.product', 'products.dicProduct')),
+            'data' => MovementResource::make($movement->load('products.product', 'products.dicProduct')->loadCount('products')),
         ]);
     }
 
@@ -105,6 +105,21 @@ class MovementController extends Controller
     public function removeProduct(Movement $movement, MovementProduct $movementProduct)
     {
         $movementProduct->delete();
+
+        return response()->json([
+            'data' => MovementResource::make(
+                $movement
+                    ->load('outlet', 'products.product', 'products.dicProduct')
+                    ->loadCount('products')
+            ),
+        ]);
+    }
+
+    public function send(Movement $movement): JsonResponse
+    {
+        if ($movement->status()->canBe('approving')) {
+            $movement->status()->transitionTo('approving');
+        }
 
         return response()->json([
             'data' => MovementResource::make(
