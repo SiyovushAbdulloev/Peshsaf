@@ -15,6 +15,8 @@
     >
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+
     @yield('head')
 
     <!-- BEGIN: CSS Assets-->

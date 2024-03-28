@@ -10,19 +10,19 @@ return [
         ],
         [
             'value' => 'week',
-            'label' => 'Данные за текущую неделю',
+            'label' => 'Данные за неделю',
             'from' => \Carbon\Carbon::now()->subWeek()->format('d-m-Y'),
             'to' => \Carbon\Carbon::now()->format('d-m-Y'),
         ],
         [
             'value' => 'month',
-            'label' => 'Данные за текущий месяц',
+            'label' => 'Данные за месяц',
             'from' => \Carbon\Carbon::now()->subMonth()->format('d-m-Y'),
             'to' => \Carbon\Carbon::now()->format('d-m-Y'),
         ],
         [
             'value' => 'year',
-            'label' => 'Данные за текущий год',
+            'label' => 'Данные за год',
             'from' => \Carbon\Carbon::now()->subYear()->format('d-m-Y'),
             'to' => \Carbon\Carbon::now()->format('d-m-Y'),
         ],

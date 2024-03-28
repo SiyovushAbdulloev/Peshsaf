@@ -21,10 +21,13 @@
                 >
                     <option value="">Выберите дату</option>
                     @foreach($options as $option)
-                        <option value="{{$option['value']}}" data-from="{{$option['from']}}"
-                                @selected(($filters['option'] ?? '') == $option['value'])
-                                data-to="{{$option['to']}}">
-                            {{$option['label']}}
+                        <option
+                            value="{{ $option['value'] }}"
+                            data-from="{{ $option['from'] }}"
+                            @selected(request()->get('option') == $option['value'])
+                            data-to="{{ $option['to'] }}"
+                        >
+                            {{ $option['label'] }}
                         </option>
                     @endforeach
                 </x-base.form-select>
@@ -33,15 +36,18 @@
                     data-single-mode="true"
                     id="from"
                     name="from"
-                    value="{{$filters['from'] ?? ''}}"
+                    data-set-date="false"
+                    placeholder="Дата начала"
+                    value="{{ request()->get('from') }}"
                 />
-                <span>до</span>
                 <x-base.litepicker
                     class="w-1/6"
                     data-single-mode="true"
                     id="to"
                     name="to"
-                    value="{{$filters['to'] ?? ''}}"
+                    data-set-date="false"
+                    placeholder="Дата окончания"
+                    value="{{ request()->get('from') }}"
                 />
                 <div class="flex gap-4">
                     <x-base.button
@@ -55,6 +61,7 @@
                         class="w-24"
                         variant="outline-primary"
                         id="clear"
+                        type="button"
                     >
                         Очистить
                     </x-base.button>
@@ -62,7 +69,7 @@
             </div>
         </form>
 
-        <div class="box p-4 mt-6">
+        <div class="box p-4 mt-6 overflow-x-auto">
             <x-base.button
                 class="flex gap-2 ml-auto"
                 variant="outline-success"
@@ -76,7 +83,7 @@
                 <table
                     id="sales-table"
                     data-tw-merge
-                    class="w-full text-left mt-5"
+                    class="w-full text-left"
                 >
                     <thead data-tw-merge class="">
                     <tr
@@ -156,7 +163,7 @@
                     </tbody>
                 </table>
                 <div class="mt-4">
-                    {{$remains->links()}}
+                    {{ $remains->links() }}
                 </div>
             @else
                 <div role="alert"
@@ -171,5 +178,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/remains.js')
+    @vite('resources/js/pages/project/reports.js')
 @endPushOnce

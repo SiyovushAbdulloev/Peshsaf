@@ -34,9 +34,12 @@
                 >
                     <option value="">Выберите дату</option>
                     @foreach($options as $option)
-                        <option value="{{$option['value']}}" data-from="{{$option['from']}}"
-                                @selected(($filters['option'] ?? '') == $option['value'])
-                                data-to="{{$option['to']}}">
+                        <option
+                            value="{{ $option['value'] }}"
+                            data-from="{{ $option['from'] }}"
+                            @selected(request()->get('option') == $option['value'])
+                            data-to="{{$option['to']}}"
+                        >
                             {{$option['label']}}
                         </option>
                     @endforeach
@@ -46,7 +49,9 @@
                     data-single-mode="true"
                     id="from"
                     name="from"
-                    value="{{$filters['from'] ?? ''}}"
+                    data-set-date="false"
+                    placeholder="Дата начала"
+                    value="{{ request()->get('from') }}"
                 />
                 <span>до</span>
                 <x-base.litepicker
@@ -54,7 +59,9 @@
                     data-single-mode="true"
                     id="to"
                     name="to"
-                    value="{{$filters['to'] ?? ''}}"
+                    data-set-date="false"
+                    placeholder="Дата окончания"
+                    value="{{ request()->get('to') }}"
                 />
                 <div class="flex gap-4">
                     <x-base.button
@@ -68,6 +75,7 @@
                         class="w-24"
                         variant="outline-primary"
                         id="clear"
+                        type="button"
                     >
                         Очистить
                     </x-base.button>
@@ -75,7 +83,7 @@
             </div>
         </form>
 
-        <div class="box p-4 mt-6">
+        <div class="box p-4 mt-6 overflow-x-auto">
             <x-base.button
                 class="flex gap-2 ml-auto"
                 variant="outline-success"
@@ -88,7 +96,7 @@
             @if($utilizationProducts->count())
                 <table
                     id="sales-table"
-                    class="w-full text-left mt-5"
+                    class="w-full text-left"
                 >
                     <thead class="">
                     <tr
@@ -150,5 +158,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/remains.js')
+    @vite('resources/js/pages/project/reports.js')
 @endPushOnce

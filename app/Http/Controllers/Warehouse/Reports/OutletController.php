@@ -12,8 +12,7 @@ class OutletController extends Controller
 {
     public function index(GetOutletsAction $action, ExportOutletsAction $exportAction): View|StreamedResponse
     {
-        $filters = request()->only(['from', 'to', 'option']);
-        $query = $action->execute($filters);
+        $query = $action->execute(request()->only(['from', 'to', 'option']));
 
         if (request()->get('export')) {
             $callback = function () use ($exportAction, $query) {
@@ -33,6 +32,6 @@ class OutletController extends Controller
         $outletProducts = $query->paginate(15);
         $options = config('project.filter-dates.options');
 
-        return view('warehouse.reports.outlets', compact('outletProducts', 'filters', 'options'));
+        return view('warehouse.reports.outlets', compact('outletProducts', 'options'));
     }
 }

@@ -35,6 +35,10 @@
                 ? " - " + dayjs().add(1, "month").format(options.format)
                 : "";
             $(this).val(date);
+
+            if ($(this).data("set-date") === false) {
+                $(this).val('')
+            }
         }
 
         new Litepicker({

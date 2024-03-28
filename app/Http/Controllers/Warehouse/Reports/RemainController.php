@@ -12,8 +12,7 @@ class RemainController extends Controller
 {
     public function index(GetRemainsAction $action, ExportRemainsAction $exportAction): View|StreamedResponse
     {
-        $filters = request()->only(['from', 'to', 'option']);
-        $query = $action->execute(filters: $filters);
+        $query = $action->execute(filters: request()->only(['from', 'to', 'option']));
 
         if (request()->get('export')) {
             $callback = function () use ($exportAction, $query) {
@@ -33,6 +32,6 @@ class RemainController extends Controller
         $remains = $query->paginate(15);
         $options = config('project.filter-dates.options');
 
-        return view('warehouse.reports.remains', compact('remains', 'options', 'filters'));
+        return view('warehouse.reports.remains', compact('remains', 'options'));
     }
 }

@@ -13,8 +13,7 @@ class UtilizationController extends Controller
 {
     public function index(GetUtilizationsAction $action, ExportUtilizationsAction $exportAction): View|StreamedResponse
     {
-        $filters = request()->only(['from', 'to', 'outlet', 'option']);
-        $query = $action->execute(filters: $filters);
+        $query = $action->execute(filters: request()->only(['from', 'to', 'outlet', 'option']));
 
         if (request()->get('export')) {
             $callback = function () use ($exportAction, $query) {
@@ -35,6 +34,6 @@ class UtilizationController extends Controller
         $outlets = Outlet::get();
         $options = config('project.filter-dates.options');
 
-        return view('warehouse.reports.utilizations', compact('utilizationProducts', 'options', 'filters', 'outlets'));
+        return view('warehouse.reports.utilizations', compact('utilizationProducts', 'options', 'outlets'));
     }
 }
