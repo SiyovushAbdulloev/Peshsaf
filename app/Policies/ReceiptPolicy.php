@@ -11,7 +11,7 @@ class ReceiptPolicy
 {
     public function edit(User $user, Receipt $receipt): bool
     {
-        return $receipt->status()->is('draft');
+        return in_array($receipt->status, [StatusReceipt::DRAFT, StatusReceipt::REJECTED]);
     }
 
     public function confirm(User $user, Receipt $receipt): bool

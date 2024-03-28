@@ -41,9 +41,9 @@ class ClientController extends Controller
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
-        $action->execute($request->getParams());
+        $return = $action->execute($request->getParams());
 
-        return redirect(route('vendor.returns.clients.index'))->with('success', 'Возврат успешно добавлен');
+        return redirect(route('vendor.returns.clients.edit', compact('return')))->with('success', 'Возврат успешно добавлен');
     }
 
     public function edit(Refund $return): View

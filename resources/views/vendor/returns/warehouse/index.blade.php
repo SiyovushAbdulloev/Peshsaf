@@ -60,7 +60,7 @@
                             {{ $return->number }}
                         </td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">
-                            {{ __($return->status) }}
+                            <x-status :status="$return->status"/>
                         </td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">
                             {{ $return->date->format('d.m.Y') }}

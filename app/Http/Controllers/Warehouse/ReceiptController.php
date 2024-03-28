@@ -53,6 +53,8 @@ class ReceiptController extends Controller
         UpdateRequest $request,
         UpdateAction $action
     ) {
+        $this->authorize('edit', $receipt);
+
         $action->execute($request->getParams(), $receipt);
 
         return redirect(route('warehouse.receipts.edit', compact('receipt')))->with('success',
@@ -69,6 +71,8 @@ class ReceiptController extends Controller
         Receipt $receipt,
         UpdateAction $action
     ) {
+        $this->authorize('edit', $receipt);
+
         $action->execute($request->getParams(), $receipt);
         if ($receipt->status()->canBe('on_approval')) {
             $receipt->status()->transitionTo('on_approval');

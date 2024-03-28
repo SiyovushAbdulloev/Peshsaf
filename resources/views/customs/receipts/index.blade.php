@@ -11,35 +11,35 @@
         @if($receipts->count())
             <table id="receipts-table" class="w-full text-left col-span-12">
                 <thead>
-                    <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            #
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Статус
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Дата
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Поставщик
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Адрес
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Страна
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Телефон
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Количество
-                        </th>
-                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]">
-                            &nbsp;
-                        </th>
-                    </tr>
+                <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        #
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Статус
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Дата
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Поставщик
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Адрес
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Страна
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Телефон
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Количество
+                    </th>
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]">
+                        &nbsp;
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
                 @foreach($receipts as $receipt)
@@ -47,7 +47,9 @@
                         class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                     >
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->number }}</td>
-                        <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->status }}</td>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
+                            <x-status :status="$receipt->status" />
+                        </td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->date->format('d.m.Y') }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->supplier?->full_name }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->supplier?->organization_address }}</td>
@@ -59,23 +61,16 @@
                                 as="a"
                                 size="sm"
                                 href="{{ route('customs.receipts.show', compact('receipt')) }}"
+                                class="confirm-receipt"
                                 type="button"
-                                variant="outline-primary"
+                                :variant="auth()->user()->can('confirm', $receipt) ? 'outline-warning' : 'outline-primary'"
                             >
-                                <x-base.icon icon="fa-info"/>
-                            </x-base.button>
-                            @can('confirm', $receipt)
-                                <x-base.button
-                                    as="a"
-                                    size="sm"
-                                    href="{{ route('customs.receipts.confirmation', compact('receipt')) }}"
-                                    class="confirm-receipt"
-                                    type="button"
-                                    variant="outline-warning"
-                                >
+                                @if(auth()->user()->can('confirm', $receipt))
                                     <x-base.icon icon="fa-list"/>
-                                </x-base.button>
-                            @endcan
+                                @else
+                                    <x-base.icon icon="fa-info"/>
+                                @endif
+                            </x-base.button>
                         </td>
                     </tr>
                 @endforeach

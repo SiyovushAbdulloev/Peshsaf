@@ -6,7 +6,7 @@ use App\Actions\Customs\ConfirmReceiptAction;
 use App\Models\Receipt;
 use Livewire\Component;
 
-class Confirm extends Component
+class Actions extends Component
 {
     public Receipt $receipt;
 
@@ -17,7 +17,7 @@ class Confirm extends Component
 
     public function render()
     {
-        return view('livewire.customs.receipts.confirm');
+        return view('livewire.customs.receipts.actions');
     }
 
     public function confirm()
@@ -25,6 +25,17 @@ class Confirm extends Component
         app(ConfirmReceiptAction::class)->execute($this->receipt);
 
         session()->flash('success', 'Приход успешно одобрен');
+
+        return $this->redirect(route('customs.receipts.index'));
+    }
+
+    public function reject()
+    {
+        if ($this->receipt->status()->canBe('rejected')) {
+            $this->receipt->status()->transitionTo('rejected');
+        }
+
+        session()->flash('success', 'Приход успешно отклонен');
 
         return $this->redirect(route('customs.receipts.index'));
     }

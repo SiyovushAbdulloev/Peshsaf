@@ -8,7 +8,7 @@ use App\Models\Refund;
 
 class StoreAction extends CoreAction
 {
-    public function handle(StoreRequestParams $params): void
+    public function handle(StoreRequestParams $params): Refund
     {
         $return = auth()->user()
             ->outlet
@@ -25,5 +25,7 @@ class StoreAction extends CoreAction
                 'product_id' => $productId,
             ]);
         }
+
+        return $return;
     }
 }

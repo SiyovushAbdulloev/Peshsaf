@@ -54,61 +54,56 @@
                 </div>
             </div>
             <div class="intro-y box p-5">
-                <form id="receipt-form" action="{{ route('customs.receipts.confirm', compact('receipt')) }}"
-                      method="post">
-                    @csrf
-
-                    <x-base.table id="products" class="mt-5">
-                        <x-base.table.thead variant="light">
+                <x-base.table id="products" class="mt-5">
+                    <x-base.table.thead variant="light">
+                        <x-base.table.tr>
+                            <x-base.table.th class="whitespace-nowrap">
+                                Наименование
+                            </x-base.table.th>
+                            <x-base.table.th class="whitespace-nowrap">
+                                Штрих-код
+                            </x-base.table.th>
+                            <x-base.table.th class="whitespace-nowrap">
+                                Количество
+                            </x-base.table.th>
+                            <x-base.table.th class="whitespace-nowrap">
+                                Ед. измерения
+                            </x-base.table.th>
+                            <x-base.table.th class="whitespace-nowrap">
+                            </x-base.table.th>
+                        </x-base.table.tr>
+                    </x-base.table.thead>
+                    <x-base.table.tbody>
+                        @forelse($receipt->products as $key => $product)
                             <x-base.table.tr>
-                                <x-base.table.th class="whitespace-nowrap">
-                                    Наименование
-                                </x-base.table.th>
-                                <x-base.table.th class="whitespace-nowrap">
-                                    Штрих-код
-                                </x-base.table.th>
-                                <x-base.table.th class="whitespace-nowrap">
-                                    Количество
-                                </x-base.table.th>
-                                <x-base.table.th class="whitespace-nowrap">
-                                    Ед. измерения
-                                </x-base.table.th>
-                                <x-base.table.th class="whitespace-nowrap">
-                                </x-base.table.th>
+                                <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
+                                <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
+                                <x-base.table.td>{{ $product->count }}</x-base.table.td>
+                                <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
+                                <x-base.table.td>
+                                    <x-base.button
+                                        size="sm"
+                                        type="button"
+                                        variant="outline-primary"
+                                    >
+                                        <x-base.icon icon="fa-info"/>
+                                    </x-base.button>
+                                </x-base.table.td>
                             </x-base.table.tr>
-                        </x-base.table.thead>
-                        <x-base.table.tbody>
-                            @forelse($receipt->products as $key => $product)
-                                <x-base.table.tr>
-                                    <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
-                                    <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
-                                    <x-base.table.td>{{ $product->count }}</x-base.table.td>
-                                    <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
-                                    <x-base.table.td>
-                                        <x-base.button
-                                            size="sm"
-                                            type="button"
-                                            variant="outline-primary"
-                                        >
-                                            <x-base.icon icon="fa-info"/>
-                                        </x-base.button>
-                                    </x-base.table.td>
-                                </x-base.table.tr>
-                            @empty
-                                <x-base.table.tr>
-                                    <x-base.table.td colspan="5" class="text-center">No data</x-base.table.td>
-                                </x-base.table.tr>
-                            @endforelse
-                        </x-base.table.tbody>
-                    </x-base.table>
+                        @empty
+                            <x-base.table.tr>
+                                <x-base.table.td colspan="5" class="text-center">No data</x-base.table.td>
+                            </x-base.table.tr>
+                        @endforelse
+                    </x-base.table.tbody>
+                </x-base.table>
 
-                    <h2 class="text-lg mt-4 text-right">
-                        Количество товаров по накладной <span class="font-bold text-xl underline">{{
-                        $receipt->products->sum('count') }}</span>
-                    </h2>
+                <h2 class="text-lg mt-4 text-right">
+                    Количество товаров по накладной <span class="font-bold text-xl underline">{{
+                    $receipt->products->sum('count') }}</span>
+                </h2>
 
-                    <livewire:customs.receipts.confirm :receipt="$receipt"/>
-                </form>
+                <livewire:customs.receipts.actions :receipt="$receipt"/>
             </div>
         </div>
     </div>

@@ -7,6 +7,12 @@ use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusMovement extends StateMachine
 {
+    const DRAFT = 'draft';
+
+    const APPROVING = 'approving';
+
+    const APPROVED = 'approved';
+
     public function recordHistory(): bool
     {
         return false;
@@ -15,20 +21,20 @@ class StatusMovement extends StateMachine
     public function transitions(): array
     {
         return [
-            'draft'     => ['approving'],
-            'approving' => ['approved'],
+            self::DRAFT     => [self::APPROVING],
+            self::APPROVING => [self::APPROVED],
         ];
     }
 
     public function defaultState(): ?string
     {
-        return 'draft';
+        return self::DRAFT;
     }
 
     public function afterTransitionHooks(): array
     {
         return [
-            'approved' => [
+            self::APPROVED => [
                 function ($from, $model) {
                     foreach ($model->products as $movementProduct) {
                         // Удаляем товар из остатков склада

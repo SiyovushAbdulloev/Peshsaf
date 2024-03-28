@@ -12,7 +12,12 @@ class GetReceiptsAction extends CoreAction
     public function handle(): LengthAwarePaginator
     {
         return Receipt::query()
-            ->byStatus([StatusReceipt::ON_APPROVAL, StatusReceipt::APPROVED, StatusReceipt::FINISHED])
+            ->byStatus([
+                StatusReceipt::ON_APPROVAL,
+                StatusReceipt::APPROVED,
+                StatusReceipt::FINISHED,
+                StatusReceipt::REJECTED,
+            ])
             ->with('warehouse')
             ->withCount('products')
             ->latest()

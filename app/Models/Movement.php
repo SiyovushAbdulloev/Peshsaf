@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\StateMachines\StatusMovement;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,5 +50,13 @@ class Movement extends Model
     public function outlet(): BelongsTo
     {
         return $this->belongsTo(Outlet::class);
+    }
+
+    public function scopeByStatus(Builder $query, array|string $statuses): void
+    {
+        if (!is_array($statuses)) {
+            $statuses = [$statuses];
+        }
+        $query->whereIn('status', $statuses);
     }
 }

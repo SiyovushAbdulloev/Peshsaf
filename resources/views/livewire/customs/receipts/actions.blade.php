@@ -1,20 +1,21 @@
-<div class="mt-5 ml-auto">
-    <div class="flex gap-3">
+<div class="mt-5 flex">
+    <x-base.button
+        as="a"
+        :href="route('customs.receipts.index')"
+        class="mr-1 w-24"
+        type="button"
+        variant="outline-secondary"
+        wire:loading.remove
+    >
+        Назад
+    </x-base.button>
+    <div class="flex gap-3 ml-auto" wire:loading.remove>
+        @can('confirm', $receipt)
         <x-base.button
-            as="a"
-            :href="route('customs.receipts.index')"
-            class="mr-1 w-24"
-            type="button"
-            variant="outline-secondary"
-            wire:loading.remove
-        >
-            Назад
-        </x-base.button>
-        <x-base.button
-            class="w-24 ml-auto"
             type="button"
             variant="danger"
-            wire:loading.remove
+            wire:confirm="Вы действительно хотите отклонить приход?"
+            wire:click="reject"
         >
             Отклонить
         </x-base.button>
@@ -23,17 +24,18 @@
             variant="primary"
             wire:confirm="Вы действительно хотите подтвердить приход?"
             wire:click="confirm"
-            wire:loading.remove
         >
             Подтвердить
         </x-base.button>
-        <x-base.button
-            type="button"
-            variant="primary"
-            class="flex ml-auto gap-3"
-            wire:loading.flex
-            disabled
-        >
+        @endcan
+    </div>
+    <x-base.button
+        type="button"
+        variant="primary"
+        class="flex ml-auto gap-3"
+        wire:loading.flex
+        disabled
+    >
             <span class="h-4 w-4">
                 <svg class="h-full w-full" width="20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
                     <g fill="none" fill-rule="evenodd">
@@ -66,7 +68,6 @@
                     </g>
                 </svg>
             </span>
-            <span>Оприходование</span>
-        </x-base.button>
-    </div>
+        <span>Ждите</span>
+    </x-base.button>
 </div>
