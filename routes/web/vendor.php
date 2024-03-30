@@ -13,7 +13,6 @@ Route::middleware('role:vendor')
         Route::resource('receipts', ReceiptController::class)->only('index', 'show');
         Route::get('receipts/{receipt}/approving',
             [ReceiptController::class, 'approving'])->name('receipts.approving');
-        Route::post('receipts/{receipt}/approve', [ReceiptController::class, 'approve'])->name('receipts.approve');
 
         Route::get('products', [ProductController::class, 'index'])->name('products.index');
 
