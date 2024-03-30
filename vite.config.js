@@ -97,6 +97,7 @@ export default defineConfig({
                 "resources/js/pages/project/reports.js",
                 "resources/js/pages/project/returns.js",
                 "resources/js/pages/project/sales.js",
+                "resources/js/pages/project/suppliers.js",
                 "resources/js/pages/project/users.js",
                 "resources/js/pages/project/utilizations.js",
                 "resources/js/pages/project/vendor.js",

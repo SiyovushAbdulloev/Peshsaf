@@ -176,5 +176,5 @@
     </div>
 </div>
 @pushOnce('scripts')
-    @vite('resources/js/pages/suppliers.js')
+    @vite('resources/js/pages/project/suppliers.js')
 @endPushOnce
