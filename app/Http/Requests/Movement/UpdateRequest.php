@@ -28,6 +28,8 @@ class UpdateRequest extends CoreFormRequest
             'outlet_id'  => ['required', 'exists:outlets,id'],
             'number'     => ['required', 'string', 'max:255'],
             'date'       => ['required', 'string'],
+            'products'   => ['required', 'array', 'min:1'],
+            'products.*' => ['integer', 'exists:warehouse_remain_products,product_id'],
         ];
     }
 
@@ -37,6 +39,7 @@ class UpdateRequest extends CoreFormRequest
             'outletId' => $this->get('outlet_id'),
             'number'   => $this->get('number'),
             'date'     => $this->get('date'),
+            'products' => $this->get('products'),
         ];
     }
 }
