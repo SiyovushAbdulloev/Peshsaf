@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\Warehouse\OutletController;
-use App\Http\Controllers\Api\Warehouse\WarehouseController;
+use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\OutletController;
+use App\Http\Controllers\Api\WarehouseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')
             ->group(function () {
                 Route::get('/warehouses', WarehouseController::class);
                 Route::get('/outlets', OutletController::class);
+                Route::get('/clients', ClientController::class);
             });
 
         require_once __DIR__ . '/api/warehouse.php';

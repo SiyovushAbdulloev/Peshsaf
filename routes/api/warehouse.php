@@ -11,12 +11,10 @@ Route::middleware('role:warehouse')
     ->group(function () {
         Route::get('/sales', [SaleController::class, 'index']);
         Route::get('/sales/{sale}', [SaleController::class, 'show']);
-        Route::get('/sales/clients', [SaleController::class, 'clients']);
         Route::get('/sales/create/products', [SaleController::class, 'products']);
         Route::post('/sales/create', [SaleController::class, 'store']);
 
         Route::get('/movements', [MovementController::class, 'index']);
-        Route::get('/movements/outlets', [MovementController::class, 'outlets']);
         Route::get('/movements/{movement}', [MovementController::class, 'show']);
         Route::get('/movements/create/products', [MovementController::class, 'products']);
         Route::post('/movements/create', [MovementController::class, 'store']);

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api\Warehouse;
 
 use App\Actions\Warehouse\GetProductAction;
-use App\Actions\Warehouse\Sale\GetClientsAction;
 use App\Actions\Warehouse\Sale\StoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
-use App\Http\Resources\ClientResource;
 use App\Http\Resources\Warehouse\Movement\ProductResource;
 use App\Http\Resources\SaleResource;
 use App\Models\Sale;
@@ -32,17 +30,6 @@ class SaleController extends Controller
     public function show(Sale $sale): JsonResponse
     {
         return response()->json(['data' => SaleResource::make($sale->load('products')->loadCount('products'))]);
-    }
-
-    public function clients(Request $request, GetClientsAction $action): JsonResponse
-    {
-        $clients = $action->execute($request->get('q'));
-
-        if (!$clients) {
-            return response()->json(['data' => []]);
-        }
-
-        return response()->json(ClientResource::collection($clients));
     }
 
     public function products(Request $request, GetProductAction $action): JsonResponse
