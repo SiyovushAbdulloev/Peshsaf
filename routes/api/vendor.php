@@ -15,7 +15,6 @@ Route::middleware('role:vendor')
 
         Route::get('/receipts', [ReceiptController::class, 'index']);
         Route::get('/receipts/{receipt}', [ReceiptController::class, 'show']);
-        Route::get('/receipts/{receipt}/approving', [ReceiptController::class, 'approving']);
         Route::patch('/receipts/{receipt}/approve', [ReceiptController::class, 'approve']);
 
         Route::get('/utilizations', [UtilizationController::class, 'index']);
