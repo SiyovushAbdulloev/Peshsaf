@@ -11,11 +11,9 @@ use App\Http\Requests\Movement\ProductStoreRequest;
 use App\Http\Requests\Movement\StoreRequest;
 use App\Http\Requests\Movement\UpdateRequest;
 use App\Http\Resources\MovementResource;
-use App\Http\Resources\OutletResource;
 use App\Http\Resources\Warehouse\Movement\ProductResource;
 use App\Models\Movement;
 use App\Models\MovementProduct;
-use App\Models\Outlet;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -38,13 +36,6 @@ class MovementController extends Controller
             'data' => MovementResource::make($movement->load('products.product', 'products.dicProduct',
                 'outlet')->loadCount('products')),
         ]);
-    }
-
-    public function outlets(): JsonResponse
-    {
-        $outlets = Outlet::get();
-
-        return response()->json(OutletResource::collection($outlets));
     }
 
     public function products(Request $request, GetProductAction $action): JsonResponse
