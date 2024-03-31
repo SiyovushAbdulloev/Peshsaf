@@ -49,7 +49,7 @@
                             class="delete ml-1"
                             type="button"
                             variant="outline-danger"
-                            wire:click="deleteProduct({{$product->id}})"
+                            wire:click="deleteProduct({{$product->product_id}})"
                             wire:confirm="Вы действительно хотите удалить продукт?"
                         >
                             <x-base.icon icon="fa-trash"></x-base.icon>
