@@ -42,16 +42,16 @@ class Products extends Component
 
     public function addProduct()
     {
-        $product = WarehouseRemainProduct::with('product', 'dicProduct.measure')
+        $remainProduct = WarehouseRemainProduct::with('product', 'dicProduct.measure')
             ->whereHas('product', fn (Builder $query) => $query->active())
             ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
             ->first();
 
-        if ($product) {
-            $this->selectedProducts->push($product);
+        if ($remainProduct) {
+            $this->selectedProducts->push($remainProduct);
             if ($this->movement?->exists) {
                 $this->movement->products()->firstOrCreate([
-                    'product_id' => $product->id,
+                    'product_id' => $remainProduct->product_id,
                 ]);
             }
         }
@@ -62,7 +62,7 @@ class Products extends Component
         if ($this->movement->exists) {
             $this->movement->products()->where('product_id', $productId)->delete();
         }
-        $this->selectedProducts = $this->selectedProducts->filter(fn($item) => $item->id !== $productId);
+        $this->selectedProducts = $this->selectedProducts->filter(fn($item) => $item->product_id !== $productId);
     }
 
     public function render()
