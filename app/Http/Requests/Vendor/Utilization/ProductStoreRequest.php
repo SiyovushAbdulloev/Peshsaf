@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Utilization;
+namespace App\Http\Requests\Vendor\Utilization;
 
 use App\Core\Http\Requests\CoreFormRequest;
-use App\Http\Requests\Params\Utilization\ProductStoreRequestParams;
+use App\Http\Requests\Params\Vendor\Utilization\ProductStoreRequestParams;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Validation\Rule;
 
 class ProductStoreRequest extends CoreFormRequest
 {
@@ -25,7 +27,15 @@ class ProductStoreRequest extends CoreFormRequest
     public function rules(): array
     {
         return [
-            'product' => ['exists:products,id'],
+            'product' => [
+                'exists:products,id',
+                Rule::unique('utilization_products', 'product_id')
+                    ->where(function (Builder $query) {
+                        $query
+                            ->where('utilization_id', $this->utilization->id)
+                            ->where('product_id', $this->product);
+                    }),
+            ],
         ];
     }
 

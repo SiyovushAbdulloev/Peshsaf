@@ -158,6 +158,11 @@ return [
                 ],
             ],
         ],
+        'utilizations' => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.utilizations.index',
+            'title'      => 'Утилизация товаров',
+        ],
     ],
     'customs'   => [
         'dashboard' => [

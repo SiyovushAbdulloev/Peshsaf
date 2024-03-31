@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Actions\Warehouse\Utilization;
+namespace App\Actions\Vendor\Utilization;
 
 use App\Core\Actions\CoreAction;
-use App\Http\Requests\Params\Warehouse\Utilization\StoreRequestParams;
+use App\Http\Requests\Params\Vendor\Utilization\StoreRequestParams;
 use App\Models\Utilization;
 
 class StoreAction extends CoreAction
@@ -11,13 +11,12 @@ class StoreAction extends CoreAction
     public function handle(StoreRequestParams $params): Utilization
     {
         $utilization = auth()->user()
-            ->warehouse
+            ->outlet
             ->utilizations()
             ->create([
-                'type'      => $params->type,
+                'type'      => Utilization::CLIENT,
                 'number'    => $params->number,
                 'date'      => $params->date,
-                'outlet_id' => $params->outletId,
                 'client_id' => $params->clientId,
             ]);
 

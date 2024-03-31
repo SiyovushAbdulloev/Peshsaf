@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Vendor\ReceiptController;
 use App\Http\Controllers\Api\Vendor\SaleController;
+use App\Http\Controllers\Api\Vendor\UtilizationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('role:vendor')
@@ -16,4 +17,13 @@ Route::middleware('role:vendor')
         Route::get('/receipts/{receipt}', [ReceiptController::class, 'show']);
         Route::get('/receipts/{receipt}/approving', [ReceiptController::class, 'approving']);
         Route::patch('/receipts/{receipt}/approve', [ReceiptController::class, 'approve']);
+
+        Route::get('/utilizations', [UtilizationController::class, 'index']);
+        Route::post('/utilizations/create', [UtilizationController::class, 'store']);
+        Route::get('/utilizations/{utilization}', [UtilizationController::class, 'show']);
+        Route::patch('/utilizations/{utilization}', [UtilizationController::class, 'update']);
+        Route::delete('/utilizations/{utilization}', [UtilizationController::class, 'destroy']);
+        Route::patch('/utilizations/{utilization}/finish', [UtilizationController::class, 'finish']);
+        Route::post('/utilizations/{utilization}/products/add', [UtilizationController::class, 'addProduct']);
+        Route::delete('/utilizations/{utilization}/products/{utilizationProduct}', [UtilizationController::class, 'removeProduct']);
     });

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api\Warehouse;
 
-use App\Actions\Utilization\FinishAction;
 use App\Actions\Warehouse\Utilization\StoreAction;
 use App\Actions\Warehouse\Utilization\UpdateAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Utilization\StoreRequest;
-use App\Http\Requests\Utilization\UpdateRequest;
+use App\Http\Requests\Warehouse\Utilization\StoreRequest;
+use App\Http\Requests\Warehouse\Utilization\UpdateRequest;
 use App\Http\Resources\Warehouse\UtilizationResource;
 use App\Models\Utilization;
 use Illuminate\Http\JsonResponse;
@@ -64,9 +63,11 @@ class UtilizationController extends Controller
         ]);
     }
 
-    public function finish(Utilization $utilization, FinishAction $action): JsonResponse
+    public function finish(Utilization $utilization): JsonResponse
     {
-        $action->execute($utilization);
+        if ($utilization->status()->canBe('finished')) {
+            $utilization->status()->transitionTo('finished');
+        }
 
         return response()->json([
             'data' => UtilizationResource::make($utilization->load('client', 'outlet'))
