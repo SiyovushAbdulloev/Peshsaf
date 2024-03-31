@@ -126,7 +126,7 @@
                                 type="button"
                                 variant="outline-primary"
                             >
-                                <x-base.lucide icon="info"/>
+                                <x-base.icon icon="fa-info"/>
                             </x-base.button>
                             @can('edit', $sale)
                                 <x-base.button
@@ -137,7 +137,7 @@
                                     variant="outline-success"
                                     data-route="{{ route('vendor.sales.destroy', compact('sale')) }}"
                                 >
-                                    <x-base.lucide icon="pencil"/>
+                                    <x-base.icon icon="pencil"/>
                                 </x-base.button>
                                 <x-base.button
                                     size="sm"
@@ -146,7 +146,7 @@
                                     variant="outline-danger"
                                     data-route="{{ route('vendor.sales.destroy', compact('sale')) }}"
                                 >
-                                    <x-base.lucide icon="trash"/>
+                                    <x-base.icon icon="trash"/>
                                 </x-base.button>
                             @endcan
                         </td>

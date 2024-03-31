@@ -55,24 +55,14 @@
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->name }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->address }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->phone }}</td>
-                        <td class="px-5 py-2 border-b dark:border-darkmode-300 flex gap-2">
-                            <x-base.button
-                                as="a"
-                                size="sm"
-                                href="{{ route('admin.outlets.edit', compact('outlet')) }}"
-                                type="button"
-                                variant="outline-success"
-                            >
-                                <x-base.lucide icon="pencil"/>
-                            </x-base.button>
-                            <x-base.button
-                                size="sm"
-                                class="delete-outlet"
-                                type="button"
-                                variant="outline-danger"
-                            >
-                                <x-base.lucide icon="trash"/>
-                            </x-base.button>
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
+                            <a href="{{ route('admin.outlets.edit', compact('outlet')) }}"
+                               class="mr-4">
+                                <x-base.icon icon="fa-pen-to-square fa-solid"/>
+                            </a>
+                            <a href="#" class="text-danger">
+                                <x-base.icon icon="fa-trash"></x-base.icon>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

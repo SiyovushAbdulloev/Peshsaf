@@ -41,15 +41,21 @@
                     <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)
                     _td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
                         <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->id }}</td>
-                        <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->dicProduct->name }}</td>
-                        <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->dicProduct->barcode }}</td>
+                        <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->dicProduct?->name }}</td>
+                        <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->dicProduct?->barcode }}</td>
                         <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->product->barcode }}</td>
                         <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->warehouse->name }}</td>
                         <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->created_at->format('d.m.Y') }}</td>
-                        <td class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row">
-                            <a href="#" class="mr-4">
-                                <x-base.lucide icon="info"/>
-                            </a>
+                        <td class="px-5 py-3 border-b dark:border-darkmode-300">
+                            <x-base.button
+                                as="a"
+                                size="sm"
+                                href="#"
+                                type="button"
+                                variant="outline-primary"
+                            >
+                                <x-base.icon icon="fa-info"/>
+                            </x-base.button>
                         </td>
                     </tr>
                 @endforeach

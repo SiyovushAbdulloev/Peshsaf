@@ -138,7 +138,7 @@
                                     type="button"
                                     variant="outline-primary"
                                 >
-                                    <x-base.lucide icon="info"/>
+                                    <x-base.icon icon="fa-info"/>
                                 </x-base.button>
                                 @can('edit', $movement)
                                     <x-base.button
@@ -147,18 +147,17 @@
                                         href="{{ route('warehouse.movements.edit', compact('movement')) }}"
                                         type="button"
                                         variant="outline-success"
-                                        data-route="{{ route('warehouse.movements.destroy', compact('movement')) }}"
                                     >
-                                        <x-base.lucide icon="pencil"/>
+                                        <x-base.icon icon="fa-pencil"/>
                                     </x-base.button>
                                     <x-base.button
                                         size="sm"
-                                        class="delete-movement"
+                                        class="delete-return"
                                         type="button"
                                         variant="outline-danger"
                                         data-route="{{ route('warehouse.movements.destroy', compact('movement')) }}"
                                     >
-                                        <x-base.lucide icon="trash"/>
+                                        <x-base.icon icon="fa-trash"/>
                                     </x-base.button>
                                 @endcan
                             </td>
@@ -169,7 +168,8 @@
             @else
                 <div role="alert"
                      class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
-                    <i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                    <i data-tw-merge data-lucide="alert-circle"
+                       class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
                     Нет данных
                 </div>
             @endif
