@@ -5,7 +5,24 @@
 @endsection
 
 @section('content')
-    <h2 class="intro-y mt-5 text-lg font-medium">Изменение</h2>
+    <div class="intro-y mt-10 flex flex-row justify-content-between">
+        <h2 class="intro-y text-lg font-medium">Изменение</h2>
+
+        <form class="ml-auto" action="{{ route('warehouse.movements.destroy', compact('movement')) }}"
+              method="post" onsubmit="return confirm('Вы действительно хотите удалить?');">
+            @csrf
+            @method('DELETE')
+
+            <x-base.button
+                class="w-24"
+                type="button"
+                variant="danger"
+                type="submit"
+            >
+                Удалить
+            </x-base.button>
+        </form>
+    </div>
 
     <div class="mt-5">
         <div class="intro-y col-span-12">
@@ -21,7 +38,7 @@
                     <h5 class="text-lg font-medium">Товары</h5>
 
                     <div class="overflow-x-auto">
-                        <livewire:warehouse.movement.products :$movement />
+                        <livewire:warehouse.movement.products :$movement/>
                     </div>
                 </div>
 
@@ -42,7 +59,7 @@
                     >
                         Изменить
                     </x-base.button>
-                    <livewire:warehouse.movement.send :$movement />
+                    <livewire:warehouse.movement.send :$movement/>
                 </div>
             </form>
         </div>

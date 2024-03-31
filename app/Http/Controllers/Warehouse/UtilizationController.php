@@ -20,7 +20,7 @@ class UtilizationController extends Controller
         $utilizations = auth()->user()
             ->warehouse
             ->utilizations()
-            ->with('client')
+            ->with('client', 'outlet')
             ->withCount('products')
             ->latest()
             ->paginate(10);
