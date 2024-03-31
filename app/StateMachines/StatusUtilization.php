@@ -30,10 +30,10 @@ class StatusUtilization extends StateMachine
         return 'draft';
     }
 
-    public function beforeTransitionHooks(): array
+    public function afterTransitionHooks(): array
     {
         return [
-            'draft' => [
+            'finished' => [
                 function ($from, $model) {
                     // TODO Warehouse actions
                     match (auth()->user()->role->name) {

@@ -5,6 +5,7 @@ use App\Http\Controllers\Vendor\ReceiptController;
 use App\Http\Controllers\Vendor\Returns\ClientController;
 use App\Http\Controllers\Vendor\Returns\WarehouseController;
 use App\Http\Controllers\Vendor\SaleController;
+use App\Http\Controllers\Vendor\UtilizationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('role:vendor')
@@ -30,4 +31,7 @@ Route::middleware('role:vendor')
                 'clients' => 'return',
             ]);
         });
+
+        // Утилизация товаров
+        Route::resource('utilizations', UtilizationController::class);
     });

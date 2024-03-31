@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Warehouse\Utilization;
+namespace App\Actions\Utilization;
 
 use App\Core\Actions\CoreAction;
 use App\Http\Requests\Params\Utilization\ProductStoreRequestParams;

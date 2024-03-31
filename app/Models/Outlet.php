@@ -47,4 +47,9 @@ class Outlet extends Model
     {
         return $this->morphMany(Refund::class, 'origin');
     }
+
+    public function utilizations(): MorphMany
+    {
+        return $this->morphMany(Utilization::class, 'model');
+    }
 }

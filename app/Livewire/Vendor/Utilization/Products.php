@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Warehouse\Utilization;
+namespace App\Livewire\Vendor\Utilization;
 
 use App\Models\Product;
 use App\Models\Utilization;
@@ -72,6 +72,6 @@ class Products extends Component
 
     public function render(): View
     {
-        return view('livewire.warehouse.utilization.products');
+        return view('livewire.vendor.utilization.products');
     }
 }

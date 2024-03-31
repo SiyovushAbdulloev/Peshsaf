@@ -33,6 +33,8 @@ Route::middleware('role:warehouse')
         Route::patch('/utilizations/{utilization}', [UtilizationController::class, 'update']);
         Route::delete('/utilizations/{utilization}', [UtilizationController::class, 'destroy']);
         Route::patch('/utilizations/{utilization}/finish', [UtilizationController::class, 'finish']);
+        Route::post('/utilizations/{utilization}/products/add', [UtilizationController::class, 'addProduct']);
+        Route::delete('/utilizations/{utilization}/products/{utilizationProduct}', [UtilizationController::class, 'removeProduct']);
 
         Route::get('/returns', [ReturnController::class, 'index'])->name('returns.index');
         Route::get('/returns/{return}', [ReturnController::class, 'show'])->name('returns.show');

@@ -9,7 +9,7 @@
         <div class="intro-y mt-2 flex">
             <h2 class="intro-y text-lg font-medium">Утилизация товаров</h2>
 
-            <a href="{{ route('warehouse.utilizations.create') }}" class="mb-2 transition duration-200 border
+            <a href="{{ route('vendor.utilizations.create') }}" class="mb-2 transition duration-200 border
                 inline-flex items-center
                 justify-center py-2
                 px-3 rounded-md ml-auto
@@ -52,7 +52,7 @@
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
-                            Наименование
+                            Клиент
                         </th>
                         <th
                             data-tw-merge
@@ -108,23 +108,19 @@
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $utilization->type === \App\Models\Utilization::OUTLET ?
-                                'Торговая точка / ' . $utilization->outlet->name : 'Клиент / ' .
-                                $utilization->client->name }}
+                                {{ $utilization->client->name }}
                             </td>
                             <td
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $utilization->type === \App\Models\Utilization::OUTLET ?
-                                $utilization->outlet->address : $utilization->client->address }}
+                                {{ $utilization->client->address }}
                             </td>
                             <td
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $utilization->type === \App\Models\Utilization::OUTLET ?
-                                $utilization->outlet->phone : $utilization->client->phone }}
+                                {{ $utilization->client->phone }}
                             </td>
                             <td
                                 data-tw-merge
@@ -139,7 +135,7 @@
                                 <x-base.button
                                     as="a"
                                     size="sm"
-                                    href="{{ route('warehouse.utilizations.show', compact('utilization')) }}"
+                                    href="{{ route('vendor.utilizations.show', compact('utilization')) }}"
                                     type="button"
                                     variant="outline-primary"
                                 >
@@ -149,10 +145,10 @@
                                     <x-base.button
                                         as="a"
                                         size="sm"
-                                        href="{{ route('warehouse.utilizations.edit', compact('utilization')) }}"
+                                        href="{{ route('vendor.utilizations.edit', compact('utilization')) }}"
                                         type="button"
                                         variant="outline-success"
-                                        data-route="{{ route('warehouse.utilizations.destroy', compact('utilization')) }}"
+                                        data-route="{{ route('vendor.utilizations.destroy', compact('utilization')) }}"
                                     >
                                         <x-base.lucide icon="pencil"/>
                                     </x-base.button>
@@ -161,7 +157,7 @@
                                         class="delete-utilization"
                                         type="button"
                                         variant="outline-danger"
-                                        data-route="{{ route('warehouse.utilizations.destroy', compact('utilization')) }}"
+                                        data-route="{{ route('vendor.utilizations.destroy', compact('utilization')) }}"
                                     >
                                         <x-base.lucide icon="trash"/>
                                     </x-base.button>
