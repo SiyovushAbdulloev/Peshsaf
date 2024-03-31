@@ -30,9 +30,9 @@ class CategoryController extends Controller
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
-        $action->execute($request->getParams());
+        $category = $action->execute($request->getParams());
 
-        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Категория добавлена');
+        return redirect(route('admin.dictionaries.categories.index', ['category' => $category->id]))->with('success', 'Категория добавлена');
     }
 
     public function edit(Category $category): View
@@ -48,13 +48,13 @@ class CategoryController extends Controller
     {
         $action->execute($request->getParams(), $category);
 
-        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.categories.index', ['category' => $category->id]))->with('success', 'Данные успешно изменены');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
-        
+
         return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Данные успешно удалены');
     }
 }

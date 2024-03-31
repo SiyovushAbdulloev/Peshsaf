@@ -46,7 +46,7 @@ class ProductController extends Controller
     {
         $action->execute($request->getParams(), $category);
 
-        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Продукт добавлен');
+        return redirect(route('admin.dictionaries.categories.index', ['category' => $category->id]))->with('success', 'Продукт добавлен');
     }
 
     public function edit(
@@ -76,7 +76,7 @@ class ProductController extends Controller
     {
         $action->execute($request->getParams(), $product);
 
-        return redirect(route('admin.dictionaries.categories.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.categories.index', ['category' => $category->id]))->with('success', 'Данные успешно изменены');
     }
 
     public function destroy(DestroyAction $action, Category $category, Product $product): RedirectResponse

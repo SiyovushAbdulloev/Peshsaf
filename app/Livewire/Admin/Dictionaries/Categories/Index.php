@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Admin\Dictionaries\Categories;
 
+use App\Models\Dictionaries\Category;
 use App\Models\Dictionaries\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public ?int $currentCategory = null;
+    public ?Category $currentCategory = null;
 
     public ?Collection $products = null;
 
@@ -19,18 +20,30 @@ class Index extends Component
         return view('livewire.admin.dictionaries.categories.index');
     }
 
-    public function mount($categories)
+    public function mount()
     {
-        $this->categories = $categories;
-        if ($categories && count($categories) > 0) {
-            $this->currentCategory = $categories[0]->id;
-            $this->fetchProducts($this->currentCategory);
+        if (request()->get('category')) {
+            $this->currentCategory = Category::find(request()->get('category'));
+        } else {
+            $this->currentCategory = Category::first();
         }
     }
 
-    public function fetchProducts($category)
+    public function deleteCategory(Category $category)
     {
-        $this->products = Product::with('measure')->where('category_id', $category)->get();
-        $this->currentCategory = $category;
+        $category->delete();
+
+        session()->flash('success', 'Категория успешно удалена');
+
+        $this->redirect(route('admin.dictionaries.categories.index'));
+    }
+
+    public function deleteProduct(Product $product)
+    {
+        $product->delete();
+
+        session()->flash('success', 'Продукт успешно удален');
+
+        $this->redirect(route('admin.dictionaries.categories.index', ['category' => $this->currentCategory->id]));
     }
 }
