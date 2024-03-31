@@ -24,6 +24,7 @@ class ProductResource extends JsonResource
             'name'       => $this->resource->dicProduct->name,
             'qrcode'     => $this->resource->product->barcode,
             'barcode'    => $this->resource->dicProduct->barcode,
+            'sender'     => $this->resource->product->sender,
             'measure'    => MeasureResource::make($this->dicProduct->measure),
         ];
     }

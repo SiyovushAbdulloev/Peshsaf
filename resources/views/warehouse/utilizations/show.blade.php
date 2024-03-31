@@ -73,7 +73,7 @@
                                         {{ $product->dicProduct->name }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->model->name }}/{{ $product->product->model->user->name }}
+                                        {{ $product->product->sender }}
                                     </x-base.table.td>
                                     <x-base.table.td>
                                         {{ $product->dicProduct->barcode }}

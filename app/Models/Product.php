@@ -6,6 +6,7 @@ use App\Models\Dictionaries\Product as DicProduct;
 use App\StateMachines\StatusProduct;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -58,5 +59,19 @@ class Product extends Model
     public static function getLastProduct(): ?Product
     {
         return Product::firstWhere('barcode', Product::max('barcode'));
+    }
+
+    public function sender(): Attribute
+    {
+        $type = 'Торговая точка';
+        return Attribute::make(
+            get: function () use ($type) {
+                if ($this->model instanceof Client) {
+                    $type = 'Клиент';
+                }
+
+                return join(' / ', [$type, $this->model->name]);
+            }
+        );
     }
 }
