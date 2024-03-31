@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Params\Warehouse\Utilization;
+namespace App\Http\Requests\Params\Utilization;
 
 use App\Core\Http\Requests\Params\RequestParams;
 

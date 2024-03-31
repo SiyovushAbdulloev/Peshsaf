@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Vendor;
 
-use App\Actions\Vendor\Utilization\AddProductAction;
+use App\Actions\Utilization\AddProductAction;
 use App\Actions\Vendor\Utilization\StoreAction;
 use App\Actions\Vendor\Utilization\UpdateAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Vendor\Utilization\ProductStoreRequest;
+use App\Http\Requests\Utilization\ProductStoreRequest;
 use App\Http\Requests\Vendor\Utilization\StoreRequest;
 use App\Http\Requests\Vendor\Utilization\UpdateRequest;
 use App\Http\Resources\Vendor\UtilizationResource;
@@ -50,6 +50,8 @@ class UtilizationController extends Controller
         UpdateRequest $request,
         UpdateAction $action
     ): JsonResponse {
+        $this->authorize('edit', $utilization);
+
         $action->execute($request->getParams(), $utilization);
 
         return response()->json([
@@ -59,6 +61,8 @@ class UtilizationController extends Controller
 
     public function destroy(Utilization $utilization): JsonResponse
     {
+        $this->authorize('edit', $utilization);
+
         $utilization->delete();
 
         return response()->json([

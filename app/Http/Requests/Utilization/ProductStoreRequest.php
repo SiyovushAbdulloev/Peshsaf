@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Vendor\Utilization;
+namespace App\Http\Requests\Utilization;
 
 use App\Core\Http\Requests\CoreFormRequest;
-use App\Http\Requests\Params\Vendor\Utilization\ProductStoreRequestParams;
+use App\Http\Requests\Params\Utilization\ProductStoreRequestParams;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Validation\Rule;
 

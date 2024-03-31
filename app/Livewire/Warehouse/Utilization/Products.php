@@ -4,6 +4,7 @@ namespace App\Livewire\Warehouse\Utilization;
 
 use App\Models\Product;
 use App\Models\Utilization;
+use App\StateMachines\StatusProduct;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
@@ -27,7 +28,11 @@ class Products extends Component
     #[On('search')]
     public function search(string $barcode): void
     {
-        $product = Product::query()->firstWhere('barcode', $barcode);
+        $product = Product::query()
+            ->active()
+            ->where('status', StatusProduct::SOLD)
+            ->where('barcode', $barcode)
+            ->first();
 
         if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
             $this->selectedProducts->push($product);
@@ -42,8 +47,11 @@ class Products extends Component
 
     public function addProduct(): void
     {
-        $product = Product::with('product.measure')->whereNotIn('id',
-            $this->selectedProducts->pluck('id'))->first();
+        $product = Product::with('product.measure')
+            ->active()
+            ->where('status', StatusProduct::SOLD)
+            ->whereNotIn('id', $this->selectedProducts->pluck('id'))
+            ->first();
         if ($product) {
             $this->selectedProducts->push($product);
             if ($this->utilization->exists) {

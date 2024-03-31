@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Actions\Vendor\Utilization;
+namespace App\Actions\Utilization;
 
 use App\Core\Actions\CoreAction;
-use App\Http\Requests\Params\Vendor\Utilization\ProductStoreRequestParams;
+use App\Http\Requests\Params\Utilization\ProductStoreRequestParams;
 use App\Models\Utilization;
 
 class AddProductAction extends CoreAction

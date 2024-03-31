@@ -52,7 +52,7 @@
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
-                            Торговая точка
+                            Наименование
                         </th>
                         <th
                             data-tw-merge
@@ -108,19 +108,23 @@
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $utilization->outlet->name }}
+                                {{ $utilization->type === \App\Models\Utilization::OUTLET ?
+                                'Торговая точка / ' . $utilization->outlet->name : 'Клиент / ' .
+                                $utilization->client->name }}
                             </td>
                             <td
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $utilization->outlet->address }}
+                                {{ $utilization->type === \App\Models\Utilization::OUTLET ?
+                                $utilization->outlet->address : $utilization->client->address }}
                             </td>
                             <td
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $utilization->outlet->phone }}
+                                {{ $utilization->type === \App\Models\Utilization::OUTLET ?
+                                $utilization->outlet->phone : $utilization->client->phone }}
                             </td>
                             <td
                                 data-tw-merge

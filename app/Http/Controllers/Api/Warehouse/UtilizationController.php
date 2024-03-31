@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Api\Warehouse;
 
+use App\Actions\Utilization\AddProductAction;
 use App\Actions\Warehouse\Utilization\StoreAction;
 use App\Actions\Warehouse\Utilization\UpdateAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Utilization\ProductStoreRequest;
 use App\Http\Requests\Warehouse\Utilization\StoreRequest;
 use App\Http\Requests\Warehouse\Utilization\UpdateRequest;
 use App\Http\Resources\Warehouse\UtilizationResource;
 use App\Models\Utilization;
+use App\Models\UtilizationProduct;
 use Illuminate\Http\JsonResponse;
 
 class UtilizationController extends Controller
@@ -31,14 +34,14 @@ class UtilizationController extends Controller
         $utilization = $action->execute($request->getParams());
 
         return response()->json([
-            'data' => UtilizationResource::make($utilization->load('client', 'outlet')->loadCount('products'))
+            'data' => UtilizationResource::make($utilization->load('client', 'outlet')->loadCount('products')),
         ]);
     }
 
     public function show(Utilization $utilization): JsonResponse
     {
         return response()->json([
-            'data' => UtilizationResource::make($utilization->load('client', 'outlet', 'products'))
+            'data' => UtilizationResource::make($utilization->load('client', 'outlet', 'products')),
         ]);
     }
 
@@ -47,19 +50,52 @@ class UtilizationController extends Controller
         UpdateRequest $request,
         UpdateAction $action
     ): JsonResponse {
+        $this->authorize('edit', $utilization);
+
         $action->execute($request->getParams(), $utilization);
 
         return response()->json([
-            'data' => UtilizationResource::make($utilization->load('client', 'outlet'))
+            'data' => UtilizationResource::make($utilization->load('client', 'outlet')),
+        ]);
+    }
+
+    public function addProduct(
+        Utilization $utilization,
+        AddProductAction $action,
+        ProductStoreRequest $request
+    ) {
+        $action->execute($request->getParams(), $utilization);
+
+        return response()->json([
+            'data' => UtilizationResource::make(
+                $utilization
+                    ->load('client', 'outlet', 'products')
+                    ->loadCount('products')
+            ),
+        ]);
+    }
+
+    public function removeProduct(Utilization $utilization, UtilizationProduct $utilizationProduct): JsonResponse
+    {
+        $utilizationProduct->delete();
+
+        return response()->json([
+            'data' => UtilizationResource::make(
+                $utilization
+                    ->load('client', 'outlet', 'products')
+                    ->loadCount('products')
+            ),
         ]);
     }
 
     public function destroy(Utilization $utilization): JsonResponse
     {
+        $this->authorize('edit', $utilization);
+
         $utilization->delete();
 
         return response()->json([
-            'success' => 'Утилизация успешно удалена'
+            'success' => 'Утилизация успешно удалена',
         ]);
     }
 
@@ -70,7 +106,7 @@ class UtilizationController extends Controller
         }
 
         return response()->json([
-            'data' => UtilizationResource::make($utilization->load('client', 'outlet'))
+            'data' => UtilizationResource::make($utilization->load('client', 'outlet')),
         ]);
     }
 }
