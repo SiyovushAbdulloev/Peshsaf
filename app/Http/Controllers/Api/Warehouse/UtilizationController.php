@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\Api\Warehouse;
 
 use App\Actions\Utilization\AddProductAction;
+use App\Actions\Warehouse\GetProductAction;
 use App\Actions\Warehouse\Utilization\StoreAction;
 use App\Actions\Warehouse\Utilization\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Utilization\ProductStoreRequest;
 use App\Http\Requests\Warehouse\Utilization\StoreRequest;
 use App\Http\Requests\Warehouse\Utilization\UpdateRequest;
+use App\Http\Resources\Warehouse\ProductResource;
 use App\Http\Resources\Warehouse\UtilizationResource;
+use App\Models\Product;
 use App\Models\Utilization;
 use App\Models\UtilizationProduct;
+use App\StateMachines\StatusProduct;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class UtilizationController extends Controller
 {
@@ -27,6 +32,21 @@ class UtilizationController extends Controller
             ->paginate(10);
 
         return response()->json(UtilizationResource::collection($utilizations));
+    }
+
+    public function products(Request $request, GetProductAction $action): JsonResponse
+    {
+        $product = Product::query()
+            ->active()
+            ->where('status', StatusProduct::SOLD)
+            ->where('barcode', $request->get('barcode'))
+            ->first();
+
+        if (!$product) {
+            return response()->json(['data' => null]);
+        }
+
+        return response()->json(['data' => ProductResource::make($product->load('product.measure'))]);
     }
 
     public function store(StoreRequest $request, StoreAction $action): JsonResponse

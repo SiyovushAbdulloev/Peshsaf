@@ -27,6 +27,7 @@ Route::middleware('role:warehouse')
 
         Route::get('/utilizations', [UtilizationController::class, 'index']);
         Route::post('/utilizations/create', [UtilizationController::class, 'store']);
+        Route::get('/utilizations/create/products', [UtilizationController::class, 'products']);
         Route::get('/utilizations/{utilization}', [UtilizationController::class, 'show']);
         Route::patch('/utilizations/{utilization}', [UtilizationController::class, 'update']);
         Route::delete('/utilizations/{utilization}', [UtilizationController::class, 'destroy']);
