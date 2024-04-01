@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Vendor\Return;
+namespace App\Actions\Vendor\Sale;
 
 use App\Core\Actions\CoreAction;
 use App\Models\Product;
@@ -10,6 +10,8 @@ class GetProductsAction extends CoreAction
 {
     public function handle(array $ids = []): ?Collection
     {
-        return Product::whereIn('id', old('products', $ids))->get();
+        return Product::active()
+            ->whereIn('id', old('products', $ids))
+            ->get();
     }
 }

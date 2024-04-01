@@ -41,6 +41,13 @@ class MovementController extends Controller
             'Перемещение успешно добавлено');
     }
 
+    public function show(Movement $movement): View
+    {
+        $movement->load('outlet', 'products.product', 'products.dicProduct');
+
+        return view('warehouse.movements.show', compact('movement'));
+    }
+
     public function edit(Movement $movement): View
     {
         $outlets = Outlet::get();

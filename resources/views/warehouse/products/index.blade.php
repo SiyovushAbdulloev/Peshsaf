@@ -96,17 +96,27 @@
                                 data-tw-merge
                                 class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                             >
-                                <a href="#" class="mr-4">
-                                    <x-base.lucide icon="info" />
-                                </a>
+                                <x-base.button
+                                    as="a"
+                                    size="sm"
+                                    href="#"
+                                    type="button"
+                                    variant="outline-primary"
+                                >
+                                    <x-base.icon icon="fa-info"/>
+                                </x-base.button>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             @else
-                <div role="alert" class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center"><i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
-                    Нет данных</div>
+                <div role="alert"
+                     class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
+                    <i data-tw-merge data-lucide="alert-circle"
+                       class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                    Нет данных
+                </div>
             @endif
         </div>
     </div>

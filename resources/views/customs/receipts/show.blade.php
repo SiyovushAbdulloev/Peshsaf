@@ -33,7 +33,7 @@
                     <div class="col-span-4">
                         <h2>Дата прихода</h2>
                         <div class="border border-blue-800 rounded-xl p-3 flex">
-                            <span>{{ $receipt->date }}</span>
+                            <span>{{ $receipt->date->format('d.m.Y') }}</span>
                             <x-base.icon icon="fa-calendar" class="ml-auto my-auto leading-3 text-lg"/>
                         </div>
                     </div>

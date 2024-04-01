@@ -17,7 +17,12 @@ class StoreRequest extends CoreFormRequest
             'number'       => ['required', 'string'],
             'warehouse_id' => ['nullable', 'required_if:distribute,0', 'exists:warehouses,id'],
             'products'     => ['required', 'array', 'min:1'],
-            'products.*'   => ['required', 'integer', 'exists:outlet_products,product_id', 'unique:refund_products,product_id'],
+            'products.*'   => [
+                'required',
+                'integer',
+                'exists:products,id',
+                'unique:refund_products,product_id',
+            ],
         ];
     }
 

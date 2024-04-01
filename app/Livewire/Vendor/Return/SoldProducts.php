@@ -1,40 +1,39 @@
 <?php
 
-namespace App\Livewire\Vendor\Utilization;
+namespace App\Livewire\Vendor\Return;
 
 use App\Actions\Vendor\GetSoldProductAction;
 use App\Actions\Vendor\Return\GetProductsAction;
 use App\Models\Product;
-use App\Models\Utilization;
+use App\Models\Refund;
 use App\StateMachines\StatusProduct;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class Products extends Component
+class SoldProducts extends Component
 {
-    public ?Utilization $utilization = null;
+    public ?Refund $return = null;
 
     public ?Collection $selectedProducts;
 
-    public function mount(Utilization $utilization): void
+    public function mount(Refund $return): void
     {
-        $this->utilization = $utilization;
+        $this->return = $return;
 
-        $this->selectedProducts = app(GetProductsAction::class)->execute($utilization->products->pluck('product_id')->toArray());
+        $this->selectedProducts = app(GetProductsAction::class)->execute($return->products->pluck('product_id')->toArray());
     }
 
-    #[On('search')]
+    #[On('confirm')]
     public function search(string $barcode): void
     {
         $product = app(GetSoldProductAction::class)->execute($barcode);
 
         if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
             $this->selectedProducts->push($product);
-
-            if ($this->utilization->exists) {
-                $this->utilization->products()->firstOrCreate([
+            if ($this->return->exists) {
+                $this->return->products()->firstOrCreate([
                     'product_id' => $product->id,
                 ]);
             }
@@ -43,16 +42,17 @@ class Products extends Component
 
     public function addProduct(): void
     {
-        $product = Product::with('product.measure')
+        $product = Product::query()
             ->active()
             ->has('product')
             ->where('status', StatusProduct::SOLD)
             ->whereNotIn('id', $this->selectedProducts->pluck('id'))
             ->first();
-        if ($product) {
+
+        if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
             $this->selectedProducts->push($product);
-            if ($this->utilization->exists) {
-                $this->utilization->products()->firstOrCreate([
+            if ($this->return?->exists) {
+                $this->return->products()->firstOrCreate([
                     'product_id' => $product->id,
                 ]);
             }
@@ -61,14 +61,14 @@ class Products extends Component
 
     public function deleteProduct($productId): void
     {
-        if ($this->utilization->exists) {
-            $this->utilization->products()->where('product_id', $productId)->delete();
+        if ($this->return->exists) {
+            $this->return->products()->where('product_id', $productId)->delete();
         }
-        $this->selectedProducts = $this->selectedProducts->filter(fn($item) => $item->id !== $productId);
+        $this->selectedProducts = $this->selectedProducts->filter(fn ($item) => $item->id !== $productId);
     }
 
     public function render(): View
     {
-        return view('livewire.vendor.utilization.products');
+        return view('livewire.vendor.return.products');
     }
 }

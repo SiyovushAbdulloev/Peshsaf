@@ -20,11 +20,10 @@
 
         @if($outlets->count())
             <table
-                id="receipts-table"
-                data-tw-merge
+                id="outlets-table"
                 class="w-full text-left mt-5"
             >
-                <thead data-tw-merge class="">
+                <thead>
                 <tr
                     class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                 >
@@ -55,7 +54,7 @@
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->name }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->address }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->phone }}</td>
-                        <td class="px-5 py-2 border-b dark:border-darkmode-300 flex gap-2">
+                        <td class="px-5 py-2 border-b dark:border-darkmode-300">
                             <x-base.button
                                 as="a"
                                 size="sm"
@@ -63,15 +62,14 @@
                                 type="button"
                                 variant="outline-success"
                             >
-                                <x-base.lucide icon="pencil"/>
+                                <x-base.icon icon="fa-pen"/>
                             </x-base.button>
                             <x-base.button
                                 size="sm"
-                                class="delete-outlet"
                                 type="button"
                                 variant="outline-danger"
                             >
-                                <x-base.lucide icon="trash"/>
+                                <x-base.icon icon="fa-trash"/>
                             </x-base.button>
                         </td>
                     </tr>

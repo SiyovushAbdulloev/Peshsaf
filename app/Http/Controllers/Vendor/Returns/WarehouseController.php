@@ -29,9 +29,9 @@ class WarehouseController extends Controller
         return view('vendor.returns.warehouse.index', compact('returns'));
     }
 
-    public function show(Movement $receipt): View
+    public function show(Refund $return): View
     {
-        return view('vendor.receipts.show', compact('receipt'));
+        return view('vendor.returns.warehouse.show', compact('return'));
     }
 
     public function create(): View

@@ -16,16 +16,16 @@ class Products extends Component
 
     public function mount()
     {
-        $this->selectedProducts = app(GetProductsAction::class)->execute();
+        $this->selectedProducts = app(GetProductsAction::class)->execute(old('products', []));
     }
 
     #[On('confirm')]
     public function search(string $barcode)
     {
-        $product = app(GetProductAction::class)->execute($barcode);
+        $warehouseProduct = app(GetProductAction::class)->execute($barcode);
 
-        if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
-            $this->selectedProducts->push($product);
+        if ($warehouseProduct && !$this->selectedProducts->contains('barcode', $warehouseProduct->product->barcode)) {
+            $this->selectedProducts->push($warehouseProduct->product);
         }
     }
 

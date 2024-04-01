@@ -5,6 +5,6 @@
         variant="primary"
         wire:click="getProduct"
     >
-        <x-base.lucide icon="info"/>
+        <x-base.icon icon="fa-info"/>
     </x-base.button>
 </div>

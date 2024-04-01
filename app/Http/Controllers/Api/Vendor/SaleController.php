@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api\Vendor;
 
-use App\Actions\Warehouse\GetProductAction;
-use App\Actions\Warehouse\Sale\GetClientsAction;
-use App\Actions\Warehouse\Sale\StoreAction;
+use App\Actions\Sale\StoreAction;
+use App\Actions\Vendor\GetNewProductAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
-use App\Http\Resources\ClientResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\SaleResource;
+use App\Models\Sale;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -28,18 +27,12 @@ class SaleController extends Controller
         return response()->json(SaleResource::collection($sales));
     }
 
-    public function clients(Request $request, GetClientsAction $action): JsonResponse
+    public function show(Sale $sale): JsonResponse
     {
-        $clients = $action->execute($request->get('q'));
-
-        if (!$clients) {
-            return response()->json(['data' => []]);
-        }
-
-        return response()->json(ClientResource::collection($clients));
+        return response()->json(['data' => SaleResource::make($sale->load('products')->loadCount('products'))]);
     }
 
-    public function products(Request $request, GetProductAction $action): JsonResponse
+    public function products(Request $request, GetNewProductAction $action): JsonResponse
     {
         $product = $action->execute($request->get('barcode'));
 
@@ -47,7 +40,7 @@ class SaleController extends Controller
             return response()->json(['data' => null]);
         }
 
-        return response()->json(['data' => ProductResource::make($product->load('product', 'dicProduct'))]);
+        return response()->json(['data' => ProductResource::make($product)]);
     }
 
     public function store(StoreRequest $request, StoreAction $action): JsonResponse

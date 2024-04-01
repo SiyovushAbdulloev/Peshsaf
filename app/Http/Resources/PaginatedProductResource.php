@@ -5,9 +5,9 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 
 /**
- * @property \App\Models\Warehouse $resource
+ * @property \App\Models\Product $resource
  */
-class WarehouseResource extends PaginateResourceCollection
+class PaginatedProductResource extends PaginateResourceCollection
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,9 @@ class WarehouseResource extends PaginateResourceCollection
     {
         return [
             'id'      => $this->resource->id,
-            'name'    => $this->resource->name,
-            'address' => $this->resource->address,
-            'phone'   => $this->resource->phone,
+            'qrcode'  => $this->resource->product->barcode,
+            'barcode' => $this->resource->barcode,
+            'name'    => $this->resource->product->name,
         ];
     }
 }

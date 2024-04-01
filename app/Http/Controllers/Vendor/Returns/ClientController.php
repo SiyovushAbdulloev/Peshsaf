@@ -29,7 +29,7 @@ class ClientController extends Controller
 
     public function show(Refund $return): View
     {
-        return view('vendor.receipts.show', compact('return'));
+        return view('vendor.returns.clients.show', compact('return'));
     }
 
     public function create(): View

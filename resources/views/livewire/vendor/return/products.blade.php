@@ -29,14 +29,14 @@
             </x-base.table.tr>
         </x-base.table.thead>
         <x-base.table.tbody>
-            @forelse($selectedProducts ?? [] as $outletProduct)
-                <x-base.table.tr wire:key="{{ $outletProduct->id }}">
-                    <x-base.table.td>{{ $outletProduct->dicProduct->name }}</x-base.table.td>
-                    <x-base.table.td>{{ $outletProduct->dicProduct->barcode }}</x-base.table.td>
-                    <x-base.table.td>{{ $outletProduct->product->barcode }}</x-base.table.td>
-                    <x-base.table.td>{{ $outletProduct->dicProduct->measure->name }}</x-base.table.td>
+            @forelse($selectedProducts ?? [] as $product)
+                <x-base.table.tr wire:key="{{ $product->id }}">
+                    <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->barcode }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
                     <x-base.table.td>
-                        <input type="hidden" name="products[]" value="{{ $outletProduct->product_id }}">
+                        <input type="hidden" name="products[]" value="{{ $product->id }}">
                         <x-base.button
                             size="sm"
                             href="#"
@@ -50,7 +50,7 @@
                             class="delete-sale ml-1"
                             type="button"
                             variant="outline-danger"
-                            wire:click="deleteProduct({{$outletProduct->product_id}})"
+                            wire:click="deleteProduct({{$product->id}})"
                         >
                             <x-base.icon icon="fa-trash"></x-base.icon>
                         </x-base.button>

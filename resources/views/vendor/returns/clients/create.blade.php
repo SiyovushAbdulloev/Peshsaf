@@ -12,6 +12,16 @@
             <form action="{{ route('vendor.returns.clients.store') }}" method="post">
                 @csrf
 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="intro-y box p-5">
                     @include('vendor.returns.clients.partials.form')
                 </div>

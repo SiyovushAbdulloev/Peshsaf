@@ -41,6 +41,15 @@ class ReceiptController extends Controller
             'Приход успешно добавлен');
     }
 
+    public function show(Receipt $receipt): View
+    {
+        $receipt
+            ->load('supplier')
+            ->loadCount('products');
+
+        return view('warehouse.receipts.show', compact('receipt'));
+    }
+
     public function edit(Receipt $receipt): View
     {
         $suppliers = Supplier::get();

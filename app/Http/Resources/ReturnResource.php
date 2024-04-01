@@ -25,6 +25,7 @@ class ReturnResource extends PaginateResourceCollection
             'number'         => $this->resource->number,
             'products_count' => $this->whenCounted('products'),
             'outlet'         => OutletResource::make($this->whenLoaded('origin')),
+            'warehouse'      => WarehouseResource::make($this->whenLoaded('warehouse')),
             'products'       => ProductResource::collection($this->whenLoaded('products')),
         ];
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Warehouse;
 
-use App\Actions\Warehouse\Sale\StoreAction;
+use App\Actions\Sale\StoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Models\Client;

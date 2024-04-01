@@ -2,12 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Dictionaries\MeasureResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property \App\Models\WarehouseRemainProduct $resource
+ * @property \App\Models\Product $resource
  */
-class ProductResource extends PaginateResourceCollection
+class ProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +19,12 @@ class ProductResource extends PaginateResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'id'      => $this->resource->id,
-            'qrcode'  => $this->resource->product->barcode,
-            'barcode' => $this->resource->dicProduct?->barcode,
-            'name'    => $this->resource->dicProduct?->name,
+            'id'         => $this->resource->id,
+            'name'       => $this->resource->product->name,
+            'qrcode'     => $this->resource->barcode,
+            'barcode'    => $this->resource->product->barcode,
+            'sender'     => $this->resource->sender,
+            'measure'    => MeasureResource::make($this->product->measure),
         ];
     }
 }
