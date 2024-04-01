@@ -171,7 +171,12 @@ return [
                     'icon'       => 'list',
                     'route_name' => 'vendor.reports.remains.index',
                     'title'      => 'По остаткам',
-                ]
+                ],
+                'utilizations'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.reports.utilizations.index',
+                    'title'      => 'По утилизации',
+                ],
             ],
         ],
     ],
