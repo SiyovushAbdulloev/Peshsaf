@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        $products = WarehouseRemain::with('product.measure')
+        $products = WarehouseRemain::has('product')->with('product.measure')
             ->withCount('products')
             ->paginate(15);
 

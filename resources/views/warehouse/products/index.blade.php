@@ -60,7 +60,6 @@
                     <tbody>
                     @foreach($products as $product)
                         <tr
-                            data-tw-merge
                             class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                         >
                             <td

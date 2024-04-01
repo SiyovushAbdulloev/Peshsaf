@@ -43,6 +43,7 @@ class Products extends Component
     public function addProduct()
     {
         $remainProduct = WarehouseRemainProduct::with('product', 'dicProduct.measure')
+            ->has('dicProduct')
             ->whereHas('product', fn (Builder $query) => $query->active())
             ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
             ->first();

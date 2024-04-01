@@ -41,7 +41,7 @@ class Product extends Model
 
     public function product(): BelongsTo
     {
-        return $this->belongsTo(DicProduct::class, 'dic_product_id')->withTrashed();
+        return $this->belongsTo(DicProduct::class, 'dic_product_id');
     }
 
     public function scopeByStatus(Builder $query, string|array $statuses): void
