@@ -16,12 +16,6 @@ class UpdateAction extends CoreAction
             'outlet_id' => $params->outletId,
         ]);
 
-        foreach ($params->products as $productId) {
-            $movement->products()->firstOrCreate([
-                'product_id' => $productId,
-            ]);
-        }
-
         return $movement;
     }
 }

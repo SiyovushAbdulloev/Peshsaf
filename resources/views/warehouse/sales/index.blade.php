@@ -129,26 +129,6 @@
                                 >
                                     <x-base.icon icon="fa-info"/>
                                 </x-base.button>
-                                @can('edit', $sale)
-                                    <x-base.button
-                                        as="a"
-                                        size="sm"
-                                        href="{{ route('warehouse.sales.edit', compact('sale')) }}"
-                                        type="button"
-                                        variant="outline-success"
-                                    >
-                                        <x-base.icon icon="fa-pencil"/>
-                                    </x-base.button>
-                                    <x-base.button
-                                        size="sm"
-                                        class="delete-receipt"
-                                        type="button"
-                                        variant="outline-danger"
-                                        data-route="{{ route('warehouse.sales.destroy', compact('sale')) }}"
-                                    >
-                                        <x-base.icon icon="fa-trash"/>
-                                    </x-base.button>
-                                @endcan
                             </td>
                         </tr>
                     @endforeach

@@ -17,10 +17,10 @@ class WarehouseResource extends PaginateResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->resource->id,
-            'name' => $this->resource->name,
+            'id'      => $this->resource->id,
+            'name'    => $this->resource->name,
             'address' => $this->resource->address,
-            'phone' => $this->resource->phone,
+            'phone'   => $this->resource->phone,
         ];
     }
 }

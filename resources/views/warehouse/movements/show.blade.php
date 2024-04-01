@@ -36,7 +36,7 @@
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-location-dot"
                     />
-                    Дата накладной: <span class="ml-2">{{ $movement->date }}</span>
+                    Дата накладной: <span class="ml-2">{{ $movement->date->format('d.m.Y') }}</span>
                 </div>
             </div>
         </div>

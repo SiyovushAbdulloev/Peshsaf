@@ -19,118 +19,62 @@
         </div>
         <div class="box p-4 mt-6 overflow-x-auto">
             @if($movements->count())
-                <table
-                    id="movements-table"
-                    data-tw-merge
-                    class="w-full text-left"
-                >
-                    <thead data-tw-merge class="">
-                    <tr
-                        data-tw-merge
-                        class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
-                    >
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                <table id="movements-table" class="w-full text-left">
+                    <thead>
+                    <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)
+                    _td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             #
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Статус
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Дата
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Торговая точка
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Адрес
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Телефон
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Количество
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]">
                             &nbsp;
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($movements as $movement)
-                        <tr
-                            data-tw-merge
-                            class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
-                        >
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300"
-                            >
+                        <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)
+                        _td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">
                                 {{ $movement->number }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">
                                 <x-status :status="$movement->status"/>
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">
                                 {{ $movement->date->format('d.m.Y') }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">
                                 {{ $movement->outlet->name }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">
                                 {{ $movement->outlet->address }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">
                                 {{ $movement->outlet->phone }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">
                                 {{ $movement->products_count }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 text-right"
-                            >
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 text-right">
                                 <x-base.button
                                     as="a"
                                     size="sm"
@@ -152,7 +96,7 @@
                                     </x-base.button>
                                     <x-base.button
                                         size="sm"
-                                        class="delete-return"
+                                        class="delete-movement"
                                         type="button"
                                         variant="outline-danger"
                                         data-route="{{ route('warehouse.movements.destroy', compact('movement')) }}"

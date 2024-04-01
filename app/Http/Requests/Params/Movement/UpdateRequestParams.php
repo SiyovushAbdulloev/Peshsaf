@@ -10,7 +10,6 @@ class UpdateRequestParams extends RequestParams
         public int $outletId,
         public string $number,
         public string $date,
-        public ?array $products,
     ) {
     }
 }

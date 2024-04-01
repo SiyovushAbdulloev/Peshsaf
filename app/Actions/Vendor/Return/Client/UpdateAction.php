@@ -11,9 +11,8 @@ class UpdateAction extends CoreAction
     public function handle(UpdateRequestParams $params, Refund $return): Refund
     {
         $return->update([
-            'client_id' => $params->clientId,
-            'number'    => $params->number,
-            'date'      => $params->date,
+            'number' => $params->number,
+            'date'   => $params->date,
         ]);
 
         return $return;

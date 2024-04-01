@@ -1,7 +1,7 @@
 @extends('layouts/sidebar')
 
 @section('head')
-    <title>Просмотр продажи</title>
+    <title>Просмотр возврата</title>
 @endsection
 
 @section('content')
@@ -14,29 +14,36 @@
             <div class="box rounded-md p-5">
                 <div class="mb-5 flex items-center border-b border-slate-200/60 pb-5 dark:border-darkmode-400">
                     <div class="truncate text-base font-medium">
-                        Детали продажи
+                        Детали возврата
                     </div>
                 </div>
                 <div class="flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
+                        icon="fa-calendar"
+                    />
+                    Дата возврата: <span class="ml-2">{{ $return->date->format('d.m.Y') }}</span>
+                </div>
+                <div class="mt-3 flex items-center">
+                    <x-base.icon
+                        class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-user"
                     />
-                    Клиент: <span class="ml-2">{{ $sale->client_name }}</span>
+                    Клиент: <span class="ml-2">{{ $return->client->name }}</span>
                 </div>
                 <div class="mt-3 flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-phone"
                     />
-                    Телефон: <span class="ml-2">{{ $sale->client_phone }}</span>
+                    Телефон: <span class="ml-2">{{ $return->client->phone }}</span>
                 </div>
                 <div class="mt-3 flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-location-dot"
                     />
-                    Адрес: <span class="ml-2">{{ $sale->client_address }}</span>
+                    Адрес: <span class="ml-2">{{ $return->client->address }}</span>
                 </div>
             </div>
         </div>
@@ -64,7 +71,7 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @foreach ($sale->products as $product)
+                            @foreach ($return->products as $product)
                                 <x-base.table.tr>
                                     <x-base.table.td class="!py-4">
                                         {{ $product->dicProduct->name }}
@@ -97,7 +104,7 @@
             <div class="mt-5 text-left">
                 <x-base.button
                     as="a"
-                    :href="route('warehouse.sales.index')"
+                    :href="route('vendor.returns.clients.index')"
                     class="mr-1 w-24"
                     type="button"
                     variant="outline-primary"

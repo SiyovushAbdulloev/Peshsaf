@@ -152,7 +152,6 @@
                                         href="{{ route('warehouse.utilizations.edit', compact('utilization')) }}"
                                         type="button"
                                         variant="outline-success"
-                                        data-route="{{ route('warehouse.utilizations.destroy', compact('utilization')) }}"
                                     >
                                         <x-base.icon icon="fa-pencil"/>
                                     </x-base.button>

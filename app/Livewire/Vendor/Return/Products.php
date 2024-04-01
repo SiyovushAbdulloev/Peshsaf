@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Vendor\Return;
 
+use App\Actions\Vendor\GetSoldProductAction;
 use App\Actions\Vendor\Return\GetProductsAction;
-use App\Models\OutletProduct;
+use App\Models\Product;
 use App\Models\Refund;
-use Illuminate\Database\Eloquent\Builder;
+use App\StateMachines\StatusProduct;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
@@ -27,17 +28,13 @@ class Products extends Component
     #[On('confirm')]
     public function search(string $barcode): void
     {
-        $outletProduct = OutletProduct::with('warehouse')
-            ->whereHas('product', function (Builder $query) use ($barcode) {
-                $query->where('barcode', $barcode);
-            })
-            ->first();
+        $product = app(GetSoldProductAction::class)->execute($barcode);
 
-        if ($outletProduct && !$this->selectedProducts->contains('product.barcode', $outletProduct->product->barcode)) {
-            $this->selectedProducts->push($outletProduct);
+        if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
+            $this->selectedProducts->push($product);
             if ($this->return->exists) {
                 $this->return->products()->firstOrCreate([
-                    'product_id' => $outletProduct->product_id,
+                    'product_id' => $product->id,
                 ]);
             }
         }
@@ -45,15 +42,18 @@ class Products extends Component
 
     public function addProduct(): void
     {
-        $outletProduct = OutletProduct::with('warehouse')
+        $product = Product::query()
+            ->active()
+            ->has('product')
+            ->where('status', StatusProduct::SOLD)
             ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
             ->first();
 
-        if ($outletProduct && !$this->selectedProducts->contains('product.barcode', $outletProduct->product->barcode)) {
-            $this->selectedProducts->push($outletProduct);
+        if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
+            $this->selectedProducts->push($product);
             if ($this->return?->exists) {
                 $this->return->products()->firstOrCreate([
-                    'product_id' => $outletProduct->product_id,
+                    'product_id' => $product->id,
                 ]);
             }
         }
@@ -64,7 +64,7 @@ class Products extends Component
         if ($this->return->exists) {
             $this->return->products()->where('product_id', $productId)->delete();
         }
-        $this->selectedProducts = $this->selectedProducts->filter(fn ($item) => $item->product_id !== $productId);
+        $this->selectedProducts = $this->selectedProducts->filter(fn ($item) => $item->id !== $productId);
     }
 
     public function render(): View

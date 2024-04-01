@@ -29,7 +29,7 @@
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-phone"
                     />
-                    Дата: <span class="ml-2">{{ $receipt->date }}</span>
+                    Дата: <span class="ml-2">{{ $receipt->date->format('d.m.Y') }}</span>
                 </div>
                 <div class="mt-3 flex items-center">
                     <x-base.icon

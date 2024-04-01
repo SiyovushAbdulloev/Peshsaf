@@ -20,11 +20,10 @@
 
         @if($outlets->count())
             <table
-                id="receipts-table"
-                data-tw-merge
+                id="outlets-table"
                 class="w-full text-left mt-5"
             >
-                <thead data-tw-merge class="">
+                <thead>
                 <tr
                     class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
                 >
@@ -56,13 +55,22 @@
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->address }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $outlet->phone }}</td>
                         <td class="px-5 py-2 border-b dark:border-darkmode-300">
-                            <a href="{{ route('admin.outlets.edit', compact('outlet')) }}"
-                               class="mr-4">
-                                <x-base.icon icon="fa-pen-to-square fa-solid"/>
-                            </a>
-                            <a href="#" class="text-danger">
-                                <x-base.icon icon="fa-trash"></x-base.icon>
-                            </a>
+                            <x-base.button
+                                as="a"
+                                size="sm"
+                                href="{{ route('admin.outlets.edit', compact('outlet')) }}"
+                                type="button"
+                                variant="outline-success"
+                            >
+                                <x-base.icon icon="fa-pen"/>
+                            </x-base.button>
+                            <x-base.button
+                                size="sm"
+                                type="button"
+                                variant="outline-danger"
+                            >
+                                <x-base.icon icon="fa-trash"/>
+                            </x-base.button>
                         </td>
                     </tr>
                 @endforeach
