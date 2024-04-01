@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Vendor\Return;
 
+use App\Actions\Product\GetProductsAction;
 use App\Actions\Vendor\GetNewProductAction;
-use App\Actions\Vendor\Return\GetProductsAction;
 use App\Models\OutletProduct;
 use App\Models\Refund;
 use App\StateMachines\StatusProduct;
@@ -67,7 +67,7 @@ class Products extends Component
         if ($this->return->exists) {
             $this->return->products()->where('product_id', $productId)->delete();
         }
-        $this->selectedProducts = $this->selectedProducts->filter(fn ($item) => $item->id !== $productId);
+        $this->selectedProducts = $this->selectedProducts->filter(fn($item) => $item->id !== $productId);
     }
 
     public function render(): View

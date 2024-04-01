@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Warehouse\Utilization;
 
+use App\Actions\Product\GetProductsAction;
 use App\Models\Product;
 use App\Models\Utilization;
 use App\StateMachines\StatusProduct;
@@ -20,9 +21,7 @@ class Products extends Component
     {
         $this->utilization = $utilization;
 
-        $this->selectedProducts = Product::with('product.measure')
-            ->whereIn('id', old('products', $utilization->products->pluck('product_id')))
-            ->get();
+        $this->selectedProducts = app(GetProductsAction::class)->execute($utilization->products->pluck('product_id')->toArray());
     }
 
     #[On('search')]

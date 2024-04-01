@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Vendor\Sale;
 
-use App\Actions\Vendor\Sale\GetProductAction;
-use App\Actions\Vendor\Sale\GetProductsAction;
+use App\Actions\Product\GetProductsAction;
+use App\Actions\Vendor\GetNewProductAction;
 use App\Models\OutletProduct;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -22,7 +22,7 @@ class Products extends Component
     #[On('confirm')]
     public function search(string $barcode)
     {
-        $outletProduct = app(GetProductAction::class)->execute($barcode);
+        $outletProduct = app(GetNewProductAction::class)->execute($barcode);
 
         if ($outletProduct && !$this->selectedProducts->contains('barcode', $outletProduct->product->barcode)) {
             $this->selectedProducts->push($outletProduct->product);

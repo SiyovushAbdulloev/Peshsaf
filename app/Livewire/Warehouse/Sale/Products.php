@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Warehouse\Sale;
 
-use App\Actions\Warehouse\GetProductAction;
-use App\Actions\Warehouse\GetProductsAction;
+use App\Actions\Product\GetProductsAction;
+use App\Actions\Warehouse\GetNewProductAction;
 use App\Models\WarehouseRemainProduct;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -20,24 +20,24 @@ class Products extends Component
     }
 
     #[On('confirm')]
-    public function search(string $barcode)
+    public function search(string $barcode): void
     {
-        $warehouseProduct = app(GetProductAction::class)->execute($barcode);
+        $product = app(GetNewProductAction::class)->execute($barcode);
 
-        if ($warehouseProduct && !$this->selectedProducts->contains('barcode', $warehouseProduct->product->barcode)) {
-            $this->selectedProducts->push($warehouseProduct->product);
+        if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
+            $this->selectedProducts->push($product);
         }
     }
 
-    public function addProduct()
+    public function addProduct(): void
     {
         $product = WarehouseRemainProduct::with('product.product', 'dicProduct.measure')
             ->whereHas('product', fn (Builder $query) => $query->active())
-            ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
+            ->whereNotIn('product_id', $this->selectedProducts->pluck('id'))
             ->first();
 
         if ($product) {
-            $this->selectedProducts->push($product);
+            $this->selectedProducts->push($product->product);
         }
     }
 

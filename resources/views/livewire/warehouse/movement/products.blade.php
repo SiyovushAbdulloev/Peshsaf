@@ -30,12 +30,12 @@
         <x-base.table.tbody>
             @forelse($selectedProducts ?? [] as $product)
                 <x-base.table.tr wire:key="{{ $product->id }}">
-                    <x-base.table.td>{{ $product->dicProduct->name }}</x-base.table.td>
-                    <x-base.table.td>{{ $product->dicProduct->barcode }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->product->name }}</x-base.table.td>
                     <x-base.table.td>{{ $product->product->barcode }}</x-base.table.td>
-                    <x-base.table.td>{{ $product->dicProduct->measure->name }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->barcode }}</x-base.table.td>
+                    <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
                     <x-base.table.td>
-                        <input type="hidden" name="products[]" value="{{ $product->product_id }}">
+                        <input type="hidden" name="products[]" value="{{ $product->id }}">
                         <x-base.button
                             size="sm"
                             href="#"
@@ -49,7 +49,7 @@
                             class="delete ml-1"
                             type="button"
                             variant="outline-danger"
-                            wire:click="deleteProduct({{$product->product_id}})"
+                            wire:click="deleteProduct({{$product->id}})"
                             wire:confirm="Вы действительно хотите удалить продукт?"
                         >
                             <x-base.icon icon="fa-trash"></x-base.icon>

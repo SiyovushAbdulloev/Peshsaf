@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Vendor;
+namespace App\Actions\Product;
 
 use App\Core\Actions\CoreAction;
 use App\Models\Product;
