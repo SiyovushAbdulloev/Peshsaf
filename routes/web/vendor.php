@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Vendor\ProductController;
 use App\Http\Controllers\Vendor\ReceiptController;
+use App\Http\Controllers\Vendor\Reports\RemainController;
 use App\Http\Controllers\Vendor\Returns\ClientController;
 use App\Http\Controllers\Vendor\Returns\WarehouseController;
 use App\Http\Controllers\Vendor\SaleController;
@@ -34,4 +35,10 @@ Route::middleware('role:vendor')
 
         // Утилизация товаров
         Route::resource('utilizations', UtilizationController::class);
+
+        Route::prefix('reports')
+            ->name('reports.')
+            ->group(function () {
+                Route::get('/remains', [RemainController::class, 'index'])->name('remains.index');
+            });
     });
