@@ -2,7 +2,10 @@
 
 namespace App\Livewire\Vendor\Sale;
 
-use App\Models\Product;
+use App\Actions\Vendor\Sale\GetProductAction;
+use App\Actions\Vendor\Sale\GetProductsAction;
+use App\Models\OutletProduct;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -13,16 +16,28 @@ class Products extends Component
 
     public function mount()
     {
-        $this->selectedProducts = Product::whereIn('id', old('products', []))->get();
+        $this->selectedProducts = app(GetProductsAction::class)->execute(old('products', []));
     }
 
     #[On('confirm')]
     public function search(string $barcode)
     {
-        $product = Product::firstWhere('barcode', $barcode);
+        $outletProduct = app(GetProductAction::class)->execute($barcode);
 
-        if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
-            $this->selectedProducts->push($product);
+        if ($outletProduct && !$this->selectedProducts->contains('barcode', $outletProduct->product->barcode)) {
+            $this->selectedProducts->push($outletProduct->product);
+        }
+    }
+
+    public function addProduct()
+    {
+        $outletProduct = OutletProduct::with('product', 'dicProduct.measure')
+            ->whereHas('product', fn (Builder $query) => $query->active())
+            ->whereNotIn('product_id', $this->selectedProducts->pluck('id'))
+            ->first();
+
+        if ($outletProduct) {
+            $this->selectedProducts->push($outletProduct->product);
         }
     }
 

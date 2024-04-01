@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Utilization\ProductStoreRequest;
 use App\Http\Requests\Warehouse\Utilization\StoreRequest;
 use App\Http\Requests\Warehouse\Utilization\UpdateRequest;
-use App\Http\Resources\Warehouse\ProductResource;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\Warehouse\UtilizationResource;
 use App\Models\Product;
 use App\Models\Utilization;

@@ -1,4 +1,13 @@
 <div>
+    <x-base.button
+        size="sm"
+        type="button"
+        variant="outline-primary"
+        class="text-right"
+        wire:click="addProduct"
+    >
+        Сканировать
+    </x-base.button>
     <x-base.table id="sale-products" class="mt-5">
         <x-base.table.thead variant="light">
             <x-base.table.tr>

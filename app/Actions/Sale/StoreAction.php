@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Actions\Warehouse\Sale;
+namespace App\Actions\Sale;
 
+use App\Actions\Vendor\RemoveOutletProductAction;
 use App\Actions\Warehouse\RemoveWarehouseProductAction;
 use App\Core\Actions\CoreAction;
 use App\Http\Requests\Params\Sale\StoreRequestParams;
@@ -9,13 +10,13 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\Sale;
-use App\Models\WarehouseRemainProduct;
 use Illuminate\Support\Facades\Storage;
 
 class StoreAction extends CoreAction
 {
     public function handle(StoreRequestParams $params): Sale
     {
+        $user   = auth()->user();
         $client = Client::firstOrCreate([
             'id' => $params->clientId,
         ], [
@@ -35,9 +36,9 @@ class StoreAction extends CoreAction
             ]);
         }
 
-        $model = match (auth()->user()->role->name) {
-            Role::WAREHOUSE => auth()->user()->warehouse,
-            Role::VENDOR => auth()->user()->outlet,
+        $model = match ($user->role->name) {
+            Role::WAREHOUSE => $user->warehouse,
+            Role::VENDOR => $user->outlet,
         };
 
         $sale = $model->sales()->create([
@@ -65,8 +66,10 @@ class StoreAction extends CoreAction
             $product->history = true;
             $product->save();
 
-            // Удаляем продукт из остатка склада
-            app(RemoveWarehouseProductAction::class)->execute($product);
+            match ($user->role->name) {
+                Role::WAREHOUSE => app(RemoveWarehouseProductAction::class)->execute($product),
+                Role::VENDOR => app(RemoveOutletProductAction::class)->execute($product),
+            };
         }
 
         return $sale;

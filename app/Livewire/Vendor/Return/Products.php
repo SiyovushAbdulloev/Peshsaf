@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Vendor\Return;
 
-use App\Actions\Vendor\GetSoldProductAction;
+use App\Actions\Vendor\GetNewProductAction;
 use App\Actions\Vendor\Return\GetProductsAction;
-use App\Models\Product;
+use App\Models\OutletProduct;
 use App\Models\Refund;
 use App\StateMachines\StatusProduct;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
@@ -28,7 +29,7 @@ class Products extends Component
     #[On('confirm')]
     public function search(string $barcode): void
     {
-        $product = app(GetSoldProductAction::class)->execute($barcode);
+        $product = app(GetNewProductAction::class)->execute($barcode);
 
         if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
             $this->selectedProducts->push($product);
@@ -42,12 +43,14 @@ class Products extends Component
 
     public function addProduct(): void
     {
-        $product = Product::query()
-            ->active()
-            ->has('product')
-            ->where('status', StatusProduct::SOLD)
-            ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
-            ->first();
+        $product = OutletProduct::query()
+            ->whereHas('product', function (Builder $query) {
+                $query
+                    ->active()
+                    ->where('status', StatusProduct::NEW);
+            })
+            ->whereNotIn('product_id', $this->selectedProducts->pluck('id'))
+            ->first()->product;
 
         if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
             $this->selectedProducts->push($product);

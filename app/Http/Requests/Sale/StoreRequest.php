@@ -4,6 +4,7 @@ namespace App\Http\Requests\Sale;
 
 use App\Core\Http\Requests\CoreFormRequest;
 use App\Http\Requests\Params\Sale\StoreRequestParams;
+use App\Models\Role;
 
 class StoreRequest extends CoreFormRequest
 {
@@ -32,7 +33,15 @@ class StoreRequest extends CoreFormRequest
             'client_photo'   => ['nullable', 'file', 'max:1024'],
             'date'           => ['required', 'string'],
             'products'       => ['required', 'array', 'min:1'],
-            'products.*'     => ['required', 'integer', 'exists:warehouse_remain_products,product_id'],
+            'products.*'     => [
+                'required',
+                'integer',
+                'unique:sale_products,product_id',
+                match (auth()->user()->role->name) {
+                    Role::WAREHOUSE => 'exists:warehouse_remain_products,product_id',
+                    Role::VENDOR => 'exists:outlet_products,product_id',
+                },
+            ],
         ];
     }
 

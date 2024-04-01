@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Warehouse;
 
+use App\Actions\Sale\StoreAction;
 use App\Actions\Warehouse\GetProductAction;
-use App\Actions\Warehouse\Sale\StoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
-use App\Http\Resources\Warehouse\Movement\ProductResource;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\SaleResource;
 use App\Models\Sale;
 use Illuminate\Http\JsonResponse;
@@ -34,13 +34,13 @@ class SaleController extends Controller
 
     public function products(Request $request, GetProductAction $action): JsonResponse
     {
-        $product = $action->execute($request->get('barcode'));
+        $warehouseProduct = $action->execute($request->get('barcode'));
 
-        if (!$product) {
+        if (!$warehouseProduct) {
             return response()->json(['data' => null]);
         }
 
-        return response()->json(['data' => ProductResource::make($product->load('product', 'dicProduct'))]);
+        return response()->json(['data' => ProductResource::make($warehouseProduct->product)]);
     }
 
     public function store(StoreRequest $request, StoreAction $action): JsonResponse
