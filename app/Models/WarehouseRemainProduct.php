@@ -27,7 +27,8 @@ class WarehouseRemainProduct extends Model
 
     public function dicProduct(): HasOneThrough
     {
-        return $this->hasOneThrough(DicProduct::class, Product::class, 'id', 'id', 'product_id', 'dic_product_id');
+        return $this->hasOneThrough(DicProduct::class, Product::class, 'id', 'id', 'product_id', 'dic_product_id')
+            ->withTrashed();
     }
 
     public function scopeFilter(Builder $query, array $filters)

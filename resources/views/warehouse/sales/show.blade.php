@@ -67,10 +67,10 @@
                             @foreach ($sale->products as $product)
                                 <x-base.table.tr>
                                     <x-base.table.td class="!py-4">
-                                        {{ $product->dicProduct->name }}
+                                        {{ $product->dicProduct?->name }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->dicProduct->barcode }}
+                                        {{ $product->dicProduct?->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
                                         {{ $product->product->barcode }}
