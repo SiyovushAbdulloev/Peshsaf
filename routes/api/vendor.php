@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Vendor\ProductController;
 use App\Http\Controllers\Api\Vendor\ReceiptController;
 use App\Http\Controllers\Api\Vendor\Returns\ClientController;
 use App\Http\Controllers\Api\Vendor\Returns\WarehouseController;
@@ -12,7 +13,6 @@ Route::middleware('role:vendor')
     ->group(function () {
         Route::get('/sales', [SaleController::class, 'index']);
         Route::get('/sales/{sale}', [SaleController::class, 'show']);
-        Route::get('/sales/create/products', [SaleController::class, 'products']);
         Route::post('/sales/create', [SaleController::class, 'store']);
 
         Route::get('/receipts', [ReceiptController::class, 'index']);
@@ -44,5 +44,10 @@ Route::middleware('role:vendor')
             Route::post('/clients/{return}/products/add', [ClientController::class, 'addProduct']);
             Route::delete('/clients/{return}/products/{returnProduct}',
                 [WarehouseController::class, 'removeProduct']);
+        });
+
+        Route::prefix('/products')->group(function () {
+            Route::get('/new', [ProductController::class, 'new']);
+            Route::get('/sold', [ProductController::class, 'sold']);
         });
     });

@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Warehouse\Movement;
 
-use App\Actions\Warehouse\GetProductAction;
+use App\Actions\Warehouse\GetNewProductAction;
 use App\Actions\Warehouse\GetProductsAction;
 use App\Models\Movement;
 use App\Models\WarehouseRemainProduct;
@@ -27,7 +27,7 @@ class Products extends Component
     #[On('search')]
     public function search(string $barcode)
     {
-        $product = app(GetProductAction::class)->execute($barcode);
+        $product = app(GetNewProductAction::class)->execute($barcode);
 
         if ($product && !$this->selectedProducts->contains('barcode', $product->barcode)) {
             $this->selectedProducts->push($product);
@@ -43,13 +43,12 @@ class Products extends Component
     public function addProduct()
     {
         $remainProduct = WarehouseRemainProduct::with('product', 'dicProduct.measure')
-            ->has('dicProduct')
             ->whereHas('product', fn (Builder $query) => $query->active())
             ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
             ->first();
 
         if ($remainProduct) {
-            $this->selectedProducts->push($remainProduct);
+            $this->selectedProducts->push($remainProduct->product);
             if ($this->movement?->exists) {
                 $this->movement->products()->firstOrCreate([
                     'product_id' => $remainProduct->product_id,
@@ -63,7 +62,7 @@ class Products extends Component
         if ($this->movement->exists) {
             $this->movement->products()->where('product_id', $productId)->delete();
         }
-        $this->selectedProducts = $this->selectedProducts->filter(fn($item) => $item->product_id !== $productId);
+        $this->selectedProducts = $this->selectedProducts->filter(fn($item) => $item->id !== $productId);
     }
 
     public function render()

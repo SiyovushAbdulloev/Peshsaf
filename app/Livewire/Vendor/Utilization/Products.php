@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Vendor\Utilization;
 
-use App\Actions\Vendor\GetSoldProductAction;
-use App\Actions\Vendor\Return\GetProductsAction;
+use App\Actions\Product\GetProductsAction;
+use App\Actions\Product\GetSoldProductAction;
 use App\Models\Product;
 use App\Models\Utilization;
 use App\StateMachines\StatusProduct;

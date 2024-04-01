@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Warehouse\MovementController;
+use App\Http\Controllers\Api\Warehouse\ProductController;
 use App\Http\Controllers\Api\Warehouse\ReturnController;
 use App\Http\Controllers\Api\Warehouse\SaleController;
 use App\Http\Controllers\Api\Warehouse\UtilizationController;
@@ -38,4 +39,9 @@ Route::middleware('role:warehouse')
         Route::get('/returns', [ReturnController::class, 'index'])->name('returns.index');
         Route::get('/returns/{return}', [ReturnController::class, 'show'])->name('returns.show');
         Route::patch('/returns/{return}/approve', [ReturnController::class, 'approve'])->name('returns.approve');
+
+        Route::prefix('/products')->group(function () {
+            Route::get('/new', [ProductController::class, 'new']);
+            Route::get('/sold', [ProductController::class, 'sold']);
+        });
     });

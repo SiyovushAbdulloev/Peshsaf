@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Warehouse;
 
-use App\Actions\Warehouse\GetProductAction;
+use App\Actions\Warehouse\GetNewProductAction;
 use App\Actions\Warehouse\Movement\AddProductAction;
 use App\Actions\Warehouse\Movement\StoreAction;
 use App\Actions\Warehouse\Movement\UpdateAction;
@@ -38,7 +38,7 @@ class MovementController extends Controller
         ]);
     }
 
-    public function products(Request $request, GetProductAction $action): JsonResponse
+    public function products(Request $request, GetNewProductAction $action): JsonResponse
     {
         $product = $action->execute($request->get('barcode'));
 

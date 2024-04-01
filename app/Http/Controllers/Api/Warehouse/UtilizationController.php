@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Warehouse;
 
 use App\Actions\Utilization\AddProductAction;
-use App\Actions\Warehouse\GetProductAction;
+use App\Actions\Warehouse\GetNewProductAction;
 use App\Actions\Warehouse\Utilization\StoreAction;
 use App\Actions\Warehouse\Utilization\UpdateAction;
 use App\Http\Controllers\Controller;
@@ -34,7 +34,7 @@ class UtilizationController extends Controller
         return response()->json(UtilizationResource::collection($utilizations));
     }
 
-    public function products(Request $request, GetProductAction $action): JsonResponse
+    public function products(Request $request, GetNewProductAction $action): JsonResponse
     {
         $product = Product::query()
             ->active()

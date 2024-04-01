@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Warehouse;
 
 use App\Actions\Sale\StoreAction;
-use App\Actions\Warehouse\GetProductAction;
+use App\Actions\Warehouse\GetNewProductAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Resources\ProductResource;
@@ -32,7 +32,7 @@ class SaleController extends Controller
         return response()->json(['data' => SaleResource::make($sale->load('products')->loadCount('products'))]);
     }
 
-    public function products(Request $request, GetProductAction $action): JsonResponse
+    public function products(Request $request, GetNewProductAction $action): JsonResponse
     {
         $warehouseProduct = $action->execute($request->get('barcode'));
 
