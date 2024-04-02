@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\StateMachines\StatusReturn;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -64,5 +65,16 @@ class Refund extends Model
     public function scopeByStatus(Builder $query, string|array $statuses): void
     {
         $query->whereIn('status', !is_array($statuses) ? [$statuses] : $statuses);
+    }
+
+    public function scopeFilter(Builder $query, array $filters)
+    {
+        $query
+            ->when($filters['from'] ?? null, function ($query, string $from) {
+                $query->whereDate('created_at', '>=', Carbon::createFromDate($from));
+            })
+            ->when($filters['to'] ?? null, function ($query, string $to) {
+                $query->whereDate('created_at', '<=', Carbon::createFromDate($to));
+            });
     }
 }

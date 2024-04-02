@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\StateMachines\StatusMovement;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -58,5 +59,19 @@ class Movement extends Model
             $statuses = [$statuses];
         }
         $query->whereIn('status', $statuses);
+    }
+
+    public function scopeFilter(Builder $query, array $filters)
+    {
+        $query
+            ->when($filters['warehouse'] ?? null, function ($query, int $warehouse) {
+                $query->where('warehouse_id', $warehouse);
+            })
+            ->when($filters['from'] ?? null, function ($query, string $from) {
+                $query->whereDate('created_at', '>=', Carbon::createFromDate($from));
+            })
+            ->when($filters['to'] ?? null, function ($query, string $to) {
+                $query->whereDate('created_at', '<=', Carbon::createFromDate($to));
+            });
     }
 }

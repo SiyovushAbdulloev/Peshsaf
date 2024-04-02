@@ -12,6 +12,21 @@
             <div class="mt-3 flex items-center">
                 Штрих код: <span class="ml-2">{{ $product->barcode }}</span>
             </div>
+            <div class="mt-3 flex items-center">
+                Категория: <span class="ml-2">{{ $product->category?->name }}</span>
+            </div>
+            <div class="mt-3 flex items-center">
+                Действующее вещество: <span class="ml-2">{{ $product->activeIngredient?->name }}</span>
+            </div>
+            <div class="mt-3 flex items-center">
+                Единица измерения: <span class="ml-2">{{ $product->measure?->name }}</span>
+            </div>
+            <div class="mt-3 flex items-center">
+                Страна: <span class="ml-2">{{ $product->country?->name }}</span>
+            </div>
+            <div class="mt-3 flex items-center">
+                Срок годности: <span class="ml-2">{{ $product->expire_date }}</span>
+            </div>
             <div class="mt-3 items-center">
                 Документы:
                 <div class="gap-2">

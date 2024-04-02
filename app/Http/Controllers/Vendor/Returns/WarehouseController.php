@@ -7,7 +7,6 @@ use App\Actions\Vendor\Return\Warehouse\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Return\Warehouse\StoreRequest;
 use App\Http\Requests\Return\Warehouse\UpdateRequest;
-use App\Models\Movement;
 use App\Models\Refund;
 use App\Models\Warehouse;
 use Illuminate\View\View;
@@ -20,6 +19,7 @@ class WarehouseController extends Controller
         $returns = auth()->user()
             ->outlet
             ->returns()
+            ->filter(request()->only(['from', 'to']))
             ->type(Refund::WAREHOUSE)
             ->withCount('products')
             ->with('warehouse')

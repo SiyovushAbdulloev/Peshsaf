@@ -45,6 +45,9 @@ class OutletProduct extends Model
     public function scopeFilter(Builder $query, array $filters)
     {
         $query
+            ->when($filters['warehouse'] ?? null, function ($query, int $warehouse) {
+                $query->where('warehouse_id', $warehouse);
+            })
             ->when($filters['from'] ?? null, function ($query, string $from) {
                 $query->whereDate('outlet_products.created_at', '>=', Carbon::createFromDate($from));
             })

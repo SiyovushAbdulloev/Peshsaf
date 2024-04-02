@@ -54,6 +54,11 @@ class Product extends Model
         return $this->belongsTo(Country::class);
     }
 
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'fileable');

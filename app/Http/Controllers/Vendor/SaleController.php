@@ -17,6 +17,7 @@ class SaleController extends Controller
         $sales = auth()->user()
             ->outlet
             ->sales()
+            ->filter(request()->only(['from', 'to']))
             ->with('client')
             ->withCount('products')
             ->paginate(15);
