@@ -163,6 +163,27 @@ return [
             'route_name' => 'vendor.utilizations.index',
             'title'      => 'Утилизация товаров',
         ],
+        'reports' => [
+            'icon'     => 'list',
+            'title'    => 'Отчеты',
+            'sub_menu' => [
+                'remains'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.reports.remains.index',
+                    'title'      => 'По остаткам',
+                ],
+                'utilizations'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.reports.utilizations.index',
+                    'title'      => 'По утилизации',
+                ],
+                'clients'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.reports.sales.index',
+                    'title'      => 'По клиентам',
+                ],
+            ],
+        ],
     ],
     'customs'   => [
         'dashboard' => [

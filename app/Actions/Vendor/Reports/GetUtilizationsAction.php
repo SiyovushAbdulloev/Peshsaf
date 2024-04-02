@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Actions\Warehouse\Reports;
+namespace App\Actions\Vendor\Reports;
 
 use App\Core\Actions\CoreAction;
+use App\Models\Outlet;
 use App\Models\UtilizationProduct;
-use App\Models\Warehouse;
 use Illuminate\Database\Eloquent\Builder;
 
 class GetUtilizationsAction extends CoreAction
@@ -13,8 +13,8 @@ class GetUtilizationsAction extends CoreAction
     {
         $utilizationProducts = UtilizationProduct::whereHas('utilization', function (Builder $query) use ($filters) {
             $query
-                ->where('model_type', Warehouse::class)
-                ->where('model_id', auth()->user()->warehouse_id)
+                ->where('model_type', Outlet::class)
+                ->where('model_id', auth()->user()->outlet_id)
                 ->filter($filters);
         })
             ->with('utilization', 'product', 'dicProduct');

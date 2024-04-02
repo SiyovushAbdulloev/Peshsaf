@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Dictionaries\Product as DicProduct;
 use App\StateMachines\StatusProduct;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,11 +24,20 @@ class Product extends Model
         'model_id',
         'barcode',
         'history',
+        'creator_id',
+        'sale_id',
     ];
 
     public $stateMachines = [
         'status' => StatusProduct::class,
     ];
+
+    protected static function booted()
+    {
+        static::creating(function (Model $product) {
+            $product->creator_id = auth()->id();
+        });
+    }
 
     public function lastActive(): HasOne
     {
@@ -64,6 +74,7 @@ class Product extends Model
     public function sender(): Attribute
     {
         $type = 'Торговая точка';
+
         return Attribute::make(
             get: function () use ($type) {
                 if ($this->model instanceof Client) {
@@ -73,5 +84,21 @@ class Product extends Model
                 return join(' / ', [$type, $this->model->name]);
             }
         );
+    }
+
+    public function sale(): BelongsTo
+    {
+        return $this->belongsTo(Sale::class);
+    }
+
+    public function scopeFilter(Builder $query, array $filters)
+    {
+        $query
+            ->when($filters['from'] ?? null, function ($query, string $from) {
+                $query->whereDate('products.created_at', '>=', Carbon::createFromDate($from));
+            })
+            ->when($filters['to'] ?? null, function ($query, string $to) {
+                $query->whereDate('products.created_at', '<=', Carbon::createFromDate($to));
+            });
     }
 }

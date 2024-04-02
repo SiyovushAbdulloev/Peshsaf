@@ -17,12 +17,15 @@ class ReceiptController extends Controller
 {
     public function index(): View
     {
+        $filters = request()->only('from', 'to', 'option');
         $receipts = Receipt::query()
             ->withCount('products')
+            ->filter($filters)
             ->latest()
             ->paginate(15);
+        $options = config('project.filter-dates.options');
 
-        return view('warehouse.receipts.index', compact('receipts'));
+        return view('warehouse.receipts.index', compact('receipts', 'options', 'filters'));
     }
 
     public function create(): View

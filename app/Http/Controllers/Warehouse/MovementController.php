@@ -16,13 +16,16 @@ class MovementController extends Controller
 {
     public function index(): View
     {
+        $filters = request()->only('from', 'to', 'option');
         $movements = Movement::query()
+            ->filter($filters)
             ->with('outlet')
             ->withCount('products')
             ->latest()
             ->paginate(10);
+        $options = config('project.filter-dates.options');
 
-        return view('warehouse.movements.index', compact('movements'));
+        return view('warehouse.movements.index', compact('movements', 'options', 'filters'));
     }
 
     public function create(): View

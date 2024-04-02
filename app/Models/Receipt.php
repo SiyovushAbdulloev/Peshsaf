@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\StateMachines\StatusReceipt;
 use Asantibanez\LaravelEloquentStateMachines\Traits\HasStateMachines;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -68,5 +69,16 @@ class Receipt extends Model
             $statuses = [$statuses];
         }
         $query->whereIn('status', $statuses);
+    }
+
+    public function scopeFilter(Builder $query, array $filters)
+    {
+        $query
+            ->when($filters['from'] ?? null, function ($query, string $from) {
+                $query->whereDate('receipts.created_at', '>=', Carbon::createFromDate($from));
+            })
+            ->when($filters['to'] ?? null, function ($query, string $to) {
+                $query->whereDate('receipts.created_at', '<=', Carbon::createFromDate($to));
+            });
     }
 }

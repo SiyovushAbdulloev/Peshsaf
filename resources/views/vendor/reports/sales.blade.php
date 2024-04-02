@@ -1,26 +1,18 @@
 @extends('layouts/sidebar')
 
 @section('subhead')
-    <title>Продажа</title>
+    <title>Отчет по клиентам</title>
 @endsection
 
 @section('content')
     <div class="mt-5">
         <form id="search-form">
-            <div class="intro-y mt-2 flex">
-                <h2 class="intro-y text-lg font-medium">Продажа</h2>
-
-                <a href="{{ route('warehouse.sales.clients') }}" class="mb-2 transition duration-200 border
-                inline-flex items-center
-                justify-center py-2
-                px-3 rounded-md ml-auto
-                font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-2 shadow-md">
-                    <x-base.icon icon="fa-plus" class="mr-2"/>
-                    Добавить
-                </a>
+            <input type="hidden" name="export" value="0" id="export"/>
+            <div class="intro-y mt-2 flex gap-4">
+                <h2 class="intro-y text-lg font-medium">Отчет по клиентам</h2>
             </div>
 
-            <div class="flex gap-8 items-center box p-4">
+            <div class="flex gap-8 mt-8 items-center box p-4">
                 <x-base.form-select
                     class="w-1/4"
                     aria-label="form-select-sm example"
@@ -78,9 +70,18 @@
         </form>
 
         <div class="box p-4 mt-6 overflow-x-auto">
-            @if($sales->count())
+            <x-base.button
+                class="flex gap-2 ml-auto"
+                variant="outline-success"
+                id="export-btn"
+                type="button"
+            >
+                <x-base.icon icon="fa-file-excel"/>
+                <span>Экспорт</span>
+            </x-base.button>
+            @if($products->count())
                 <table
-                    id="sales-table"
+                    id="products-table"
                     data-tw-merge
                     class="w-full text-left"
                 >
@@ -93,13 +94,19 @@
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
-                            #
+                            Наименование
                         </th>
                         <th
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
-                            Дата
+                            Штрих-код
+                        </th>
+                        <th
+                            data-tw-merge
+                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                        >
+                            QR-код
                         </th>
                         <th
                             data-tw-merge
@@ -111,30 +118,12 @@
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
-                            Адрес
-                        </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
-                            Телефон
-                        </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
-                            Количество
-                        </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap w-[12%]"
-                        >
-                            &nbsp;
+                            Дата оп-я товара
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($sales as $sale)
+                    @foreach($products as $product)
                         <tr
                             data-tw-merge
                             class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
@@ -143,59 +132,42 @@
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $sale->id }}
+                                {{ $product->product->name }}
                             </td>
                             <td
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $sale->date->format('d.m.Y') }}
+                                {{ $product->product->barcode }}
                             </td>
                             <td
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $sale->client->name }}
+                                {{ $product->barcode }}
                             </td>
                             <td
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $sale->client->address }}
+                                {{ $product->sale->client_name }}
                             </td>
                             <td
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $sale->client->phone }}
-                            </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300"
-                            >
-                                {{ $sale->products_count }}
-                            </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 text-right"
-                            >
-                                <x-base.button
-                                    as="a"
-                                    size="sm"
-                                    href="{{ route('warehouse.sales.show', compact('sale')) }}"
-                                    type="button"
-                                    variant="outline-primary"
-                                >
-                                    <x-base.icon icon="fa-info"/>
-                                </x-base.button>
+                                {{ $product->created_at->format('d.m.Y') }}
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                <div class="mt-4">
+                    {{ $products->links() }}
+                </div>
             @else
                 <div role="alert"
-                     class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
+                     class="mt-8 alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
                     <i data-tw-merge data-lucide="alert-circle"
                        class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
                     Нет данных
@@ -206,6 +178,5 @@
 @endsection
 
 @pushOnce('scripts')
-    @vite('resources/js/pages/project/sales.js')
     @vite('resources/js/pages/project/reports.js')
 @endPushOnce

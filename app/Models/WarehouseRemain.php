@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class WarehouseRemain extends Model
 {
@@ -20,7 +19,7 @@ class WarehouseRemain extends Model
 
     public function product(): BelongsTo
     {
-        return $this->belongsTo(DicProduct::class, 'dic_product_id');
+        return $this->belongsTo(DicProduct::class, 'dic_product_id')->withTrashed();
     }
 
     public function products(): HasMany
