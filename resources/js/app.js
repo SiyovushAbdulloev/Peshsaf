@@ -17,3 +17,27 @@ if ($('meta[name="csrf-token"]').length > 0) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+$(".show-product").on("click", function () {
+    $.ajax({
+        url: $(this).attr('data-route'),
+        dataType: 'html',
+    }).done((res) => {
+        $('#body').html(res)
+        const el = document.querySelector("#basic-slide-over-preview");
+        const slideOver = tailwind.Modal.getInstance(el);
+
+        slideOver.toggle();
+    }).fail((err) => {
+        $('#body').html('Ошибка при загрузке данных')
+        console.log(err);
+    });
+});
+
+Livewire.on('show-product', function (res) {
+    $('#body').html(res);
+    const el = document.querySelector("#basic-slide-over-preview");
+    const slideOver = tailwind.Modal.getInstance(el);
+
+    slideOver.toggle();
+})

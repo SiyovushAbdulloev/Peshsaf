@@ -97,11 +97,11 @@
                                 class="px-5 py-3 border-b dark:border-darkmode-300 flex flex-row"
                             >
                                 <x-base.button
-                                    as="a"
+                                    class="show-product"
                                     size="sm"
-                                    href="#"
                                     type="button"
                                     variant="outline-primary"
+                                    data-route="{{ route('products.show', ['product' => $product->dic_product_id]) }}"
                                 >
                                     <x-base.icon icon="fa-info"/>
                                 </x-base.button>

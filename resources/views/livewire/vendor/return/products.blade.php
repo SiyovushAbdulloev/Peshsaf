@@ -38,12 +38,13 @@
                     <x-base.table.td>
                         <input type="hidden" name="products[]" value="{{ $product->id }}">
                         <x-base.button
+                            class="show-product"
                             size="sm"
-                            href="#"
                             type="button"
                             variant="outline-primary"
+                            wire:click="showModal({{$product->dic_product_id}})"
                         >
-                            <x-base.icon icon="fa-info"></x-base.icon>
+                            <x-base.icon icon="fa-info"/>
                         </x-base.button>
                         <x-base.button
                             size="sm"

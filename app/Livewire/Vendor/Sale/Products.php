@@ -4,6 +4,7 @@ namespace App\Livewire\Vendor\Sale;
 
 use App\Actions\Product\GetProductsAction;
 use App\Actions\Vendor\GetNewProductAction;
+use App\Models\Dictionaries\Product as DicProduct;
 use App\Models\OutletProduct;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -39,6 +40,11 @@ class Products extends Component
         if ($outletProduct) {
             $this->selectedProducts->push($outletProduct->product);
         }
+    }
+
+    public function showModal(DicProduct $product): void
+    {
+        $this->dispatch('show-product', view('product', compact('product'))->render());
     }
 
     public function deleteProduct($productId): void

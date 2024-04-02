@@ -3,6 +3,7 @@
 namespace App\Livewire\Warehouse\Utilization;
 
 use App\Actions\Product\GetProductsAction;
+use App\Models\Dictionaries\Product as DicProduct;
 use App\Models\Product;
 use App\Models\Utilization;
 use App\StateMachines\StatusProduct;
@@ -59,6 +60,11 @@ class Products extends Component
                 ]);
             }
         }
+    }
+
+    public function showModal(DicProduct $product): void
+    {
+        $this->dispatch('show-product', view('product', compact('product'))->render());
     }
 
     public function deleteProduct($productId): void

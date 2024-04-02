@@ -47,5 +47,81 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-span-12 lg:col-span-7 2xl:col-span-8">
+            <div class="box rounded-md p-5">
+                <div class="-mt-3 overflow-auto lg:overflow-visible">
+                    <x-base.table striped>
+                        <x-base.table.thead>
+                            <x-base.table.tr>
+                                <x-base.table.th class="whitespace-nowrap !py-5">
+                                    Наименование
+                                </x-base.table.th>
+                                <x-base.table.th class="whitespace-nowrap">
+                                    Штрих код
+                                </x-base.table.th>
+                                <x-base.table.th class="whitespace-nowrap">
+                                    Количество
+                                </x-base.table.th>
+                                <x-base.table.th class="whitespace-nowrap">
+                                    Ед. измерения
+                                </x-base.table.th>
+                                <x-base.table.th class="whitespace-nowrap text-right">
+                                    &nbsp;
+                                </x-base.table.th>
+                            </x-base.table.tr>
+                        </x-base.table.thead>
+                        <x-base.table.tbody>
+                            @foreach ($receipt->products as $product)
+                                <x-base.table.tr>
+                                    <x-base.table.td class="!py-4">
+                                        {{ $product->product->name }}
+                                    </x-base.table.td>
+                                    <x-base.table.td>
+                                        {{ $product->product->barcode }}
+                                    </x-base.table.td>
+                                    <x-base.table.td>
+                                        {{ $product->count }}
+                                    </x-base.table.td>
+                                    <x-base.table.td>
+                                        {{ $product->product->measure->name }}
+                                    </x-base.table.td>
+                                    <x-base.table.td class="text-right">
+                                        <div class="text-center">
+                                            <x-base.button
+                                                class="show-product"
+                                                size="sm"
+                                                type="button"
+                                                variant="outline-primary"
+                                                data-route="{{ route('products.show', ['product' =>
+                                                $product->dic_product_id]) }}"
+                                            >
+                                                <x-base.icon icon="fa-info"/>
+                                            </x-base.button>
+                                        </div>
+                                    </x-base.table.td>
+                                </x-base.table.tr>
+                            @endforeach
+                        </x-base.table.tbody>
+                    </x-base.table>
+                </div>
+            </div>
+
+            <div class="mt-5 text-left">
+                <x-base.button
+                    as="a"
+                    :href="route('warehouse.receipts.index')"
+                    class="mr-1 w-24"
+                    type="button"
+                    variant="outline-primary"
+                >
+                    Отмена
+                </x-base.button>
+            </div>
+        </div>
     </div>
 @endsection
+
+@pushOnce('scripts')
+    @vite('resources/js/pages/project/receipts.js')
+@endPushOnce

@@ -64,27 +64,30 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @foreach ($sale->products as $product)
+                            @foreach ($sale->products as $saleProduct)
                                 <x-base.table.tr>
                                     <x-base.table.td class="!py-4">
-                                        {{ $product->dicProduct?->name }}
+                                        {{ $saleProduct->dicProduct?->name }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->dicProduct?->barcode }}
+                                        {{ $saleProduct->dicProduct?->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->barcode }}
+                                        {{ $saleProduct->product->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->dicProduct->measure->name }}
+                                        {{ $saleProduct->dicProduct->measure->name }}
                                     </x-base.table.td>
                                     <x-base.table.td class="text-right">
                                         <x-base.button
+                                            class="show-product"
                                             size="sm"
                                             type="button"
                                             variant="outline-primary"
+                                            data-route="{{ route('products.show', ['product' =>
+                                            $saleProduct->product->dic_product_id]) }}"
                                         >
-                                            <x-base.lucide icon="info"/>
+                                            <x-base.icon icon="fa-info"/>
                                         </x-base.button>
                                     </x-base.table.td>
                                 </x-base.table.tr>

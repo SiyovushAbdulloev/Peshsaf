@@ -80,11 +80,14 @@
                                     </x-base.table.td>
                                     <x-base.table.td class="text-right">
                                         <x-base.button
+                                            class="show-product"
                                             size="sm"
                                             type="button"
                                             variant="outline-primary"
+                                            data-route="{{ route('products.show', ['product' =>
+                                            $product->product->dic_product_id]) }}"
                                         >
-                                            <x-base.lucide icon="info"/>
+                                            <x-base.icon icon="fa-info"/>
                                         </x-base.button>
                                     </x-base.table.td>
                                 </x-base.table.tr>
