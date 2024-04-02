@@ -3,6 +3,7 @@
 namespace App\Actions\Vendor\Reports;
 
 use App\Core\Actions\CoreAction;
+use App\Models\Outlet;
 use App\Models\UtilizationProduct;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -12,6 +13,7 @@ class GetUtilizationsAction extends CoreAction
     {
         $utilizationProducts = UtilizationProduct::whereHas('utilization', function (Builder $query) use ($filters) {
             $query
+                ->where('model_type', Outlet::class)
                 ->where('model_id', auth()->user()->outlet_id)
                 ->filter($filters);
         })

@@ -180,7 +180,7 @@ return [
                 'clients'  => [
                     'icon'       => 'list',
                     'route_name' => 'vendor.reports.sales.index',
-                    'title'      => 'По покупкам',
+                    'title'      => 'По клиентам',
                 ],
             ],
         ],

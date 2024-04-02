@@ -59,6 +59,7 @@ class StoreAction extends CoreAction
             $newProduct             = $product->replicate();
             $newProduct->model_type = Client::class;
             $newProduct->model_id   = $client->id;
+            $newProduct->sale_id    = $sale->id;
             $newProduct->save();
 
             $newProduct->status()->transitionTo('sold');

@@ -24,7 +24,8 @@ class Product extends Model
         'model_id',
         'barcode',
         'history',
-        'creator_id'
+        'creator_id',
+        'sale_id',
     ];
 
     public $stateMachines = [
@@ -73,6 +74,7 @@ class Product extends Model
     public function sender(): Attribute
     {
         $type = 'Торговая точка';
+
         return Attribute::make(
             get: function () use ($type) {
                 if ($this->model instanceof Client) {
@@ -84,9 +86,9 @@ class Product extends Model
         );
     }
 
-    public function saleProduct(): HasOne
+    public function sale(): BelongsTo
     {
-        return $this->hasOne(SaleProduct::class);
+        return $this->belongsTo(Sale::class);
     }
 
     public function scopeFilter(Builder $query, array $filters)

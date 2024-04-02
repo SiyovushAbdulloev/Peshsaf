@@ -55,7 +55,7 @@ class ExportSalesAction extends CoreAction
                 ->setCellValue("A$rowIndex", $product->product->name)
                 ->setCellValue("B$rowIndex", $product->product->barcode)
                 ->setCellValue("C$rowIndex", $product->barcode)
-                ->setCellValue("D$rowIndex", $product->saleProduct->sale->client_name)
+                ->setCellValue("D$rowIndex", $product->sale->client_name)
                 ->setCellValue("E$rowIndex", $product->created_at->format('d.m.Y'));
 
             if ($index !== $products->count() - 1) {
@@ -68,7 +68,6 @@ class ExportSalesAction extends CoreAction
         $sheet->getStyle("A1:E2")->getFont()->setBold(true);
         $sheet->getStyle("A2:E2")->getFont()->getColor()->setRGB('f9f9f9');
         $sheet->getStyle("A2:E2")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('00a933');
-
 
         return IOFactory::createWriter($spreadsheet, 'Xls');
     }

@@ -1,7 +1,7 @@
 @extends('layouts/sidebar')
 
 @section('subhead')
-    <title>Отчет по покупкам</title>
+    <title>Отчет по клиентам</title>
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
         <form id="search-form">
             <input type="hidden" name="export" value="0" id="export"/>
             <div class="intro-y mt-2 flex gap-4">
-                <h2 class="intro-y text-lg font-medium">Отчет по покупкам</h2>
+                <h2 class="intro-y text-lg font-medium">Отчет по клиентам</h2>
             </div>
 
             <div class="flex gap-8 mt-8 items-center box p-4">
@@ -112,7 +112,7 @@
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
-                            Ед.Из.
+                            Покупатель
                         </th>
                         <th
                             data-tw-merge
@@ -150,7 +150,7 @@
                                 data-tw-merge
                                 class="px-5 py-2 border-b dark:border-darkmode-300"
                             >
-                                {{ $product->saleProduct->sale->client_name }}
+                                {{ $product->sale->client_name }}
                             </td>
                             <td
                                 data-tw-merge
@@ -163,7 +163,7 @@
                     </tbody>
                 </table>
                 <div class="mt-4">
-                    {{ $roducts->links() }}
+                    {{ $products->links() }}
                 </div>
             @else
                 <div role="alert"
