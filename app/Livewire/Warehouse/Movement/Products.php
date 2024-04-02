@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Warehouse\Movement;
 
+use App\Actions\Product\GetProductsAction;
 use App\Actions\Warehouse\GetNewProductAction;
-use App\Actions\Warehouse\GetProductsAction;
 use App\Models\Dictionaries\Product as DicProduct;
 use App\Models\Movement;
 use App\Models\WarehouseRemainProduct;

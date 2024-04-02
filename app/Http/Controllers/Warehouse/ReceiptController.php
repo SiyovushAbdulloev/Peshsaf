@@ -11,6 +11,7 @@ use App\Models\Dictionaries\Product;
 use App\Models\Receipt;
 use App\Models\Supplier;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ReceiptController extends Controller
 {
@@ -70,9 +71,11 @@ class ReceiptController extends Controller
             'Данные успешно сохранены');
     }
 
-    public function destroy(Receipt $receipt): bool
+    public function destroy(Receipt $receipt): RedirectResponse
     {
-        return $receipt->delete();
+        $receipt->delete();
+
+        return redirect(route('warehouse.receipts.index'))->with('success', 'Приход успешно удален');
     }
 
     public function send(

@@ -2,7 +2,7 @@
     'use strict';
 
     let utilizationsTable = $('#utilizations-table');
-    $('.delete-movement', utilizationsTable).on('click', function (e) {
+    $('.delete-utilization', utilizationsTable).on('click', function (e) {
         if (confirm('Вы действительно хотите удапить утилизацию?')) {
             let form = $('#delete-form');
             form.attr('action', $(this).attr('data-route')).submit();
