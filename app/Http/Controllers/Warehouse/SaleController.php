@@ -7,22 +7,26 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Models\Client;
 use App\Models\Sale;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SaleController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        $filters = request()->only('from', 'to', 'option');
         $sales = auth()->user()
             ->warehouse
             ->sales()
+            ->filter($request)
             ->with('client')
             ->withCount('products')
             ->latest('date')
             ->paginate(15);
+        $options = config('project.filter-dates.options');
 
-        return view('warehouse.sales.index', compact('sales'));
+        return view('warehouse.sales.index', compact('sales', 'options', 'filters'));
     }
 
     public function create(Client $client = null): View
