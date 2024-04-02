@@ -41,22 +41,22 @@ class Product extends Model
 
     public function measure(): BelongsTo
     {
-        return $this->belongsTo(Measure::class);
+        return $this->belongsTo(Measure::class)->withTrashed();
     }
 
     public function activeIngredient(): BelongsTo
     {
-        return $this->belongsTo(ActiveIngredient::class);
+        return $this->belongsTo(ActiveIngredient::class)->withTrashed();
     }
 
     public function country(): BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class)->withTrashed();
     }
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->withTrashed();
     }
 
     public function files(): MorphMany

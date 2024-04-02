@@ -73,4 +73,12 @@ class ClientController extends Controller
         return redirect(route('vendor.returns.clients.index'))->with('success',
             'Возврат успешно завершен');
     }
+
+    public function destroy(Refund $return): RedirectResponse
+    {
+        $return->products()->delete();
+        $return->delete();
+
+        return redirect(route('vendor.returns.clients.index'))->with('success', 'Возврат успешно удален');
+    }
 }

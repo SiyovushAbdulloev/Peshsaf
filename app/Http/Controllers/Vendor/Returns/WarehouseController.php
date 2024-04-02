@@ -79,4 +79,12 @@ class WarehouseController extends Controller
         return redirect(route('vendor.returns.warehouse.index'))->with('success',
             'Возврат успешно отправлен на одобрение');
     }
+
+    public function destroy(Refund $return): RedirectResponse
+    {
+        $return->products()->delete();
+        $return->delete();
+
+        return redirect(route('vendor.returns.warehouse.index'))->with('success', 'Возврат успешно удален');
+    }
 }

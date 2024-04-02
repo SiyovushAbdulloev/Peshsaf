@@ -14,6 +14,7 @@
                 justify-center py-2
                 px-3 rounded-md ml-auto
                 font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-2 shadow-md">
+                <x-base.icon icon="fa-plus" class="mr-2" />
                 Добавить
             </a>
         </div>
@@ -182,6 +183,12 @@
                 </div>
             @endif
         </div>
+    </div>
+
+    <form id="delete-form" method="POST">
+        @csrf
+        @method('DELETE')
+    </form>
 @endsection
 
 @pushOnce('scripts')

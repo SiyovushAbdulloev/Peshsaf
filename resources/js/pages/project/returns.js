@@ -43,4 +43,11 @@
             $('#query').val('');
         });
     });
+
+    $('.delete-return').on('click', function (e) {
+        if (confirm('Вы действительно хотите удапить возврат?')) {
+            let form = $('#delete-form');
+            form.attr('action', $(this).attr('data-route')).submit();
+        }
+    });
 })();
