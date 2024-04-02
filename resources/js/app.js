@@ -56,3 +56,10 @@ $('#clear').on('click', function () {
     });
     $('#search-form').submit();
 });
+
+$('.delete').on('click', function (e) {
+    if (confirm('Вы действительно хотите удапить запись?')) {
+        let form = $('#delete-form');
+        form.attr('action', $(this).attr('data-route')).submit();
+    }
+});

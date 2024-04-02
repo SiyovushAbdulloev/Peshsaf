@@ -10,11 +10,11 @@ class DestroyAction extends CoreAction
 {
     public function handle(User $user)
     {
-        foreach ($user->files as $file) {
-            app(DeleteFileAction::class)->execute($file->filename);
-        }
-
-        $user->files()->delete();
+//        foreach ($user->files as $file) {
+//            app(DeleteFileAction::class)->execute($file->filename);
+//        }
+//
+//        $user->files()->delete();
         $user->delete();
     }
 }
