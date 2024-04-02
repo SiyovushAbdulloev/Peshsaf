@@ -11,17 +11,20 @@ class ReturnController extends Controller
 {
     public function index(): View
     {
+        $filters = request()->only('from', 'to', 'option');
         $returns = auth()->user()
             ->warehouse
             ->returns()
+            ->filter($filters)
             ->type(Refund::WAREHOUSE)
             ->byStatus([StatusReturn::PENDING, StatusReturn::FINISHED])
             ->withCount('products')
             ->with('origin')
             ->latest()
             ->paginate(15);
+        $options = config('project.filter-dates.options');
 
-        return view('warehouse.returns.index', compact('returns'));
+        return view('warehouse.returns.index', compact('returns', 'options', 'filters'));
     }
 
     public function show(Refund $return): View

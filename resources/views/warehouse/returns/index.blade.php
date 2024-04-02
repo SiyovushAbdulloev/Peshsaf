@@ -6,7 +6,67 @@
 
 @section('content')
     <div class="mt-5">
-        <h2 class="intro-y text-lg font-medium">Возврат товаров</h2>
+        <form id="search-form">
+            <div class="intro-y mt-2 flex">
+                <h2 class="intro-y text-lg font-medium">Возврат товаров</h2>
+            </div>
+
+            <div class="flex gap-8 items-center box p-4">
+                <x-base.form-select
+                    class="w-1/4"
+                    aria-label="form-select-sm example"
+                    id="option"
+                    name="option"
+                >
+                    <option value="">Выберите дату</option>
+                    @foreach($options as $option)
+                        <option
+                            value="{{ $option['value'] }}"
+                            data-from="{{ $option['from'] }}"
+                            @selected(request()->get('option') == $option['value'])
+                            data-to="{{ $option['to'] }}"
+                        >
+                            {{ $option['label'] }}
+                        </option>
+                    @endforeach
+                </x-base.form-select>
+                <x-base.litepicker
+                    class="w-1/6"
+                    data-single-mode="true"
+                    id="from"
+                    name="from"
+                    data-set-date="false"
+                    placeholder="Дата начала"
+                    value="{{ request()->get('from') }}"
+                />
+                <x-base.litepicker
+                    class="w-1/6"
+                    data-single-mode="true"
+                    id="to"
+                    name="to"
+                    data-set-date="false"
+                    placeholder="Дата окончания"
+                    value="{{ request()->get('from') }}"
+                />
+                <div class="flex gap-4">
+                    <x-base.button
+                        class="w-24"
+                        variant="primary"
+                        id="search"
+                    >
+                        Поиск
+                    </x-base.button>
+                    <x-base.button
+                        class="w-24"
+                        variant="outline-primary"
+                        id="clear"
+                        type="button"
+                    >
+                        Очистить
+                    </x-base.button>
+                </div>
+            </div>
+        </form>
 
         <div class="box p-4 mt-6 overflow-x-auto">
             @if($returns->count())
@@ -78,10 +138,15 @@
             @else
                 <div role="alert"
                      class="alert relative border rounded-md px-5 py-4 bg-warning border-warning bg-opacity-20 border-opacity-5 text-warning dark:border-warning dark:border-opacity-20 mb-2 flex items-center">
-                    <i data-tw-merge data-lucide="alert-circle" class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
+                    <i data-tw-merge data-lucide="alert-circle"
+                       class="stroke-1.5 w-5 h-5 mr-2 h-6 w-6 mr-2 h-6 w-6"></i>
                     Нет данных
                 </div>
             @endif
         </div>
     </div>
 @endsection
+
+@pushOnce('scripts')
+    @vite('resources/js/pages/project/reports.js')
+@endPushOnce
