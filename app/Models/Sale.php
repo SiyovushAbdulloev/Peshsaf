@@ -42,16 +42,16 @@ class Sale extends Model
         return $this->hasMany(SaleProduct::class);
     }
 
-    public function scopeFilter(Builder $query, Request $request)
+    public function scopeFilter(Builder $query, array $filters)
     {
         $query
-            ->when($request->get('phone') ?? null, function ($query, string $phone) {
+            ->when($filters['phone'] ?? null, function ($query, string $phone) {
                 $query->where('client_phone', $phone);
             })
-            ->when($request->get('from') ?? null, function ($query, string $from) {
+            ->when($filters['from'] ?? null, function ($query, string $from) {
                 $query->whereDate('date', '>=', Carbon::createFromDate($from));
             })
-            ->when($request->get('to') ?? null, function ($query, string $to) {
+            ->when($filters['to'] ?? null, function ($query, string $to) {
                 $query->whereDate('date', '<=', Carbon::createFromDate($to));
             });
     }

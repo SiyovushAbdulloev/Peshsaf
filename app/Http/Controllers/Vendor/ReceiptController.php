@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Movement;
+use App\Models\Supplier;
+use App\Models\Warehouse;
 use App\StateMachines\StatusMovement;
 use App\StateMachines\StatusReceipt;
 use Illuminate\View\View;
@@ -12,16 +14,19 @@ class ReceiptController extends Controller
 {
     public function index(): View
     {
+        $warehouses = Warehouse::get();
+
         $receipts = auth()->user()
             ->outlet
             ->movements()
+            ->filter(request()->only(['warehouse', 'from', 'to']))
             ->byStatus([StatusMovement::APPROVING, StatusMovement::APPROVED])
             ->with('warehouse')
             ->withCount('products')
             ->latest()
             ->paginate(15);
 
-        return view('vendor.receipts.index', compact('receipts'));
+        return view('vendor.receipts.index', compact('receipts', 'warehouses'));
     }
 
     public function show(Movement $receipt): View

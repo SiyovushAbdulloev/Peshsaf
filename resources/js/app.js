@@ -41,3 +41,18 @@ Livewire.on('show-product', function (res) {
 
     slideOver.toggle();
 })
+
+$('#option').on('change', function (e) {
+    let selected = $(this).children('option:selected');
+
+    $('#from').val(selected.data('from'));
+    $('#to').val(selected.data('to'));
+});
+
+$('#clear').on('click', function () {
+    let inputs = $('#search-form :input');
+    inputs.each(function () {
+        $(this).val('');
+    });
+    $('#search-form').submit();
+});
