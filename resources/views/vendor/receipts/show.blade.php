@@ -79,7 +79,16 @@
                                         {{ $product->dicProduct->measure->name }}
                                     </x-base.table.td>
                                     <x-base.table.td class="text-right">
-                                        <livewire:product-button :product="$product->product_id"/>
+                                        <x-base.button
+                                            class="show-product"
+                                            size="sm"
+                                            type="button"
+                                            variant="outline-primary"
+                                            data-route="{{ route('products.show', ['product' =>
+                                            $product->product->dic_product_id]) }}"
+                                        >
+                                            <x-base.icon icon="fa-info"/>
+                                        </x-base.button>
                                     </x-base.table.td>
                                 </x-base.table.tr>
                             @endforeach
@@ -101,7 +110,6 @@
             </div>
         </div>
     </div>
-    <livewire:product-modal/>
 @endsection
 
 @pushOnce('scripts')

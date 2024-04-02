@@ -49,7 +49,7 @@
                                     <x-base.table.td>{{ $product->measure->name }}</x-base.table.td>
                                     <x-base.table.td>
                                         <a href="#" class="mr-4">
-                                            <x-base.lucide icon="info"/>
+                                            <x-base.icon icon="fa-info"/>
                                         </a>
                                     </x-base.table.td>
                                 </x-base.table.tr>

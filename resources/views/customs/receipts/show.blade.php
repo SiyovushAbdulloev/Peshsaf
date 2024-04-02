@@ -82,9 +82,12 @@
                                 <x-base.table.td>{{ $product->product->measure->name }}</x-base.table.td>
                                 <x-base.table.td>
                                     <x-base.button
+                                        class="show-product"
                                         size="sm"
                                         type="button"
                                         variant="outline-primary"
+                                        data-route="{{ route('products.show', ['product' =>
+                                            $product->dic_product_id]) }}"
                                     >
                                         <x-base.icon icon="fa-info"/>
                                     </x-base.button>

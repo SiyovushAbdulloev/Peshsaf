@@ -4,6 +4,7 @@ namespace App\Livewire\Vendor\Return;
 
 use App\Actions\Product\GetProductsAction;
 use App\Actions\Vendor\GetNewProductAction;
+use App\Models\Dictionaries\Product as DicProduct;
 use App\Models\OutletProduct;
 use App\Models\Refund;
 use App\StateMachines\StatusProduct;
@@ -60,6 +61,11 @@ class Products extends Component
                 ]);
             }
         }
+    }
+
+    public function showModal(DicProduct $product): void
+    {
+        $this->dispatch('show-product', view('product', compact('product'))->render());
     }
 
     public function deleteProduct($productId): void

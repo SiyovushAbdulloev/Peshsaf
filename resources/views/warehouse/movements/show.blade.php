@@ -64,25 +64,28 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @foreach ($movement->products as $product)
+                            @foreach ($movement->products as $movementProduct)
                                 <x-base.table.tr>
                                     <x-base.table.td class="!py-4">
-                                        {{ $product->dicProduct->name }}
+                                        {{ $movementProduct->dicProduct->name }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->dicProduct->barcode }}
+                                        {{ $movementProduct->dicProduct->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->barcode }}
+                                        {{ $movementProduct->product->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->dicProduct->measure->name }}
+                                        {{ $movementProduct->dicProduct->measure->name }}
                                     </x-base.table.td>
                                     <x-base.table.td class="text-right">
                                         <x-base.button
+                                            class="show-product"
                                             size="sm"
                                             type="button"
                                             variant="outline-primary"
+                                            data-route="{{ route('products.show', ['product' =>
+                                            $movementProduct->product->dic_product_id]) }}"
                                         >
                                             <x-base.icon icon="fa-info"/>
                                         </x-base.button>

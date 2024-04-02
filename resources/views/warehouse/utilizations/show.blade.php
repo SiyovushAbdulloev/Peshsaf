@@ -67,30 +67,33 @@
                             </x-base.table.tr>
                         </x-base.table.thead>
                         <x-base.table.tbody>
-                            @foreach ($utilization->products as $product)
+                            @foreach ($utilization->products as $utilizationProduct)
                                 <x-base.table.tr>
                                     <x-base.table.td class="!py-4">
-                                        {{ $product->dicProduct->name }}
+                                        {{ $utilizationProduct->dicProduct->name }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->sender }}
+                                        {{ $utilizationProduct->product->sender }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->dicProduct->barcode }}
+                                        {{ $utilizationProduct->dicProduct->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->product->barcode }}
+                                        {{ $utilizationProduct->product->barcode }}
                                     </x-base.table.td>
                                     <x-base.table.td>
-                                        {{ $product->dicProduct->measure->name }}
+                                        {{ $utilizationProduct->dicProduct->measure->name }}
                                     </x-base.table.td>
                                     <x-base.table.td class="text-right">
                                         <x-base.button
+                                            class="show-product"
                                             size="sm"
                                             type="button"
                                             variant="outline-primary"
+                                            data-route="{{ route('products.show', ['product' =>
+                                            $utilizationProduct->product->dic_product_id]) }}"
                                         >
-                                            <x-base.lucide icon="info"/>
+                                            <x-base.icon icon="fa-info"/>
                                         </x-base.button>
                                     </x-base.table.td>
                                 </x-base.table.tr>

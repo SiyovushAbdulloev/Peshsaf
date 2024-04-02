@@ -51,6 +51,10 @@
     </div>
 </div>
 
+<x-base.slideover size="lg" id="basic-slide-over-preview">
+    <x-base.slideover.panel id="body"/>
+</x-base.slideover>
+
 <!-- BEGIN: Vendor JS Assets-->
 @vite('resources/js/vendors/dom.js')
 @vite('resources/js/vendors/tailwind-merge.js')

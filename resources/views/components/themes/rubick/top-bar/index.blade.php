@@ -27,13 +27,13 @@
                 <div class="mt-0.5 text-xs text-white/70 dark:text-slate-500">{{ Auth::user()->email }}</div>
             </x-base.menu.header>
             <x-base.menu.divider class="bg-white/[0.08]"/>
-            <x-base.menu.item class="hover:bg-white/5" :href="route('profile.edit')">
-                <x-base.lucide
-                    class="mr-2 h-4 w-4"
-                    icon="User"
-                />
-                Profile
-            </x-base.menu.item>
+{{--            <x-base.menu.item class="hover:bg-white/5" :href="route('profile.edit')">--}}
+{{--                <x-base.lucide--}}
+{{--                    class="mr-2 h-4 w-4"--}}
+{{--                    icon="User"--}}
+{{--                />--}}
+{{--                Profile--}}
+{{--            </x-base.menu.item>--}}
             <x-base.menu.item class="hover:bg-white/5" onclick="event.preventDefault();document.getElementById
                 ('logout-form').submit();">
                 <x-base.lucide

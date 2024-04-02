@@ -4,6 +4,7 @@ namespace App\Livewire\Warehouse\Movement;
 
 use App\Actions\Warehouse\GetNewProductAction;
 use App\Actions\Warehouse\GetProductsAction;
+use App\Models\Dictionaries\Product as DicProduct;
 use App\Models\Movement;
 use App\Models\WarehouseRemainProduct;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,6 +39,11 @@ class Products extends Component
                 ]);
             }
         }
+    }
+
+    public function showModal(DicProduct $product): void
+    {
+        $this->dispatch('show-product', view('product', compact('product'))->render());
     }
 
     public function addProduct()

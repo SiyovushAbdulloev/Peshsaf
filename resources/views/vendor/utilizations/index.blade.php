@@ -139,7 +139,7 @@
                                     type="button"
                                     variant="outline-primary"
                                 >
-                                    <x-base.lucide icon="info"/>
+                                    <x-base.icon icon="fa-info"/>
                                 </x-base.button>
                                 @can('edit', $utilization)
                                     <x-base.button
