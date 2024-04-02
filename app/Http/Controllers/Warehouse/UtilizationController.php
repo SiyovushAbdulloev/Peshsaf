@@ -17,15 +17,18 @@ class UtilizationController extends Controller
 {
     public function index(): View
     {
+        $filters = request()->only('from', 'to', 'option');
         $utilizations = auth()->user()
             ->warehouse
             ->utilizations()
+            ->filter($filters)
             ->with('client', 'outlet')
             ->withCount('products')
             ->latest()
             ->paginate(10);
+        $options = config('project.filter-dates.options');
 
-        return view('warehouse.utilizations.index', compact('utilizations'));
+        return view('warehouse.utilizations.index', compact('utilizations', 'options', 'filters'));
     }
 
     public function show(Utilization $utilization): View
