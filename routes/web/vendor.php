@@ -3,6 +3,7 @@
 use App\Http\Controllers\Vendor\ProductController;
 use App\Http\Controllers\Vendor\ReceiptController;
 use App\Http\Controllers\Vendor\Reports\RemainController;
+use App\Http\Controllers\Vendor\Reports\SaleController as ReportSaleController;
 use App\Http\Controllers\Vendor\Reports\UtilizationController as UtilizationReportController;
 use App\Http\Controllers\Vendor\Returns\ClientController;
 use App\Http\Controllers\Vendor\Returns\WarehouseController;
@@ -42,5 +43,6 @@ Route::middleware('role:vendor')
             ->group(function () {
                 Route::get('/remains', [RemainController::class, 'index'])->name('remains.index');
                 Route::get('/utilizations', [UtilizationReportController::class, 'index'])->name('utilizations.index');
+                Route::get('/sales', [ReportSaleController::class, 'index'])->name('sales.index');
             });
     });

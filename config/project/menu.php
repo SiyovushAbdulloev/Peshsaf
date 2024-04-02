@@ -177,6 +177,11 @@ return [
                     'route_name' => 'vendor.reports.utilizations.index',
                     'title'      => 'По утилизации',
                 ],
+                'clients'  => [
+                    'icon'       => 'list',
+                    'route_name' => 'vendor.reports.sales.index',
+                    'title'      => 'По покупкам',
+                ],
             ],
         ],
     ],
