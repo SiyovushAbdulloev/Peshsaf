@@ -50,7 +50,7 @@ class Products extends Component
     {
         $remainProduct = WarehouseRemainProduct::with('product', 'dicProduct.measure')
             ->whereHas('product', fn (Builder $query) => $query->active())
-            ->whereNotIn('product_id', $this->selectedProducts->pluck('product_id'))
+            ->whereNotIn('product_id', $this->selectedProducts->pluck('id'))
             ->first();
 
         if ($remainProduct) {

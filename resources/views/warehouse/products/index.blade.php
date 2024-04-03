@@ -41,13 +41,13 @@
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
-                            Остаток
+                            Ед. измерения
                         </th>
                         <th
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
-                            Ед. измерения
+                            Остаток
                         </th>
                         <th
                             data-tw-merge

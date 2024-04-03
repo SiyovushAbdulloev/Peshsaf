@@ -91,7 +91,9 @@
                                     <x-base.button
                                         as="a"
                                         size="sm"
-                                        href="{{ route('admin.dictionaries.categories.products.edit', compact('category', 'product')) }}"
+                                        href="{{ route('admin.dictionaries.categories.products.edit', ['category' =>
+                                        $currentCategory, 'product' => $product])
+                                         }}"
                                         type="button"
                                         variant="outline-success"
                                     >

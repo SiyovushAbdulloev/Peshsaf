@@ -17,7 +17,7 @@ class UpdateRequest extends CoreFormRequest
             'position'   => ['required', 'integer', 'exists:positions,id'],
             'address'    => ['required', 'string', 'max:255'],
             'is_limited' => ['required', 'in:0,1'],
-            'expired'    => ['required', 'date'],
+            'expired'    => ['nullable', 'required_if:is_limited,true', 'date'],
             'phone'      => ['required', 'regex:/^[0-9]{9}+$/'],
             'email'      => ['required', 'email'],
             'password'   => ['nullable', 'string', 'min:8', 'max:255'],

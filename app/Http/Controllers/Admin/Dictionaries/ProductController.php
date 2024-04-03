@@ -24,17 +24,16 @@ class ProductController extends Controller
         ActiveIngredientIndexAction $activeIngredientIndexAction,
         MeasureIndexAction $measureIndexAction,
         Category $category
-    ): View
-    {
+    ): View {
         $product = new Product();
 
         return view('admin.dictionaries.categories.products.create', [
-            'countries' => $countryIndexAction->execute(),
+            'countries'         => $countryIndexAction->execute(),
             'activeIngredients' => $activeIngredientIndexAction->execute(),
-            'measures' => $measureIndexAction->execute(),
-            'list' => config('project.list'),
-            'category' => $category,
-            'product' => $product
+            'measures'          => $measureIndexAction->execute(),
+            'list'              => config('project.list'),
+            'category'          => $category,
+            'product'           => $product,
         ]);
     }
 
@@ -42,11 +41,11 @@ class ProductController extends Controller
         StoreRequest $request,
         StoreAction $action,
         Category $category
-    ): RedirectResponse
-    {
+    ): RedirectResponse {
         $action->execute($request->getParams(), $category);
 
-        return redirect(route('admin.dictionaries.categories.index', ['category' => $category->id]))->with('success', 'Продукт добавлен');
+        return redirect(route('admin.dictionaries.categories.index', compact('category')))->with('success',
+            'Продукт добавлен');
     }
 
     public function edit(
@@ -55,28 +54,27 @@ class ProductController extends Controller
         MeasureIndexAction $measureIndexAction,
         Category $category,
         Product $product
-    ): View
-    {
+    ): View {
         return view('admin.dictionaries.categories.products.edit', [
-            'countries' => $countryIndexAction->execute(),
+            'countries'         => $countryIndexAction->execute(),
             'activeIngredients' => $activeIngredientIndexAction->execute(),
-            'measures' => $measureIndexAction->execute(),
-            'list' => config('project.list'),
-            'category' => $category,
-            'product' => $product
+            'measures'          => $measureIndexAction->execute(),
+            'list'              => config('project.list'),
+            'category'          => $category,
+            'product'           => $product,
         ]);
     }
 
     public function update(
         UpdateRequest $request,
-        UpdateAction  $action,
+        UpdateAction $action,
         Category $category,
-        Product      $product
-    ): RedirectResponse
-    {
+        Product $product
+    ): RedirectResponse {
         $action->execute($request->getParams(), $product);
 
-        return redirect(route('admin.dictionaries.categories.index', ['category' => $category->id]))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.categories.products.edit', compact('category', 'product')))->with('success',
+            'Данные успешно изменены');
     }
 
     public function destroy(DestroyAction $action, Category $category, Product $product): RedirectResponse

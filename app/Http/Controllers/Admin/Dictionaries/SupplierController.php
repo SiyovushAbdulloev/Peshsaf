@@ -57,7 +57,7 @@ class SupplierController extends Controller
     {
         $action->execute($request->getParams(), $supplier);
 
-        return redirect(route('admin.dictionaries.suppliers.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.dictionaries.suppliers.edit', compact('supplier')))->with('success', 'Данные успешно изменены');
     }
 
     public function destroy(DestroyAction $action, Supplier $supplier): RedirectResponse

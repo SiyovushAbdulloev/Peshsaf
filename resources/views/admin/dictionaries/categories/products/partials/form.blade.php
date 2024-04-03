@@ -173,58 +173,7 @@
         @enderror
     </div>
 
-    <div class="col-span-12">
-        <x-base.form-label>Загрузите документы</x-base.form-label>
-        <x-base.form-upload
-            name="files"
-            :multiple="true"
-            accept=".doc,.pdf"
-            description="PDF,DOC (макс 1Мб)"
-        />
-
-        @if($product->exists())
-            <div>
-                <table>
-                    @foreach($product->files as $file)
-                        <tr id="{{$file->id}}">
-                            <td>
-                                {{$file->original_filename}}
-                            </td>
-                            <td>
-                                <x-base.button
-                                    class="w-20"
-                                    variant="danger"
-                                    type="button"
-                                    data-value="{{$file->id}}"
-                                    id="remove-file"
-                                >
-                                    Удалить
-                                </x-base.button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-        @endif
-        @error('files')
-        <div class="mt-2 text-danger italic">
-            {{ $message }}
-        </div>
-        @enderror
-        @if ($errors->has('files.*'))
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->get('files.*') as $error)
-                        @foreach($error as $message)
-                            <div class="mt-2 text-danger italic">
-                                {{ $message }}
-                            </div>
-                        @endforeach
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    </div>
+    <livewire:files :files="$product->files" />
 </div>
 
 @pushOnce('scripts')

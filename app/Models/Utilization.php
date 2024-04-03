@@ -80,6 +80,14 @@ class Utilization extends Model
     public function scopeFilter(Builder $query, array $filters)
     {
         $query
+            ->when($filters['client'] ?? null, function ($query, string $client) {
+                $query->whereHas('client', function (Builder $query) use ($client) {
+                    $client = preg_replace('/\s+/', '%', $client);
+                    $client = sprintf('%%%s%%', $client);
+
+                    $query->where('name', 'LIKE', $client);
+                });
+            })
             ->when($filters['from'] ?? null, function ($query, string $from) {
                 $query->whereDate('created_at', '>=', Carbon::createFromDate($from));
             })
