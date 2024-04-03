@@ -22,92 +22,51 @@
         <div class="box mt-5 p-4 overflow-x-auto">
             @if($suppliers->count())
                 <table
-                    data-tw-merge
                     class="w-full text-left"
                 >
                     <thead data-tw-merge class="">
-                    <tr
-                        data-tw-merge
-                        class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
-                    >
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                    <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)
+                    _td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             #
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Наименование
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Адресс
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Телефон
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             E-mail
                         </th>
-                        <th
-                            data-tw-merge
-                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
-                        >
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             &nbsp;
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($suppliers as $supplier)
-                        <tr
-                            data-tw-merge
-                            class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)_td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50"
-                        >
-                            <td
-                                data-tw-merge
-                                class="px-5 py-3 border-b dark:border-darkmode-300"
-                            >
+                        <tr class="[&amp;:nth-of-type(odd)_td]:bg-slate-100 [&amp;:nth-of-type(odd)
+                        _td]:dark:bg-darkmode-300 [&amp;:nth-of-type(odd)_td]:dark:bg-opacity-50">
+                            <td class="px-5 py-3 border-b dark:border-darkmode-300">
                                 {{ $supplier->id }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-3 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-3 border-b dark:border-darkmode-300">
                                 {{ $supplier->organization_name }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-3 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-3 border-b dark:border-darkmode-300">
                                 {{ $supplier->organization_address }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-3 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-3 border-b dark:border-darkmode-300">
                                 {{ $supplier->phone }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-3 border-b dark:border-darkmode-300"
-                            >
+                            <td class="px-5 py-3 border-b dark:border-darkmode-300">
                                 {{ $supplier->email }}
                             </td>
-                            <td
-                                data-tw-merge
-                                class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 text-right"
-                            >
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 text-right">
                                 <x-base.button
                                     as="a"
                                     size="sm"

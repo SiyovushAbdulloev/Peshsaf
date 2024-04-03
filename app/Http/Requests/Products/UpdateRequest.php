@@ -17,7 +17,7 @@ class UpdateRequest extends CoreFormRequest
             'active_ingredient' => ['required', 'integer', 'exists:active_ingredients,id'],
             'status' => ['required', 'string', Rule::in($this->getList())],
             'measure' => ['required', 'integer', 'exists:measures,id'],
-            'expiry_date' => ['required', 'string', 'date_format:d-m-Y'],
+            'expiry_date' => ['required', 'string'],
             'country' => ['required', 'integer', 'exists:countries,id'],
             'barcode' => ['required', 'string', 'max_digits:20'],
             'description' => ['required', 'string', 'max:500'],

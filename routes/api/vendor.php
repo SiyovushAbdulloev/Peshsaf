@@ -41,6 +41,7 @@ Route::middleware('role:vendor')
             Route::apiResource('clients', ClientController::class)->parameters([
                 'clients' => 'return',
             ]);
+            Route::post('/clients/{return}/finish', [ClientController::class, 'finish']);
             Route::post('/clients/{return}/products/add', [ClientController::class, 'addProduct']);
             Route::delete('/clients/{return}/products/{returnProduct}',
                 [WarehouseController::class, 'removeProduct']);

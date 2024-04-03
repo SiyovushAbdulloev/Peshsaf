@@ -13,7 +13,7 @@ class UtilizationController extends Controller
 {
     public function index(GetUtilizationsAction $action, ExportUtilizationsAction $exportAction): View|StreamedResponse
     {
-        $query = $action->execute(filters: request()->only(['from', 'to', 'outlet', 'option']));
+        $query = $action->execute(filters: request()->only(['from', 'to', 'outlet', 'client']));
 
         if (request()->get('export')) {
             $callback = function () use ($exportAction, $query) {

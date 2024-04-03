@@ -19,7 +19,7 @@
                     <div class="mt-5 text-right">
                         <x-base.button
                             as="a"
-                            :href="route('admin.dictionaries.categories.index')"
+                            :href="route('admin.dictionaries.categories.index', compact('category'))"
                             class="mr-1 w-24"
                             type="button"
                             variant="outline-secondary"

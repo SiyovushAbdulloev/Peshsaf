@@ -12,73 +12,84 @@
                 <h2 class="intro-y text-lg font-medium">Отчет по утилизациям</h2>
             </div>
 
-            <div class="flex gap-8 mt-8 items-center box p-4">
-                <x-base.form-select
-                    class="w-1/4"
-                    aria-label="form-select-sm example"
-                    name="outlet"
-                    id="outlet"
-                >
-                    <option value="">Выберите торговую точку</option>
-                    @foreach($outlets as $outlet)
-                        <option value="{{$outlet->id}}" @selected(($filters['outlet'] ?? 0) == $outlet->id)>
-                            {{$outlet->name}}
-                        </option>
-                    @endforeach
-                </x-base.form-select>
-                <x-base.form-select
-                    class="w-1/4"
-                    aria-label="form-select-sm example"
-                    id="option"
-                    name="option"
-                >
-                    <option value="">Выберите дату</option>
-                    @foreach($options as $option)
-                        <option
-                            value="{{ $option['value'] }}"
-                            data-from="{{ $option['from'] }}"
-                            @selected(request()->get('option') == $option['value'])
-                            data-to="{{$option['to']}}"
+            <div class="box p-4 mt-8">
+                <div class="grid grid-cols-12 gap-4">
+                    <x-base.form-select
+                        class="col-span-6"
+                        aria-label="form-select-sm example"
+                        name="outlet"
+                        id="outlet"
+                    >
+                        <option value="">Выберите торговую точку</option>
+                        @foreach($outlets as $outlet)
+                            <option value="{{$outlet->id}}" @selected(($filters['outlet'] ?? 0) == $outlet->id)>
+                                {{$outlet->name}}
+                            </option>
+                        @endforeach
+                    </x-base.form-select>
+                    <x-base.form-input
+                        class="col-span-6"
+                        id="client"
+                        type="text"
+                        name="client"
+                        placeholder="Введите имя клиента"
+                        value="{{ request()->get('client') }}"
+                    />
+                </div>
+                <div class="grid grid-cols-12 gap-4 mt-4">
+                    <x-base.form-select
+                        class="col-span-6 2xl:col-span-2"
+                        aria-label="form-select-sm example"
+                        id="option"
+                        name="option"
+                    >
+                        <option value="">Выберите дату</option>
+                        @foreach($options as $option)
+                            <option
+                                value="{{ $option['value'] }}"
+                                data-from="{{ $option['from'] }}"
+                                @selected(request()->get('option') == $option['value'])
+                                data-to="{{$option['to']}}"
+                            >
+                                {{$option['label']}}
+                            </option>
+                        @endforeach
+                    </x-base.form-select>
+                    <x-base.litepicker
+                        class="col-span-6 2xl:col-span-2"
+                        data-single-mode="true"
+                        id="from"
+                        name="from"
+                        data-set-date="false"
+                        placeholder="Дата начала"
+                        value="{{ request()->get('from') }}"
+                    />
+                    <x-base.litepicker
+                        class="col-span-6 2xl:col-span-2"
+                        data-single-mode="true"
+                        id="to"
+                        name="to"
+                        data-set-date="false"
+                        placeholder="Дата окончания"
+                        value="{{ request()->get('to') }}"
+                    />
+                    <div class="flex gap-4 col-span-6 ml-auto">
+                        <x-base.button
+                            class="w-24"
+                            variant="primary"
+                            id="search"
                         >
-                            {{$option['label']}}
-                        </option>
-                    @endforeach
-                </x-base.form-select>
-                <x-base.litepicker
-                    class="w-1/6"
-                    data-single-mode="true"
-                    id="from"
-                    name="from"
-                    data-set-date="false"
-                    placeholder="Дата начала"
-                    value="{{ request()->get('from') }}"
-                />
-                <span>до</span>
-                <x-base.litepicker
-                    class="w-1/6"
-                    data-single-mode="true"
-                    id="to"
-                    name="to"
-                    data-set-date="false"
-                    placeholder="Дата окончания"
-                    value="{{ request()->get('to') }}"
-                />
-                <div class="flex gap-4">
-                    <x-base.button
-                        class="w-24"
-                        variant="primary"
-                        id="search"
-                    >
-                        Поиск
-                    </x-base.button>
-                    <x-base.button
-                        class="w-24"
-                        variant="outline-primary"
-                        id="clear"
-                        type="button"
-                    >
-                        Очистить
-                    </x-base.button>
+                            Поиск
+                        </x-base.button>
+                        <x-base.button
+                            class="w-24"
+                            variant="outline-primary"
+                            id="clear"
+                            type="button"
+                        >
+                            Очистить
+                        </x-base.button>
+                    </div>
                 </div>
             </div>
         </form>

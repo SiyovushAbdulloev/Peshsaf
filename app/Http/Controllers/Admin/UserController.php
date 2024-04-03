@@ -54,7 +54,7 @@ class UserController extends Controller
     {
         $action->execute($request->getParams(), $user);
 
-        return redirect(route('admin.users.index'))->with('success', 'Данные успешно изменены');
+        return redirect(route('admin.users.edit', compact('user')))->with('success', 'Данные успешно изменены');
     }
 
     public function destroy(DestroyAction $action, User $user): RedirectResponse
