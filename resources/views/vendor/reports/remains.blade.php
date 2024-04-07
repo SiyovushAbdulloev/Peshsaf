@@ -47,7 +47,7 @@
                     name="to"
                     data-set-date="false"
                     placeholder="Дата окончания"
-                    value="{{ request()->get('from') }}"
+                    value="{{ request()->get('to') }}"
                 />
                 <div class="flex gap-4">
                     <x-base.button
