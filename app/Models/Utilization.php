@@ -88,14 +88,14 @@ class Utilization extends Model
                     $query->where('name', 'LIKE', $client);
                 });
             })
-            ->when($filters['from'] ?? null, function ($query, string $from) {
-                $query->whereDate('created_at', '>=', Carbon::createFromDate($from));
-            })
             ->when($filters['outlet'] ?? null, function ($query, string $outlet) {
                 $query->where('outlet_id', (int)$outlet);
             })
+            ->when($filters['from'] ?? null, function ($query, string $from) {
+                $query->whereDate('date', '>=', Carbon::createFromDate($from));
+            })
             ->when($filters['to'] ?? null, function ($query, string $to) {
-                $query->whereDate('created_at', '<=', Carbon::createFromDate($to));
+                $query->whereDate('date', '<=', Carbon::createFromDate($to));
             });
     }
 }

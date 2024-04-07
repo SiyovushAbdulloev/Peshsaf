@@ -75,10 +75,10 @@ class Receipt extends Model
     {
         $query
             ->when($filters['from'] ?? null, function ($query, string $from) {
-                $query->whereDate('receipts.created_at', '>=', Carbon::createFromDate($from));
+                $query->whereDate('date', '>=', Carbon::createFromDate($from));
             })
             ->when($filters['to'] ?? null, function ($query, string $to) {
-                $query->whereDate('receipts.created_at', '<=', Carbon::createFromDate($to));
+                $query->whereDate('date', '<=', Carbon::createFromDate($to));
             });
     }
 }

@@ -15,6 +15,7 @@ class ReceiptController extends Controller
         $receipts = auth()->user()
             ->outlet
             ->movements()
+            ->filter(request()->only('from', 'to', 'warehouse'))
             ->with('warehouse')
             ->withCount('products')
             ->latest()

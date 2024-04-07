@@ -68,10 +68,10 @@ class Movement extends Model
                 $query->where('warehouse_id', $warehouse);
             })
             ->when($filters['from'] ?? null, function ($query, string $from) {
-                $query->whereDate('created_at', '>=', Carbon::createFromDate($from));
+                $query->whereDate('date', '>=', Carbon::createFromDate($from));
             })
             ->when($filters['to'] ?? null, function ($query, string $to) {
-                $query->whereDate('created_at', '<=', Carbon::createFromDate($to));
+                $query->whereDate('date', '<=', Carbon::createFromDate($to));
             });
     }
 }

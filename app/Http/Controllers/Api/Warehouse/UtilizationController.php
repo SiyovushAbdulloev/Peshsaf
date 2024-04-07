@@ -26,6 +26,7 @@ class UtilizationController extends Controller
         $utilizations = auth()->user()
             ->warehouse
             ->utilizations()
+            ->filter(request()->only('from', 'to'))
             ->with('client', 'outlet')
             ->withCount('products')
             ->latest()

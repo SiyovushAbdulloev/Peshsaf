@@ -21,6 +21,7 @@ class ClientResource extends PaginateResourceCollection
             'name' => $this->resource->name,
             'address' => $this->resource->address,
             'phone' => $this->resource->phone,
+            'avatar' => $this->resource->image?->url,
         ];
     }
 }

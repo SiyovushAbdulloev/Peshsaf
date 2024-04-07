@@ -10,7 +10,7 @@
             numberOfColumns: 2,
             numberOfMonths: 2,
             showWeekNumbers: true,
-            format: "D-MM-YYYY",
+            format: "DD-MM-YYYY",
             dropdowns: {
                 minYear: 1990,
                 maxYear: null,

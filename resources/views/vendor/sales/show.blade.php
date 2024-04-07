@@ -11,12 +11,21 @@
 
     <div class="intro-y mt-5 grid grid-cols-11 gap-5">
         <div class="col-span-12 lg:col-span-4 2xl:col-span-3">
-            <div class="box rounded-md p-5">
-                <div class="mb-5 flex items-center border-b border-slate-200/60 pb-5 dark:border-darkmode-400">
+            <div class="box rounded-md p-5 flex flex-col gap-y-3">
+                <div class="flex items-center border-b border-slate-200/60 pb-5 dark:border-darkmode-400">
                     <div class="truncate text-base font-medium">
                         Детали продажи
                     </div>
                 </div>
+                @if($sale->client?->image)
+                <div class="flex items-center">
+                        <div class="col-span-12">
+                            <div class="image-fit relative h-20 w-20 flex-none sm:h-24 sm:w-24 lg:h-32 lg:w-32">
+                                <img class="rounded-full" src="{{ $sale->client->image->url }}" alt="{{ $sale->name }}">
+                            </div>
+                        </div>
+                </div>
+                @endif
                 <div class="flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
@@ -24,14 +33,14 @@
                     />
                     Клиент: <span class="ml-2">{{ $sale->client_name }}</span>
                 </div>
-                <div class="mt-3 flex items-center">
+                <div class="flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-phone"
                     />
                     Телефон: <span class="ml-2">{{ $sale->client_phone }}</span>
                 </div>
-                <div class="mt-3 flex items-center">
+                <div class="flex items-center">
                     <x-base.icon
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-location-dot"
