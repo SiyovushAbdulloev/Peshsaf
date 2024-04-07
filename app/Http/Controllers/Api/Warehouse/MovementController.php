@@ -24,6 +24,7 @@ class MovementController extends Controller
         $movements = Movement::query()
             ->with('outlet')
             ->withCount('products')
+            ->filter(request()->only('from', 'to'))
             ->latest()
             ->paginate(10);
 

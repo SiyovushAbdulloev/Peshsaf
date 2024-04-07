@@ -19,6 +19,7 @@ class SaleController extends Controller
         $sales = auth()->user()
             ->warehouse
             ->sales()
+            ->filter(request()->only('from', 'to'))
             ->with('client')
             ->withCount('products')
             ->latest()

@@ -16,6 +16,7 @@ class ReturnController extends Controller
         $returns = auth()->user()
             ->warehouse
             ->returns()
+            ->filter(request()->only('from', 'to'))
             ->type(Refund::WAREHOUSE)
             ->byStatus([StatusReturn::PENDING, StatusReturn::FINISHED])
             ->withCount('products')

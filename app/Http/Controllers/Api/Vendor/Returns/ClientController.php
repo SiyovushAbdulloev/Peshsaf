@@ -23,6 +23,7 @@ class ClientController extends Controller
         $returns = auth()->user()
             ->outlet
             ->returns()
+            ->filter(request()->only('from', 'to'))
             ->type(Refund::CLIENT)
             ->withCount('products')
             ->with('client')
