@@ -23,9 +23,9 @@ class Index extends Component
     public function mount()
     {
         if (request()->get('category')) {
-            $this->currentCategory = Category::find(request()->get('category'));
+            $this->currentCategory = Category::with('products.measure')->find(request()->get('category'));
         } else {
-            $this->currentCategory = Category::first();
+            $this->currentCategory = Category::with('products.measure')->first();
         }
     }
 

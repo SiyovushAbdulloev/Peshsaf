@@ -10,5 +10,17 @@
     "rejected": "Отклонен",
     "utilized": "Утилизирован",
     "client": "Клиент",
-    "outlet": "Торговая точка"
+    "outlet": "Торговая точка",
+    "January": "Январь",
+    "February": "Февраль",
+    "March": "Март",
+    "April": "Апрель",
+    "May": "Май",
+    "June": "Июнь",
+    "July": "Июль",
+    "August": "Август",
+    "September": "Сентябрь",
+    "October": "Октябрь",
+    "November": "Ноябрь",
+    "December": "Декабрь"
 }

@@ -2,15 +2,15 @@
 <div class="relative z-[51] flex h-[67px] items-center border-b border-slate-200">
     <!-- BEGIN: Breadcrumb -->
     <x-base.breadcrumb class="-intro-x mr-auto hidden sm:flex">
-        <x-base.breadcrumb.link :index="0">
-            <x-base.lucide icon="home"/>
-        </x-base.breadcrumb.link>
-        <x-base.breadcrumb.link
-            :index="1"
-            :active="true"
-        >
-            Dashboard
-        </x-base.breadcrumb.link>
+{{--        <x-base.breadcrumb.link :index="0">--}}
+{{--            <x-base.lucide icon="home"/>--}}
+{{--        </x-base.breadcrumb.link>--}}
+{{--        <x-base.breadcrumb.link--}}
+{{--            :index="1"--}}
+{{--            :active="true"--}}
+{{--        >--}}
+{{--            Dashboard--}}
+{{--        </x-base.breadcrumb.link>--}}
     </x-base.breadcrumb>
     <!-- END: Breadcrumb -->
     <!-- BEGIN: Account Menu -->

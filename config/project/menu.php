@@ -5,7 +5,7 @@ return [
         'dashboard'    => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
-            'title'      => 'Dashboard',
+            'title'      => 'Главная',
         ],
         'divider',
         'dictionaries' => [
@@ -66,7 +66,7 @@ return [
         'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
-            'title'      => 'Dashboard',
+            'title'      => 'Главная',
         ],
         'products'  => [
             'icon'       => 'list',
@@ -81,12 +81,12 @@ return [
         'sales'     => [
             'icon'       => 'list',
             'route_name' => 'warehouse.sales.index',
-            'title'      => 'Продажа',
+            'title'      => 'Продажа частным лицам',
         ],
         'movements' => [
             'icon'       => 'list',
             'route_name' => 'warehouse.movements.index',
-            'title'      => 'Перемещение товаров',
+            'title'      => 'Продажа ИП и Юр лицам',
         ],
         'utilizations' => [
             'icon'       => 'list',
@@ -124,7 +124,7 @@ return [
         'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
-            'title'      => 'Dashboard',
+            'title'      => 'Главная',
         ],
         'divider',
         'products'  => [
@@ -189,7 +189,7 @@ return [
         'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
-            'title'      => 'Dashboard',
+            'title'      => 'Главная',
         ],
         'receipts'  => [
             'icon'       => 'list',

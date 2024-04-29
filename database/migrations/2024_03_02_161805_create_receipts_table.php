@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('supplier_id')->constrained();
             $table->foreignId('warehouse_id')->constrained();
             $table->string('filepath')->nullable();
+            $table->string('paper_size')->nullable();
             $table->timestamps();
         });
 

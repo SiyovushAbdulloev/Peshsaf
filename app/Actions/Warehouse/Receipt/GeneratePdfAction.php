@@ -52,7 +52,7 @@ class GeneratePdfAction extends CoreAction
 
         $path = "receipts/$receipt->id.pdf";
         Storage::put($path, Pdf::loadView('qrcode', ['codes' => $codes])
-            ->setPaper('A4')
+            ->setPaper(in_array($receipt->paper_size, ['A3', 'A4']) ? $receipt->paper_size : 'A4')
             ->stream());
 
         $receipt->update([
