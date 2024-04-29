@@ -17,50 +17,40 @@
 @pushOnce('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const ctx = document.getElementById('myChart');
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: {!! json_encode($months) !!},
-                datasets: [
-                    {
-                        label: 'Приходы',
-                        data: {!! $receipts->map(function ($receipt) {
-                                    return $receipt['count'];
-                              }) !!},
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Перемещения',
-                        data: {!! $movements->map(function ($movement) {
-                                    return $movement['count'];
-                              }) !!},
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Продажи',
-                        data: {!! $sales->map(function ($sale) {
-                                    return $sale['count'];
-                              }) !!},
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Утилизации',
-                        data: {!! $utilizations->map(function ($utilization) {
-                                    return $utilization['count'];
-                              }) !!},
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+    new Chart(document.getElementById('myChart'), {
+        type: 'line',
+        data: {
+            labels: {!! json_encode($months) !!},
+            datasets: [
+                {
+                    label: 'Приходы',
+                    data: {{ json_encode($receipts) }},
+                    borderWidth: 1
+                },
+                {
+                    label: 'Перемещения',
+                    data: {{ json_encode($movements) }},
+                    borderWidth: 1
+                },
+                {
+                    label: 'Продажи',
+                    data: {{ json_encode($sales) }},
+                    borderWidth: 1
+                },
+                {
+                    label: 'Утилизации',
+                    data: {{ json_encode($utilizations) }},
+                    borderWidth: 1
+                },
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
+        }
+    });
     </script>
 @endPushOnce
