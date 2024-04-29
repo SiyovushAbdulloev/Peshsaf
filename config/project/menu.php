@@ -5,7 +5,7 @@ return [
         'dashboard'    => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
-            'title'      => 'Dashboard',
+            'title'      => 'Главная',
         ],
         'divider',
         'dictionaries' => [
@@ -66,7 +66,7 @@ return [
         'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
-            'title'      => 'Dashboard',
+            'title'      => 'Главная',
         ],
         'products'  => [
             'icon'       => 'list',
@@ -124,7 +124,7 @@ return [
         'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
-            'title'      => 'Dashboard',
+            'title'      => 'Главная',
         ],
         'divider',
         'products'  => [
@@ -189,7 +189,7 @@ return [
         'dashboard' => [
             'icon'       => 'home',
             'route_name' => 'dashboard',
-            'title'      => 'Dashboard',
+            'title'      => 'Главная',
         ],
         'receipts'  => [
             'icon'       => 'list',

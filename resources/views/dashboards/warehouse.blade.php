@@ -1,12 +1,12 @@
 @extends('layouts.sidebar')
 
 @section('subhead')
-    <title>Dashboard</title>
+    <title>Главная</title>
 @endsection
 
 @section('content')
     <div class="intro-y mt-8">
-        <h2 class="mr-auto text-lg font-medium">This is a dashboard</h2>
+        <h2 class="mr-auto text-lg font-medium">Главная</h2>
     </div>
 
     <div>
