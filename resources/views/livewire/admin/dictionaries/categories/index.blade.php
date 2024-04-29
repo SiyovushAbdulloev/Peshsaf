@@ -27,7 +27,7 @@
                         ])
                     >
                         <x-base.icon :icon="$currentCategory->id === $category->id ? 'fa-folder-open' : 'fa-folder'"/>
-                        {{$category->name}}
+                        {{$category->name}} ({{ $category->products_count }})
                     </a>
 
                     <div class="flex gap-2">

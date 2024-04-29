@@ -10,6 +10,6 @@ class IndexAction extends CoreAction
 {
     public function handle(): Collection
     {
-        return Category::get();
+        return Category::query()->withCount('products')->get();
     }
 }

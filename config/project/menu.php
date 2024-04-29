@@ -81,12 +81,12 @@ return [
         'sales'     => [
             'icon'       => 'list',
             'route_name' => 'warehouse.sales.index',
-            'title'      => 'Продажа',
+            'title'      => 'Продажа частным лицам',
         ],
         'movements' => [
             'icon'       => 'list',
             'route_name' => 'warehouse.movements.index',
-            'title'      => 'Перемещение товаров',
+            'title'      => 'Продажа ИП и Юр лицам',
         ],
         'utilizations' => [
             'icon'       => 'list',

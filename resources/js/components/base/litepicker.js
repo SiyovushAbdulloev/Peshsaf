@@ -13,7 +13,7 @@
             format: "DD-MM-YYYY",
             dropdowns: {
                 minYear: 1990,
-                maxYear: null,
+                maxYear: 2040,
                 months: true,
                 years: true,
             },

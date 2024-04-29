@@ -80,7 +80,7 @@
                     <div class="flex">
                         <h2 class="text-lg mt-4 ml-5">
                             Количество товаров по накладной <span class="font-bold text-xl underline">{{
-                        $receipt->products->count() }}</span>
+                        $receipt->products->sum('count') }}</span>
                         </h2>
 
                         <div class="mt-5 ml-auto">
@@ -116,15 +116,17 @@
                                 for="make-qr"
                             >
                                 Сформировать QR код: <span class="font-bold text-xl underline">{{
-                $receipt->products->count() }}</span>
+                $receipt->products->sum('count') }}</span>
                             </label>
                         </div>
                         <div class="text-lg ml-10 flex items-center">
                             <span>Формат:</span>
                             <x-base.form-select
                                 class="ml-3"
+                                name="paper_size"
                             >
-                                <option>A4</option>
+                                <option value="A4">A4</option>
+                                <option value="A3">A3</option>
                             </x-base.form-select>
                         </div>
 

@@ -41,7 +41,7 @@ class MovementController extends Controller
         $movement = $action->execute($request->getParams());
 
         return redirect(route('warehouse.movements.edit', compact('movement')))->with('success',
-            'Перемещение успешно добавлено');
+            'Продажа успешно создана');
     }
 
     public function show(Movement $movement): View
@@ -73,7 +73,7 @@ class MovementController extends Controller
     {
         $movement->delete();
 
-        return redirect(route('warehouse.movements.index'))->with('success', 'Перемещение успешно удалено');
+        return redirect(route('warehouse.movements.index'))->with('success', 'Продажа успешно удалена');
     }
 
     public function send(Movement $movement): RedirectResponse
@@ -82,6 +82,6 @@ class MovementController extends Controller
             $movement->status()->transitionTo('approving');
         }
 
-        return redirect(route('warehouse.movements.index'))->with('success', 'Перемещение успешно отправлено');
+        return redirect(route('warehouse.movements.index'))->with('success', 'Продажа успешно оформлена');
     }
 }

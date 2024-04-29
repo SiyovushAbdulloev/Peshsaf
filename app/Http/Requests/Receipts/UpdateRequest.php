@@ -3,11 +3,11 @@
 namespace App\Http\Requests\Receipts;
 
 use App\Core\Http\Requests\CoreFormRequest;
-use App\Http\Requests\Params\Warehouse\Receipt\StoreRequestParams;
+use App\Http\Requests\Params\Warehouse\Receipt\UpdateRequestParams;
 
 class UpdateRequest extends CoreFormRequest
 {
-    protected string $params = StoreRequestParams::class;
+    protected string $params = UpdateRequestParams::class;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +30,7 @@ class UpdateRequest extends CoreFormRequest
             'date'        => ['required', 'string'],
             'products'    => ['required', 'array', 'min:1'],
             'products.*'  => ['required', 'int', 'min:1'],
+            'paper_size'  => ['required', 'string', 'in:A3,A4'],
         ];
     }
 
@@ -40,6 +41,7 @@ class UpdateRequest extends CoreFormRequest
             'number'     => $this->get('number'),
             'date'       => $this->get('date'),
             'products'   => $this->get('products'),
+            'paperSize'  => $this->get('paper_size'),
         ];
     }
 }

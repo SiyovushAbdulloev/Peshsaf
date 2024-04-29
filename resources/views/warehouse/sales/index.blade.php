@@ -1,14 +1,14 @@
 @extends('layouts/sidebar')
 
 @section('subhead')
-    <title>Продажа</title>
+    <title>Продажа частным лицам</title>
 @endsection
 
 @section('content')
     <div class="mt-5">
         <form id="search-form">
             <div class="intro-y mt-2 flex">
-                <h2 class="intro-y text-lg font-medium">Продажа</h2>
+                <h2 class="intro-y text-lg font-medium">Продажа частным лицам</h2>
 
                 <a href="{{ route('warehouse.sales.clients') }}" class="mb-2 transition duration-200 border
                 inline-flex items-center

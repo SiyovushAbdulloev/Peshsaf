@@ -24,6 +24,7 @@ class Receipt extends Model
         'supplier_id',
         'warehouse_id',
         'filepath',
+        'paper_size',
     ];
 
     protected $casts = [
