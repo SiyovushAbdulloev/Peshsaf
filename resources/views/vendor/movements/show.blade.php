@@ -1,0 +1,113 @@
+@extends('layouts/sidebar')
+
+@section('head')
+    <title>Просмотр перемещения</title>
+@endsection
+
+@section('content')
+    <div class="intro-y mt-8 flex flex-col items-center sm:flex-row">
+        <h2 class="mr-auto text-lg font-medium">Просмотр</h2>
+    </div>
+
+    <div class="intro-y mt-5 grid grid-cols-11 gap-5">
+        <div class="col-span-12 lg:col-span-4 2xl:col-span-3">
+            <div class="box rounded-md p-5">
+                <div class="mb-5 flex items-center border-b border-slate-200/60 pb-5 dark:border-darkmode-400">
+                    <div class="truncate text-base font-medium">
+                        Детали перемещения
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <x-base.icon
+                        class="mr-1 h-4 w-4 text-slate-500"
+                        icon="fa-user"
+                    />
+                    Тороговая точка: <span class="ml-2">{{ $movement->outlet->name }}</span>
+                </div>
+                <div class="mt-3 flex items-center">
+                    <x-base.icon
+                        class="mr-1 h-4 w-4 text-slate-500"
+                        icon="fa-phone"
+                    />
+                    Номер накладной: <span class="ml-2">{{ $movement->number }}</span>
+                </div>
+                <div class="mt-3 flex items-center">
+                    <x-base.icon
+                        class="mr-1 h-4 w-4 text-slate-500"
+                        icon="fa-location-dot"
+                    />
+                    Дата накладной: <span class="ml-2">{{ $movement->date->format('d.m.Y') }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 lg:col-span-7 2xl:col-span-8">
+            <div class="box rounded-md p-5">
+                <div class="-mt-3 overflow-auto lg:overflow-visible">
+                    <x-base.table striped>
+                        <x-base.table.thead>
+                            <x-base.table.tr>
+                                <x-base.table.th class="whitespace-nowrap !py-5">
+                                    Наименование
+                                </x-base.table.th>
+                                <x-base.table.th class="whitespace-nowrap">
+                                    Штрих код
+                                </x-base.table.th>
+                                <x-base.table.th class="whitespace-nowrap">
+                                    QR код
+                                </x-base.table.th>
+                                <x-base.table.th class="whitespace-nowrap">
+                                    Ед. измерения
+                                </x-base.table.th>
+                                <x-base.table.th class="whitespace-nowrap text-right">
+                                    &nbsp;
+                                </x-base.table.th>
+                            </x-base.table.tr>
+                        </x-base.table.thead>
+                        <x-base.table.tbody>
+                            @foreach ($movement->products as $movementProduct)
+                                <x-base.table.tr>
+                                    <x-base.table.td class="!py-4">
+                                        {{ $movementProduct->dicProduct->name }}
+                                    </x-base.table.td>
+                                    <x-base.table.td>
+                                        {{ $movementProduct->dicProduct->barcode }}
+                                    </x-base.table.td>
+                                    <x-base.table.td>
+                                        {{ $movementProduct->product->barcode }}
+                                    </x-base.table.td>
+                                    <x-base.table.td>
+                                        {{ $movementProduct->dicProduct->measure->name }}
+                                    </x-base.table.td>
+                                    <x-base.table.td class="text-right">
+                                        <x-base.button
+                                            class="show-product"
+                                            size="sm"
+                                            type="button"
+                                            variant="outline-primary"
+                                            data-route="{{ route('products.show', ['product' =>
+                                            $movementProduct->product->dic_product_id]) }}"
+                                        >
+                                            <x-base.icon icon="fa-info"/>
+                                        </x-base.button>
+                                    </x-base.table.td>
+                                </x-base.table.tr>
+                            @endforeach
+                        </x-base.table.tbody>
+                    </x-base.table>
+                </div>
+            </div>
+
+            <div class="mt-5 text-left">
+                <x-base.button
+                    as="a"
+                    :href="route('vendor.movements.index')"
+                    class="mr-1 w-24"
+                    type="button"
+                    variant="outline-primary"
+                >
+                    Отмена
+                </x-base.button>
+            </div>
+        </div>
+    </div>
+@endsection

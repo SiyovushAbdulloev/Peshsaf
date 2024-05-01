@@ -6,16 +6,19 @@ use App\Core\Actions\CoreAction;
 use App\Http\Requests\Params\Return\Warehouse\StoreRequestParams;
 use App\Models\OutletProduct;
 use App\Models\Refund;
+use App\Models\Warehouse;
 
 class StoreAction extends CoreAction
 {
     public function handle(StoreRequestParams $params): void
     {
+        // Возврат создаем только на склад
         if ($params->distribute) {
             $warehouses = OutletProduct::query()
+                ->where('model_type', Warehouse::class)
                 ->whereIn('product_id', $params->products)
                 ->get()
-                ->groupBy('warehouse_id');
+                ->groupBy('model_id');
 
             foreach ($warehouses as $warehouseId => $outletProducts) {
                 $this->createRefund($warehouseId, $outletProducts->pluck('product_id')->toArray(), $params);

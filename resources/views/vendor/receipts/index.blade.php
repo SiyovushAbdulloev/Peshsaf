@@ -106,7 +106,7 @@
                             Дата
                         </th>
                         <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
-                            Склад
+                            Отправитель
                         </th>
                         <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             Адрес
@@ -130,9 +130,11 @@
                                 <x-status :status="$receipt->status"/>
                             </td>
                             <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->date->format('d.m.Y') }}</td>
-                            <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->warehouse?->name }}</td>
-                            <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->warehouse?->address ?? '-' }}</td>
-                            <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->warehouse?->phone ?? '-' }}</td>
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->model?->name }}</td>
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->model?->address ?? '-'
+                            }}</td>
+                            <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->model?->phone ?? '-'
+                            }}</td>
                             <td class="px-5 py-2 border-b dark:border-darkmode-300">{{ $receipt->products_count }}</td>
                             <td class="px-5 py-2 border-b dark:border-darkmode-300 gap-2">
                                 <x-base.button

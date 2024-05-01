@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Vendor\MovementController;
 use App\Http\Controllers\Vendor\ProductController;
 use App\Http\Controllers\Vendor\ReceiptController;
 use App\Http\Controllers\Vendor\Reports\RemainController;
@@ -23,6 +24,9 @@ Route::middleware('role:vendor')
         Route::get('/sales/clients', [SaleController::class, 'clients'])->name('sales.clients');
         Route::get('/sales/create/{client?}', [SaleController::class, 'create'])->name('sales.create');
         Route::resource('sales', SaleController::class)->except('create');
+
+        // Перемещения товаров
+        Route::resource('movements', MovementController::class);
 
         Route::prefix('/returns')->name('returns.')->group(function () {
             Route::resource('/warehouse', WarehouseController::class)->parameters([

@@ -33,7 +33,12 @@ class Outlet extends Model
         return $this->hasOne(User::class, 'outlet_id');
     }
 
-    public function movements(): HasMany
+    public function movements(): MorphMany
+    {
+        return $this->morphMany(Movement::class, 'model');
+    }
+
+    public function receipts(): HasMany
     {
         return $this->hasMany(Movement::class);
     }

@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('movements', function (Blueprint $table) {
             $table->id();
             $table->string('status');
-            $table->foreignId('warehouse_id')->constrained();
+            $table->morphs('model');
             $table->foreignId('outlet_id')->constrained();
             $table->string('number');
             $table->date('date');

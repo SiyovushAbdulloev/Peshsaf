@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Warehouse\Movement;
+namespace App\Livewire\Vendor\Movement;
 
 use App\Models\Movement;
 use Livewire\Component;
@@ -20,13 +20,13 @@ class Send extends Component
             $this->movement->status()->transitionTo('approving');
         }
 
-        session()->flash('success', 'Продажа успешно оформлена');
+        session()->flash('success', 'Перемещение успешно отправлено');
 
-        return $this->redirect(route('warehouse.movements.index'));
+        return $this->redirect(route('vendor.movements.index'));
     }
 
     public function render()
     {
-        return view('livewire.warehouse.movement.send');
+        return view('livewire.vendor.movement.send');
     }
 }

@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Movement;
-use App\Models\Supplier;
 use App\Models\Warehouse;
 use App\StateMachines\StatusMovement;
-use App\StateMachines\StatusReceipt;
 use Illuminate\View\View;
 
 class ReceiptController extends Controller
@@ -18,10 +16,10 @@ class ReceiptController extends Controller
 
         $receipts = auth()->user()
             ->outlet
-            ->movements()
+            ->receipts()
             ->filter(request()->only(['warehouse', 'from', 'to']))
             ->byStatus([StatusMovement::APPROVING, StatusMovement::APPROVED])
-            ->with('warehouse')
+            ->with('model')
             ->withCount('products')
             ->latest()
             ->paginate(15);

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OutletProduct extends Model
@@ -18,7 +19,8 @@ class OutletProduct extends Model
     protected $fillable = [
         'outlet_id',
         'product_id',
-        'warehouse_id',
+        'model_type',
+        'model_id',
     ];
 
     public function outlet(): BelongsTo
@@ -31,9 +33,9 @@ class OutletProduct extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function warehouse(): BelongsTo
+    public function model(): MorphTo
     {
-        return $this->belongsTo(Warehouse::class);
+        return $this->morphTo();
     }
 
     public function dicProduct(): HasOneThrough
@@ -46,7 +48,14 @@ class OutletProduct extends Model
     {
         $query
             ->when($filters['warehouse'] ?? null, function ($query, int $warehouse) {
-                $query->where('warehouse_id', $warehouse);
+                $query
+                    ->where('model_type', Warehouse::class)
+                    ->where('model_id', $warehouse);
+            })
+            ->when($filters['outlet'] ?? null, function ($query, int $outlet) {
+                $query
+                    ->where('model_type', Outlet::class)
+                    ->where('model_id', $outlet);
             })
             ->when($filters['from'] ?? null, function ($query, string $from) {
                 $query->whereDate('outlet_products.created_at', '>=', Carbon::createFromDate($from));

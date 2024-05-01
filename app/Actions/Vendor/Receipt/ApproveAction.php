@@ -28,8 +28,9 @@ class ApproveAction extends CoreAction
             logger("Добавление товара $product->id в остатки торговой точки $outlet->id");
 
             $outlet->products()->create([
-                'product_id'   => $newProduct->id,
-                'warehouse_id' => $receipt->warehouse_id,
+                'product_id' => $newProduct->id,
+                'model_type' => $receipt->model_type,
+                'model_id'   => $receipt->model_id,
             ]);
 
             $product->history = true;

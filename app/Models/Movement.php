@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Movement extends Model
 {
@@ -19,16 +20,17 @@ class Movement extends Model
         'status',
         'date',
         'number',
-        'warehouse_id',
+        'model_type',
+        'model_id',
         'outlet_id',
     ];
 
     protected $casts = [
-        'date' => 'datetime'
+        'date' => 'datetime',
     ];
 
     public $stateMachines = [
-        'status' => StatusMovement::class
+        'status' => StatusMovement::class,
     ];
 
     protected static function booted(): void
@@ -43,9 +45,9 @@ class Movement extends Model
         return $this->hasMany(MovementProduct::class);
     }
 
-    public function warehouse(): BelongsTo
+    public function model(): MorphTo
     {
-        return $this->belongsTo(Warehouse::class);
+        return $this->morphTo();
     }
 
     public function outlet(): BelongsTo
@@ -65,7 +67,14 @@ class Movement extends Model
     {
         $query
             ->when($filters['warehouse'] ?? null, function ($query, int $warehouse) {
-                $query->where('warehouse_id', $warehouse);
+                $query
+                    ->where('model_type', Warehouse::class)
+                    ->where('model_id', $warehouse);
+            })
+            ->when($filters['outlet'] ?? null, function ($query, int $outlet) {
+                $query
+                    ->where('model_type', Outlet::class)
+                    ->where('model_id', $outlet);
             })
             ->when($filters['from'] ?? null, function ($query, string $from) {
                 $query->whereDate('date', '>=', Carbon::createFromDate($from));

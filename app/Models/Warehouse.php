@@ -34,9 +34,9 @@ class Warehouse extends Model
         return $this->morphMany(Sale::class, 'model');
     }
 
-    public function movements(): HasMany
+    public function movements(): MorphMany
     {
-        return $this->hasMany(Movement::class);
+        return $this->morphMany(Movement::class, 'model');
     }
 
     public function utilizations(): MorphMany
