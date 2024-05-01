@@ -32,6 +32,22 @@
                     <x-base.form-select
                         class="col-span-3"
                         aria-label="form-select-sm example"
+                        id="outlet"
+                        name="outlet"
+                    >
+                        <option value="">Торговая точка</option>
+                        @foreach($outlets as $outlet)
+                            <option
+                                value="{{ $outlet->id }}"
+                                @selected(request()->get('outlet') == $outlet->id)
+                            >
+                                {{ $outlet->name }}
+                            </option>
+                        @endforeach
+                    </x-base.form-select>
+                    <x-base.form-select
+                        class="col-span-3"
+                        aria-label="form-select-sm example"
                         id="option"
                         name="option"
                     >
@@ -123,7 +139,7 @@
                             <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->dicProduct?->name }}</td>
                             <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->dicProduct?->barcode }}</td>
                             <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->product->barcode }}</td>
-                            <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->warehouse->name }}</td>
+                            <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->model?->name }}</td>
                             <td class="px-5 py-3 border-b dark:border-darkmode-300">{{ $product->created_at->format('d.m.Y') }}</td>
                             <td class="px-5 py-3 border-b dark:border-darkmode-300">
                                 <x-base.button

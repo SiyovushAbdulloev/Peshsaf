@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Warehouse;
+namespace App\Http\Controllers\Vendor;
 
-use App\Actions\Warehouse\Movement\StoreAction;
-use App\Actions\Warehouse\Movement\UpdateAction;
+use App\Actions\Vendor\Movement\StoreAction;
+use App\Actions\Vendor\Movement\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Movement\StoreRequest;
 use App\Http\Requests\Movement\UpdateRequest;
@@ -18,7 +18,7 @@ class MovementController extends Controller
     {
         $filters = request()->only('from', 'to', 'option');
         $movements = auth()->user()
-            ->warehouse
+            ->outlet
             ->movements()
             ->filter($filters)
             ->with('outlet')
@@ -27,37 +27,37 @@ class MovementController extends Controller
             ->paginate(10);
         $options = config('project.filter-dates.options');
 
-        return view('warehouse.movements.index', compact('movements', 'options', 'filters'));
+        return view('vendor.movements.index', compact('movements', 'options', 'filters'));
     }
 
     public function create(): View
     {
         $movement = new Movement;
-        $outlets  = Outlet::get();
+        $outlets  = Outlet::get()->except(auth()->user()->outlet_id);
 
-        return view('warehouse.movements.create', compact('movement', 'outlets'));
+        return view('vendor.movements.create', compact('movement', 'outlets'));
     }
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse
     {
         $movement = $action->execute($request->getParams());
 
-        return redirect(route('warehouse.movements.edit', compact('movement')))->with('success',
-            'Продажа успешно создана');
+        return redirect(route('vendor.movements.edit', compact('movement')))->with('success',
+            'Перемещение успешно создано');
     }
 
     public function show(Movement $movement): View
     {
         $movement->load('outlet', 'products.product', 'products.dicProduct');
 
-        return view('warehouse.movements.show', compact('movement'));
+        return view('vendor.movements.show', compact('movement'));
     }
 
     public function edit(Movement $movement): View
     {
         $outlets = Outlet::get();
 
-        return view('warehouse.movements.edit', compact('movement', 'outlets'));
+        return view('vendor.movements.edit', compact('movement', 'outlets'));
     }
 
     public function update(
@@ -67,7 +67,7 @@ class MovementController extends Controller
     ): RedirectResponse {
         $action->execute($request->getParams(), $movement);
 
-        return redirect(route('warehouse.movements.edit', compact('movement')))->with('success',
+        return redirect(route('vendor.movements.edit', compact('movement')))->with('success',
             'Данные успешно сохранены');
     }
 
@@ -75,7 +75,7 @@ class MovementController extends Controller
     {
         $movement->delete();
 
-        return redirect(route('warehouse.movements.index'))->with('success', 'Продажа успешно удалена');
+        return redirect(route('vendor.movements.index'))->with('success', 'Перемещение успешно удалено');
     }
 
     public function send(Movement $movement): RedirectResponse
@@ -84,6 +84,6 @@ class MovementController extends Controller
             $movement->status()->transitionTo('approving');
         }
 
-        return redirect(route('warehouse.movements.index'))->with('success', 'Продажа успешно оформлена');
+        return redirect(route('vendor.movements.index'))->with('success', 'Перемещение успешно отправлено');
     }
 }

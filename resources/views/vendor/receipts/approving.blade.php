@@ -13,8 +13,8 @@
                 <h2 class="intro-y font-medium mb-3">Информация о приходе</h2>
                 <div class="grid grid-cols-12 gap-3">
                     <div class="col-span-4">
-                        <h2>Склад</h2>
-                        <div class="border border-blue-800 rounded-xl p-3">{{ $receipt->warehouse->name
+                        <h2>Отправитель</h2>
+                        <div class="border border-blue-800 rounded-xl p-3">{{ $receipt->model->name
                         }}</div>
                     </div>
                     <div class="col-span-4">

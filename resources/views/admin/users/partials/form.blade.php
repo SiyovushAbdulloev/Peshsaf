@@ -175,7 +175,7 @@
         />
     </div>
 
-    <livewire:files :files="$product->files" />
+    <livewire:files :files="$user->files" />
 </div>
 
 @pushOnce('scripts')

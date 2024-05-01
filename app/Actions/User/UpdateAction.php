@@ -23,6 +23,8 @@ class UpdateAction extends CoreAction
             'expired'     => $params->isLimited ? Carbon::createFromFormat('d-m-Y', $params->expired) : null,
         ]);
 
+        $user->syncRoles($params->role);
+
         match ($user->role->name) {
             Role::VENDOR => $user->update([
                 'outlet_id' => $params->outletId,

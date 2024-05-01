@@ -5,6 +5,7 @@ namespace App\Http\Requests\User;
 use App\Core\Http\Requests\CoreFormRequest;
 use App\Http\Requests\Params\User\UpdateRequestParams;
 use App\Models\Role;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends CoreFormRequest
 {
@@ -17,6 +18,7 @@ class UpdateRequest extends CoreFormRequest
             'position'   => ['required', 'integer', 'exists:positions,id'],
             'address'    => ['required', 'string', 'max:255'],
             'is_limited' => ['required', 'in:0,1'],
+            'role'       => ['required', Rule::in(Role::ADMIN, Role::WAREHOUSE, Role::VENDOR)],
             'expired'    => ['nullable', 'required_if:is_limited,true', 'date'],
             'phone'      => ['required', 'regex:/^[0-9]{9}+$/'],
             'email'      => ['required', 'email'],
@@ -25,7 +27,7 @@ class UpdateRequest extends CoreFormRequest
             'files.*'    => ['required_with:files', 'file', 'mimes:pdf,doc', 'max:5120'],
         ];
 
-        return match ($this->user->role->name) {
+        return match ($this->role) {
             Role::VENDOR => array_merge($rules, ['outlet' => ['required', 'integer', 'exists:outlets,id']]),
             Role::WAREHOUSE => array_merge($rules, ['warehouse' => ['required', 'integer', 'exists:warehouses,id']]),
             default => $rules,
@@ -40,6 +42,7 @@ class UpdateRequest extends CoreFormRequest
             'address'     => $this->get('address'),
             'isLimited'   => $this->boolean('is_limited'),
             'expired'     => $this->get('expired'),
+            'role'        => $this->get('role'),
             'warehouseId' => $this->get('warehouse'),
             'outletId'    => $this->get('outlet'),
             'phone'       => $this->get('phone'),

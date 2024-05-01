@@ -137,6 +137,11 @@ return [
             'route_name' => 'vendor.sales.index',
             'title'      => 'Продажа',
         ],
+        'movements' => [
+            'icon'       => 'list',
+            'route_name' => 'vendor.movements.index',
+            'title'      => 'Перемещение товаров',
+        ],
         'receipts'  => [
             'icon'       => 'list',
             'route_name' => 'vendor.receipts.index',
