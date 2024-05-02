@@ -11,7 +11,8 @@ class UpdateAction extends CoreAction
     public function handle(StoreRequestParams $params, Country $country): Country
     {
         $country->update([
-            'name' => $params->name
+            'name'        => $params->name,
+            'is_favorite' => $params->isFavorite,
         ]);
 
         return $country;

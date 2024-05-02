@@ -14,4 +14,23 @@
         {{ $message }}
     </div>
     @enderror
+
+    <x-base.form-check class="mt-5">
+        <x-base.form-check.input
+            id="vertical-form-3"
+            type="checkbox"
+            name="is_favorite"
+            checked="{{ old('is_favorite', $country->is_favorite) ? true : false }}"
+            value="1"
+        />
+        <x-base.form-check.label for="vertical-form-3">
+            Избранный
+        </x-base.form-check.label>
+    </x-base.form-check>
+
+    @error('is_favorite')
+    <div class="mt-2 text-danger italic">
+        {{ $message }}
+    </div>
+    @enderror
 </div>

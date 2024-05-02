@@ -11,7 +11,8 @@ class StoreAction extends CoreAction
     public function handle(StoreRequestParams $params): Country
     {
         return Country::create([
-            'name' => $params->name
+            'name'        => $params->name,
+            'is_favorite' => $params->isFavorite,
         ]);
     }
 }

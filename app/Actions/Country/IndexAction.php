@@ -10,6 +10,6 @@ class IndexAction extends CoreAction
 {
     public function handle(): Collection
     {
-        return Country::get();
+        return Country::orderByRaw('is_favorite DESC, name ASC')->get();
     }
 }

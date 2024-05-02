@@ -39,12 +39,22 @@
             name="country"
         >
             <option value="">Выберите страну</option>
-            @foreach($countries as $country)
+            <optgroup label="Избранные">
+                @foreach($countries->where('is_favorite', true) as $favoriteCountry)
+                    <option
+                        value="{{$favoriteCountry->id}}"
+                        @selected(old('country', $supplier->country_id) == $favoriteCountry->id)
+                    >
+                        {{$favoriteCountry->name}}
+                    </option>
+                @endforeach
+            </optgroup>
+            @foreach($countries->where('is_favorite', false) as $country)
                 <option
                     value="{{$country->id}}"
                     @selected(old('country', $supplier->country_id) == $country->id)
                 >
-                    {{ $country->name }}
+                    {{$country->name}}
                 </option>
             @endforeach
         </x-base.form-select>

@@ -44,8 +44,7 @@ class CountryController extends Controller
         StoreRequest $request,
         UpdateAction $action,
         Country $country
-    ): RedirectResponse
-    {
+    ): RedirectResponse {
         $action->execute($request->getParams(), $country);
 
         return redirect(route('admin.dictionaries.countries.index'))->with('success', 'Данные успешно изменены');
