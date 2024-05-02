@@ -8,6 +8,7 @@ use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -70,7 +71,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
+        'expired'           => 'date',
     ];
 
     public function position(): BelongsTo
@@ -98,22 +100,28 @@ class User extends Authenticatable
         return $this->morphMany(File::class, 'fileable');
     }
 
+    public function notificationMessages(): HasMany
+    {
+        return $this->hasMany(NotificationMessage::class);
+    }
+
     public function statusText(): Attribute
     {
         return Attribute::make(
             get: function () {
-              $isLimited = $this->is_limited;
+                $isLimited = $this->is_limited;
 
-              if (!$isLimited) {
-                  return 'Нет ограничения';
-              } else {
-                  $until = Carbon::parse($this->expired);
-                  if (!$until->isFuture()) {
-                      return '<span class="text-danger">Не активен</span>';
-                  }
-                  $until = $until->format('d.m.Y');
-                  return '<span class="text-success">Активен до' . $until . '</span>';
-              }
+                if (!$isLimited) {
+                    return 'Нет ограничения';
+                } else {
+                    $until = Carbon::parse($this->expired);
+                    if (!$until->isFuture()) {
+                        return '<span class="text-danger">Не активен</span>';
+                    }
+                    $until = $until->format('d.m.Y');
+
+                    return '<span class="text-success">Активен до' . $until . '</span>';
+                }
             }
         );
     }

@@ -150,7 +150,7 @@
                                     <x-base.button
                                         as="a"
                                         size="sm"
-                                        href="{{ route('vendor.receipts.approving', compact('receipt')) }}"
+                                        href="{{ route('vendor.receipts.show', compact('receipt')) }}"
                                         type="button"
                                         variant="outline-warning"
                                     >

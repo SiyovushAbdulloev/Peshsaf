@@ -3,6 +3,10 @@
 namespace App\StateMachines;
 
 use App\Actions\Warehouse\Receipt\GeneratePdfAction;
+use App\Events\NotificationsEvent;
+use App\Jobs\SendNotification;
+use App\Models\NotificationMessage;
+use App\Models\User;
 use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusReceipt extends StateMachine
@@ -40,7 +44,17 @@ class StatusReceipt extends StateMachine
     public function afterTransitionHooks(): array
     {
         return [
-            'finished' => [
+            'on_approval' => [
+                function ($from, $model) {
+                    SendNotification::dispatch(
+                        User::role('customs')->first()->id,
+                        'Новый приход',
+                        sprintf('Поступило новое перемещение от склада <b>%s</b>', $model->warehouse->name),
+                        route('customs.receipts.show', $model)
+                    );
+                },
+            ],
+            'finished'    => [
                 function ($from, $model) {
                     app(GeneratePdfAction::class)->execute($model);
                 },

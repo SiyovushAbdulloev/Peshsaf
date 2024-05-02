@@ -77,6 +77,9 @@
                                 Ед. измерения
                             </x-base.table.th>
                             <x-base.table.th class="whitespace-nowrap">
+                                Срок годности
+                            </x-base.table.th>
+                            <x-base.table.th class="whitespace-nowrap">
                             </x-base.table.th>
                         </x-base.table.tr>
                     </x-base.table.thead>
@@ -87,6 +90,7 @@
                                 <x-base.table.td>{{ $product->name }}</x-base.table.td>
                                 <x-base.table.td>{{ $product->status }}</x-base.table.td>
                                 <x-base.table.td>{{ $product->measure->name }}</x-base.table.td>
+                                <x-base.table.td>{{ $product->expiry_date?->format('d-m-Y') }}</x-base.table.td>
                                 <x-base.table.td>
                                     <x-base.button
                                         as="a"

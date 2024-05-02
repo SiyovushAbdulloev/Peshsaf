@@ -3,6 +3,11 @@
 namespace App\StateMachines;
 
 use App\Actions\Warehouse\RemoveWarehouseProductAction;
+use App\Events\NotificationsEvent;
+use App\Jobs\SendNotification;
+use App\Models\NotificationMessage;
+use App\Models\Outlet;
+use App\Models\User;
 use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusMovement extends StateMachine
@@ -34,6 +39,21 @@ class StatusMovement extends StateMachine
     public function afterTransitionHooks(): array
     {
         return [
+            self::APPROVING => [
+                function ($from, $model) {
+                    $body = sprintf('Поступило новое перемещение от склада <b>%s</b>', $model->model->name);
+
+                    if ($model->model_type === Outlet::class) {
+                        $body = sprintf('Поступило новое перемещение от торговой точки <b>%s</b>', $model->model->name);
+                    }
+                    SendNotification::dispatch(
+                        $model->outlet->user?->id,
+                        'Новый приход',
+                        $body,
+                        route('vendor.receipts.show', $model)
+                    );
+                }
+            ],
             self::APPROVED => [
                 function ($from, $model) {
                     foreach ($model->products as $movementProduct) {

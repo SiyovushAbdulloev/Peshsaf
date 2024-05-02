@@ -29,13 +29,6 @@ class ReceiptController extends Controller
 
     public function show(Movement $receipt): View
     {
-        return view('vendor.receipts.show', compact('receipt'));
-    }
-
-    public function approving(Movement $receipt): View
-    {
-        $this->authorize('approve', $receipt);
-
         return view('vendor.receipts.approving', compact('receipt'));
     }
 
