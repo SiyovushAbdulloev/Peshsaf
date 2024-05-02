@@ -13,6 +13,7 @@
 {{--        </x-base.breadcrumb.link>--}}
     </x-base.breadcrumb>
     <!-- END: Breadcrumb -->
+    <livewire:notifications />
     <!-- BEGIN: Account Menu -->
     <x-base.menu>
         <x-base.menu.button class="image-fit zoom-in intro-x block h-8 w-8 overflow-hidden rounded-full shadow-lg">
@@ -53,5 +54,13 @@
 <!-- END: Top Bar -->
 
 @pushOnce('scripts')
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Echo.private(`notifications.{{auth()->id()}}`)
+                .listen('NotificationsEvent', (e) => {
+                    Livewire.dispatch('newMessage')
+                });
+        });
+    </script>
     @vite('resources/js/components/themes/rubick/top-bar.js')
 @endPushOnce

@@ -16,8 +16,6 @@ Route::middleware('role:vendor')
     ->name('vendor.')
     ->group(function () {
         Route::resource('receipts', ReceiptController::class)->only('index', 'show');
-        Route::get('receipts/{receipt}/approving',
-            [ReceiptController::class, 'approving'])->name('receipts.approving');
 
         Route::get('products', [ProductController::class, 'index'])->name('products.index');
 

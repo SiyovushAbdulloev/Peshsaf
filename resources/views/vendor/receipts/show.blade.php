@@ -22,7 +22,7 @@
                         class="mr-1 h-4 w-4 text-slate-500"
                         icon="fa-user"
                     />
-                    Отправитель: <span class="ml-2">{{ $receipt->warehouse->name }}</span>
+                    Отправитель: <span class="ml-2">{{ $receipt->model->name }}</span>
                 </div>
                 <div class="mt-3 flex items-center">
                     <x-base.icon

@@ -3,6 +3,8 @@
 namespace App\StateMachines;
 
 use App\Actions\Vendor\Return\Client\FinishAction;
+use App\Jobs\SendNotification;
+use App\Models\User;
 use Asantibanez\LaravelEloquentStateMachines\StateMachines\StateMachine;
 
 class StatusReturn extends StateMachine
@@ -34,6 +36,16 @@ class StatusReturn extends StateMachine
     public function afterTransitionHooks(): array
     {
         return [
+            'pending' => [
+                function ($from, $model) {
+                    SendNotification::dispatch(
+                        $model->warehouse->user?->id,
+                        'Новый возврат',
+                        sprintf('Поступил возврат от торговой точки <b>%s</b>', $model->origin->name),
+                        route('warehouse.returns.show', $model)
+                    );
+                },
+            ],
             'finished' => [
                 function ($from, $model) {
                     if ($from === self::DRAFT) {

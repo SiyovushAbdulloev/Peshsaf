@@ -39,6 +39,10 @@ class Product extends Model
         'description',
     ];
 
+    protected $casts = [
+        'expiry_date' => 'date:Y-m-d'
+    ];
+
     public function measure(): BelongsTo
     {
         return $this->belongsTo(Measure::class)->withTrashed();

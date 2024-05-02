@@ -80,7 +80,9 @@
                     $receipt->products->count() }}</span>
                 </h2>
 
+                @can('approve', $receipt)
                 <livewire:vendor.receipts.approve :receipt="$receipt"/>
+                @endcan
             </div>
         </div>
     </div>
