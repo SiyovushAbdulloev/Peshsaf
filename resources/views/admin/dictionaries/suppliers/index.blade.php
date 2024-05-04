@@ -43,6 +43,9 @@
                             E-mail
                         </th>
                         <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                            Код
+                        </th>
+                        <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                             &nbsp;
                         </th>
                     </tr>
@@ -65,6 +68,9 @@
                             </td>
                             <td class="px-5 py-3 border-b dark:border-darkmode-300">
                                 {{ $supplier->email }}
+                            </td>
+                            <td class="px-5 py-3 border-b dark:border-darkmode-300">
+                                {{ $supplier->code }}
                             </td>
                             <td class="px-5 py-2 border-b dark:border-darkmode-300 gap-2 text-right">
                                 <x-base.button

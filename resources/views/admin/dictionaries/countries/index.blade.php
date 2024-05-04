@@ -46,6 +46,18 @@
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
+                            Избранный
+                        </th>
+                        <th
+                            data-tw-merge
+                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                        >
+                            Код
+                        </th>
+                        <th
+                            data-tw-merge
+                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                        >
                             &nbsp;
                         </th>
                     </tr>
@@ -67,6 +79,22 @@
                                 class="px-5 py-3 border-b dark:border-darkmode-300"
                             >
                                 {{ $country->name }}
+                            </td>
+                            <td
+                                data-tw-merge
+                                class="px-5 py-3 border-b dark:border-darkmode-300"
+                            >
+                                @if($country->is_favorite)
+                                    <i class="fa-solid fa-star"></i>
+                                @else
+                                    <i class="fa-regular fa-star"></i>
+                                @endif
+                            </td>
+                            <td
+                                data-tw-merge
+                                class="px-5 py-3 border-b dark:border-darkmode-300"
+                            >
+                                {{ $country->code }}
                             </td>
                             <td
                                 data-tw-merge

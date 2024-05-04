@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Dictionaries\Country;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string $phone
  * @property string $email
  * @property string $description
+ * @property string $code
  */
 class Supplier extends Model
 {
@@ -30,6 +32,7 @@ class Supplier extends Model
         'phone',
         'email',
         'description',
+        'code',
     ];
 
     protected static function booted(): void

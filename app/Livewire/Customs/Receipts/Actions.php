@@ -22,7 +22,8 @@ class Actions extends Component
 
     public function confirm()
     {
-        app(ConfirmReceiptAction::class)->execute($this->receipt);
+        app(ConfirmReceiptAction::class)->execute($this->receipt
+            ->load('products.product.country', 'products.product.category', 'supplier'));
 
         session()->flash('success', 'Приход успешно одобрен');
 

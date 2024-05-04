@@ -73,7 +73,8 @@ class ProductController extends Controller
     ): RedirectResponse {
         $action->execute($request->getParams(), $product);
 
-        return redirect(route('admin.dictionaries.categories.products.edit', compact('category', 'product')))->with('success',
+        return redirect(route('admin.dictionaries.categories.products.edit',
+            compact('category', 'product')))->with('success',
             'Данные успешно изменены');
     }
 

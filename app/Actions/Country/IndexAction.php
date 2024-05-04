@@ -3,13 +3,13 @@
 namespace App\Actions\Country;
 
 use App\Core\Actions\CoreAction;
-use App\Models\Country;
+use App\Models\Dictionaries\Country;
 use Illuminate\Database\Eloquent\Collection;
 
 class IndexAction extends CoreAction
 {
     public function handle(): Collection
     {
-        return Country::get();
+        return Country::orderByRaw('is_favorite DESC, name ASC')->get();
     }
 }

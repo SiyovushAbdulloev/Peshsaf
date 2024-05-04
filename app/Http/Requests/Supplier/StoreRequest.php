@@ -13,6 +13,7 @@ class StoreRequest extends CoreFormRequest
     {
         return [
             'organization_name'    => ['required', 'string', 'max:255'],
+            'code'                 => ['required', 'string', 'max:3'],
             'full_name'            => ['required', 'string', 'max:255'],
             'country'              => ['required', 'integer', 'exists:countries,id'],
             'organization_address' => ['required', 'string', 'max:255'],
@@ -28,6 +29,7 @@ class StoreRequest extends CoreFormRequest
     {
         return [
             'organizationName'    => $this->get('organization_name'),
+            'code'                => $this->get('code'),
             'fullName'            => $this->get('full_name'),
             'countryId'           => $this->get('country'),
             'organizationAddress' => $this->get('organization_address'),

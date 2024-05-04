@@ -16,6 +16,23 @@
     </div>
 
     <div class="col-span-12 2xl:col-span-6">
+        <x-base.form-label for="name">Код</x-base.form-label>
+        <x-base.form-input
+            id="code"
+            type="text"
+            name="code"
+            placeholder="Введите код"
+            value="{{ old('name', $supplier->code) }}"
+        />
+
+        @error('code')
+        <div class="mt-2 text-danger italic">
+            {{ $message }}
+        </div>
+        @enderror
+    </div>
+
+    <div class="col-span-12 2xl:col-span-6">
         <x-base.form-label for="full_name">ФИО</x-base.form-label>
         <x-base.form-input
             id="full_name"
@@ -39,12 +56,22 @@
             name="country"
         >
             <option value="">Выберите страну</option>
-            @foreach($countries as $country)
+            <optgroup label="Избранные">
+                @foreach($countries->where('is_favorite', true) as $favoriteCountry)
+                    <option
+                        value="{{$favoriteCountry->id}}"
+                        @selected(old('country', $supplier->country_id) == $favoriteCountry->id)
+                    >
+                        {{$favoriteCountry->name}}
+                    </option>
+                @endforeach
+            </optgroup>
+            @foreach($countries->where('is_favorite', false) as $country)
                 <option
                     value="{{$country->id}}"
                     @selected(old('country', $supplier->country_id) == $country->id)
                 >
-                    {{ $country->name }}
+                    {{$country->name}}
                 </option>
             @endforeach
         </x-base.form-select>

@@ -29,10 +29,7 @@ class SupplierController extends Controller
         $countries = $action->execute();
         $supplier = new Supplier();
 
-        return view('admin.dictionaries.suppliers.create', [
-            'countries' => $countries,
-            'supplier' => $supplier,
-        ]);
+        return view('admin.dictionaries.suppliers.create', compact('countries', 'supplier'));
     }
 
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse

@@ -26,6 +26,7 @@ class Product extends Model
         'history',
         'creator_id',
         'sale_id',
+        'serial_number',
     ];
 
     public $stateMachines = [
@@ -41,7 +42,7 @@ class Product extends Model
 
     public function lastActive(): HasOne
     {
-        return $this->hasOne(Product::class, 'barcode', 'barcode')->active()->latest();
+        return $this->hasOne(Product::class, 'serial_number', 'serial_number')->active()->latest();
     }
 
     public function model(): MorphTo
@@ -68,7 +69,7 @@ class Product extends Model
 
     public static function getLastProduct(): ?Product
     {
-        return Product::firstWhere('barcode', Product::max('barcode'));
+        return Product::firstWhere('serial_number', Product::max('serial_number'));
     }
 
     public function sender(): Attribute

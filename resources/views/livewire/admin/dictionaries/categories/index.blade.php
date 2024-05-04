@@ -23,11 +23,15 @@
                         href="{{ route('admin.dictionaries.categories.index', ['category' => $category->id]) }}"
                         @class([
                             'text-sky-500 font-bold' => $currentCategory->id === $category->id,
-                            'text-base'
+                            'text-base w-full flex',
                         ])
                     >
-                        <x-base.icon :icon="$currentCategory->id === $category->id ? 'fa-folder-open' : 'fa-folder'"/>
-                        {{$category->name}} ({{ $category->products_count }})
+                        <x-base.icon class="my-auto" :icon="$currentCategory->id === $category->id ? 'fa-folder-open' :
+                        'fa-folder'"/>
+                        <div class="flex flex-col ml-2">
+                            <span class="align-text-top">{{$category->name}} ({{ $category->products_count }})</span>
+                            <span class="text-xs">Код: {{ $category->code }}</span>
+                        </div>
                     </a>
 
                     <div class="flex gap-2">

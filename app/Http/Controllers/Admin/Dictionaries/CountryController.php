@@ -7,7 +7,7 @@ use App\Actions\Country\StoreAction;
 use App\Actions\Country\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Country\StoreRequest;
-use App\Models\Country;
+use App\Models\Dictionaries\Country;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Throwable;
@@ -44,8 +44,7 @@ class CountryController extends Controller
         StoreRequest $request,
         UpdateAction $action,
         Country $country
-    ): RedirectResponse
-    {
+    ): RedirectResponse {
         $action->execute($request->getParams(), $country);
 
         return redirect(route('admin.dictionaries.countries.index'))->with('success', 'Данные успешно изменены');

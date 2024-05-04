@@ -27,7 +27,7 @@
             @foreach($activeIngredients as $activeIngredient)
                 <option
                     value="{{$activeIngredient->id}}"
-                    @selected(old('active_ingredient', $product->activeIngredient?->id) == $activeIngredient->id)
+                    @selected(old('active_ingredient', $product->activeIngredient_id) == $activeIngredient->id)
                 >
                     {{$activeIngredient->name}}
                 </option>
@@ -121,10 +121,20 @@
             name="country"
         >
             <option value="">Выберите страну</option>
-            @foreach($countries as $country)
+            <optgroup label="Избранные">
+                @foreach($countries->where('is_favorite', true) as $favoriteCountry)
+                    <option
+                        value="{{$favoriteCountry->id}}"
+                        @selected(old('country', $product->country_id) == $favoriteCountry->id)
+                    >
+                        {{$favoriteCountry->name}}
+                    </option>
+                @endforeach
+            </optgroup>
+            @foreach($countries->where('is_favorite', false) as $country)
                 <option
                     value="{{$country->id}}"
-                    @selected(old('country', $product->country?->id) == $country->id)
+                    @selected(old('country', $product->country_id) == $country->id)
                 >
                     {{$country->name}}
                 </option>
@@ -173,7 +183,7 @@
         @enderror
     </div>
 
-    <livewire:files :files="$product->files" />
+    <livewire:files :files="$product->files"/>
 </div>
 
 @pushOnce('scripts')

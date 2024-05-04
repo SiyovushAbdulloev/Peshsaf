@@ -14,7 +14,8 @@ class CategorySeeder extends Seeder
     {
         for ($i = 1; $i <= 5; $i++) {
             Category::firstOrCreate([
-                'name' => "Category$i"
+                'name' => "Category$i",
+                'code' => str_pad($i, 3, '0', STR_PAD_LEFT),
             ]);
         }
     }

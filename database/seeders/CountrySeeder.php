@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Country;
+use App\Models\Dictionaries\Country;
 use Illuminate\Database\Seeder;
 
 class CountrySeeder extends Seeder
@@ -12,9 +12,12 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 5; $i++) {
+        foreach (config('project.countries') as $index => $country) {
             Country::firstOrCreate([
-                'name' => "Country$i"
+                'name' => $country['name'],
+                'code' => str_pad($index + 1, 3, '0', STR_PAD_LEFT),
+            ], [
+                'is_favorite' => $country['is_favorite'] ?? false,
             ]);
         }
     }
