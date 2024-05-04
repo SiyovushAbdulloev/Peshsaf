@@ -12,13 +12,21 @@ class ConfirmReceiptAction extends CoreAction
     {
         foreach ($receipt->products as $receiptProduct) {
             for ($i = 0; $i < (int)$receiptProduct->count; $i++) {
-                $lastProduct = Product::getLastProduct();
+                $lastProduct  = Product::getLastProduct();
+                $serialNumber = $lastProduct ? $lastProduct->serial_number + 1 : 1;
+
                 // Создаем товар
                 Product::query()->create([
                     'dic_product_id' => $receiptProduct->dic_product_id,
                     'model_type'     => Receipt::class,
                     'model_id'       => $receipt->id,
-                    'barcode'        => $lastProduct ? $lastProduct->barcode + 1 : 1,
+                    'serial_number'  => $serialNumber,
+                    'barcode'        => join([
+                        $receiptProduct->product->country->code,
+                        $receipt->supplier->code,
+                        $receiptProduct->product->category->code,
+                        str_pad($serialNumber, 7, '0', STR_PAD_LEFT),
+                    ]),
                 ]);
             }
         }

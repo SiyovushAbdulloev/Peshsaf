@@ -4,6 +4,7 @@ namespace App\Http\Requests\Category;
 
 use App\Core\Http\Requests\CoreFormRequest;
 use App\Http\Requests\Params\Category\StoreRequestParams;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends CoreFormRequest
 {
@@ -12,7 +13,18 @@ class StoreRequest extends CoreFormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:positions,name'],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories', 'name')->ignore($this->category?->id),
+            ],
+            'code' => [
+                'required',
+                'string',
+                'max:3',
+                Rule::unique('categories', 'code')->ignore($this->category?->id),
+            ],
         ];
     }
 
@@ -20,6 +32,7 @@ class StoreRequest extends CoreFormRequest
     {
         return [
             'name' => $this->get('name'),
+            'code' => $this->get('code'),
         ];
     }
 }

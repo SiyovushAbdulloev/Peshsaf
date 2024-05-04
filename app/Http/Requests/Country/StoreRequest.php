@@ -20,6 +20,12 @@ class StoreRequest extends CoreFormRequest
                 Rule::unique('countries', 'name')->ignore($this->country?->id),
             ],
             'is_favorite' => ['sometimes', 'boolean'],
+            'code'        => [
+                'required',
+                'string',
+                'max:3',
+                Rule::unique('countries', 'code')->ignore($this->country?->id),
+            ],
         ];
     }
 
@@ -27,7 +33,8 @@ class StoreRequest extends CoreFormRequest
     {
         return [
             'name'       => $this->get('name'),
-            'isFavorite' => $this->get('is_favorite') ?? false,
+            'isFavorite' => !!$this->get('is_favorite'),
+            'code'       => $this->get('code'),
         ];
     }
 }

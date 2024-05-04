@@ -3,7 +3,7 @@
 namespace App\Actions\Country;
 
 use App\Core\Actions\CoreAction;
-use App\Models\Country;
+use App\Models\Dictionaries\Country;
 use Illuminate\Database\Eloquent\Collection;
 
 class IndexAction extends CoreAction

@@ -8,6 +8,7 @@ class StoreRequestParams extends RequestParams
 {
     public function __construct(
         public string $organizationName,
+        public string $code,
         public string $fullName,
         public int $countryId,
         public string $organizationAddress,

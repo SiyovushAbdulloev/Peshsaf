@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,7 +15,8 @@ return new class extends Migration
             $table->string('status');
             $table->foreignId('dic_product_id')->constrained();
             $table->morphs('model');
-            $table->bigInteger('barcode')->unique();
+            $table->char('barcode', 16);
+            $table->bigInteger('serial_number');
             $table->boolean('history')->default(false);
             $table->timestamps();
         });

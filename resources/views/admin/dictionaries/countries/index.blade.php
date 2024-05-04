@@ -52,6 +52,12 @@
                             data-tw-merge
                             class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
                         >
+                            Код
+                        </th>
+                        <th
+                            data-tw-merge
+                            class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap"
+                        >
                             &nbsp;
                         </th>
                     </tr>
@@ -83,6 +89,12 @@
                                 @else
                                     <i class="fa-regular fa-star"></i>
                                 @endif
+                            </td>
+                            <td
+                                data-tw-merge
+                                class="px-5 py-3 border-b dark:border-darkmode-300"
+                            >
+                                {{ $country->code }}
                             </td>
                             <td
                                 data-tw-merge

@@ -1,19 +1,37 @@
-<div>
-    <x-base.form-label for="name">Наименование</x-base.form-label>
-    <x-base.form-input
-        class="w-full"
-        id="name"
-        type="text"
-        name="name"
-        placeholder="Введите наименование"
-        value="{{ old('name', $country->name) }}"
-    />
+<div class="grid grid-cols-2 gap-3">
+    <div class="w-full">
+        <x-base.form-label for="name">Наименование</x-base.form-label>
+        <x-base.form-input
+            id="name"
+            type="text"
+            name="name"
+            placeholder="Введите наименование"
+            value="{{ old('name', $country->name) }}"
+        />
 
-    @error('name')
-    <div class="mt-2 text-danger italic">
-        {{ $message }}
+        @error('name')
+        <div class="mt-2 text-danger italic">
+            {{ $message }}
+        </div>
+        @enderror
     </div>
-    @enderror
+
+    <div class="w-full">
+        <x-base.form-label for="name">Код</x-base.form-label>
+        <x-base.form-input
+            id="code"
+            type="text"
+            name="code"
+            placeholder="Введите код"
+            value="{{ old('name', $country->code) }}"
+        />
+
+        @error('code')
+        <div class="mt-2 text-danger italic">
+            {{ $message }}
+        </div>
+        @enderror
+    </div>
 
     <x-base.form-check class="mt-5">
         <x-base.form-check.input
